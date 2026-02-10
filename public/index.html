@@ -1,10 +1,202 @@
 <!doctype html>
-<html>
-  <head>
-    <title>ACK-Splore</title>
-  </head>
-  <body>
-    <h1>ACK-Splore is live</h1>
-    <p>If you see this, your server is working.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ACK-Splore — The Historic Loop</title>
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --card: #141417;
+      --text: #f5f5f7;
+      --muted: #a6a6ad;
+      --line: #2a2a2f;
+      --btn: #1f1f24;
+      --btnHover: #25252b;
+      --accent: #8ab4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: var(--text); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 16px 64px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; letter-spacing: 0.2px;
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 999px; background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(138,180,255,0.15);
+    }
+    .pill {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+    h1 { font-size: 40px; margin: 18px 0 10px; line-height: 1.05; }
+    .sub {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 0 20px;
+      max-width: 70ch;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    }
+    .card h2 { margin: 0 0 6px; font-size: 18px; }
+    .meta { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .desc { margin: 0 0 14px; color: var(--text); opacity: 0.92; line-height: 1.45; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: var(--btn);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn:hover { background: var(--btnHover); }
+    .btn.secondary {
+      background: transparent;
+      color: var(--muted);
+    }
+    .btn.secondary:hover { color: var(--text); }
+    .fineprint {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .how {
+      margin-top: 16px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.02);
+    }
+    .how h3 { margin: 0 0 8px; font-size: 16px; }
+    .how ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .how li { margin: 6px 0; }
+    .footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer a { color: var(--muted); }
+    .footer a:hover { color: var(--text); }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>ACK-Splore</span>
+      </div>
+      <span class="pill">Nantucket • Self-guided</span>
+    </div>
+
+    <h1>The Historic Loop</h1>
+    <p class="sub">
+      A self-guided walk that tells Nantucket’s story—from its earliest inhabitants and founding families,
+      through the whaling boom, to the people and places that shaped the island we see today.
+      You choose how deep you want to go. Start whenever you want.
+    </p>
+
+    <div class="cards">
+      <section class="card">
+        <h2>Short Loop</h2>
+        <p class="meta">~60 minutes • ~1.2–1.4 miles</p>
+        <p class="desc">
+          A tight, high-signal version of the story—perfect if you want the highlights without committing
+          a whole morning.
+        </p>
+        <div class="row">
+          <a class="btn" href="/start.html?loop=short">Start Short</a>
+          <a class="btn secondary" href="/start.html">Enter code</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Medium Loop</h2>
+        <p class="meta">~90–105 minutes • ~1.8–2.1 miles</p>
+        <p class="desc">
+          The flagship experience. The full narrative, a comfortable pace, and the “ohhh that’s why Nantucket is like this”
+          moments built in.
+        </p>
+        <div class="row">
+          <a class="btn" href="/start.html?loop=medium">Start Medium</a>
+          <a class="btn secondary" href="/start.html">Enter code</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Long Loop</h2>
+        <p class="meta">~120 minutes • 2.5+ miles</p>
+        <p class="desc">
+          For the people who want to keep walking. More stops, more context, more “local” detail—without feeling like a lecture.
+        </p>
+        <div class="row">
+          <a class="btn" href="/start.html?loop=long">Start Long</a>
+          <a class="btn secondary" href="/start.html">Enter code</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="how">
+      <h3>How it works</h3>
+      <ul>
+        <li><strong>Pick a loop</strong> based on your time and energy.</li>
+        <li><strong>Walk at your pace</strong>—no guide, no schedule, no awkward group dynamics.</li>
+        <li><strong>Complete each stop</strong> (for now: snap a photo). We’ll make challenges more creative next.</li>
+      </ul>
+      <p class="fineprint">
+        Tip: If you’re doing this with friends or family, one person can run the phone and everyone else just… looks around and actually notices Nantucket.
+      </p>
+    </div>
+
+    <div class="footer">
+      <div>
+        Built for walking shoes, not textbooks.  
+        <span style="color:rgba(255,255,255,0.35)">•</span>
+        <a href="/start.html">Start / Enter Code</a>
+      </div>
+      <div>
+        Want to help test new loops? (We’ll add a form here soon.)
+      </div>
+    </div>
+  </main>
+</body>
 </html>
