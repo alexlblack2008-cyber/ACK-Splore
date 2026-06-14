@@ -77,6 +77,11 @@ app.post("/api/beerdie/games", (req, res) => {
     "drops",
     "fifaSuccesses",
     "fifaHighestLevel",
+    "dungeons",
+    "heightCalls",
+    "heightWarnings",
+    "overTableCalls",
+    "overTableWarnings",
   ];
   for (const playerId of allPlayers) {
     const raw = (playerStats && playerStats[playerId]) || {};

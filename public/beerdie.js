@@ -8,6 +8,11 @@
     { key: "drops", label: "Drops" },
     { key: "fifaSuccesses", label: "FIFA successes" },
     { key: "fifaHighestLevel", label: "FIFA highest level reached" },
+    { key: "dungeons", label: "Dungeons (short throws)" },
+    { key: "heightCalls", label: "Height calls" },
+    { key: "heightWarnings", label: "Height warnings" },
+    { key: "overTableCalls", label: "Over-the-table calls" },
+    { key: "overTableWarnings", label: "Over-the-table warnings" },
   ];
 
   let players = [];
@@ -109,6 +114,9 @@
           <td>${Math.round(p.catchPct * 100)}%</td>
           <td>${p.offensePerGame.toFixed(1)}</td>
           <td>${p.fifaPerGame.toFixed(1)}</td>
+          <td>${Math.round(p.dungeonPct * 100)}%</td>
+          <td>${p.heightFoulsPerGame.toFixed(1)}</td>
+          <td>${p.overTableFoulsPerGame.toFixed(1)}</td>
         </tr>`
       )
       .join("");
@@ -127,6 +135,9 @@
               <th style="padding: 4px 8px">Catch%</th>
               <th style="padding: 4px 8px">Offense/G</th>
               <th style="padding: 4px 8px">FIFA/G</th>
+              <th style="padding: 4px 8px">Dungeon%</th>
+              <th style="padding: 4px 8px">Height fouls/G</th>
+              <th style="padding: 4px 8px">Over-table fouls/G</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
