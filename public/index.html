@@ -377,6 +377,13 @@
                 <div class="label">Family Fun Tour</div>
                 <div class="desc">Kid-friendly route (placeholder for now).</div>
               </button>
+
+              <button class="btn" id="btn-beerdie">
+                <div class="label">Beer Die Rankings</div>
+                <div class="desc">
+                  Log games and stats, see the leaderboard.
+                </div>
+              </button>
             </div>
           </section>
 
@@ -606,6 +613,95 @@
             </div>
           </section>
 
+          <!-- VIEW: BEER DIE RANKINGS -->
+          <section class="view" id="view-beerdie">
+            <div class="row">
+              <div class="crumbs">Beer Die Rankings</div>
+              <button class="back" id="back-to-home-from-beerdie">← Home</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="actions" style="margin-top: 0">
+              <button class="secondary bd-tab" data-tab="leaderboard">
+                Leaderboard
+              </button>
+              <button class="secondary bd-tab" data-tab="players">
+                Players
+              </button>
+              <button class="secondary bd-tab" data-tab="loggame">
+                Log Game
+              </button>
+            </div>
+
+            <div class="panel bd-panel" id="bd-leaderboard" style="margin-top: 12px">
+              <div id="bd-leaderboard-table">Loading…</div>
+              <p class="note">
+                Ratings need at least <span id="bd-mingames"></span> games
+                played. Weights: <span id="bd-weights"></span>
+              </p>
+            </div>
+
+            <div class="panel bd-panel" id="bd-players" style="margin-top: 12px; display: none">
+              <div class="field" style="margin-top: 0">
+                <label for="bd-player-name">Player name</label>
+                <input id="bd-player-name" type="text" placeholder="e.g. Alex" />
+              </div>
+              <div class="actions">
+                <button class="primary" id="bd-add-player">Add player</button>
+              </div>
+              <div class="toast" id="bd-player-toast"></div>
+              <div class="divider"></div>
+              <div id="bd-player-list"></div>
+            </div>
+
+            <div class="panel bd-panel" id="bd-loggame" style="margin-top: 12px; display: none">
+              <div class="field" style="margin-top: 0">
+                <label for="bd-game-date">Date</label>
+                <input id="bd-game-date" type="date" />
+              </div>
+
+              <div style="display: flex; gap: 10px">
+                <div class="field" style="flex: 1">
+                  <label for="bd-num-teams">Number of teams</label>
+                  <select id="bd-num-teams">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </div>
+                <div class="field" style="flex: 1">
+                  <label for="bd-team-size">Players per team</label>
+                  <select id="bd-team-size">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="bd-team-setup"></div>
+              <div class="field" id="bd-winner-setup"></div>
+
+              <div class="actions">
+                <button class="secondary" id="bd-generate-stats">
+                  Continue to stats
+                </button>
+              </div>
+
+              <div id="bd-stat-entry" style="display: none"></div>
+
+              <div class="actions">
+                <button class="primary" id="bd-submit-game" style="display: none">
+                  Submit game
+                </button>
+              </div>
+
+              <div class="toast" id="bd-loggame-toast"></div>
+            </div>
+          </section>
+
           <!-- VIEW: PLACEHOLDER -->
           <section class="view" id="view-placeholder">
             <div class="row">
@@ -808,7 +904,10 @@
         payment: document.getElementById("view-payment"),
         tour: document.getElementById("view-tour"),
         placeholder: document.getElementById("view-placeholder"),
+        beerdie: document.getElementById("view-beerdie"),
       };
+
+      window.showView = showView;
 
       const statusPill = document.getElementById("statusPill");
       const crumbPill = document.getElementById("crumbPill");
@@ -911,6 +1010,20 @@
         showView("placeholder");
       });
 
+      document.getElementById("btn-beerdie").addEventListener("click", () => {
+        state.tour = null;
+        state.loop = null;
+        showView("beerdie");
+        crumbPill.textContent = "Beer Die Rankings";
+        document.dispatchEvent(new Event("beerdie:show"));
+      });
+
+      document
+        .getElementById("back-to-home-from-beerdie")
+        .addEventListener("click", () => {
+          showView("home");
+        });
+
       // ----- Back buttons -----
       document.getElementById("back-to-home").addEventListener("click", () => {
         state.tour = null;
@@ -984,5 +1097,6 @@
       // Initial
       showView("home");
     </script>
+    <script src="/beerdie.js"></script>
   </body>
 </html>
