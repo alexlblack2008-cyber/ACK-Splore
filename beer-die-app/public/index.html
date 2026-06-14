@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beer Die Rankings</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.08);
+        --text: #eaf0ff;
+        --muted: rgba(234, 240, 255, 0.75);
+        --muted2: rgba(234, 240, 255, 0.6);
+        --line: rgba(234, 240, 255, 0.14);
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background: radial-gradient(
+            1200px 700px at 10% 10%,
+            rgba(94, 234, 212, 0.25),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 600px at 90% 20%,
+            rgba(59, 130, 246, 0.22),
+            transparent 55%
+          ),
+          radial-gradient(
+            800px 500px at 30% 90%,
+            rgba(244, 114, 182, 0.18),
+            transparent 55%
+          ),
+          var(--bg);
+        display: grid;
+        place-items: center;
+        padding: 28px;
+      }
+
+      .shell {
+        width: min(960px, 100%);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(
+          135deg,
+          rgba(94, 234, 212, 0.9),
+          rgba(59, 130, 246, 0.9)
+        );
+        box-shadow: var(--shadow);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0.2px;
+      }
+
+      .pill {
+        font-size: 12px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .card-inner {
+        padding: 22px;
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 18px 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      @media (max-width: 640px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        outline: none;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: rgba(94, 234, 212, 0.65);
+        box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.12);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+
+      .primary {
+        cursor: pointer;
+        border: 1px solid rgba(94, 234, 212, 0.5);
+        background: linear-gradient(
+          135deg,
+          rgba(94, 234, 212, 0.22),
+          rgba(59, 130, 246, 0.18)
+        );
+        color: var(--text);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-weight: 700;
+        transition: transform 0.12s ease, border-color 0.12s ease,
+          background 0.12s ease;
+      }
+
+      .primary:hover {
+        transform: translateY(-1px);
+        border-color: rgba(94, 234, 212, 0.8);
+      }
+
+      .secondary {
+        cursor: pointer;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-weight: 700;
+      }
+
+      .secondary.active {
+        border-color: rgba(94, 234, 212, 0.65);
+        background: rgba(94, 234, 212, 0.12);
+      }
+
+      .note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted2);
+        line-height: 1.35;
+      }
+
+      .toast {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        display: none;
+      }
+
+      .toast.show {
+        display: block;
+      }
+
+      .success {
+        border-color: rgba(34, 197, 94, 0.35);
+        background: rgba(34, 197, 94, 0.08);
+        color: rgba(220, 252, 231, 0.95);
+      }
+
+      .danger {
+        border-color: rgba(239, 68, 68, 0.35);
+        background: rgba(239, 68, 68, 0.08);
+        color: rgba(254, 226, 226, 0.95);
+      }
+
+      footer {
+        margin-top: 14px;
+        color: var(--muted2);
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .bd-panel {
+        display: none;
+      }
+      .bd-panel.active {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>Beer Die Rankings</h1>
+            <div class="pill">Track stats, see the leaderboard</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="card">
+        <div class="card-inner">
+          <div class="actions" style="margin-top: 0">
+            <button class="secondary bd-tab active" data-tab="leaderboard">
+              Leaderboard
+            </button>
+            <button class="secondary bd-tab" data-tab="players">Players</button>
+            <button class="secondary bd-tab" data-tab="loggame">Log Game</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="bd-panel active" id="bd-leaderboard">
+            <div id="bd-leaderboard-table">Loading…</div>
+            <p class="note">
+              Ratings need at least <span id="bd-mingames"></span> games
+              played. Weights: <span id="bd-weights"></span>
+            </p>
+          </div>
+
+          <div class="bd-panel" id="bd-players">
+            <div class="field" style="margin-top: 0">
+              <label for="bd-player-name">Player name</label>
+              <input id="bd-player-name" type="text" placeholder="e.g. Alex" />
+            </div>
+            <div class="actions">
+              <button class="primary" id="bd-add-player">Add player</button>
+            </div>
+            <div class="toast" id="bd-player-toast"></div>
+            <div class="divider"></div>
+            <div id="bd-player-list"></div>
+          </div>
+
+          <div class="bd-panel" id="bd-loggame">
+            <div class="field" style="margin-top: 0">
+              <label for="bd-game-date">Date</label>
+              <input id="bd-game-date" type="date" />
+            </div>
+
+            <div style="display: flex; gap: 10px">
+              <div class="field" style="flex: 1">
+                <label for="bd-num-teams">Number of teams</label>
+                <select id="bd-num-teams">
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div class="field" style="flex: 1">
+                <label for="bd-team-size">Players per team</label>
+                <select id="bd-team-size">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="bd-team-setup"></div>
+            <div class="field" id="bd-winner-setup"></div>
+
+            <div class="actions">
+              <button class="secondary" id="bd-generate-stats">
+                Continue to stats
+              </button>
+            </div>
+
+            <div id="bd-stat-entry" style="display: none"></div>
+
+            <div class="actions">
+              <button class="primary" id="bd-submit-game" style="display: none">
+                Submit game
+              </button>
+            </div>
+
+            <div class="toast" id="bd-loggame-toast"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer>Beer Die Rankings • GHIN-style leaderboard for your group</footer>
+    </div>
+
+    <script src="/beerdie.js"></script>
+  </body>
+</html>
