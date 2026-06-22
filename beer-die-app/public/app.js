@@ -1,7 +1,7 @@
 /* Beer Die Rankings - Frontend Logic */
 
 var SUPABASE_URL = 'https://vezdmpzbwqsujvmrqklx.supabase.co';
-var SUPABASE_ANON_KEY = 'sb_publishable_XdDYvo37sRFIhk_6nDUHAw_Tyo3YUPd';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlemRtcHpid3FzdWp2bXJxa2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMzc4MDEsImV4cCI6MjA5NzcxMzgwMX0.2WiHAwmVcURcpLzozxeaPLa_-sEztKDu2Aeei-WmxOc';
 var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 var currentUser = null;
@@ -107,8 +107,9 @@ async function loadDashboard() {
   }
   list.innerHTML = html;
 
-  // Weekly report
+  // Weekly report & all time stats
   await loadWeeklyReport(groupIds);
+  await loadAllTimeStats(groupIds);
 }
 
 async function loadWeeklyReport(groupIds) {
@@ -140,6 +141,51 @@ async function loadWeeklyReport(groupIds) {
   $('week-wins').textContent = userWins;
   $('week-rating-dir').textContent = userGames > 0 ? (userWins >= userGames / 2 ? '↑' : '↓') : '-';
   $('week-rating-dir').style.color = userGames > 0 ? (userWins >= userGames / 2 ? '#7dd3c0' : '#e74c3c') : '#aaa';
+}
+
+async function loadAllTimeStats(groupIds) {
+  var gamesRes = await sb.from('games').select('id, winning_team_index').in('group_id', groupIds);
+  var games = gamesRes.data || [];
+  if (games.length === 0) {
+    $('alltime-empty').style.display = 'block';
+    return;
+  }
+  $('alltime-empty').style.display = 'none';
+  var gameIds = games.map(function(g) { return g.id; });
+  var gpRes = await sb.from('game_players').select('*').in('game_id', gameIds).eq('user_id', currentUser.id);
+  var myPlays = gpRes.data || [];
+  if (myPlays.length === 0) {
+    $('alltime-empty').style.display = 'block';
+    return;
+  }
+
+  var t = { games: 0, wins: 0, throws: 0, hits: 0, catches: 0, drops: 0, dinks: 0, sinks: 0, fifa: 0, dungeons: 0 };
+  myPlays.forEach(function(gp) {
+    t.games++;
+    var game = games.find(function(g) { return g.id === gp.game_id; });
+    if (game && game.winning_team_index === gp.team_index) t.wins++;
+    t.throws += gp.throws || 0;
+    t.hits += gp.hits || 0;
+    t.catches += gp.catches || 0;
+    t.drops += gp.drops || 0;
+    t.dinks += gp.dinks || 0;
+    t.sinks += gp.sinks || 0;
+    t.fifa += gp.fifa_successes || 0;
+    t.dungeons += gp.dungeons || 0;
+  });
+
+  $('at-games').textContent = t.games;
+  $('at-wins').textContent = t.wins;
+  $('at-winpct').textContent = t.games > 0 ? Math.round(t.wins / t.games * 100) + '%' : '0%';
+  $('at-hits').textContent = t.hits;
+  $('at-hitpct').textContent = t.throws > 0 ? Math.round(t.hits / t.throws * 100) + '%' : '0%';
+  $('at-catches').textContent = t.catches;
+  $('at-catchpct').textContent = (t.catches + t.drops) > 0 ? Math.round(t.catches / (t.catches + t.drops) * 100) + '%' : '0%';
+  $('at-dinks').textContent = t.dinks;
+  $('at-sinks').textContent = t.sinks;
+  $('at-fifa').textContent = t.fifa;
+  $('at-dungeons').textContent = t.dungeons;
+  $('at-drops').textContent = t.drops;
 }
 
 /* ── Groups ── */
