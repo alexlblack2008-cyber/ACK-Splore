@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beer Die Rankings</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0a0e27;
+  color: #e0e0e0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
+}
+body::before {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,200,180,0.15), transparent 70%);
+  top: -100px; left: -100px;
+}
+body::after {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(180,50,180,0.12), transparent 70%);
+  bottom: -150px; right: -150px;
+}
+.blob-blue {
+  position: fixed;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(50,100,220,0.12), transparent 70%);
+  top: 40%; left: 50%;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none; z-index: 0;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+h1 { font-size: 2em; margin-bottom: 8px; }
+h2 { font-size: 1.4em; margin-bottom: 12px; color: #7dd3c0; }
+h3 { font-size: 1.1em; margin-bottom: 8px; color: #aaa; }
+input, select, button {
+  font-family: inherit;
+  font-size: 0.95em;
+  border-radius: 10px;
+  outline: none;
+}
+input, select {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #e0e0e0;
+  padding: 10px 14px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+select option { background: #1a1e3a; }
+button {
+  background: linear-gradient(135deg, #00c9a7, #3b82f6);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+button:hover { opacity: 0.85; }
+button.secondary {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+button.danger {
+  background: linear-gradient(135deg, #e84393, #d63031);
+}
+.btn-sm { padding: 6px 14px; font-size: 0.85em; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 120px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+}
+th, td {
+  padding: 8px 6px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+th { color: #7dd3c0; font-weight: 600; white-space: nowrap; }
+.view { display: none; }
+.view.active { display: block; }
+.group-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.group-card:hover { background: rgba(255,255,255,0.07); }
+.badge {
+  display: inline-block;
+  background: rgba(0,200,167,0.15);
+  color: #7dd3c0;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.invite-code {
+  font-family: monospace;
+  font-size: 1.3em;
+  color: #f0c040;
+  letter-spacing: 2px;
+}
+.tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.tabs button { border-radius: 8px; font-size: 0.85em; }
+.tabs button.active { background: linear-gradient(135deg, #00c9a7, #3b82f6); }
+.tabs button:not(.active) { background: rgba(255,255,255,0.08); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 8px; }
+.stat-item label { display: block; font-size: 0.78em; color: #aaa; margin-bottom: 3px; }
+.stat-item input { margin-bottom: 0; }
+.team-section { margin-bottom: 16px; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 12px; }
+.player-stats { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+.week-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+.week-stat { text-align: center; }
+.week-stat .num { font-size: 1.8em; font-weight: 700; color: #7dd3c0; }
+.week-stat .lbl { font-size: 0.8em; color: #aaa; }
+.msg { padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 0.9em; }
+.msg.error { background: rgba(231,76,60,0.15); color: #e74c3c; }
+.msg.success { background: rgba(0,200,167,0.15); color: #7dd3c0; }
+.overflow-x { overflow-x: auto; }
+.nav-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+}
+.hidden { display: none !important; }
+@media (max-width: 600px) {
+  .container { padding: 12px; }
+  .glass { padding: 16px; }
+  h1 { font-size: 1.5em; }
+  table { font-size: 0.78em; }
+  th, td { padding: 6px 4px; }
+}
+</style>
+</head>
+<body>
+<div class="blob-blue"></div>
+<div class="container">
+
+<!-- AUTH VIEW -->
+<div id="view-auth" class="view active">
+  <div class="glass" style="max-width:420px;margin:60px auto;">
+    <h1 style="text-align:center;">Beer Die Rankings</h1>
+    <p style="text-align:center;color:#aaa;margin-bottom:20px;">Track your stats. Climb the leaderboard.</p>
+    <div id="auth-msg"></div>
+    <div id="auth-tabs" class="tabs" style="justify-content:center;margin-bottom:16px;">
+      <button class="active" onclick="showAuthTab('login')">Log In</button>
+      <button onclick="showAuthTab('signup')">Sign Up</button>
+    </div>
+    <div id="auth-login">
+      <input id="login-email" type="email" placeholder="Email">
+      <input id="login-password" type="password" placeholder="Password">
+      <button style="width:100%" onclick="doLogin()">Log In</button>
+    </div>
+    <div id="auth-signup" style="display:none">
+      <input id="signup-email" type="email" placeholder="Email">
+      <input id="signup-password" type="password" placeholder="Password">
+      <input id="signup-name" type="text" placeholder="Display Name">
+      <button style="width:100%" onclick="doSignup()">Sign Up</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD VIEW -->
+<div id="view-dashboard" class="view">
+  <div class="nav-bar">
+    <h1>Beer Die Rankings</h1>
+    <div>
+      <span id="user-name" style="color:#7dd3c0;margin-right:12px;"></span>
+      <button class="btn-sm secondary" onclick="doLogout()">Log Out</button>
+    </div>
+  </div>
+
+  <!-- Weekly Report -->
+  <div class="glass">
+    <h2>This Week</h2>
+    <div id="week-report" class="week-stats">
+      <div class="week-stat"><div class="num" id="week-games">0</div><div class="lbl">Games</div></div>
+      <div class="week-stat"><div class="num" id="week-wins">0</div><div class="lbl">Wins</div></div>
+      <div class="week-stat"><div class="num" id="week-rating-dir">-</div><div class="lbl">Rating Trend</div></div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h2>Your Groups</h2>
+    <div id="groups-list"></div>
+    <div class="row" style="margin-top:12px;">
+      <button onclick="showModal('create')">Create Group</button>
+      <button class="secondary" onclick="showModal('join')">Join Group</button>
+    </div>
+  </div>
+
+  <!-- Create/Join modals (inline) -->
+  <div id="modal-create" class="glass hidden">
+    <h2>Create Group</h2>
+    <div id="create-msg"></div>
+    <input id="create-name" placeholder="Group name">
+    <div class="row">
+      <button onclick="doCreateGroup()">Create</button>
+      <button class="secondary" onclick="hideModals()">Cancel</button>
+    </div>
+  </div>
+  <div id="modal-join" class="glass hidden">
+    <h2>Join Group</h2>
+    <div id="join-msg"></div>
+    <input id="join-code" placeholder="Invite code">
+    <div class="row">
+      <button onclick="doJoinGroup()">Join</button>
+      <button class="secondary" onclick="hideModals()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- GROUP DETAIL VIEW -->
+<div id="view-group" class="view">
+  <div class="nav-bar">
+    <div>
+      <button class="btn-sm secondary" onclick="showView('dashboard')">&larr; Back</button>
+      <span id="group-name" style="font-size:1.3em;font-weight:700;margin-left:10px;"></span>
+    </div>
+    <div>
+      <span id="user-name2" style="color:#7dd3c0;margin-right:12px;"></span>
+      <button class="btn-sm secondary" onclick="doLogout()">Log Out</button>
+    </div>
+  </div>
+
+  <div class="glass">
+    <div class="tabs" id="group-tabs">
+      <button class="active" onclick="showGroupTab('leaderboard')">Leaderboard</button>
+      <button onclick="showGroupTab('log-game')">Log Game</button>
+      <button onclick="showGroupTab('members')">Members</button>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="tab-leaderboard">
+      <div class="overflow-x">
+        <table id="leaderboard-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Player</th><th>Rating</th><th>Games</th><th>Win%</th>
+              <th>Hit%</th><th>Catch%</th><th>Off/G</th><th>FIFA/G</th>
+              <th>Dng%</th><th>Ht F/G</th><th>OT F/G</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </div>
+      <p id="leaderboard-empty" style="color:#aaa;display:none;">No games logged yet.</p>
+    </div>
+
+    <!-- Log Game -->
+    <div id="tab-log-game" style="display:none">
+      <div id="log-msg"></div>
+      <div class="row" style="margin-bottom:12px;">
+        <div>
+          <label style="font-size:0.8em;color:#aaa;">Teams</label>
+          <select id="num-teams" onchange="buildGameForm()">
+            <option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.8em;color:#aaa;">Players/Team</label>
+          <select id="players-per-team" onchange="buildGameForm()">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.8em;color:#aaa;">Winning Team</label>
+          <select id="winning-team"></select>
+        </div>
+      </div>
+      <div id="teams-container"></div>
+      <button onclick="doLogGame()" style="margin-top:12px;width:100%;">Submit Game</button>
+    </div>
+
+    <!-- Members -->
+    <div id="tab-members" style="display:none">
+      <p style="margin-bottom:8px;">Invite Code: <span class="invite-code" id="invite-code-display"></span></p>
+      <button class="btn-sm secondary" style="margin-bottom:16px;" onclick="copyInviteCode()">Copy Code</button>
+      <div id="members-list"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
