@@ -255,7 +255,6 @@ var WEIGHTS = {
   overTableFoulsPerGame: -0.075
 };
 
-function triangular(n) { return n * (n + 1) / 2; }
 
 async function loadLeaderboard() {
   // Get all games in this group
@@ -290,7 +289,7 @@ async function loadLeaderboard() {
     p.catches += gp.catches || 0;
     p.drops += gp.drops || 0;
     p.fifa_successes += gp.fifa_successes || 0;
-    p.fifa_points += triangular(gp.fifa_highest_level || 0);
+    p.fifa_points += gp.fifa_successes || 0;
     p.dungeons += gp.dungeons || 0;
     p.height_calls += gp.height_calls || 0;
     p.height_warnings += gp.height_warnings || 0;
@@ -422,7 +421,7 @@ async function getUserRatingInGroup(groupId, userId) {
     p.sinks += gp.sinks || 0;
     p.catches += gp.catches || 0;
     p.drops += gp.drops || 0;
-    p.fifa_points += triangular(gp.fifa_highest_level || 0);
+    p.fifa_points += gp.fifa_successes || 0;
     p.dungeons += gp.dungeons || 0;
     p.height_calls += gp.height_calls || 0;
     p.height_warnings += gp.height_warnings || 0;
@@ -494,7 +493,7 @@ function buildGameForm() {
     { key: 'throws', label: 'Throws' }, { key: 'hits', label: 'Hits' },
     { key: 'dinks', label: 'Dinks' }, { key: 'sinks', label: 'Sinks' },
     { key: 'catches', label: 'Catches' }, { key: 'drops', label: 'Drops' },
-    { key: 'fifa_successes', label: 'FIFA Successes' }, { key: 'fifa_highest_level', label: 'FIFA Highest Lvl' },
+    { key: 'fifa_successes', label: 'FIFA Successes' },
     { key: 'dungeons', label: 'Dungeons' },
     { key: 'height_calls', label: 'Height Calls' }, { key: 'height_warnings', label: 'Height Warnings' },
     { key: 'over_table_calls', label: 'Over-Table Calls' }, { key: 'over_table_warnings', label: 'Over-Table Warnings' }
@@ -545,7 +544,7 @@ async function doLogGame() {
       teamPlayerIds.push(uid);
 
       var stats = {};
-      ['throws','hits','dinks','sinks','catches','drops','fifa_successes','fifa_highest_level','dungeons','height_calls','height_warnings','over_table_calls','over_table_warnings'].forEach(function(key) {
+      ['throws','hits','dinks','sinks','catches','drops','fifa_successes','dungeons','height_calls','height_warnings','over_table_calls','over_table_warnings'].forEach(function(key) {
         var el = $('stat-' + t + '-' + p + '-' + key);
         stats[key] = el ? parseInt(el.value) || 0 : 0;
       });
