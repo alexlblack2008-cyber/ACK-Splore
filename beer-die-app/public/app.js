@@ -533,6 +533,17 @@ function buildGameForm() {
     wt.appendChild(opt);
   }
 
+  // Build score inputs for each team
+  var scoreDiv = $('score-inputs');
+  var sh = '';
+  for (var s = 0; s < numTeams; s++) {
+    sh += '<div style="flex:1;min-width:80px;">';
+    sh += '<label style="font-size:0.8em;color:#aaa;">Team ' + (s + 1) + ' Score</label>';
+    sh += '<input type="number" id="team-score-' + s + '" value="0" min="0" style="margin-bottom:0;">';
+    sh += '</div>';
+  }
+  scoreDiv.innerHTML = sh;
+
   var container = $('teams-container');
   container.innerHTML = '';
   var statFields = [
@@ -574,6 +585,12 @@ async function doLogGame() {
   var numTeams = parseInt($('num-teams').value);
   var ppt = parseInt($('players-per-team').value);
   var winIdx = parseInt($('winning-team').value);
+  var playedTo = parseInt($('game-played-to').value) || 11;
+  var scores = [];
+  for (var s = 0; s < numTeams; s++) {
+    var scoreEl = $('team-score-' + s);
+    scores.push(scoreEl ? parseInt(scoreEl.value) || 0 : 0);
+  }
 
   var teams = [];
   var playerEntries = [];
@@ -607,6 +624,8 @@ async function doLogGame() {
     date: new Date().toISOString().split('T')[0],
     winning_team_index: winIdx,
     teams: teams,
+    played_to: playedTo,
+    scores: scores,
     created_by: currentUser.id
   }).select().single();
 

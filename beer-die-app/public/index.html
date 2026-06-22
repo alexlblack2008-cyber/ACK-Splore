@@ -326,6 +326,13 @@ th { color: #7dd3c0; font-weight: 600; white-space: nowrap; }
           <select id="winning-team"></select>
         </div>
       </div>
+      <div class="row" style="margin-bottom:12px;">
+        <div>
+          <label style="font-size:0.8em;color:#aaa;">Game Played To</label>
+          <input type="number" id="game-played-to" value="11" min="1" style="margin-bottom:0;">
+        </div>
+        <div id="score-inputs"></div>
+      </div>
       <div id="teams-container"></div>
       <button onclick="doLogGame()" style="margin-top:12px;width:100%;">Submit Game</button>
     </div>
