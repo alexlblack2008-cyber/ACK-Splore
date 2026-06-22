@@ -162,11 +162,27 @@ th { color: #7dd3c0; font-weight: 600; white-space: nowrap; }
 }
 .hidden { display: none !important; }
 @media (max-width: 600px) {
-  .container { padding: 12px; }
-  .glass { padding: 16px; }
-  h1 { font-size: 1.5em; }
-  table { font-size: 0.78em; }
-  th, td { padding: 6px 4px; }
+  .container { padding: 8px; }
+  .glass { padding: 12px; }
+  h1 { font-size: 1.3em; }
+  table { font-size: 0.72em; }
+  th, td { padding: 5px 3px; }
+  .tabs { gap: 4px; }
+  .tabs button { padding: 8px 12px; font-size: 0.8em; }
+  .nav-bar { gap: 6px; padding: 0 4px; }
+  .nav-bar h1 { font-size: 1.1em; }
+  .btn-sm { padding: 5px 10px; font-size: 0.8em; }
+  .stat-grid { grid-template-columns: repeat(auto-fill, minmax(90px,1fr)); gap: 6px; }
+  .week-stat .num { font-size: 1.4em; }
+  .week-stat .lbl { font-size: 0.7em; }
+  .row { gap: 6px; }
+}
+@media (max-width: 380px) {
+  .container { padding: 6px; }
+  .glass { padding: 10px; }
+  h1 { font-size: 1.1em; }
+  table { font-size: 0.65em; }
+  th, td { padding: 4px 2px; }
 }
 </style>
 </head>
@@ -271,12 +287,12 @@ th { color: #7dd3c0; font-weight: 600; white-space: nowrap; }
 <!-- GROUP DETAIL VIEW -->
 <div id="view-group" class="view">
   <div class="nav-bar">
-    <div>
-      <button class="btn-sm secondary" onclick="showView('dashboard')">&larr; Back</button>
-      <span id="group-name" style="font-size:1.3em;font-weight:700;margin-left:10px;"></span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="btn-sm secondary" onclick="showView('dashboard')">&larr;</button>
+      <span id="group-name" style="font-size:1.1em;font-weight:700;"></span>
     </div>
-    <div>
-      <span id="user-name2" style="color:#7dd3c0;margin-right:12px;"></span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <span id="user-name2" style="color:#7dd3c0;font-size:0.85em;"></span>
       <button class="btn-sm secondary" onclick="doLogout()">Log Out</button>
     </div>
   </div>
