@@ -225,6 +225,16 @@ async function loadGroupDetail() {
     return '<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">' + escHtml(m.display_name || 'Unknown') + '</div>';
   }).join('');
 
+  // Show delete button only if current user is the group creator
+  var delSection = $('delete-group-section');
+  if (delSection) {
+    if (g.data && g.data.created_by === currentUser.id) {
+      delSection.classList.remove('hidden');
+    } else {
+      delSection.classList.add('hidden');
+    }
+  }
+
   // Leaderboard
   await loadLeaderboard();
   // Reset to leaderboard tab
@@ -569,6 +579,36 @@ async function doLogGame() {
 
   msgEl('log-msg', 'Game logged!', 'success');
   await loadLeaderboard();
+}
+
+/* ── Delete Group ── */
+function confirmDeleteGroup() {
+  if (!currentGroupData) return;
+  if (confirm('Are you sure you want to delete "' + currentGroupData.name + '"? This will remove all games, stats, and members. This cannot be undone.')) {
+    doDeleteGroup();
+  }
+}
+
+async function doDeleteGroup() {
+  if (!currentGroupId || !currentGroupData) return;
+  if (currentGroupData.created_by !== currentUser.id) return alert('Only the group creator can delete this group.');
+
+  // Delete in order: game_players → games → group_members → group
+  var gamesRes = await sb.from('games').select('id').eq('group_id', currentGroupId);
+  var gameIds = (gamesRes.data || []).map(function(g) { return g.id; });
+
+  if (gameIds.length > 0) {
+    await sb.from('game_players').delete().in('game_id', gameIds);
+  }
+  await sb.from('games').delete().eq('group_id', currentGroupId);
+  await sb.from('group_members').delete().eq('group_id', currentGroupId);
+  var del = await sb.from('groups').delete().eq('id', currentGroupId);
+
+  if (del.error) return alert('Error deleting group: ' + del.error.message);
+
+  currentGroupId = null;
+  currentGroupData = null;
+  showView('dashboard');
 }
 
 /* ── Utils ── */

@@ -309,6 +309,10 @@ th { color: #7dd3c0; font-weight: 600; white-space: nowrap; }
       <p style="margin-bottom:8px;">Invite Code: <span class="invite-code" id="invite-code-display"></span></p>
       <button class="btn-sm secondary" style="margin-bottom:16px;" onclick="copyInviteCode()">Copy Code</button>
       <div id="members-list"></div>
+      <div id="delete-group-section" class="hidden" style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+        <p style="color:#aaa;font-size:0.85em;margin-bottom:8px;">Only the group creator can delete this group.</p>
+        <button class="danger btn-sm" onclick="confirmDeleteGroup()">Delete Group</button>
+      </div>
     </div>
   </div>
 </div>
