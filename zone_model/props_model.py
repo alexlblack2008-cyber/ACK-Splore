@@ -98,9 +98,10 @@ def _sport_priority(today: date | None = None) -> list[tuple[str, list[str]]]:
     if seasons["nhl"]:
         priority.append(("icehockey_nhl", NHL_PROP_MARKETS))
 
-    # Soccer — always scan for corners / cards / goals / anytime scorer
+    # Soccer — high-profile competitions only (World Cup, CL, PL, major cups)
     for sk in SOCCER_SPORT_KEYS:
         priority.append((sk, SOCCER_PROP_MARKETS))
+    # Skip lower-tier domestic leagues (La Liga, Bundesliga, MLS, etc.)
 
     # MMA — fighter props
     priority.append(("mma_mixed_martial_arts", MMA_PROP_MARKETS))
@@ -223,18 +224,18 @@ MMA_PROP_MARKETS = [
     "fighter_to_win_by_decision",
 ]
 
-# Soccer leagues to scan
+# Soccer leagues to scan — high-profile competitions only
 SOCCER_SPORT_KEYS = [
-    "soccer_fifa_world_cup",
-    "soccer_epl",
-    "soccer_uefa_champs_league",
-    "soccer_spain_la_liga",
-    "soccer_germany_bundesliga",
-    "soccer_italy_serie_a",
-    "soccer_france_ligue_one",
-    "soccer_mls",
-    "soccer_conmebol_copa_america",
-    "soccer_concacaf_nations_league",
+    "soccer_fifa_world_cup",              # World Cup (top priority)
+    "soccer_uefa_champs_league",          # Champions League
+    "soccer_uefa_europa_league",          # Europa League
+    "soccer_epl",                         # Premier League
+    "soccer_england_efl_cup",            # EFL Cup (Carabao)
+    "soccer_fa_cup",                      # FA Cup
+    "soccer_conmebol_copa_libertadores",  # Copa Libertadores
+    "soccer_conmebol_copa_america",       # Copa América / international
+    "soccer_uefa_euro",                   # European Championship
+    "soccer_concacaf_gold_cup",           # CONCACAF Gold Cup
 ]
 
 
