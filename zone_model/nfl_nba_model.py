@@ -423,6 +423,33 @@ def _nba_fair_total(home: TeamStats, away: TeamStats,
 
 # ── Main entry point ───────────────────────────────────────────────────────────
 
+def _nba_scheme_notes(home_team: str, away_team: str) -> list[str]:
+    """Adds defensive scheme context to the NBA game projection."""
+    notes: list[str] = []
+    try:
+        from nba_defense import get_defense
+        hd = get_defense(home_team)
+        ad = get_defense(away_team)
+        notes.append(
+            f"{home_team} defense: {hd.primary_coverage} — "
+            f"blitz rate {hd.blitz_frequency:.0%}, zone {hd.zone_frequency:.0%}, "
+            f"paint {hd.paint_defense} / perimeter {hd.perimeter_defense}"
+        )
+        notes.append(
+            f"{away_team} defense: {ad.primary_coverage} — "
+            f"blitz rate {ad.blitz_frequency:.0%}, zone {ad.zone_frequency:.0%}, "
+            f"paint {ad.paint_defense} / perimeter {ad.perimeter_defense}"
+        )
+        # Pace-of-play interaction with scheme
+        if hd.primary_coverage == "switch_everything" and ad.primary_coverage == "switch_everything":
+            notes.append("Both teams switch everything — expect more isolation scoring, higher variance")
+        if hd.zone_frequency >= 0.15 or ad.zone_frequency >= 0.15:
+            notes.append("Zone-heavy matchup — mid-range shots increase, pace likely slows")
+    except Exception:
+        pass
+    return notes
+
+
 def score_nfl_nba_game(sport: str, home_team: str, away_team: str,
                         market_total: float,
                         market_spread: Optional[float] = None) -> StatModelOutput:
@@ -442,6 +469,7 @@ def score_nfl_nba_game(sport: str, home_team: str, away_team: str,
         away_stats = _get_nba_team_stats(away_team)
         fair, home_proj, away_proj, rat = _nba_fair_total(
             home_stats, away_stats, market_total)
+        rat += _nba_scheme_notes(home_team, away_team)
 
     edge_total = round(fair - market_total, 2)
 

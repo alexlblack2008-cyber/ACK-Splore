@@ -503,9 +503,22 @@ def analyse_prop(
     variance = sum((v - avg) ** 2 for v in values) / len(values)
     std = math.sqrt(variance) if variance > 0 else max(0.5, avg * 0.15)
 
-    # Opponent adjustment
+    # Opponent adjustment (team-level multiplier)
     opp_mult = _opp_adjustment(prop_type, opponent, sport)
     adj_avg  = avg * opp_mult
+
+    # NBA superstar / defensive scheme adjustment
+    scheme_notes: list[str] = []
+    if sport == "nba":
+        try:
+            from nba_defense import get_prop_adjustment, apply_adjustment_to_prop
+            adj = get_prop_adjustment(player_name, opponent)
+            delta, notes = apply_adjustment_to_prop(prop_type, line, adj)
+            if delta != 0.0:
+                adj_avg += delta
+                scheme_notes += adj.rationale + notes
+        except Exception:
+            pass
 
     z = (adj_avg - line) / std
     confidence = min(0.85, 0.50 + abs(z) * 0.12)
@@ -524,7 +537,7 @@ def analyse_prop(
         f"Std dev: {std:.2f}  →  z-score: {z:+.2f}",
         f"Opp ({opponent}) allows {opp_mult:.2f}x avg {prop_type}  →  adj avg: {adj_avg:.1f}",
         f"Last 5: {[round(v, 1) for v in last5]}",
-    ]
+    ] + scheme_notes
 
     return PropPick(
         sport          = sport,
