@@ -37,7 +37,11 @@ from live.mlb_api import (
 )
 from live.weather_client import get_weather_adjustment
 from live.lineup_quality import total_lineup_adjustment
+from live.odds_client import load_dotenv, get_mlb_totals, match_total
 from ledger import record_pick, settle_pick, all_time_summary, weekly_pnl_report
+
+# Load .env file if present (picks up ODDS_API_KEY locally)
+load_dotenv()
 
 # How many top picks to surface (min 3, max 5)
 MIN_PICKS = 3
@@ -98,6 +102,17 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
     today = game_date or date.today().isoformat()
     games_raw = get_todays_games(today)
 
+    # Fetch live odds once for all games (1 API call = 1 quota unit)
+    try:
+        totals_cache = get_mlb_totals(today)
+        print(f"  [Odds API] Loaded {len(totals_cache)} game totals for {today}")
+    except EnvironmentError as e:
+        print(f"  [Odds API] WARNING: {e}\n  Falling back to 8.5 placeholder for all games.")
+        totals_cache = {}
+    except Exception as e:
+        print(f"  [Odds API] ERROR: {e}\n  Falling back to 8.5 placeholder.")
+        totals_cache = {}
+
     scored: list[ScoredGame] = []
 
     for g in games_raw:
@@ -152,10 +167,8 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
             away_live_woba     = away_live_woba,
         )
 
-        # Build GameInput — market_total placeholder; injected from odds feed
-        # In production this comes from a live odds API (e.g., TheOddsAPI)
-        # For demo we use a plausible default
-        market_total = 8.5  # REPLACE WITH LIVE ODDS FEED
+        # Live market total from The Odds API; falls back to 8.5 if unavailable
+        market_total = match_total(g["home_team"], g["away_team"], totals_cache)
 
         home_ctx = _build_team_context(
             g["home_team"], home_starter, home_lineup, home=True, api_stats=home_stats
