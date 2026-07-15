@@ -270,15 +270,21 @@ def compute_fair_total(game: GameInput) -> ModelOutput:
     edge_pct = edge_runs / game.market_total
 
     # --- Confidence composite ---
-    # Weighted average of how many layers have non-trivial signal
-    layer_signals = [
-        abs(ura) > 0.1,
-        abs(total_pucs) > 0.1,
-        abs(total_bfa) > 0.15,
-        abs(total_rca) > 0.10,
-    ]
-    signal_count = sum(layer_signals)
-    raw_confidence = (signal_count / 4.0) * ump_confidence
+    # Weighted layers: ump + pitcher carry real signal even in static mode;
+    # bullpen and rest/travel are bonuses when live data is available.
+    # Each layer contributes a 0-1 score; weights sum to 1.0.
+    ump_score   = min(1.0, abs(ura) / 0.30)          # weight 0.40 — primary edge
+    pucs_score  = min(1.0, abs(total_pucs) / 0.20)   # weight 0.35 — pitcher fit
+    bfa_score   = min(1.0, abs(total_bfa) / 0.30)    # weight 0.15 — fatigue
+    rca_score   = min(1.0, abs(total_rca) / 0.20)    # weight 0.10 — rest/travel
+
+    weighted_signal = (
+        0.40 * ump_score +
+        0.35 * pucs_score +
+        0.15 * bfa_score +
+        0.10 * rca_score
+    )
+    raw_confidence = weighted_signal * ump_confidence
 
     # --- Recommendation thresholds ---
     # We require at least 0.35 runs of edge and 0.35 confidence to bet
