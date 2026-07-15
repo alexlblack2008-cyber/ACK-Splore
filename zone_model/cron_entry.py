@@ -15,26 +15,28 @@ from ledger import weekly_pnl_report
 from datetime import date
 
 def _props_section(today: str) -> str:
-    """Scans player props for today and returns a formatted section, or empty string."""
+    """
+    Season-aware props scan across all sports.
+    NFL/NBA lead when in season; soccer corners/cards/goals always scanned.
+    """
     try:
-        import os
         api_key = os.environ.get("ODDS_API_KEY", "")
         if not api_key:
             return ""
-        from props_model import scan_props_from_odds_api, format_prop_pick
-        picks = []
-        for sport_key in ("baseball_mlb", "basketball_nba", "americanfootball_nfl"):
-            picks += scan_props_from_odds_api(sport_key, api_key, today)
+        from props_model import scan_all_props, format_prop_pick
+        from datetime import date as _date
+        picks = scan_all_props(api_key, today, max_picks=8)
         if not picks:
             return ""
         lines = [
             "",
             "=" * 56,
-            "  PLAYER PROPS — NICHE EDGES",
+            "  PROP EDGES — ANY SPORT, ANY MARKET",
             "=" * 56,
         ]
-        for p in picks[:5]:
+        for p in picks:
             lines.append(format_prop_pick(p))
+            lines.append("")
         return "\n".join(lines)
     except Exception:
         return ""
