@@ -440,6 +440,8 @@ def format_bonus_pick(bp: Optional[BonusPickOutput]) -> str:
         f"  NOTE: Bonus Pick uses market-structure analysis (public money,",
         f"  sharp reversal, narrative inflation) — not statistical umpire/",
         f"  pitcher data. Two independent models, one daily report.",
+        f"",
+        f"  **THE BONUS PICK: {bp.lean}  {bp.market_line}**",
         sep,
     ]
     return "\n".join(lines)
