@@ -126,6 +126,18 @@ app.post("/api/settle", (req, res) => {
   }
 });
 
+// ── Service Worker (inject build date for cache busting) ────────────────────
+
+const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+app.get("/sw.js", (req, res) => {
+  const swPath = path.join(__dirname, "public", "sw.js");
+  const raw    = fs.readFileSync(swPath, "utf8");
+  const out    = raw.replace("__BUILD_DATE__", BUILD_DATE);
+  res.setHeader("Content-Type", "application/javascript");
+  res.setHeader("Cache-Control", "no-cache");
+  res.send(out);
+});
+
 // ── Dashboard (single-page) ──────────────────────────────────────────────────
 
 app.get("/picks", (req, res) => {

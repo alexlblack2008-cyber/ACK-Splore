@@ -38,6 +38,7 @@ from live.mlb_api import (
 from live.weather_client import get_weather_adjustment
 from live.lineup_quality import total_lineup_adjustment
 from live.odds_client import load_dotenv, get_mlb_totals, match_total
+from live.recent_form import get_recent_form, form_run_adjustment, format_form_summary
 from ledger import record_pick, settle_pick, all_time_summary, weekly_pnl_report
 from bonus_pick import get_bonus_pick, format_bonus_pick
 
@@ -65,6 +66,8 @@ class ScoredGame:
     output:        ModelOutput
     weather_note:  str
     score:         float   # ranking score = |edge_runs| × confidence
+    home_form_note: str = ""
+    away_form_note: str = ""
 
 
 def _build_team_context(
@@ -318,10 +321,15 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
 
         output = compute_fair_total(game_input)
 
-        # Inject lineup and weather into fair total post-hoc
-        # (these layers are additive and don't affect umpire/pitcher interaction)
+        # Recent form adjustment (last 5 games per team)
+        home_form = get_recent_form("mlb", g["home_team"])
+        away_form = get_recent_form("mlb", g["away_team"])
+        form_adj  = (form_run_adjustment(home_form, "mlb") +
+                     form_run_adjustment(away_form, "mlb"))
+
+        # Inject lineup, weather, and form into fair total post-hoc
         lineup_total_adj = lineup_adj["total_lineup_adj"]
-        combined_adj = lineup_total_adj + weather_adj
+        combined_adj = lineup_total_adj + weather_adj + form_adj
         output.fair_total  = round(output.fair_total + combined_adj, 2)
         output.edge_runs   = round(output.fair_total - market_total, 2)
         output.edge_pct    = round(output.edge_runs / market_total, 4)
@@ -334,16 +342,18 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
         ranking_score = abs(output.edge_runs) * output.confidence
 
         scored.append(ScoredGame(
-            game_pk      = pk,
-            home_team    = g["home_team"],
-            away_team    = g["away_team"],
-            venue        = g["venue_name"],
-            umpire       = ump_name,
-            home_starter = home_starter["name"],
-            away_starter = away_starter["name"],
-            output       = output,
-            weather_note = wx["note"],
-            score        = ranking_score,
+            game_pk        = pk,
+            home_team      = g["home_team"],
+            away_team      = g["away_team"],
+            venue          = g["venue_name"],
+            umpire         = ump_name,
+            home_starter   = home_starter["name"],
+            away_starter   = away_starter["name"],
+            output         = output,
+            weather_note   = wx["note"],
+            score          = ranking_score,
+            home_form_note = format_form_summary(home_form),
+            away_form_note = format_form_summary(away_form),
         ))
 
     # Sort by ranking score descending, filter to bettable games
@@ -430,6 +440,8 @@ def format_daily_report(picks: list[ScoredGame], game_date: str,
             f"  Starters:  {sg.away_starter} (away)  vs  {sg.home_starter} (home)",
             f"  Venue:     {sg.venue}",
             f"  Weather:   {sg.weather_note}",
+            f"  Form ◆ {sg.home_form_note}",
+            f"  Form ◆ {sg.away_form_note}",
             f"  Fair total:{sg.output.fair_total:.2f}  "
             f"Edge: {sg.output.edge_runs:+.2f} runs ({sg.output.edge_pct*100:+.1f}%)",
             f"  Confidence:{sg.output.confidence:.0%}   "

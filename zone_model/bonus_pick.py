@@ -313,9 +313,49 @@ def _consensus_disagreement_score(spread_stdev: float, total_stdev: float) -> fl
     return min(10.0, combined * 6.0)
 
 
+def _scheme_rationale(sport_key: str, home_team: str, away_team: str) -> list[str]:
+    """
+    Returns extra rationale bullets from scheme matchup + H2H + recent form
+    for NFL and NBA events. Silent on any error.
+    """
+    notes: list[str] = []
+    try:
+        sport = None
+        if sport_key == "americanfootball_nfl":
+            sport = "nfl"
+        elif sport_key == "basketball_nba":
+            sport = "nba"
+        if not sport:
+            return notes
+
+        from scheme_model import score_scheme_matchup, format_scheme_summary
+        from live.recent_form import get_recent_form, format_form_summary
+
+        sm = score_scheme_matchup(sport, home_team, away_team)
+        if sm:
+            notes += [f"Scheme edge: {r}" for r in sm.rationale[:3]]
+            if sm.h2h and sm.h2h.games:
+                h2h = sm.h2h
+                notes.append(
+                    f"H2H last {len(h2h.games)}G: {h2h.a_wins}W-{h2h.b_wins}L "
+                    f"avg total {h2h.avg_total:.1f} avg margin {h2h.avg_margin:+.1f}"
+                )
+
+        home_form = get_recent_form(sport, home_team)
+        away_form = get_recent_form(sport, away_team)
+        if home_form.available:
+            notes.append(format_form_summary(home_form))
+        if away_form.available:
+            notes.append(format_form_summary(away_form))
+    except Exception:
+        pass
+    return notes
+
+
 def score_bonus_pick(event: HighProfileEvent) -> BonusPickOutput:
     """
     Runs all five research dimensions and produces the Bonus Pick recommendation.
+    For NFL/NBA adds scheme matchup, H2H history, and recent form layers.
     """
     spread = event.best_spread_home  # negative = home favored
 
@@ -377,6 +417,10 @@ def score_bonus_pick(event: HighProfileEvent) -> BonusPickOutput:
         f"Narrative inflation {narr_score:.1f}/10: {narr_note}",
         f"Book consensus gap {consensus_score:.1f}/10: spread σ={event.spread_consensus}, total σ={event.total_consensus}",
     ]
+
+    # Enrich with scheme matchup + H2H + recent form for NFL/NBA
+    extra = _scheme_rationale(event.sport_key, event.home_team, event.away_team)
+    rationale += extra
 
     recommendation = "BET" if composite >= 58 and confidence >= 0.40 else "PASS"
 
