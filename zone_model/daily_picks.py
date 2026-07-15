@@ -39,6 +39,7 @@ from live.weather_client import get_weather_adjustment
 from live.lineup_quality import total_lineup_adjustment
 from live.odds_client import load_dotenv, get_mlb_totals, match_total
 from ledger import record_pick, settle_pick, all_time_summary, weekly_pnl_report
+from bonus_pick import get_bonus_pick, format_bonus_pick
 
 # Load .env file if present (picks up ODDS_API_KEY locally)
 load_dotenv()
@@ -308,6 +309,17 @@ def format_daily_report(picks: list[ScoredGame], game_date: str,
     return "\n".join(lines)
 
 
+def format_daily_report_with_bonus(
+    picks: list[ScoredGame],
+    game_date: str,
+    settlements: list[str],
+) -> str:
+    """Full daily report: Zone Model picks + Bonus Pick appended."""
+    main = format_daily_report(picks, game_date, settlements)
+    bonus = get_bonus_pick(game_date)
+    return main + format_bonus_pick(bonus)
+
+
 def run_daily(game_date: str | None = None, log_to_ledger: bool = True) -> str:
     """
     Full daily pipeline. Returns the formatted report string.
@@ -339,7 +351,7 @@ def run_daily(game_date: str | None = None, log_to_ledger: bool = True) -> str:
                     game_pk       = sg.game_pk,
                 )
 
-    return format_daily_report(picks, today, settlements)
+    return format_daily_report_with_bonus(picks, today, settlements)
 
 
 if __name__ == "__main__":
