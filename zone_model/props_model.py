@@ -520,6 +520,18 @@ def analyse_prop(
         except Exception:
             pass
 
+    # NFL superstar / defensive scheme adjustment
+    if sport == "nfl":
+        try:
+            from nfl_defense import get_nfl_prop_adjustment, apply_nfl_adjustment
+            nfl_adj = get_nfl_prop_adjustment(player_name, opponent)
+            delta, notes = apply_nfl_adjustment(prop_type, nfl_adj)
+            if delta != 0.0:
+                adj_avg += delta
+                scheme_notes += nfl_adj.rationale + notes
+        except Exception:
+            pass
+
     z = (adj_avg - line) / std
     confidence = min(0.85, 0.50 + abs(z) * 0.12)
 
