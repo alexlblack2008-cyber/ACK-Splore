@@ -1,0 +1,18 @@
+{
+  "name": "Zone Model Picks",
+  "short_name": "Zone Model",
+  "description": "Daily sports betting picks — MLB totals, player props, and bonus picks",
+  "start_url": "/picks",
+  "display": "standalone",
+  "background_color": "#0D1017",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
