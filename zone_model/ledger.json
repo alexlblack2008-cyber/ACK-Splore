@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "bet_date": "2026-07-16",
+    "game_pk": 716524,
+    "home_team": "Cleveland Guardians",
+    "away_team": "Minnesota Twins",
+    "umpire": "Laz Diaz",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 10.04,
+    "edge_runs": 1.54,
+    "confidence": 0.675,
+    "kelly_fraction": 0.0414,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
+  },
+  {
+    "bet_date": "2026-07-16",
+    "game_pk": 732242,
+    "home_team": "Texas Rangers",
+    "away_team": "Seattle Mariners",
+    "umpire": "Laz Diaz",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.43,
+    "edge_runs": 0.93,
+    "confidence": 0.651,
+    "kelly_fraction": 0.0409,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
+  }
+]
