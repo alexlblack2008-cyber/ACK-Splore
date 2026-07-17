@@ -77,7 +77,14 @@ def _golf_section() -> str:
             player_odds = event.get("player_odds", {})
             if not course_name or not player_odds:
                 continue
-            picks = scan_tournament(course_name, player_odds, bankroll=bankroll)
+            picks = scan_tournament(
+                course_name,
+                player_odds,
+                top5_odds  = event.get("top5_odds"),
+                top10_odds = event.get("top10_odds"),
+                top20_odds = event.get("top20_odds"),
+                bankroll   = bankroll,
+            )
             if picks:
                 lines.append(f"\n  {event.get('tournament', event.get('name', course_name)).upper()}")
                 for p in picks:

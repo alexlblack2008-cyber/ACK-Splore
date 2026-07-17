@@ -686,25 +686,45 @@ def american_to_implied(odds: int) -> float:
         return abs(odds) / (abs(odds) + 100)
 
 
-def fit_to_fair_odds(fit_score: float, field_size: int = 156) -> int:
-    """
-    Convert fit score to rough fair American odds.
-    Higher fit = more likely to win = shorter odds.
-    Baseline: 1/field_size chance = pure random.
-    Fit score shifts probability up from baseline.
-    """
-    baseline_prob = 1 / field_size
-    # Scale: fit_score 50 = baseline, 100 = 3x baseline
-    multiplier = 0.5 + (fit_score / 100) * 2.5
-    fair_prob = baseline_prob * multiplier
-    fair_prob = min(fair_prob, 0.25)  # cap at 25% win prob
-    if fair_prob <= 0:
-        return 99999
-    fair_decimal = 1 / fair_prob
-    if fair_decimal >= 2:
-        return int((fair_decimal - 1) * 100)
+def _prob_to_american(prob: float) -> int:
+    """Convert a probability to American odds."""
+    prob = max(0.001, min(0.999, prob))
+    decimal = 1 / prob
+    if decimal >= 2:
+        return int((decimal - 1) * 100)
     else:
-        return int(-100 / (fair_decimal - 1))
+        return int(-100 / (decimal - 1))
+
+
+def fit_to_finish_prob(fit_score: float, field_size: int, top_n: int) -> float:
+    """
+    Estimate P(finish in top N) given a player's fit score and field size.
+
+    Logic: fit score maps to an expected finishing position.
+      - fit 100 → expected position ≈ top 8% of field  (elite performer)
+      - fit  80 → expected position ≈ top 20% of field
+      - fit  60 → expected position ≈ top 38% of field
+      - fit  40 → expected position ≈ top 58% of field (below average)
+
+    P(top_N) = N / expected_position  (capped at 0.90)
+    """
+    # Map fit_score [0,100] → expected_rank percentile [0.92, 0.08]
+    # Linear: fit=100 → pct=0.08, fit=0 → pct=0.92
+    pct = 0.92 - (fit_score / 100) * 0.84
+    expected_rank = max(1, pct * field_size)
+    raw_prob = top_n / expected_rank
+    return min(0.90, raw_prob)
+
+
+def fit_to_fair_odds(fit_score: float, field_size: int = 156,
+                     bet_type: str = "WIN") -> int:
+    """
+    Convert fit score + bet type to fair American odds.
+    """
+    top_n_map = {"WIN": 1, "TOP5": 5, "TOP10": 10, "TOP20": 20, "MAKE_CUT": field_size // 2}
+    top_n = top_n_map.get(bet_type, 1)
+    prob  = fit_to_finish_prob(fit_score, field_size, top_n)
+    return _prob_to_american(prob)
 
 
 @dataclass
@@ -742,12 +762,7 @@ def analyse_golfer(player_name: str, course_name: str,
 
     fit_score, rationale = score_player_course_fit(player, course)
 
-    # Adjust field_size proxy for bet type
-    effective_field = {"WIN": field_size, "TOP5": field_size/5,
-                       "TOP10": field_size/10, "TOP20": field_size/20,
-                       "MAKE_CUT": field_size/2.2}.get(bet_type, field_size)
-
-    fair_odds  = fit_to_fair_odds(fit_score, int(effective_field))
+    fair_odds  = fit_to_fair_odds(fit_score, field_size, bet_type)
     fair_prob  = american_to_implied(fair_odds)
     book_prob  = american_to_implied(market_odds)
     edge       = fair_prob - book_prob
@@ -827,27 +842,47 @@ def format_golf_pick(pick: GolfPick, bankroll: float = 1000.0) -> str:
     return "\n".join(lines)
 
 
-def scan_tournament(course_name: str, player_odds: dict[str, int],
-                    bet_type: str = "WIN",
-                    bankroll: float = 1000.0) -> list[GolfPick]:
+def scan_tournament(
+    course_name:  str,
+    player_odds:  dict[str, int],
+    top5_odds:    Optional[dict[str, int]] = None,
+    top10_odds:   Optional[dict[str, int]] = None,
+    top20_odds:   Optional[dict[str, int]] = None,
+    bankroll:     float = 1000.0,
+) -> list[GolfPick]:
     """
-    Scan all players in a tournament field for value.
-    player_odds: {player_name: american_odds}
-    Returns picks sorted by edge descending.
+    Scan all players across all four bet types (WIN, TOP5, TOP10, TOP20).
+    Returns all value picks sorted by edge descending.
+    Pass odds dicts from fetch_golf_odds() for automatic live odds.
     """
     course = COURSE_PROFILES.get(course_name)
     if not course:
         return []
 
-    field_size = len(player_odds)
-    picks = []
-    for player_name, odds in player_odds.items():
-        pick = analyse_golfer(player_name, course_name, odds, bet_type, field_size)
-        if pick:
-            picks.append(pick)
+    field_size = max(len(player_odds), 70)  # major fields are typically 156
+    all_picks: list[GolfPick] = []
 
-    picks.sort(key=lambda p: p.edge, reverse=True)
-    return picks
+    markets = [
+        ("WIN",   player_odds),
+        ("TOP5",  top5_odds  or {}),
+        ("TOP10", top10_odds or {}),
+        ("TOP20", top20_odds or {}),
+    ]
+
+    seen: set[tuple[str, str]] = set()  # (player, bet_type) dedup
+
+    for bet_type, odds_dict in markets:
+        for player_name, odds in odds_dict.items():
+            key = (player_name, bet_type)
+            if key in seen:
+                continue
+            seen.add(key)
+            pick = analyse_golfer(player_name, course_name, odds, bet_type, field_size)
+            if pick:
+                all_picks.append(pick)
+
+    all_picks.sort(key=lambda p: p.edge, reverse=True)
+    return all_picks
 
 
 def update_prep_notes(player_name: str, notes: list[str]) -> None:

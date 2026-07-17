@@ -195,74 +195,88 @@ _GOLF_SPORT_KEYS = [
 ]
 
 
+_GOLF_FINISH_MARKETS = ["outrights", "golfer_top_5", "golfer_top_10", "golfer_top_20"]
+
+# Map API sport key → (friendly tournament name, course name)
+_GOLF_META = {
+    "golf_masters_tournament_winner":    ("Masters Tournament",        "Augusta National"),
+    "golf_us_open_winner":               ("US Open",                   "Pinehurst No. 2"),
+    "golf_the_open_championship_winner": ("The Open Championship",     "Royal Troon"),
+    "golf_pga_championship_winner":      ("PGA Championship",          "Valhalla"),
+    "golf_the_players_championship":     ("The Players Championship",  "TPC Sawgrass"),
+    "golf_fedex_cup_winner":             ("FedEx Cup",                 "East Lake"),
+}
+
+
+def _best_odds_for_market(event: dict, market_key: str) -> dict[str, int]:
+    """Extract best available odds per player across all bookmakers for one market."""
+    player_odds: dict[str, int] = {}
+    for bm in event.get("bookmakers", []):
+        for market in bm.get("markets", []):
+            if market.get("key") != market_key:
+                continue
+            for outcome in market.get("outcomes", []):
+                name  = outcome.get("name", "")
+                price = outcome.get("price")
+                if name and price is not None:
+                    existing = player_odds.get(name)
+                    # For finish markets keep highest (most generous) odds
+                    if existing is None or int(price) > existing:
+                        player_odds[name] = int(price)
+    return player_odds
+
+
 def fetch_golf_odds(bookmakers: str = "draftkings,fanduel,betmgm") -> list[dict]:
     """
-    Fetch outright winner odds for all active golf tournaments from The Odds API.
+    Fetch winner + top-5/10/20 finish odds for all active golf tournaments.
 
-    Returns a list of dicts:
-      [
-        {
-          "sport_key": "golf_the_open_championship_winner",
-          "tournament": "The Open Championship",
-          "course": "Royal Troon",   # inferred from tournament name
-          "player_odds": {"Rory McIlroy": +600, "Scottie Scheffler": +350, ...}
-        },
-        ...
-      ]
-    Only returns events that are currently active (have bookmaker lines).
+    Returns one entry per active tournament:
+      {
+        "sport_key":    "golf_the_open_championship_winner",
+        "tournament":   "The Open Championship",
+        "course":       "Royal Troon",
+        "player_odds":  {"Rory McIlroy": +600, ...},   # outright winner
+        "top5_odds":    {"Rory McIlroy": -120, ...},   # top-5 yes odds
+        "top10_odds":   {"Rory McIlroy": -200, ...},
+        "top20_odds":   {"Rory McIlroy": -350, ...},
+      }
     """
-    results = []
-
-    # Map API sport key → friendly name + course lookup
-    _meta = {
-        "golf_masters_tournament_winner":    ("Masters Tournament",        "Augusta National"),
-        "golf_us_open_winner":               ("US Open",                   "Pinehurst No. 2"),
-        "golf_the_open_championship_winner": ("The Open Championship",     "Royal Troon"),
-        "golf_pga_championship_winner":      ("PGA Championship",          "Valhalla"),
-        "golf_the_players_championship":     ("The Players Championship",  "TPC Sawgrass"),
-        "golf_fedex_cup_winner":             ("FedEx Cup",                 "East Lake"),
-    }
+    # Collect all markets in one pass per sport_key (one API call per key)
+    tournament_data: dict[str, dict] = {}
 
     for sport_key in _GOLF_SPORT_KEYS:
+        markets_param = ",".join(_GOLF_FINISH_MARKETS)
         try:
             raw = _get(f"/sports/{sport_key}/odds", {
                 "regions":    "us",
-                "markets":    "outrights",
+                "markets":    markets_param,
                 "oddsFormat": "american",
                 "bookmakers": bookmakers,
             })
         except Exception:
             continue
 
-        events = raw.get("events", []) if isinstance(raw, dict) else raw
+        events = raw.get("events", []) if isinstance(raw, dict) else []
         if not events:
             continue
 
         for event in events:
-            player_odds: dict[str, int] = {}
-            for bm in event.get("bookmakers", []):
-                for market in bm.get("markets", []):
-                    if market.get("key") != "outrights":
-                        continue
-                    for outcome in market.get("outcomes", []):
-                        name  = outcome.get("name", "")
-                        price = outcome.get("price")
-                        if name and price is not None:
-                            # Keep the best (highest) odds per player across books
-                            existing = player_odds.get(name)
-                            if existing is None or int(price) > existing:
-                                player_odds[name] = int(price)
+            winner_odds = _best_odds_for_market(event, "outrights")
+            if not winner_odds:
+                continue  # no lines = event not yet open
 
-            if player_odds:
-                name, course = _meta.get(sport_key, (event.get("sport_title", sport_key), ""))
-                results.append({
-                    "sport_key":   sport_key,
-                    "tournament":  name,
-                    "course":      course,
-                    "player_odds": player_odds,
-                })
+            name, course = _GOLF_META.get(sport_key, (event.get("sport_title", sport_key), ""))
+            tournament_data[sport_key] = {
+                "sport_key":   sport_key,
+                "tournament":  name,
+                "course":      course,
+                "player_odds": winner_odds,
+                "top5_odds":   _best_odds_for_market(event, "golfer_top_5"),
+                "top10_odds":  _best_odds_for_market(event, "golfer_top_10"),
+                "top20_odds":  _best_odds_for_market(event, "golfer_top_20"),
+            }
 
-    return results
+    return list(tournament_data.values())
 
 
 # ── .env loader (optional convenience) ───────────────────────────────────────
