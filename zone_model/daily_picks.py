@@ -364,14 +364,9 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
 def get_top_picks(game_date: str | None = None) -> list[ScoredGame]:
     today = game_date or date.today().isoformat()
     all_scored = score_all_games(today)
+    # Only return games the model actually recommends betting on
     bettable = [g for g in all_scored if g.output.recommendation != "NO BET"]
-    picks = bettable[:MAX_PICKS]
-    # Enforce minimum: if fewer than MIN_PICKS have full confidence, lower threshold
-    if len(picks) < MIN_PICKS:
-        extras = [g for g in all_scored if g.output.recommendation == "NO BET"]
-        extras.sort(key=lambda x: x.score, reverse=True)
-        picks += extras[:MAX_PICKS - len(picks)]
-    return picks[:MAX_PICKS]
+    return bettable[:MAX_PICKS]
 
 
 def settle_yesterdays_picks() -> list[str]:

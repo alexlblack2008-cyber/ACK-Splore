@@ -30,7 +30,183 @@ GMAIL_FROM = os.environ.get("GMAIL_FROM", "alex.l.black.2008@gmail.com")
 GMAIL_TO   = os.environ.get("GMAIL_TO",   "alex.l.black.2008@gmail.com")
 
 
-def _send_email(subject: str, body: str) -> bool:
+def _build_html(body: str, today: str) -> str:
+    """Convert plain-text report into a clean styled HTML email."""
+    html_lines = []
+    for line in body.splitlines():
+        stripped = line.strip()
+
+        # Section headers
+        if stripped.startswith("THE ZONE MODEL") or stripped.startswith("PICK #") \
+                or stripped.startswith("PROP EDGES") or stripped.startswith("GOLF VALUE") \
+                or stripped.startswith("MONDAY WEEKLY"):
+            html_lines.append(f'<div class="section-header">{stripped}</div>')
+
+        # The actual pick line
+        elif stripped.startswith("**THE PICK:") or stripped.startswith("THE PICK:"):
+            pick_text = stripped.replace("**", "")
+            html_lines.append(f'<div class="pick-line">{pick_text}</div>')
+
+        # OVER / UNDER / BET SLIP header lines
+        elif stripped.startswith("▲") or stripped.startswith("▼"):
+            html_lines.append(f'<div class="direction">{stripped}</div>')
+
+        # WHY THIS BET / NUMBERS / STAKE headers
+        elif "WHY THIS BET" in stripped or "NUMBERS" in stripped \
+                or "STAKE" in stripped or "ODDS & EDGE" in stripped \
+                or "PREP / NEWS" in stripped:
+            html_lines.append(f'<div class="sub-header">{stripped}</div>')
+
+        # Bullet points
+        elif stripped.startswith("•") or stripped.startswith("★"):
+            html_lines.append(f'<div class="bullet">{stripped}</div>')
+
+        # Divider lines
+        elif set(stripped) <= set("=─·-│┌┐└┘├┤") and len(stripped) > 4:
+            html_lines.append('<hr>')
+
+        # Empty line
+        elif stripped == "":
+            html_lines.append('<div class="spacer"></div>')
+
+        # Everything else
+        else:
+            html_lines.append(f'<div class="row">{stripped}</div>')
+
+    content = "\n".join(html_lines)
+
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {{
+    margin: 0; padding: 0;
+    background: #0f0f0f;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #e8e8e8;
+  }}
+  .wrapper {{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }}
+  .logo {{
+    text-align: center;
+    padding: 28px 0 8px;
+  }}
+  .logo-title {{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }}
+  .logo-sub {{
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }}
+  .date-bar {{
+    text-align: center;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 16px 0 24px;
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }}
+  .card {{
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }}
+  .section-header {{
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+    text-transform: uppercase;
+    padding: 18px 0 6px;
+  }}
+  .pick-line {{
+    background: #00c853;
+    color: #000;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+  }}
+  .direction {{
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    padding: 6px 0 2px;
+  }}
+  .sub-header {{
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #555;
+    text-transform: uppercase;
+    padding: 14px 0 4px;
+    border-top: 1px solid #252525;
+    margin-top: 10px;
+  }}
+  .bullet {{
+    font-size: 14px;
+    color: #ccc;
+    padding: 3px 0 3px 8px;
+    line-height: 1.5;
+  }}
+  .row {{
+    font-size: 13px;
+    color: #aaa;
+    padding: 2px 0;
+    line-height: 1.6;
+  }}
+  .spacer {{ height: 6px; }}
+  hr {{
+    border: none;
+    border-top: 1px solid #252525;
+    margin: 10px 0;
+  }}
+  .footer {{
+    text-align: center;
+    font-size: 11px;
+    color: #444;
+    padding: 20px 0;
+    letter-spacing: 1px;
+  }}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="logo">
+    <div class="logo-title">⚡ The Zone Model</div>
+    <div class="logo-sub">Daily Picks Report</div>
+  </div>
+  <div class="date-bar">{today}</div>
+  <div class="card">
+    {content}
+  </div>
+  <div class="footer">Zone Model · Automated Daily Report · Do not reply</div>
+</div>
+</body>
+</html>"""
+
+
+def _send_email(subject: str, body: str, today: str = "") -> bool:
     """Send picks report via Gmail SMTP. Returns True on success."""
     app_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not app_password:
@@ -39,19 +215,11 @@ def _send_email(subject: str, body: str) -> bool:
     try:
         msg = MIMEMultipart("alternative")
         msg["Subject"] = subject
-        msg["From"]    = GMAIL_FROM
+        msg["From"]    = f"Zone Model <{GMAIL_FROM}>"
         msg["To"]      = GMAIL_TO
 
-        # Plain text version
         msg.attach(MIMEText(body, "plain"))
-
-        # HTML version — monospace so the bet slip formatting looks right
-        html = (
-            "<html><body>"
-            f"<pre style='font-family:monospace;font-size:14px;line-height:1.5'>{body}</pre>"
-            "</body></html>"
-        )
-        msg.attach(MIMEText(html, "html"))
+        msg.attach(MIMEText(_build_html(body, today), "html"))
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(GMAIL_FROM, app_password)
@@ -160,8 +328,8 @@ def main():
     print(full_report)
 
     # Email the report directly
-    subject = f"Zone Model Picks — {today}"
-    _send_email(subject, full_report)
+    subject = f"⚡ Zone Model Picks — {today}"
+    _send_email(subject, full_report, today=today)
 
 
 if __name__ == "__main__":
