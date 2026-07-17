@@ -41,13 +41,46 @@ def _props_section(today: str) -> str:
     except Exception:
         return ""
 
+def _golf_section() -> str:
+    """
+    Scan active major/elite golf tournaments for value picks.
+    Only fires when a supported event is running or within 1 week.
+    """
+    try:
+        from golf_model import ACTIVE_TOURNAMENTS, scan_tournament, format_golf_pick
+        if not ACTIVE_TOURNAMENTS:
+            return ""
+        lines = [
+            "",
+            "=" * 56,
+            "  GOLF VALUE PICKS",
+            "=" * 56,
+        ]
+        for event in ACTIVE_TOURNAMENTS:
+            course_name  = event.get("course")
+            player_odds  = event.get("player_odds", {})
+            bankroll     = float(os.environ.get("BANKROLL", "1000"))
+            if not course_name or not player_odds:
+                continue
+            picks = scan_tournament(course_name, player_odds, bankroll=bankroll)
+            if picks:
+                lines.append(f"\n  {event.get('name', course_name).upper()}")
+                for p in picks:
+                    lines.append(format_golf_pick(p, bankroll=bankroll))
+                    lines.append("")
+        return "\n".join(lines) if len(lines) > 4 else ""
+    except Exception:
+        return ""
+
+
 def main():
     today = date.today().isoformat()
     print(f"[Zone Model] Running daily picks for {today} …\n")
 
     report = run_daily(today, log_to_ledger=True)
     props  = _props_section(today)
-    print(report + props)
+    golf   = _golf_section()
+    print(report + props + golf)
 
     # On Mondays, also print last week's full P&L
     if date.today().weekday() == 0:
