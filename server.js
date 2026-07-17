@@ -85,6 +85,28 @@ app.get("/api/summary", (req, res) => {
   });
 });
 
+// Save actual bet amount: POST /api/bet { home_team, away_team, bet_date, actual_stake, actual_to_win }
+app.post("/api/bet", (req, res) => {
+  const { home_team, away_team, bet_date, actual_stake, actual_to_win } = req.body;
+  if (!home_team || !away_team || !bet_date || actual_stake == null || actual_to_win == null) {
+    return res.status(400).json({ error: "home_team, away_team, bet_date, actual_stake, actual_to_win required" });
+  }
+  const entries = loadLedger();
+  const entry = entries.find(e =>
+    e.home_team === home_team && e.away_team === away_team &&
+    e.bet_date === bet_date && e.outcome === "pending"
+  );
+  if (!entry) return res.status(404).json({ error: "Pending pick not found" });
+  entry.actual_stake  = +Number(actual_stake).toFixed(2);
+  entry.actual_to_win = +Number(actual_to_win).toFixed(2);
+  try {
+    fs.writeFileSync(LEDGER_PATH, JSON.stringify(entries, null, 2));
+    res.json({ ok: true, entry });
+  } catch(e) {
+    res.status(500).json({ error: "Failed to save ledger" });
+  }
+});
+
 // Settle a pick: POST /api/settle { home_team, away_team, bet_date, actual_runs }
 app.post("/api/settle", (req, res) => {
   const { home_team, away_team, bet_date, actual_runs } = req.body;
@@ -98,24 +120,27 @@ app.post("/api/settle", (req, res) => {
 
   const entries = loadLedger();
   const entry = entries.find(e =>
-    e.home_team === home_team &&
-    e.away_team === away_team &&
-    e.bet_date  === bet_date  &&
-    e.outcome   === "pending"
+    e.home_team === home_team && e.away_team === away_team &&
+    e.bet_date === bet_date  && e.outcome === "pending"
   );
-
   if (!entry) return res.status(404).json({ error: "Pending pick not found" });
 
-  const STAKE = 100, WIN_PAYOUT = STAKE / 1.10;
   const rec = entry.recommendation;
   const total = entry.market_total;
   let outcome;
   if (rec === "OVER")  outcome = runs > total ? "won" : runs === total ? "push" : "lost";
   else                 outcome = runs < total ? "won" : runs === total ? "push" : "lost";
 
+  // Use actual bet amounts if recorded, otherwise fall back to $100 paper stake
+  const staked  = entry.actual_stake  ?? 100;
+  const to_win  = entry.actual_to_win ?? +(staked / 1.10).toFixed(2);
+  const pnl     = outcome === "won" ? +to_win.toFixed(2)
+                : outcome === "lost" ? -staked
+                : 0;
+
   entry.actual_runs = runs;
   entry.outcome     = outcome;
-  entry.pnl         = outcome === "won" ? +WIN_PAYOUT.toFixed(2) : outcome === "lost" ? -STAKE : 0;
+  entry.pnl         = pnl;
   entry.settled_at  = new Date().toISOString();
 
   try {
