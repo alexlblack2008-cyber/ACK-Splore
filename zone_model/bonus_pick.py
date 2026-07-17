@@ -313,37 +313,6 @@ def _consensus_disagreement_score(spread_stdev: float, total_stdev: float) -> fl
     return min(10.0, combined * 6.0)
 
 
-def _stat_model_rationale(sport_key: str, home_team: str, away_team: str,
-                           market_total: Optional[float],
-                           market_spread: Optional[float]) -> list[str]:
-    """
-    Runs the statistical fair-total model for NFL/NBA and returns
-    rationale bullets + adjusts total edge signal.
-    """
-    notes: list[str] = []
-    try:
-        sport = None
-        if sport_key == "americanfootball_nfl":
-            sport = "nfl"
-        elif sport_key == "basketball_nba":
-            sport = "nba"
-        if not sport or market_total is None:
-            return notes
-
-        from nfl_nba_model import score_nfl_nba_game
-        out = score_nfl_nba_game(
-            sport        = sport,
-            home_team    = home_team,
-            away_team    = away_team,
-            market_total = market_total,
-            market_spread= market_spread,
-        )
-        notes += out.rationale
-    except Exception:
-        pass
-    return notes
-
-
 def _scheme_rationale(sport_key: str, home_team: str, away_team: str) -> list[str]:
     """
     Returns extra rationale bullets from scheme matchup + H2H + recent form
@@ -434,22 +403,6 @@ def score_bonus_pick(event: HighProfileEvent) -> BonusPickOutput:
     # Confidence: normalize composite to 0-1 with floor at 0.3
     confidence = max(0.30, min(0.90, composite / 100))
 
-    # Stat model convergence boost: if stat model agrees with behavioral lean, +5%
-    try:
-        if event.sport_key in ("americanfootball_nfl", "basketball_nba") and \
-                event.best_total is not None:
-            sport = "nfl" if "nfl" in event.sport_key else "nba"
-            from nfl_nba_model import score_nfl_nba_game
-            sm = score_nfl_nba_game(sport, event.home_team, event.away_team,
-                                     event.best_total, event.best_spread_home)
-            stat_lean = "OVER" if sm.edge_total > 0 else "UNDER"
-            beh_lean  = lean if lean in ("OVER", "UNDER") else None
-            if beh_lean and stat_lean == beh_lean:
-                confidence = min(0.90, confidence + 0.05)
-                composite  = min(100.0, composite + 4.0)
-    except Exception:
-        pass
-
     # Kelly (1/4 Kelly, -110 juice assumed)
     breakeven = 0.5238
     est_win_prob = breakeven + (confidence - 0.50) * 0.25
@@ -465,20 +418,9 @@ def score_bonus_pick(event: HighProfileEvent) -> BonusPickOutput:
         f"Book consensus gap {consensus_score:.1f}/10: spread σ={event.spread_consensus}, total σ={event.total_consensus}",
     ]
 
-    # Statistical fair-total model for NFL/NBA
-    stat_notes = _stat_model_rationale(
-        event.sport_key, event.home_team, event.away_team,
-        event.best_total, event.best_spread_home,
-    )
-    if stat_notes:
-        rationale.append("── Statistical Model ──")
-        rationale += stat_notes
-
-    # Scheme matchup + H2H + recent form for NFL/NBA
-    scheme_notes = _scheme_rationale(event.sport_key, event.home_team, event.away_team)
-    if scheme_notes:
-        rationale.append("── Scheme / H2H / Form ──")
-        rationale += scheme_notes
+    # Enrich with scheme matchup + H2H + recent form for NFL/NBA
+    extra = _scheme_rationale(event.sport_key, event.home_team, event.away_team)
+    rationale += extra
 
     recommendation = "BET" if composite >= 58 and confidence >= 0.40 else "PASS"
 

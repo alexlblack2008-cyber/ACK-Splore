@@ -54,19 +54,6 @@ class PropPick:
     matchup_note:   str = ""
     last_n_games:   list[float] = field(default_factory=list)
     market_key:     str = ""      # raw Odds API market key
-    kelly_fraction: float = 0.0   # quarter-Kelly stake as fraction of bankroll
-    juice:          float = -110  # American odds on the line
-
-
-def _kelly(win_prob: float, american_odds: float = -110) -> float:
-    """Quarter-Kelly stake as a fraction of bankroll. Returns 0 if no edge."""
-    if american_odds < 0:
-        b = 100 / abs(american_odds)
-    else:
-        b = american_odds / 100
-    q = 1 - win_prob
-    full_kelly = (b * win_prob - q) / b
-    return max(0.0, full_kelly * 0.25)
 
 
 # ── Season detection ───────────────────────────────────────────────────────────
@@ -111,9 +98,10 @@ def _sport_priority(today: date | None = None) -> list[tuple[str, list[str]]]:
     if seasons["nhl"]:
         priority.append(("icehockey_nhl", NHL_PROP_MARKETS))
 
-    # Soccer — always scan for corners / cards / goals / anytime scorer
+    # Soccer — high-profile competitions only (World Cup, CL, PL, major cups)
     for sk in SOCCER_SPORT_KEYS:
         priority.append((sk, SOCCER_PROP_MARKETS))
+    # Skip lower-tier domestic leagues (La Liga, Bundesliga, MLS, etc.)
 
     # MMA — fighter props
     priority.append(("mma_mixed_martial_arts", MMA_PROP_MARKETS))
@@ -242,7 +230,7 @@ SOCCER_SPORT_KEYS = [
     "soccer_uefa_champs_league",          # Champions League
     "soccer_uefa_europa_league",          # Europa League
     "soccer_epl",                         # Premier League
-    "soccer_england_efl_cup",             # EFL Cup (Carabao)
+    "soccer_england_efl_cup",            # EFL Cup (Carabao)
     "soccer_fa_cup",                      # FA Cup
     "soccer_conmebol_copa_libertadores",  # Copa Libertadores
     "soccer_conmebol_copa_america",       # Copa América / international
@@ -516,34 +504,9 @@ def analyse_prop(
     variance = sum((v - avg) ** 2 for v in values) / len(values)
     std = math.sqrt(variance) if variance > 0 else max(0.5, avg * 0.15)
 
-    # Opponent adjustment (team-level multiplier)
+    # Opponent adjustment
     opp_mult = _opp_adjustment(prop_type, opponent, sport)
     adj_avg  = avg * opp_mult
-
-    # NBA superstar / defensive scheme adjustment
-    scheme_notes: list[str] = []
-    if sport == "nba":
-        try:
-            from nba_defense import get_prop_adjustment, apply_adjustment_to_prop
-            adj = get_prop_adjustment(player_name, opponent)
-            delta, notes = apply_adjustment_to_prop(prop_type, line, adj)
-            if delta != 0.0:
-                adj_avg += delta
-                scheme_notes += adj.rationale + notes
-        except Exception:
-            pass
-
-    # NFL superstar / defensive scheme adjustment
-    if sport == "nfl":
-        try:
-            from nfl_defense import get_nfl_prop_adjustment, apply_nfl_adjustment
-            nfl_adj = get_nfl_prop_adjustment(player_name, opponent)
-            delta, notes = apply_nfl_adjustment(prop_type, nfl_adj)
-            if delta != 0.0:
-                adj_avg += delta
-                scheme_notes += nfl_adj.rationale + notes
-        except Exception:
-            pass
 
     z = (adj_avg - line) / std
     confidence = min(0.85, 0.50 + abs(z) * 0.12)
@@ -562,9 +525,7 @@ def analyse_prop(
         f"Std dev: {std:.2f}  →  z-score: {z:+.2f}",
         f"Opp ({opponent}) allows {opp_mult:.2f}x avg {prop_type}  →  adj avg: {adj_avg:.1f}",
         f"Last 5: {[round(v, 1) for v in last5]}",
-    ] + scheme_notes
-
-    kelly = _kelly(confidence)
+    ]
 
     return PropPick(
         sport          = sport,
@@ -581,7 +542,6 @@ def analyse_prop(
         matchup_note   = f"opp mult {opp_mult:.2f}x",
         last_n_games   = values,
         market_key     = prop_type,
-        kelly_fraction = round(kelly, 4),
     )
 
 
@@ -717,56 +677,24 @@ def scan_props_from_odds_api(sport_key: str, api_key: str,
 
 # ── Formatting ─────────────────────────────────────────────────────────────────
 
-def format_prop_pick(pick: PropPick, bankroll: float = 1000.0) -> str:
-    """
-    Formats a PropPick as a full bet slip with rationale and stake sizing.
-    bankroll: dollar amount to size Kelly stakes against (default $1,000).
-    """
-    sym       = "▲" if pick.recommendation == "OVER" else "▼"
-    bar_fill  = round(pick.confidence * 10)
-    conf_bar  = "█" * bar_fill + "░" * (10 - bar_fill)
+def format_prop_pick(pick: PropPick) -> str:
+    """Formats a PropPick for the daily report."""
+    sym      = "▲" if pick.recommendation == "OVER" else "▼"
+    bar_fill = round(pick.confidence * 10)
+    conf_bar = "█" * bar_fill + "░" * (10 - bar_fill)
     sport_tag = pick.sport.upper()
 
-    # Stake sizing
-    stake_pct  = pick.kelly_fraction * 100
-    stake_amt  = pick.kelly_fraction * bankroll
-    # Breakeven win rate at -110 juice
-    breakeven  = 52.38
-
-    # Tier label
-    if pick.confidence >= 0.72:
-        tier = "⭐ STRONG LEAN"
-    elif pick.confidence >= 0.62:
-        tier = "LEAN"
-    else:
-        tier = "SPECULATIVE"
-
-    # Build slip
-    sep = "  " + "─" * 56
     lines = [
-        sep,
-        f"  ┌─ BET SLIP [{sport_tag}] ──────────────────────────────────",
-        f"  │  {sym} {pick.recommendation} {pick.line} — "
-        f"{pick.player} {pick.prop_type.upper()}",
-        f"  │  Team: {pick.team}",
-        f"  │  {tier}   Confidence: {pick.confidence:.0%}  [{conf_bar}]",
-        f"  │",
-        f"  ├─ WHY THIS BET ─────────────────────────────────────────",
+        f"  ⬡ PROP [{sport_tag}]: {pick.player} ({pick.team})"
+        f"  {sym} {pick.recommendation} {pick.line}"
+        f" {pick.prop_type.upper()}",
+        f"    Avg:{pick.player_avg:.1f}  Std:{pick.player_std:.2f}"
+        f"  z={pick.z_score:+.2f}  Conf:{pick.confidence:.0%}  [{conf_bar}]",
     ]
     for r in pick.rationale:
-        lines.append(f"  │  • {r}")
-    lines += [
-        f"  │",
-        f"  ├─ NUMBERS ──────────────────────────────────────────────",
-        f"  │  Player avg (adj): {pick.player_avg:.1f}   Line: {pick.line}   "
-        f"Edge: {pick.player_avg - pick.line:+.1f}",
-        f"  │  Std dev: {pick.player_std:.2f}   z-score: {pick.z_score:+.2f}   "
-        f"Breakeven: {breakeven:.1f}%",
-        f"  │  Last 5: {[round(v,1) for v in pick.last_n_games[:5]]}",
-        f"  │",
-        f"  ├─ STAKE (¼-Kelly on ${bankroll:,.0f} bankroll) ─────────────",
-        f"  │  Bet: ${stake_amt:.2f}  ({stake_pct:.2f}% of roll)",
-        f"  │  Win ~${stake_amt * (100/110):.2f} profit at -110 juice",
-        f"  └────────────────────────────────────────────────────────",
-    ]
+        lines.append(f"    • {r}")
+    lines.append(
+        f"  **PROP PICK: {pick.recommendation} {pick.line}"
+        f" {pick.player} {pick.prop_type}**"
+    )
     return "\n".join(lines)
