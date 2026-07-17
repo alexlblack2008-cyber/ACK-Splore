@@ -1,12 +1,24 @@
 """
 Cron entry point — called once daily by the CCR Routine trigger.
 
-Runs the full Zone Model daily pipeline and prints the report.
-The CCR trigger captures stdout and sends it as a push notification + email.
+Runs the full Zone Model daily pipeline, prints the report, and emails
+it directly to alex.l.black.2008@gmail.com via Gmail SMTP.
+
+Required env vars (set on Render):
+  ODDS_API_KEY        — The Odds API key
+  GMAIL_APP_PASSWORD  — 16-char Gmail App Password (myaccount.google.com/apppasswords)
+  GMAIL_FROM          — sending address (defaults to alex.l.black.2008@gmail.com)
+  GMAIL_TO            — recipient address (defaults to alex.l.black.2008@gmail.com)
+  BANKROLL            — paper bankroll in dollars (default 1000)
 """
 
 import sys
 import os
+import smtplib
+import traceback
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -14,17 +26,51 @@ from daily_picks import run_daily
 from ledger import weekly_pnl_report
 from datetime import date
 
+GMAIL_FROM = os.environ.get("GMAIL_FROM", "alex.l.black.2008@gmail.com")
+GMAIL_TO   = os.environ.get("GMAIL_TO",   "alex.l.black.2008@gmail.com")
+
+
+def _send_email(subject: str, body: str) -> bool:
+    """Send picks report via Gmail SMTP. Returns True on success."""
+    app_password = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if not app_password:
+        print("  [Email] GMAIL_APP_PASSWORD not set — skipping email.")
+        return False
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = subject
+        msg["From"]    = GMAIL_FROM
+        msg["To"]      = GMAIL_TO
+
+        # Plain text version
+        msg.attach(MIMEText(body, "plain"))
+
+        # HTML version — monospace so the bet slip formatting looks right
+        html = (
+            "<html><body>"
+            f"<pre style='font-family:monospace;font-size:14px;line-height:1.5'>{body}</pre>"
+            "</body></html>"
+        )
+        msg.attach(MIMEText(html, "html"))
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(GMAIL_FROM, app_password)
+            server.sendmail(GMAIL_FROM, GMAIL_TO, msg.as_string())
+
+        print(f"  [Email] Sent to {GMAIL_TO} ✓")
+        return True
+    except Exception as e:
+        print(f"  [Email] Failed: {e}")
+        return False
+
+
 def _props_section(today: str) -> str:
-    """
-    Season-aware props scan across all sports.
-    NFL/NBA lead when in season; soccer corners/cards/goals always scanned.
-    """
+    """Season-aware props scan across all sports."""
     try:
         api_key = os.environ.get("ODDS_API_KEY", "")
         if not api_key:
             return ""
         from props_model import scan_all_props, format_prop_pick
-        from datetime import date as _date
         picks = scan_all_props(api_key, today, max_picks=8)
         if not picks:
             return ""
@@ -41,21 +87,17 @@ def _props_section(today: str) -> str:
     except Exception:
         return ""
 
+
 def _golf_section() -> str:
-    """
-    Fetch live DraftKings/FanDuel golf odds via The Odds API and scan for value.
-    Falls back to ACTIVE_TOURNAMENTS if no API key or no live events found.
-    """
+    """Fetch live golf odds and scan for value picks."""
     try:
         from golf_model import ACTIVE_TOURNAMENTS, scan_tournament, format_golf_pick
         bankroll = float(os.environ.get("BANKROLL", "1000"))
 
-        # Try live odds first
         live_events = []
         api_key = os.environ.get("ODDS_API_KEY", "")
         if api_key:
             try:
-                import sys
                 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "live"))
                 from odds_client import fetch_golf_odds
                 live_events = fetch_golf_odds()
@@ -102,14 +144,25 @@ def main():
     report = run_daily(today, log_to_ledger=True)
     props  = _props_section(today)
     golf   = _golf_section()
-    print(report + props + golf)
 
-    # On Mondays, also print last week's full P&L
+    full_report = report + props + golf
+
+    # Monday P&L recap
     if date.today().weekday() == 0:
-        print("\n" + "=" * 56)
-        print("  MONDAY WEEKLY RECAP")
-        print("=" * 56)
-        print(weekly_pnl_report())
+        recap = (
+            "\n" + "=" * 56 + "\n"
+            "  MONDAY WEEKLY RECAP\n"
+            + "=" * 56 + "\n"
+            + weekly_pnl_report()
+        )
+        full_report += recap
+
+    print(full_report)
+
+    # Email the report directly
+    subject = f"Zone Model Picks — {today}"
+    _send_email(subject, full_report)
+
 
 if __name__ == "__main__":
     main()
