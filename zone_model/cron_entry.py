@@ -43,28 +43,43 @@ def _props_section(today: str) -> str:
 
 def _golf_section() -> str:
     """
-    Scan active major/elite golf tournaments for value picks.
-    Only fires when a supported event is running or within 1 week.
+    Fetch live DraftKings/FanDuel golf odds via The Odds API and scan for value.
+    Falls back to ACTIVE_TOURNAMENTS if no API key or no live events found.
     """
     try:
         from golf_model import ACTIVE_TOURNAMENTS, scan_tournament, format_golf_pick
-        if not ACTIVE_TOURNAMENTS:
+        bankroll = float(os.environ.get("BANKROLL", "1000"))
+
+        # Try live odds first
+        live_events = []
+        api_key = os.environ.get("ODDS_API_KEY", "")
+        if api_key:
+            try:
+                import sys
+                sys.path.insert(0, os.path.join(os.path.dirname(__file__), "live"))
+                from odds_client import fetch_golf_odds
+                live_events = fetch_golf_odds()
+            except Exception:
+                pass
+
+        events = live_events if live_events else ACTIVE_TOURNAMENTS
+        if not events:
             return ""
+
         lines = [
             "",
             "=" * 56,
-            "  GOLF VALUE PICKS",
+            "  GOLF VALUE PICKS" + (" [LIVE ODDS: DK/FD]" if live_events else ""),
             "=" * 56,
         ]
-        for event in ACTIVE_TOURNAMENTS:
-            course_name  = event.get("course")
-            player_odds  = event.get("player_odds", {})
-            bankroll     = float(os.environ.get("BANKROLL", "1000"))
+        for event in events:
+            course_name = event.get("course")
+            player_odds = event.get("player_odds", {})
             if not course_name or not player_odds:
                 continue
             picks = scan_tournament(course_name, player_odds, bankroll=bankroll)
             if picks:
-                lines.append(f"\n  {event.get('name', course_name).upper()}")
+                lines.append(f"\n  {event.get('tournament', event.get('name', course_name)).upper()}")
                 for p in picks:
                     lines.append(format_golf_pick(p, bankroll=bankroll))
                     lines.append("")

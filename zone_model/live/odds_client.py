@@ -182,6 +182,89 @@ def match_total(
     return fallback
 
 
+# ── Golf outright winner odds ─────────────────────────────────────────────────
+
+# The Odds API sport keys for golf
+_GOLF_SPORT_KEYS = [
+    "golf_masters_tournament_winner",
+    "golf_us_open_winner",
+    "golf_the_open_championship_winner",
+    "golf_pga_championship_winner",
+    "golf_the_players_championship",
+    "golf_fedex_cup_winner",
+]
+
+
+def fetch_golf_odds(bookmakers: str = "draftkings,fanduel,betmgm") -> list[dict]:
+    """
+    Fetch outright winner odds for all active golf tournaments from The Odds API.
+
+    Returns a list of dicts:
+      [
+        {
+          "sport_key": "golf_the_open_championship_winner",
+          "tournament": "The Open Championship",
+          "course": "Royal Troon",   # inferred from tournament name
+          "player_odds": {"Rory McIlroy": +600, "Scottie Scheffler": +350, ...}
+        },
+        ...
+      ]
+    Only returns events that are currently active (have bookmaker lines).
+    """
+    results = []
+
+    # Map API sport key → friendly name + course lookup
+    _meta = {
+        "golf_masters_tournament_winner":    ("Masters Tournament",        "Augusta National"),
+        "golf_us_open_winner":               ("US Open",                   "Pinehurst No. 2"),
+        "golf_the_open_championship_winner": ("The Open Championship",     "Royal Troon"),
+        "golf_pga_championship_winner":      ("PGA Championship",          "Valhalla"),
+        "golf_the_players_championship":     ("The Players Championship",  "TPC Sawgrass"),
+        "golf_fedex_cup_winner":             ("FedEx Cup",                 "East Lake"),
+    }
+
+    for sport_key in _GOLF_SPORT_KEYS:
+        try:
+            raw = _get(f"/sports/{sport_key}/odds", {
+                "regions":    "us",
+                "markets":    "outrights",
+                "oddsFormat": "american",
+                "bookmakers": bookmakers,
+            })
+        except Exception:
+            continue
+
+        events = raw.get("events", []) if isinstance(raw, dict) else raw
+        if not events:
+            continue
+
+        for event in events:
+            player_odds: dict[str, int] = {}
+            for bm in event.get("bookmakers", []):
+                for market in bm.get("markets", []):
+                    if market.get("key") != "outrights":
+                        continue
+                    for outcome in market.get("outcomes", []):
+                        name  = outcome.get("name", "")
+                        price = outcome.get("price")
+                        if name and price is not None:
+                            # Keep the best (highest) odds per player across books
+                            existing = player_odds.get(name)
+                            if existing is None or int(price) > existing:
+                                player_odds[name] = int(price)
+
+            if player_odds:
+                name, course = _meta.get(sport_key, (event.get("sport_title", sport_key), ""))
+                results.append({
+                    "sport_key":   sport_key,
+                    "tournament":  name,
+                    "course":      course,
+                    "player_odds": player_odds,
+                })
+
+    return results
+
+
 # ── .env loader (optional convenience) ───────────────────────────────────────
 
 def load_dotenv(path: str | None = None) -> None:
