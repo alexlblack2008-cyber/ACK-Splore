@@ -1,0 +1,17 @@
+[
+  {
+    "bet_date": "2026-07-17",
+    "home_team": "Arizona Diamondbacks",
+    "away_team": "St. Louis Cardinals",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "stake": 100,
+    "actual_stake": 42,
+    "actual_to_win": 40,
+    "confidence": 0.68,
+    "umpire": "TBD",
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null
+  }
+]

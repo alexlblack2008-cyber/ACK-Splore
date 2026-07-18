@@ -13,10 +13,23 @@ const LEDGER_PATH = path.join(__dirname, "zone_model", "ledger.json");
 
 // ── Ledger helpers ───────────────────────────────────────────────────────────
 
+const SEED_PATH = path.join(__dirname, "zone_model", "ledger.seed.json");
+
 function loadLedger() {
   try {
     if (fs.existsSync(LEDGER_PATH)) {
-      return JSON.parse(fs.readFileSync(LEDGER_PATH, "utf8"));
+      const data = JSON.parse(fs.readFileSync(LEDGER_PATH, "utf8"));
+      if (data.length > 0) return data;
+    }
+  } catch {}
+  // If ledger is empty or missing, seed from ledger.seed.json
+  try {
+    if (fs.existsSync(SEED_PATH)) {
+      const seed = JSON.parse(fs.readFileSync(SEED_PATH, "utf8"));
+      if (seed.length > 0) {
+        fs.writeFileSync(LEDGER_PATH, JSON.stringify(seed, null, 2));
+        return seed;
+      }
     }
   } catch {}
   return [];
