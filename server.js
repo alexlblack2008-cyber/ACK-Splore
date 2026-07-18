@@ -185,6 +185,10 @@ app.get("/picks", (req, res) => {
 // ── Root ─────────────────────────────────────────────────────────────────────
 
 app.get("/", (req, res) => {
+  res.redirect("/picks");
+});
+
+app.get("/tour", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
