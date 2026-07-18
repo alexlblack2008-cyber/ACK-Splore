@@ -239,6 +239,7 @@ def _props_section(today: str) -> str:
         if not api_key:
             return ""
         from props_model import scan_all_props, format_prop_pick
+        from ledger import record_prop_pick
         picks = scan_all_props(api_key, today, max_picks=8)
         if not picks:
             return ""
@@ -251,6 +252,23 @@ def _props_section(today: str) -> str:
         for p in picks:
             lines.append(format_prop_pick(p))
             lines.append("")
+            # Log to ledger so it shows on the website
+            try:
+                home = getattr(p, "team", p.player)
+                away = getattr(p, "opponent", p.sport)
+                desc = f"{p.player} {p.prop_type} {p.line}"
+                record_prop_pick(
+                    bet_date       = today,
+                    sport          = p.sport,
+                    home_team      = home,
+                    away_team      = away,
+                    recommendation = p.recommendation,
+                    market_total   = p.line,
+                    confidence     = p.confidence,
+                    description    = desc,
+                )
+            except Exception:
+                pass
         return "\n".join(lines)
     except Exception:
         return ""
