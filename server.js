@@ -120,29 +120,43 @@ app.post("/api/bet", (req, res) => {
   }
 });
 
-// Settle a pick: POST /api/settle { home_team, away_team, bet_date, actual_runs }
+// Settle a pick: POST /api/settle { home_team, away_team, bet_date, recommendation, actual_runs?, actual_home_score?, actual_away_score? }
 app.post("/api/settle", (req, res) => {
-  const { home_team, away_team, bet_date, actual_runs } = req.body;
-  if (!home_team || !away_team || !bet_date || actual_runs == null) {
-    return res.status(400).json({ error: "home_team, away_team, bet_date, actual_runs required" });
-  }
-  const runs = Number(actual_runs);
-  if (isNaN(runs) || runs < 0) {
-    return res.status(400).json({ error: "actual_runs must be a non-negative number" });
+  const { home_team, away_team, bet_date, recommendation, actual_runs, actual_home_score, actual_away_score } = req.body;
+  if (!home_team || !away_team || !bet_date) {
+    return res.status(400).json({ error: "home_team, away_team, bet_date required" });
   }
 
   const entries = loadLedger();
+  // Match on recommendation too if provided (handles multiple picks same game)
   const entry = entries.find(e =>
     e.home_team === home_team && e.away_team === away_team &&
-    e.bet_date === bet_date  && e.outcome === "pending"
+    e.bet_date === bet_date   && e.outcome === "pending" &&
+    (!recommendation || e.recommendation === recommendation)
   );
   if (!entry) return res.status(404).json({ error: "Pending pick not found" });
 
   const rec = entry.recommendation;
-  const total = entry.market_total;
   let outcome;
-  if (rec === "OVER")  outcome = runs > total ? "won" : runs === total ? "push" : "lost";
-  else                 outcome = runs < total ? "won" : runs === total ? "push" : "lost";
+
+  if (rec === "OVER" || rec === "UNDER") {
+    const runs = Number(actual_runs);
+    if (isNaN(runs) || runs < 0) return res.status(400).json({ error: "actual_runs required for OVER/UNDER bets" });
+    outcome = rec === "OVER"
+      ? (runs > entry.market_total ? "won" : runs === entry.market_total ? "push" : "lost")
+      : (runs < entry.market_total ? "won" : runs === entry.market_total ? "push" : "lost");
+    entry.actual_runs = runs;
+  } else if (rec === "HOME" || rec === "AWAY") {
+    const hs = Number(actual_home_score), as_ = Number(actual_away_score);
+    if (isNaN(hs) || isNaN(as_)) return res.status(400).json({ error: "actual_home_score and actual_away_score required for ML bets" });
+    if (rec === "HOME") outcome = hs > as_ ? "won" : hs < as_ ? "lost" : "push";
+    else                outcome = as_ > hs ? "won" : as_ < hs ? "lost" : "push";
+    entry.actual_runs = hs + as_;
+    entry.actual_home_score = hs;
+    entry.actual_away_score = as_;
+  } else {
+    return res.status(400).json({ error: "Unknown recommendation type" });
+  }
 
   // Use actual bet amounts if recorded, otherwise fall back to $100 paper stake
   const staked  = entry.actual_stake  ?? 100;
@@ -151,7 +165,6 @@ app.post("/api/settle", (req, res) => {
                 : outcome === "lost" ? -staked
                 : 0;
 
-  entry.actual_runs = runs;
   entry.outcome     = outcome;
   entry.pnl         = pnl;
   entry.settled_at  = new Date().toISOString();
