@@ -11,10 +11,10 @@
     "actual_to_win": 40,
     "confidence": 0.68,
     "umpire": "TBD",
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 9,
+    "pnl": 40,
+    "settled_at": "2026-07-19T14:47:16.712492"
   },
   {
     "bet_date": "2026-07-18",
@@ -41,10 +41,10 @@
     "confidence": 0.62,
     "stake": 100,
     "umpire": "Total goals UNDER 3.5 (-140)",
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 10,
+    "pnl": -100,
+    "settled_at": "2026-07-19T14:47:15.310345"
   },
   {
     "bet_date": "2026-07-18",
@@ -56,9 +56,11 @@
     "confidence": 0.58,
     "stake": 100,
     "umpire": "France to win ML (-135)",
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 10,
+    "pnl": -100,
+    "settled_at": "2026-07-19T14:47:15.310391",
+    "actual_home_score": 4,
+    "actual_away_score": 6
   }
 ]
