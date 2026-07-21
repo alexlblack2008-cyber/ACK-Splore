@@ -32,6 +32,11 @@ jobs:
           cd zone_model
           python auto_settle.py
 
+      - name: Refresh umpire profiles
+        run: |
+          cd zone_model
+          python update_umpire_data.py || echo "Umpire update failed — continuing with cached profiles"
+
       - name: Run Zone Model pipeline
         env:
           ODDS_API_KEY:         ${{ secrets.ODDS_API_KEY }}
@@ -47,7 +52,7 @@ jobs:
         run: |
           git config user.name "Zone Model Bot"
           git config user.email "actions@github.com"
-          git add zone_model/ledger.json
+          git add zone_model/ledger.json zone_model/umpire_data.py
           # Touch a timestamp file to keep the schedule alive (GitHub disables
           # scheduled workflows on repos with no recent activity)
           date -u +"%Y-%m-%dT%H:%M:%SZ" > zone_model/.last_run
