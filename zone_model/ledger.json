@@ -62,5 +62,23 @@
     "settled_at": "2026-07-20T15:45:07.400210",
     "actual_home_score": 1,
     "actual_away_score": 0
+  },
+  {
+    "bet_date": "2026-08-02",
+    "game_pk": 824807,
+    "home_team": "Baltimore Orioles",
+    "away_team": "Philadelphia Phillies",
+    "umpire": "Tripp Gibson",
+    "recommendation": "OVER",
+    "market_total": 8.0,
+    "fair_total": 10.49,
+    "edge_runs": 2.49,
+    "confidence": 0.479,
+    "kelly_fraction": 0.0314,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
