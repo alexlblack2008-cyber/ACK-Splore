@@ -50,8 +50,10 @@ MIN_PICKS = 3
 MAX_PICKS = 5
 
 # Minimum thresholds to issue a pick
-MIN_EDGE   = 0.35   # runs
-MIN_CONF   = 0.35
+# Edge requires real market totals from Odds API — without them confidence
+# drops and picks are suppressed. Key must be set in GitHub secrets.
+MIN_EDGE   = 0.30   # runs (lowered: 0.35 was too strict with real lines)
+MIN_CONF   = 0.33
 
 
 @dataclass

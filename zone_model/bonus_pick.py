@@ -150,13 +150,28 @@ def fetch_todays_high_profile_events(game_date: str | None = None) -> list[HighP
             # Flag: is this event high profile by keyword?
             label = f"{home} {away} {sport_key}".lower()
             is_flagged = any(kw in label for kw in HIGH_PROFILE_KEYWORDS)
-            # For UFC/World Cup/NFL Playoffs, every event qualifies
-            always_on  = sport_key in {
-                "mma_mixed_martial_arts", "soccer_fifa_world_cup",
+
+            # UFC: only pick main card / main event fighters — skip prelim bouts.
+            # A fight qualifies if the event title contains "ufc" + a number (PPV/Fight Night)
+            # AND the fighters are recognizable (tracked by the market with 3+ books offering odds).
+            if sport_key == "mma_mixed_martial_arts":
+                books_count = len(ev.get("bookmakers", []))
+                # Prelim bouts have thin book coverage; main card gets 4+ books
+                if books_count < 4:
+                    continue
+                # Must also pass the high-profile keyword check or be a PPV main event
+                title_str = ev.get("sport_title", "") + " " + ev.get("id", "")
+                is_main_card = is_flagged or books_count >= 5
+                if not is_main_card:
+                    continue
+
+            # For World Cup and Boxing, every event qualifies
+            always_on = sport_key in {
+                "soccer_fifa_world_cup",
                 "boxing_boxing",
             }
 
-            if not (is_flagged or always_on):
+            if not (is_flagged or always_on) and sport_key != "mma_mixed_martial_arts":
                 continue
 
             # Collect spreads and totals across books
@@ -422,7 +437,7 @@ def score_bonus_pick(event: HighProfileEvent) -> BonusPickOutput:
     extra = _scheme_rationale(event.sport_key, event.home_team, event.away_team)
     rationale += extra
 
-    recommendation = "BET" if composite >= 58 and confidence >= 0.40 else "PASS"
+    recommendation = "BET" if composite >= 52 and confidence >= 0.38 else "PASS"
 
     return BonusPickOutput(
         event           = event,
