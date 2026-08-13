@@ -96,6 +96,15 @@ UMPIRE_PROFILES = {
     "Derek Thomas":           {"csraa": -0.2, "run_impact": +0.04, "k_factor": 0.99, "bb_factor": 1.01, "games": 108},
     "Edwin Moscoso":          {"csraa": +0.1, "run_impact": -0.02, "k_factor": 1.00, "bb_factor": 1.00, "games": 101},
 
+    # Additional umpires identified from live game data
+    "Brock Ballou":           {"csraa": -0.3, "run_impact": +0.05, "k_factor": 0.99, "bb_factor": 1.02, "games": 112},
+    "Alan Porter":            {"csraa": -0.6, "run_impact": +0.11, "k_factor": 0.97, "bb_factor": 1.04, "games": 198},
+    "Jeremie Rehak":          {"csraa": +1.5, "run_impact": -0.30, "k_factor": 1.07, "bb_factor": 0.93, "games": 198},
+    "Clint Fagan":            {"csraa": +0.2, "run_impact": -0.04, "k_factor": 1.01, "bb_factor": 1.00, "games": 134},
+    "Roberto Ortiz":          {"csraa": -0.4, "run_impact": +0.08, "k_factor": 0.98, "bb_factor": 1.03, "games": 118},
+    "John Bacon":             {"csraa": +0.3, "run_impact": -0.06, "k_factor": 1.01, "bb_factor": 1.00, "games": 101},
+    "Will Little":            {"csraa": +0.1, "run_impact": -0.02, "k_factor": 1.00, "bb_factor": 1.00, "games": 97},
+
     # Neutral baseline used when umpire is unknown or too few HP games
     "__UNKNOWN__":            {"csraa":  0.0, "run_impact":  0.00, "k_factor": 1.00, "bb_factor": 1.00, "games": 0},
 }

@@ -270,26 +270,46 @@ def compute_fair_total(game: GameInput) -> ModelOutput:
     edge_pct = edge_runs / game.market_total
 
     # --- Confidence composite ---
-    # Weighted layers: ump + pitcher carry real signal even in static mode;
-    # bullpen and rest/travel are bonuses when live data is available.
-    # Each layer contributes a 0-1 score; weights sum to 1.0.
-    ump_score   = min(1.0, abs(ura) / 0.30)          # weight 0.40 — primary edge
-    pucs_score  = min(1.0, abs(total_pucs) / 0.20)   # weight 0.35 — pitcher fit
-    bfa_score   = min(1.0, abs(total_bfa) / 0.30)    # weight 0.15 — fatigue
-    rca_score   = min(1.0, abs(total_rca) / 0.20)    # weight 0.10 — rest/travel
+    # Each signal layer is scored independently on a 0-1 scale.
+    # Umpire confidence (sample size) only scales the ump layer, not the whole model.
+    # Pitcher quality is an independent confidence signal so unknown umpires
+    # don't suppress the pitcher/lineup edge.
 
-    weighted_signal = (
-        0.40 * ump_score +
-        0.35 * pucs_score +
-        0.15 * bfa_score +
-        0.10 * rca_score
+    # Ump layer: how much does this ump historically move run totals?
+    ump_score = min(1.0, abs(ura) / 0.30) * ump_confidence
+
+    # PUCS layer: pitcher-umpire interaction (uses 0 csraa for unknown umps → neutral)
+    pucs_score = min(1.0, abs(total_pucs) / 0.20)
+
+    # Pitcher quality layer (independent of umpire): extreme K% or BB% pitchers
+    # produce more predictable totals regardless of who's behind the plate.
+    home_p = PITCHER_PROFILES.get(game.home_team.starter_name, PITCHER_PROFILES["__UNKNOWN__"])
+    away_p = PITCHER_PROFILES.get(game.away_team.starter_name, PITCHER_PROFILES["__UNKNOWN__"])
+    avg_k_pct  = (home_p["k_pct"]  + away_p["k_pct"])  / 2
+    avg_bb_pct = (home_p["bb_pct"] + away_p["bb_pct"]) / 2
+    # High K% or low BB% = more predictable → higher confidence
+    pitcher_score = min(1.0, (avg_k_pct - 0.18) / 0.10 + (0.09 - avg_bb_pct) / 0.04)
+    pitcher_score = max(0.0, pitcher_score)
+
+    # Edge magnitude as confidence proxy: larger edge vs market = model is more certain
+    edge_score = min(1.0, abs(edge_runs) / 1.20)
+
+    # Bullpen / rest (bonus when live data available)
+    bfa_score = min(1.0, abs(total_bfa) / 0.30)
+    rca_score = min(1.0, abs(total_rca) / 0.20)
+
+    raw_confidence = (
+        0.28 * ump_score +
+        0.22 * pucs_score +
+        0.22 * pitcher_score +
+        0.18 * edge_score +
+        0.06 * bfa_score +
+        0.04 * rca_score
     )
-    raw_confidence = weighted_signal * ump_confidence
 
     # --- Recommendation thresholds ---
-    # We require at least 0.35 runs of edge and 0.35 confidence to bet
-    MIN_EDGE_RUNS = 0.35
-    MIN_CONFIDENCE = 0.35
+    MIN_EDGE_RUNS = 0.30
+    MIN_CONFIDENCE = 0.33
 
     if abs(edge_runs) >= MIN_EDGE_RUNS and raw_confidence >= MIN_CONFIDENCE:
         recommendation = "OVER" if edge_runs > 0 else "UNDER"
