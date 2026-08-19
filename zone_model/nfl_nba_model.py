@@ -47,6 +47,16 @@ from datetime import date
 
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports"
 
+try:
+    from nfl_teams import (
+        NFL_OFFENSIVE_PROFILES, QB_PROP_PROFILES, SKILL_PLAYER_PROPS,
+        NFL_LEAGUE_AVG as _NFL_OFF_AVG, NFL_DOME_TEAMS,
+    )
+    _NFL_PROFILES_AVAILABLE = True
+except ImportError:
+    _NFL_PROFILES_AVAILABLE = False
+    NFL_DOME_TEAMS = set()
+
 
 # ── Data structures ────────────────────────────────────────────────────────────
 
@@ -265,10 +275,20 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
     """
     avg = NFL_LEAGUE_AVG
 
+    # Pull from offline profiles if ESPN data unavailable
+    def _off_pts(ts: TeamStats) -> float:
+        if ts.available and ts.pts_per_game > 0:
+            return ts.pts_per_game
+        if _NFL_PROFILES_AVAILABLE:
+            prof = NFL_OFFENSIVE_PROFILES.get(ts.team_name)
+            if prof:
+                return prof.pts_per_game
+        return avg["pts_per_game"]
+
     # Projected score = avg of (team off avg) and (opponent def allowed)
-    home_off  = home.pts_per_game  if home.available  else avg["pts_per_game"]
+    home_off  = _off_pts(home)
     home_def  = home.pts_allowed   if home.available  else avg["pts_per_game"]
-    away_off  = away.pts_per_game  if away.available  else avg["pts_per_game"]
+    away_off  = _off_pts(away)
     away_def  = away.pts_allowed   if away.available  else avg["pts_per_game"]
 
     # Each team's projected score = blend of their offense vs opponent defense
@@ -280,8 +300,16 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
     away_pace_adj = 0.0
     if home.available and home.yards_per_play_off > 0:
         home_pace_adj = (home.yards_per_play_off - avg["yards_per_play"]) * 0.8
+    elif _NFL_PROFILES_AVAILABLE:
+        prof = NFL_OFFENSIVE_PROFILES.get(home.team_name)
+        if prof:
+            home_pace_adj = (prof.yards_per_play - avg["yards_per_play"]) * 0.8
     if away.available and away.yards_per_play_off > 0:
         away_pace_adj = (away.yards_per_play_off - avg["yards_per_play"]) * 0.8
+    elif _NFL_PROFILES_AVAILABLE:
+        prof = NFL_OFFENSIVE_PROFILES.get(away.team_name)
+        if prof:
+            away_pace_adj = (prof.yards_per_play - avg["yards_per_play"]) * 0.8
     home_proj += home_pace_adj
     away_proj += away_pace_adj
 
@@ -306,6 +334,12 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
     if away.available and away.third_down_pct > 0:
         td_adj = (away.third_down_pct - avg["third_down_pct"]) * 8.0
         away_proj += td_adj
+
+    # Dome stadium scoring boost (retractable/indoor = ~2.1 pts per game total)
+    if _NFL_PROFILES_AVAILABLE and home.team_name in NFL_DOME_TEAMS:
+        dome_boost = _NFL_OFF_AVG.get("dome_scoring_boost", 2.1) / 2
+        home_proj += dome_boost
+        away_proj += dome_boost
 
     home_proj = round(max(10.0, home_proj), 1)
     away_proj = round(max(7.0,  away_proj), 1)
