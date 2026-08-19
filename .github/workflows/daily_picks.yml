@@ -39,28 +39,14 @@ jobs:
 
       - name: Run Zone Model pipeline
         env:
-          ODDS_API_KEY:         ${{ secrets.ODDS_API_KEY }}
-          GMAIL_APP_PASSWORD:   ${{ secrets.GMAIL_APP_PASSWORD }}
-          GMAIL_FROM:           ${{ secrets.GMAIL_FROM }}
-          GMAIL_TO:             ${{ secrets.GMAIL_TO }}
-          BANKROLL:             "1000"
+          ODDS_API_KEY:        ${{ secrets.ODDS_API_KEY }}
+          GMAIL_APP_PASSWORD:  ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_FROM:          ${{ secrets.GMAIL_FROM }}
+          GMAIL_TO:            ${{ secrets.GMAIL_TO }}
+          BANKROLL:            "1000"
         run: |
           cd zone_model
-          # Validate API key before running — surface the error clearly
-          python -c "
-import os, urllib.request, urllib.parse, json
-key = os.environ.get('ODDS_API_KEY','')
-if not key:
-    print('ERROR: ODDS_API_KEY secret is not set in GitHub Actions — go to Settings → Secrets → Actions and add it')
-    exit(1)
-try:
-    params = urllib.parse.urlencode({'apiKey': key, 'regions':'us','markets':'totals'})
-    with urllib.request.urlopen(f'https://api.the-odds-api.com/v4/sports/baseball_mlb/odds?{params}', timeout=8) as r:
-        remaining = r.headers.get('x-requests-remaining', '?')
-        print(f'[Odds API] Key valid. Requests remaining: {remaining}')
-except Exception as e:
-    print(f'WARNING: Odds API check failed ({e}) — picks will use 8.5 placeholder totals')
-"
+          python validate_api_key.py
           python cron_entry.py
 
       - name: Commit updated ledger
@@ -68,8 +54,6 @@ except Exception as e:
           git config user.name "Zone Model Bot"
           git config user.email "actions@github.com"
           git add zone_model/ledger.json zone_model/umpire_data.py
-          # Touch a timestamp file to keep the schedule alive (GitHub disables
-          # scheduled workflows on repos with no recent activity)
           date -u +"%Y-%m-%dT%H:%M:%SZ" > zone_model/.last_run
           git add zone_model/.last_run
           git diff --cached --quiet || git commit -m "chore: daily picks run $(date -u +%Y-%m-%d) [skip ci]"
