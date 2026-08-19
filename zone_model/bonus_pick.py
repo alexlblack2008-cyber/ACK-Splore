@@ -165,8 +165,10 @@ def fetch_todays_high_profile_events(game_date: str | None = None) -> list[HighP
                 if not is_main_card:
                     continue
 
-            # For World Cup and Boxing, every event qualifies
+            # NFL regular-season games, World Cup, and Boxing always qualify —
+            # no keyword filtering needed for these sports.
             always_on = sport_key in {
+                "americanfootball_nfl",
                 "soccer_fifa_world_cup",
                 "boxing_boxing",
             }
@@ -480,30 +482,45 @@ def _world_cup_from_espn(game_date: str) -> Optional[HighProfileEvent]:
         return None
 
 
-def get_bonus_pick(game_date: str | None = None) -> Optional[BonusPickOutput]:
-    """
-    Main entry: finds the single best Bonus Pick from all high-profile events
-    today, or returns None if nothing qualifies.
-    """
+def get_all_scored_picks(game_date: str | None = None) -> list[BonusPickOutput]:
+    """Returns all scored bonus picks for the day, sorted by composite × confidence."""
     target = game_date or date.today().isoformat()
     events = fetch_todays_high_profile_events(target)
 
-    # If live Odds API returned nothing, try ESPN for World Cup
     if not events:
         wc = _world_cup_from_espn(target)
         if wc:
             events = [wc]
 
     if not events:
+        return []
+
+    scored = [score_bonus_pick(e) for e in events]
+    scored.sort(key=lambda x: x.composite_score * x.confidence, reverse=True)
+    return scored
+
+
+def get_nfl_picks(game_date: str | None = None) -> list[BonusPickOutput]:
+    """Returns all qualifying NFL picks for the day, sorted by confidence."""
+    all_picks = get_all_scored_picks(game_date)
+    nfl = [p for p in all_picks
+           if p.event.sport_key == "americanfootball_nfl" and p.recommendation == "BET"]
+    return nfl
+
+
+def get_bonus_pick(game_date: str | None = None) -> Optional[BonusPickOutput]:
+    """
+    Main entry: finds the single best Bonus Pick from all high-profile events
+    today, or returns None if nothing qualifies.
+    """
+    all_picks = get_all_scored_picks(game_date)
+    if not all_picks:
         return None
 
-    all_scored = [score_bonus_pick(e) for e in events]
-    candidates = [c for c in all_scored if c.recommendation == "BET"]
+    candidates = [c for c in all_picks if c.recommendation == "BET"]
     if not candidates:
-        candidates = sorted(all_scored, key=lambda x: x.composite_score, reverse=True)
-        return candidates[0] if candidates else None
+        return all_picks[0]  # best available even without a BET signal
 
-    candidates.sort(key=lambda x: x.composite_score * x.confidence, reverse=True)
     return candidates[0]
 
 
