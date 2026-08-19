@@ -68,16 +68,16 @@ def _fetch_games(sport_key: str, game_date: str) -> list[dict]:
     qs  = urllib.parse.urlencode(params)
     url = f"{base}/sports/{sport_key}/odds?{qs}"
 
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "ZoneModel/1.0"})
-            with urllib.request.urlopen(req, timeout=12) as r:
+            with urllib.request.urlopen(req, timeout=8) as r:
                 raw = json.loads(r.read())
             return [ev for ev in raw if game_date in ev.get("commence_time", "")]
         except Exception:
-            if attempt == 2:
+            if attempt == 1:
                 return []
-            time.sleep(2 ** attempt)
+            time.sleep(2)
     return []
 
 

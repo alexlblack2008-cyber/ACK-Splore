@@ -476,13 +476,21 @@ def format_daily_report_with_bonus(
     is_sunday = d.weekday() == 6  # Monday=0, Sunday=6
 
     # ── NFL (statistical model, primary) ──────────────────────────────────────
-    nfl_scored  = score_nfl_games(game_date)
-    nfl_section = format_nfl_nba_section(nfl_scored, game_date)
-    nfl_qualifying = [p for p in nfl_scored if p.recommendation != "NO BET"]
+    try:
+        nfl_scored  = score_nfl_games(game_date)
+        nfl_section = format_nfl_nba_section(nfl_scored, game_date)
+        nfl_qualifying = [p for p in nfl_scored if p.recommendation != "NO BET"]
+    except Exception as e:
+        print(f"  [NFL] Scoring error: {e}")
+        nfl_scored, nfl_section, nfl_qualifying = [], "", []
 
     # ── NBA (statistical model, primary) ──────────────────────────────────────
-    nba_scored  = score_nba_games(game_date)
-    nba_section = format_nfl_nba_section(nba_scored, game_date)
+    try:
+        nba_scored  = score_nba_games(game_date)
+        nba_section = format_nfl_nba_section(nba_scored, game_date)
+    except Exception as e:
+        print(f"  [NBA] Scoring error: {e}")
+        nba_scored, nba_section = [], ""
 
     # ── MLB (Zone Model, always runs when confident) ───────────────────────────
     has_primary = bool(nfl_qualifying or
@@ -528,10 +536,13 @@ def format_daily_report_with_bonus(
         parlay_section = format_sunday_parlays(parlays)
 
     # ── Bonus pick (UFC, boxing, major soccer only) ────────────────────────────
-    bonus = get_bonus_pick(game_date)
-    if bonus and bonus.event.sport_key in ("americanfootball_nfl", "basketball_nba"):
-        bonus = None   # handled by statistical model above
-    bonus_section = format_bonus_pick(bonus)
+    try:
+        bonus = get_bonus_pick(game_date)
+        if bonus and bonus.event.sport_key in ("americanfootball_nfl", "basketball_nba"):
+            bonus = None
+        bonus_section = format_bonus_pick(bonus)
+    except Exception:
+        bonus_section = ""
 
     return nfl_section + nba_section + main + parlay_section + bonus_section
 
