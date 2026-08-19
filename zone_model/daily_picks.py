@@ -40,7 +40,10 @@ from live.lineup_quality import total_lineup_adjustment
 from live.odds_client import load_dotenv, get_mlb_totals, match_total
 from live.recent_form import get_recent_form, form_run_adjustment, format_form_summary
 from ledger import record_pick, settle_pick, all_time_summary, weekly_pnl_report
-from bonus_pick import get_bonus_pick, format_bonus_pick, get_nfl_picks
+from bonus_pick import get_bonus_pick, format_bonus_pick
+from nfl_nba_picks import (
+    score_nfl_games, score_nba_games, format_nfl_nba_section, ScoredNFLNBAGame,
+)
 from parlay_builder import build_sunday_parlays, format_sunday_parlays
 
 # Load .env file if present (picks up ODDS_API_KEY locally)
@@ -462,81 +465,75 @@ def format_daily_report(picks: list[ScoredGame], game_date: str,
     return "\n".join(lines)
 
 
-def _format_nfl_section(nfl_picks: list, game_date: str) -> str:
-    """Formats NFL picks as a standalone section above the MLB picks."""
-    if not nfl_picks:
-        return ""
-    sep = "=" * 56
-    lines = [
-        "",
-        sep,
-        f"  🏈  NFL PICKS  ◆  {game_date}",
-        sep,
-    ]
-    for i, p in enumerate(nfl_picks, 1):
-        ev = p.event
-        spread = ev.best_spread_home
-        spread_str = f"  Spread:    Home {spread:+.1f}" if spread is not None else ""
-        total_str  = f"  Total:     {ev.best_total}" if ev.best_total else ""
-        lines += [
-            f"\n  NFL PICK #{i}  →  {p.lean}  {p.market_line}",
-            f"  {ev.away_team}  @  {ev.home_team}",
-        ]
-        if spread_str:
-            lines.append(spread_str)
-        if total_str:
-            lines.append(total_str)
-        lines += [
-            f"  Composite: {p.composite_score:.0f}/100   Confidence: {p.confidence:.0%}",
-            f"  Kelly:     {p.kelly_fraction:.2%} of bankroll",
-            f"  Paper bet: $100 → win ${100/1.10:.2f} at -110",
-            f"  Research:",
-        ]
-        for r in p.rationale[:4]:
-            lines.append(f"    • {r}")
-        lines.append("  ·" * 28)
-    lines += ["", sep]
-    return "\n".join(lines)
-
-
 def format_daily_report_with_bonus(
     picks: list[ScoredGame],
     game_date: str,
     settlements: list[str],
 ) -> str:
-    """Full daily report: NFL picks (if any) → MLB picks → Sunday parlays."""
+    """Full daily report: NFL → NBA → MLB → Sunday parlays → UFC/Soccer bonus."""
     from datetime import date as _date
     d = _date.fromisoformat(game_date)
     is_sunday = d.weekday() == 6  # Monday=0, Sunday=6
 
-    # Pull all qualifying NFL picks
-    nfl_picks = get_nfl_picks(game_date)
+    # ── NFL (statistical model, primary) ──────────────────────────────────────
+    nfl_scored  = score_nfl_games(game_date)
+    nfl_section = format_nfl_nba_section(nfl_scored, game_date)
+    nfl_qualifying = [p for p in nfl_scored if p.recommendation != "NO BET"]
 
-    # NFL section (leads the report when NFL is on)
-    nfl_section = _format_nfl_section(nfl_picks, game_date)
+    # ── NBA (statistical model, primary) ──────────────────────────────────────
+    nba_scored  = score_nba_games(game_date)
+    nba_section = format_nfl_nba_section(nba_scored, game_date)
 
-    # MLB section — de-emphasize header when NFL is running
-    if nfl_picks:
-        mlb_header = f"  MLB PICKS  ◆  {game_date}  (secondary — NFL is on)"
+    # ── MLB (Zone Model, always runs when confident) ───────────────────────────
+    has_primary = bool(nfl_qualifying or
+                       [p for p in nba_scored if p.recommendation != "NO BET"])
+    if has_primary:
+        mlb_header = f"  MLB PICKS  ◆  {game_date}  (see NFL/NBA above)"
     else:
         mlb_header = f"  THE ZONE MODEL  ◆  MLB Picks for {game_date}"
     main = format_daily_report(picks, game_date, settlements).replace(
         f"  THE ZONE MODEL  ◆  MLB Picks for {game_date}", mlb_header
     )
 
-    # Sunday parlay section
+    # ── Sunday NFL parlays ─────────────────────────────────────────────────────
     parlay_section = ""
-    if is_sunday and nfl_picks:
-        parlays = build_sunday_parlays(nfl_picks)
+    if is_sunday and nfl_qualifying:
+        # Convert ScoredNFLNBAGame → BonusPickOutput-compatible for parlay builder
+        from parlay_builder import ParlayLeg, _build_parlay, format_sunday_parlays
+        legs = []
+        for p in nfl_qualifying:
+            out = p.output
+            if p.side_rec == "HOME":
+                sp = f"{p.market_spread:+.1f}" if p.market_spread else ""
+                desc = f"{p.home_team} {sp}".strip()
+            elif p.side_rec == "AWAY":
+                away_sp = f"{-p.market_spread:+.1f}" if p.market_spread else ""
+                desc = f"{p.away_team} {away_sp}".strip()
+            else:
+                desc = f"{p.recommendation} {p.market_total}"
+            from parlay_builder import ParlayLeg, _DEC_110
+            legs.append(ParlayLeg(
+                description  = desc,
+                team_or_side = desc,
+                lean         = p.side_rec if p.side_rec != "NEUTRAL" else p.recommendation,
+                confidence   = out.confidence,
+                decimal_odds = _DEC_110,
+            ))
+        parlays = []
+        tier_conf = {"SAFE": (0.58, 2), "MODERATE": (0.52, 3), "RISKY": (0.45, 4)}
+        for tier, (min_c, target) in tier_conf.items():
+            q = [l for l in legs if l.confidence >= min_c]
+            if len(q) >= target:
+                parlays.append(_build_parlay(q[:target], tier))
         parlay_section = format_sunday_parlays(parlays)
 
-    # Non-NFL high-profile bonus pick (UFC, soccer finals, etc.)
+    # ── Bonus pick (UFC, boxing, major soccer only) ────────────────────────────
     bonus = get_bonus_pick(game_date)
-    if bonus and bonus.event.sport_key == "americanfootball_nfl":
-        bonus = None  # already covered in the NFL section above
+    if bonus and bonus.event.sport_key in ("americanfootball_nfl", "basketball_nba"):
+        bonus = None   # handled by statistical model above
     bonus_section = format_bonus_pick(bonus)
 
-    return nfl_section + main + parlay_section + bonus_section
+    return nfl_section + nba_section + main + parlay_section + bonus_section
 
 
 def run_daily(game_date=None, log_to_ledger: bool = True) -> str:
