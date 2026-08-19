@@ -87,7 +87,6 @@ UMPIRE_PROFILES = {
     "Brian O'Nora":           {"csraa": -0.7, "run_impact": +0.14, "k_factor": 0.97, "bb_factor": 1.04, "games": 198},
     "Carlos Torres":          {"csraa": -0.6, "run_impact": +0.11, "k_factor": 0.97, "bb_factor": 1.03, "games": 172},
     "Vic Carapazza":          {"csraa": -1.2, "run_impact": +0.24, "k_factor": 0.95, "bb_factor": 1.07, "games": 219},
-    "Mike Estabrook":         {"csraa": +0.4, "run_impact": -0.07, "k_factor": 1.02, "bb_factor": 0.99, "games": 187},
     "Andy Fletcher":          {"csraa": -0.6, "run_impact": +0.12, "k_factor": 0.97, "bb_factor": 1.03, "games": 209},
     "Kerwin Danley":          {"csraa": -0.5, "run_impact": +0.10, "k_factor": 0.98, "bb_factor": 1.03, "games": 231},
     "Ryan Additon":           {"csraa": -0.3, "run_impact": +0.06, "k_factor": 0.99, "bb_factor": 1.02, "games": 144},
@@ -99,7 +98,6 @@ UMPIRE_PROFILES = {
     # Additional umpires identified from live game data
     "Brock Ballou":           {"csraa": -0.3, "run_impact": +0.05, "k_factor": 0.99, "bb_factor": 1.02, "games": 112},
     "Alan Porter":            {"csraa": -0.6, "run_impact": +0.11, "k_factor": 0.97, "bb_factor": 1.04, "games": 198},
-    "Jeremie Rehak":          {"csraa": +1.5, "run_impact": -0.30, "k_factor": 1.07, "bb_factor": 0.93, "games": 198},
     "Clint Fagan":            {"csraa": +0.2, "run_impact": -0.04, "k_factor": 1.01, "bb_factor": 1.00, "games": 134},
     "Roberto Ortiz":          {"csraa": -0.4, "run_impact": +0.08, "k_factor": 0.98, "bb_factor": 1.03, "games": 118},
     "John Bacon":             {"csraa": +0.3, "run_impact": -0.06, "k_factor": 1.01, "bb_factor": 1.00, "games": 101},

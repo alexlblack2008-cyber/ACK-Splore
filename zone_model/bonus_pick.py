@@ -165,10 +165,11 @@ def fetch_todays_high_profile_events(game_date: str | None = None) -> list[HighP
                 if not is_main_card:
                     continue
 
-            # NFL regular-season games, World Cup, and Boxing always qualify —
-            # no keyword filtering needed for these sports.
+            # NFL and NBA regular-season games, World Cup, and Boxing always
+            # qualify — no keyword filtering needed for these sports.
             always_on = sport_key in {
                 "americanfootball_nfl",
+                "basketball_nba",
                 "soccer_fifa_world_cup",
                 "boxing_boxing",
             }
