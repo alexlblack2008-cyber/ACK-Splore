@@ -1,0 +1,67 @@
+name: Zone Model — Live Line Monitor
+
+on:
+  schedule:
+    # ── Sunday NFL (1pm–11:30pm ET = 17:00–03:30 UTC) ──
+    # Every 15 min during game window
+    - cron: '0,15,30,45 17,18,19,20,21,22,23 * * 0'
+    - cron: '0,15,30,45 0,1,2,3 * * 1'   # continuation into Monday UTC
+
+    # ── Saturday NCAAF (noon–midnight ET = 16:00–04:00 UTC) ──
+    - cron: '0,15,30,45 16,17,18,19,20,21,22,23 * * 6'
+    - cron: '0,15,30,45 0,1,2,3 * * 0'   # continuation into Sunday UTC
+
+    # ── Monday Night Football (7pm–midnight ET = 23:00–04:00 UTC) ──
+    - cron: '0,15,30,45 23 * * 1'
+    - cron: '0,15,30,45 0,1,2,3 * * 2'
+
+    # ── Thursday Night Football (7pm–midnight ET) ──
+    - cron: '0,15,30,45 23 * * 4'
+    - cron: '0,15,30,45 0,1,2,3 * * 5'
+
+    # ── NBA: nightly Oct–Jun (7pm–midnight ET = 23:00–04:00 UTC) ──
+    - cron: '0,15,30,45 23 * * *'
+    - cron: '0,15,30,45 0,1,2,3 * * *'
+
+  workflow_dispatch:  # manual trigger for testing
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt || echo "No deps needed"
+
+      - name: Run live line monitor
+        env:
+          ODDS_API_KEY:       ${{ secrets.ODDS_API_KEY }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_FROM:         ${{ secrets.GMAIL_FROM }}
+          GMAIL_TO:           ${{ secrets.GMAIL_TO }}
+        run: |
+          cd zone_model
+          python live_line_monitor.py
+
+      - name: Save line state
+        uses: actions/checkout@v4
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit line state
+        run: |
+          git config user.name "Zone Model Bot"
+          git config user.email "actions@github.com"
+          git add zone_model/.line_state.json || true
+          git diff --cached --quiet || git commit -m "chore: line state update [skip ci]"
+          git push || true
