@@ -40,7 +40,7 @@ class NBACoachProfile:
     notes:                  str   = ""
 
 
-# ── NBA Head Coach Profiles (2024-25 season) ──────────────────────────────────
+# ── NBA Head Coach Profiles (2025-26 season) ──────────────────────────────────
 
 NBA_COACH_PROFILES: dict[str, NBACoachProfile] = {
 

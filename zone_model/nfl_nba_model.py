@@ -275,7 +275,7 @@ def _get_nba_team_stats(team_name: str) -> TeamStats:
     return stats
 
 
-# ── League averages (2024-25 season baselines) ────────────────────────────────
+# ── League averages (2026 season baselines) ───────────────────────────────────
 
 NFL_LEAGUE_AVG = {
     "pts_per_game":      23.0,   # each team scores ~23 pts → ~46 total

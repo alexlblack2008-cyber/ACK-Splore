@@ -43,7 +43,7 @@ class NFLCoachProfile:
     notes:                  str   = ""
 
 
-# ── NFL Head Coach Profiles (2025 season) ─────────────────────────────────────
+# ── NFL Head Coach Profiles (2026 season) ─────────────────────────────────────
 # Total pts adj = net expected points above league avg per game for this HC's offense + defense combo
 
 NFL_COACH_PROFILES: dict[str, NFLCoachProfile] = {
