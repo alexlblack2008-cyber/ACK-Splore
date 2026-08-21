@@ -69,6 +69,28 @@ try:
 except ImportError:
     _NBA_COACHES_AVAILABLE = False
 
+# Live season stats — updated daily by update_coach_data.py
+# Overrides static profile values with current-season performance numbers.
+_COACH_SEASON_STATS: dict = {"nfl": {}, "nba": {}}
+try:
+    import os as _os
+    _stats_path = _os.path.join(_os.path.dirname(__file__), "coach_season_stats.json")
+    if _os.path.exists(_stats_path):
+        with open(_stats_path) as _f:
+            _COACH_SEASON_STATS = json.load(_f)
+except Exception:
+    pass
+
+
+def _nfl_live(team: str) -> dict:
+    """Live season stats for an NFL team, empty dict if unavailable."""
+    return _COACH_SEASON_STATS.get("nfl", {}).get(team, {})
+
+
+def _nba_live(team: str) -> dict:
+    """Live season stats for an NBA team, empty dict if unavailable."""
+    return _COACH_SEASON_STATS.get("nba", {}).get(team, {})
+
 
 # ── Data structures ────────────────────────────────────────────────────────────
 
@@ -354,21 +376,36 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
         away_proj += dome_boost
 
     # Coach tendencies: 4th-down aggression, pace, red-zone style
+    # Live season stats override static profile values when available.
     if _NFL_COACHES_AVAILABLE:
         hc = _get_nfl_coach(home.team_name)
         ac = _get_nfl_coach(away.team_name)
-        # 4th down aggression above avg converts more drives into pts
+        hl = _nfl_live(home.team_name)
+        al = _nfl_live(away.team_name)
+
+        # Pass rate: prefer live season data (captures scheme drift mid-season)
+        h_pass_rate = hl.get("pass_rate", hc.pass_rate_tendency)
+        a_pass_rate = al.get("pass_rate", ac.pass_rate_tendency)
+        home_proj += (h_pass_rate - 0.575) * 6.0
+        away_proj += (a_pass_rate - 0.575) * 6.0
+
+        # Red zone TD%: live data reflects hot/cold red-zone efficiency
+        h_rz = hl.get("red_zone_td_pct", hc.red_zone_aggression)
+        a_rz = al.get("red_zone_td_pct", ac.red_zone_aggression)
+        home_proj += (h_rz - 0.575) * 5.0
+        away_proj += (a_rz - 0.575) * 5.0
+
+        # 4th down aggression and hurry-up are stable coaching philosophy — use static
         home_proj += (hc.fourth_down_aggression - 0.55) * 4.0
         away_proj += (ac.fourth_down_aggression - 0.55) * 4.0
-        # Hurry-up / no-huddle adds possessions
         home_proj += (hc.hurry_up_freq - 0.10) * 8.0
         away_proj += (ac.hurry_up_freq - 0.10) * 8.0
-        # Red-zone TD tendency vs FGs
-        home_proj += (hc.red_zone_aggression - 0.575) * 5.0
-        away_proj += (ac.red_zone_aggression - 0.575) * 5.0
-        # High-pass-rate offenses score more (above 0.575 avg)
-        home_proj += (hc.pass_rate_tendency - 0.575) * 6.0
-        away_proj += (ac.pass_rate_tendency - 0.575) * 6.0
+
+        # Net pts adj from live performance if available, else static profile
+        if hl.get("total_pts_adj") is not None:
+            home_proj += hl["total_pts_adj"] * 0.3   # blend — don't double-count
+        if al.get("total_pts_adj") is not None:
+            away_proj += al["total_pts_adj"] * 0.3
 
     home_proj = round(max(10.0, home_proj), 1)
     away_proj = round(max(7.0,  away_proj), 1)
@@ -461,20 +498,38 @@ def _nba_fair_total(home: TeamStats, away: TeamStats,
         away_proj += oreb_adj
 
     # Coach tendencies: pace, 3-pt emphasis, defensive intensity
+    # Live season stats override static profile values when available.
     if _NBA_COACHES_AVAILABLE:
         hc = _get_nba_coach(home.team_name)
         ac = _get_nba_coach(away.team_name)
-        # Pace tendency shifts possessions
-        coach_pace = (hc.pace_tendency + ac.pace_tendency) / 2
+        hl = _nba_live(home.team_name)
+        al = _nba_live(away.team_name)
+
+        # Pace: live season pace overrides static tendency
+        h_pace = hl.get("pace", hc.pace_tendency)
+        a_pace = al.get("pace", ac.pace_tendency)
+        coach_pace = (h_pace + a_pace) / 2
         pace_delta = coach_pace - avg["pace_poss"]
         home_proj += pace_delta * 0.5
         away_proj += pace_delta * 0.5
-        # 3-pt emphasis: high 3PA = higher variance, slight scoring boost
-        home_proj += (hc.three_point_emphasis - 0.38) * 20.0
-        away_proj += (ac.three_point_emphasis - 0.38) * 20.0
-        # Defensive intensity reduces opponent scoring
-        home_proj -= (hc.defensive_intensity - 0.50) * 4.0  # home D limits away
-        away_proj -= (ac.defensive_intensity - 0.50) * 4.0  # away D limits home
+
+        # 3PT rate: live data tracks whether team is actually shooting more 3s
+        h_3rate = hl.get("three_rate", hc.three_point_emphasis)
+        a_3rate = al.get("three_rate", ac.three_point_emphasis)
+        home_proj += (h_3rate - 0.38) * 20.0
+        away_proj += (a_3rate - 0.38) * 20.0
+
+        # Defensive intensity: live def_rating most accurate signal
+        h_def_int = hl.get("defensive_intensity", hc.defensive_intensity)
+        a_def_int = al.get("defensive_intensity", ac.defensive_intensity)
+        home_proj -= (h_def_int - 0.50) * 4.0
+        away_proj -= (a_def_int - 0.50) * 4.0
+
+        # Net pts adj from live performance if available
+        if hl.get("total_pts_adj") is not None:
+            home_proj += hl["total_pts_adj"] * 0.3
+        if al.get("total_pts_adj") is not None:
+            away_proj += al["total_pts_adj"] * 0.3
 
     home_proj = round(max(85.0, home_proj), 1)
     away_proj = round(max(85.0, away_proj), 1)
