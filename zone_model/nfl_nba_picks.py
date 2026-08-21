@@ -23,6 +23,14 @@ from datetime import date
 
 from nfl_nba_model import score_nfl_nba_game, StatModelOutput
 
+try:
+    from intel_scraper import get_prop_edge, get_team_signals
+    _INTEL_AVAILABLE = True
+except ImportError:
+    _INTEL_AVAILABLE = False
+    def get_prop_edge(p, s): return ("neutral", 0.0)
+    def get_team_signals(t, s): return []
+
 
 # ── Thresholds ─────────────────────────────────────────────────────────────────
 
@@ -125,8 +133,16 @@ def score_nfl_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
 
         out = score_nfl_nba_game("nfl", home, away, total, spread)
 
+        # Intel layer: reporter signals adjust confidence
+        intel_signals = get_team_signals(home, "nfl") + get_team_signals(away, "nfl")
+        intel_boost = sum(
+            s["confidence"] * (0.03 if s["prop_impact"] == ("over" if out.edge_total > 0 else "under") else -0.02)
+            for s in intel_signals
+        )
+        adj_confidence = min(0.85, max(0.30, out.confidence + intel_boost))
+
         rec = "NO BET"
-        if abs(out.edge_total) >= NFL_MIN_EDGE_PTS and out.confidence >= NFL_MIN_CONF:
+        if abs(out.edge_total) >= NFL_MIN_EDGE_PTS and adj_confidence >= NFL_MIN_CONF:
             rec = "OVER" if out.edge_total > 0 else "UNDER"
 
         side_rec = "NEUTRAL"
@@ -145,7 +161,7 @@ def score_nfl_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
             output        = out,
             recommendation= rec,
             side_rec      = side_rec,
-            score         = abs(out.edge_total) * out.confidence,
+            score         = abs(out.edge_total) * adj_confidence,
         ))
 
     results.sort(key=lambda x: x.score, reverse=True)
@@ -166,8 +182,16 @@ def score_nba_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
 
         out = score_nfl_nba_game("nba", home, away, total, spread)
 
+        # Intel layer: reporter signals adjust confidence
+        intel_signals = get_team_signals(home, "nba") + get_team_signals(away, "nba")
+        intel_boost = sum(
+            s["confidence"] * (0.03 if s["prop_impact"] == ("over" if out.edge_total > 0 else "under") else -0.02)
+            for s in intel_signals
+        )
+        adj_confidence = min(0.85, max(0.30, out.confidence + intel_boost))
+
         rec = "NO BET"
-        if abs(out.edge_total) >= NBA_MIN_EDGE_PTS and out.confidence >= NBA_MIN_CONF:
+        if abs(out.edge_total) >= NBA_MIN_EDGE_PTS and adj_confidence >= NBA_MIN_CONF:
             rec = "OVER" if out.edge_total > 0 else "UNDER"
 
         side_rec = "NEUTRAL"
@@ -186,7 +210,7 @@ def score_nba_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
             output        = out,
             recommendation= rec,
             side_rec      = side_rec,
-            score         = abs(out.edge_total) * out.confidence,
+            score         = abs(out.edge_total) * adj_confidence,
         ))
 
     results.sort(key=lambda x: x.score, reverse=True)
@@ -229,6 +253,14 @@ def format_nfl_nba_section(picks: list[ScoredNFLNBAGame], game_date: str) -> str
         lines.append("  Research:")
         for r in out.rationale[:4]:
             lines.append(f"    • {r}")
+        # Intel signals summary
+        if _INTEL_AVAILABLE:
+            sigs = get_team_signals(p.home_team, p.sport) + get_team_signals(p.away_team, p.sport)
+            if sigs:
+                lines.append("  Intel:")
+                for s in sigs[:3]:
+                    icon = {"usage_up": "↑", "injury": "🩹", "drama": "⚠", "positive": "✓"}.get(s["signal_type"], "•")
+                    lines.append(f"    {icon} {s['player']} ({s['source']}): {s['headline'][:80]}")
         lines.append("  ·" * 28)
 
     lines += ["", sep]

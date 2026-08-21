@@ -46,6 +46,15 @@ from nfl_nba_picks import (
 )
 from parlay_builder import build_sunday_parlays, format_sunday_parlays
 
+try:
+    from intel_scraper import get_player_signals, get_team_signals, get_prop_edge
+    _INTEL_AVAILABLE = True
+except ImportError:
+    _INTEL_AVAILABLE = False
+    def get_player_signals(p, s, **kw): return []
+    def get_team_signals(t, s, **kw): return []
+    def get_prop_edge(p, s): return ("neutral", 0.0)
+
 # Load .env file if present (picks up ODDS_API_KEY locally)
 load_dotenv()
 
@@ -449,8 +458,21 @@ def format_daily_report(picks: list[ScoredGame], game_date: str,
             f"Kelly: {sg.output.kelly_fraction:.2%} of bankroll",
             f"  Paper bet: $100 → win ${100/1.10:.2f} at -110",
             f"  **THE PICK: {rec} {sg.output.fair_total - sg.output.edge_runs:.1f}  —  {sg.away_team} @ {sg.home_team}**",
-            "  ·" * 28,
         ]
+        # Reporter intel signals for both teams / starters
+        if _INTEL_AVAILABLE:
+            intel = (
+                get_team_signals(sg.home_team, "mlb") +
+                get_team_signals(sg.away_team, "mlb") +
+                get_player_signals(sg.home_starter, "mlb") +
+                get_player_signals(sg.away_starter, "mlb")
+            )
+            if intel:
+                lines.append("  Intel:")
+                for s in sorted(intel, key=lambda x: x["confidence"], reverse=True)[:4]:
+                    icon = {"usage_up": "↑", "injury": "🩹", "drama": "⚠", "positive": "✓"}.get(s["signal_type"], "•")
+                    lines.append(f"    {icon} {s['player']} ({s['source']}): {s['headline'][:85]}")
+        lines.append("  ·" * 28)
 
     lines += ["", "=" * 56]
 
