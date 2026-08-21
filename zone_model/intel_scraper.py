@@ -349,11 +349,16 @@ def _strip_html(text: str) -> str:
 
 def _parse_rss(xml: str, source: str) -> list[dict]:
     """Parse RSS XML into list of {title, description, link} dicts."""
+    def _unwrap(text: str) -> str:
+        # Strip CDATA wrappers
+        text = re.sub(r"<!\[CDATA\[(.*?)\]\]>", r"\1", text, flags=re.DOTALL)
+        return _strip_html(text).strip()
+
     items = []
     for item in re.findall(r"<item>(.*?)</item>", xml, re.DOTALL):
         def _tag(tag: str) -> str:
             m = re.search(rf"<{tag}[^>]*>(.*?)</{tag}>", item, re.DOTALL)
-            return _strip_html(m.group(1)) if m else ""
+            return _unwrap(m.group(1)) if m else ""
         title = _tag("title")
         desc  = _tag("description") or _tag("summary")
         link  = _tag("link")
