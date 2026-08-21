@@ -57,6 +57,18 @@ except ImportError:
     _NFL_PROFILES_AVAILABLE = False
     NFL_DOME_TEAMS = set()
 
+try:
+    from nfl_coaches import get_coach as _get_nfl_coach
+    _NFL_COACHES_AVAILABLE = True
+except ImportError:
+    _NFL_COACHES_AVAILABLE = False
+
+try:
+    from nba_coaches import get_coach as _get_nba_coach
+    _NBA_COACHES_AVAILABLE = True
+except ImportError:
+    _NBA_COACHES_AVAILABLE = False
+
 
 # ── Data structures ────────────────────────────────────────────────────────────
 
@@ -341,6 +353,23 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
         home_proj += dome_boost
         away_proj += dome_boost
 
+    # Coach tendencies: 4th-down aggression, pace, red-zone style
+    if _NFL_COACHES_AVAILABLE:
+        hc = _get_nfl_coach(home.team_name)
+        ac = _get_nfl_coach(away.team_name)
+        # 4th down aggression above avg converts more drives into pts
+        home_proj += (hc.fourth_down_aggression - 0.55) * 4.0
+        away_proj += (ac.fourth_down_aggression - 0.55) * 4.0
+        # Hurry-up / no-huddle adds possessions
+        home_proj += (hc.hurry_up_freq - 0.10) * 8.0
+        away_proj += (ac.hurry_up_freq - 0.10) * 8.0
+        # Red-zone TD tendency vs FGs
+        home_proj += (hc.red_zone_aggression - 0.575) * 5.0
+        away_proj += (ac.red_zone_aggression - 0.575) * 5.0
+        # High-pass-rate offenses score more (above 0.575 avg)
+        home_proj += (hc.pass_rate_tendency - 0.575) * 6.0
+        away_proj += (ac.pass_rate_tendency - 0.575) * 6.0
+
     home_proj = round(max(10.0, home_proj), 1)
     away_proj = round(max(7.0,  away_proj), 1)
     fair_total = round(home_proj + away_proj, 1)
@@ -362,6 +391,15 @@ def _nfl_fair_total(home: TeamStats, away: TeamStats,
         rationale.append(
             f"{home.team_name} red zone TD%: {home.red_zone_td_pct:.0%} "
             f"(league avg {avg['red_zone_td_pct']:.0%})")
+    if _NFL_COACHES_AVAILABLE:
+        hc = _get_nfl_coach(home.team_name)
+        ac = _get_nfl_coach(away.team_name)
+        rationale.append(
+            f"Coach ({hc.name}): 4th-down aggression {hc.fourth_down_aggression:.0%}, "
+            f"hurry-up {hc.hurry_up_freq:.0%}, pass rate {hc.pass_rate_tendency:.0%}")
+        rationale.append(
+            f"Coach ({ac.name}): 4th-down aggression {ac.fourth_down_aggression:.0%}, "
+            f"hurry-up {ac.hurry_up_freq:.0%}, pass rate {ac.pass_rate_tendency:.0%}")
 
     edge = round(fair_total - market_total, 2)
     rationale.append(
@@ -422,6 +460,22 @@ def _nba_fair_total(home: TeamStats, away: TeamStats,
         oreb_adj = (away.oreb_rate - avg["oreb_rate"]) * 15.0
         away_proj += oreb_adj
 
+    # Coach tendencies: pace, 3-pt emphasis, defensive intensity
+    if _NBA_COACHES_AVAILABLE:
+        hc = _get_nba_coach(home.team_name)
+        ac = _get_nba_coach(away.team_name)
+        # Pace tendency shifts possessions
+        coach_pace = (hc.pace_tendency + ac.pace_tendency) / 2
+        pace_delta = coach_pace - avg["pace_poss"]
+        home_proj += pace_delta * 0.5
+        away_proj += pace_delta * 0.5
+        # 3-pt emphasis: high 3PA = higher variance, slight scoring boost
+        home_proj += (hc.three_point_emphasis - 0.38) * 20.0
+        away_proj += (ac.three_point_emphasis - 0.38) * 20.0
+        # Defensive intensity reduces opponent scoring
+        home_proj -= (hc.defensive_intensity - 0.50) * 4.0  # home D limits away
+        away_proj -= (ac.defensive_intensity - 0.50) * 4.0  # away D limits home
+
     home_proj = round(max(85.0, home_proj), 1)
     away_proj = round(max(85.0, away_proj), 1)
     fair_total = round(home_proj + away_proj, 1)
@@ -446,6 +500,17 @@ def _nba_fair_total(home: TeamStats, away: TeamStats,
         rationale.append(
             f"{home.team_name} eFG%: {home.efg_pct:.1%} "
             f"(league avg {avg['efg_pct']:.1%})")
+    if _NBA_COACHES_AVAILABLE:
+        hc = _get_nba_coach(home.team_name)
+        ac = _get_nba_coach(away.team_name)
+        rationale.append(
+            f"Coach ({hc.name}): pace {hc.pace_tendency:.1f}, "
+            f"3PT% {hc.three_point_emphasis:.0%}, "
+            f"def intensity {hc.defensive_intensity:.0%} — {hc.notes[:60]}")
+        rationale.append(
+            f"Coach ({ac.name}): pace {ac.pace_tendency:.1f}, "
+            f"3PT% {ac.three_point_emphasis:.0%}, "
+            f"def intensity {ac.defensive_intensity:.0%} — {ac.notes[:60]}")
 
     edge = round(fair_total - market_total, 2)
     rationale.append(
