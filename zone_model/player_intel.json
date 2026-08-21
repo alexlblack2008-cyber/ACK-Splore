@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-21T20:18:06.825506+00:00",
-  "signal_count": 13,
+  "updated_at": "2026-08-21T21:30:59.597244+00:00",
+  "signal_count": 15,
   "signals": [
+    {
+      "player": "Garrett Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Eagles waive WR Johnny Wilson with an injury designation The Eagles waived wide receiver Johnny Wilson with an injury de",
+      "excerpt": "Eagles waive WR Johnny Wilson with an injury designation The Eagles waived wide receiver Johnny Wilson with an injury designation, the team announced.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/eagles-waive-wr-johnny-wilson-with-an-injury-designation",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-21T21:30:39.150925+00:00"
+    },
+    {
+      "player": "Russell Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Eagles waive WR Johnny Wilson with an injury designation The Eagles waived wide receiver Johnny Wilson with an injury de",
+      "excerpt": "Eagles waive WR Johnny Wilson with an injury designation The Eagles waived wide receiver Johnny Wilson with an injury designation, the team announced.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/eagles-waive-wr-johnny-wilson-with-an-injury-designation",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-21T21:30:39.150917+00:00"
+    },
     {
       "player": "Kawhi Leonard",
       "team": "Unknown",
