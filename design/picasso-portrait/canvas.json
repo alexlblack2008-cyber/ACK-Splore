@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 520, "h": 800 },
+    { "file": "AnalyticCubism.dc.html", "x": 600, "y": 0, "w": 520, "h": 800 },
+    { "file": "BluePeriod.dc.html", "x": 1200, "y": 0, "w": 520, "h": 800 }
+  ],
+  "annotations": [
+    { "id": "note-main", "x": 0, "y": -150, "w": 480, "text": "Synthetic Cubism, bold\nFlat color-block planes, doubled profile/frontal eyes, patterned fabric. The loudest, most \"recognizably Picasso\" option — leading candidate." },
+    { "id": "note-analytic", "x": 600, "y": -150, "w": 480, "text": "Analytic Cubism, muted\nFaceted earth-tone planes, barely-legible form. Quieter and more austere — closer to 1910 Picasso/Braque." },
+    { "id": "note-blue", "x": 1200, "y": -150, "w": 480, "text": "Blue Period, melancholic\nA hunched figure with a guitar, monochrome blue, representational. Moodier and more figurative than the cubist options." }
+  ],
+  "launch": { "view": "canvas" }
+}
