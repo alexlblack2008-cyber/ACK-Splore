@@ -224,5 +224,41 @@
     "actual_runs": 8,
     "pnl": 0,
     "settled_at": "2026-08-21T14:42:37.784607"
+  },
+  {
+    "bet_date": "2026-08-22",
+    "game_pk": 823743,
+    "home_team": "Milwaukee Brewers",
+    "away_team": "Atlanta Braves",
+    "umpire": "John Tumpane",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 10.03,
+    "edge_runs": 1.53,
+    "confidence": 0.418,
+    "kelly_fraction": 0.0221,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
+  },
+  {
+    "bet_date": "2026-08-22",
+    "game_pk": 823831,
+    "home_team": "Miami Marlins",
+    "away_team": "Washington Nationals",
+    "umpire": "D.J. Reyburn",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.77,
+    "edge_runs": 1.27,
+    "confidence": 0.406,
+    "kelly_fraction": 0.0284,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
