@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-21T21:30:59.597244+00:00",
-  "signal_count": 15,
+  "updated_at": "2026-08-22T01:37:48.012024+00:00",
+  "signal_count": 17,
   "signals": [
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Robert returns to South Side for 1st time as visitor ",
+      "excerpt": "Robert returns to South Side for 1st time as visitor ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/luis-robert-jr-miguel-vargas-reunite-mets-white-sox",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-22T01:37:26.689412+00:00"
+    },
+    {
+      "player": "Cody Bellinger",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "\u2018I\u2019m itching to get back\u2019: Bellinger (hamstring) eyeing Sunday return to Yanks ",
+      "excerpt": "\u2018I\u2019m itching to get back\u2019: Bellinger (hamstring) eyeing Sunday return to Yanks ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/cody-bellinger-yankees-hamstring-injury-rehab",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-22T01:37:26.689239+00:00"
+    },
     {
       "player": "Garrett Wilson",
       "team": "Unknown",
