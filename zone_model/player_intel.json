@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-22T09:33:22.009085+00:00",
-  "signal_count": 17,
+  "updated_at": "2026-08-22T12:51:26.010020+00:00",
+  "signal_count": 18,
   "signals": [
+    {
+      "player": "Xavier Legette",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Xavier Legette misses Panthers' preseason game with foot/ankle injury Panthers wide receiver Xavier Legette missed Frida",
+      "excerpt": "Xavier Legette misses Panthers' preseason game with foot/ankle injury Panthers wide receiver Xavier Legette missed Friday night's preseason game with what head coach Dave Canales described as a foot and ankle injury.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/xavier-legette-misses-panthers-preseason-game-with-foot-ankle-injury",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-22T12:51:04.346819+00:00"
+    },
     {
       "player": "Luis Robert",
       "team": "Unknown",
