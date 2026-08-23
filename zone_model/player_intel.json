@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-23T09:34:31.024478+00:00",
-  "signal_count": 40,
+  "updated_at": "2026-08-23T12:52:34.346266+00:00",
+  "signal_count": 42,
   "signals": [
+    {
+      "player": "Matthew Stafford",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Stetson Bennett IV seems to be ready to serve as Matthew Stafford's understudy Two years ago, with Rams backup quarterba",
+      "excerpt": "Stetson Bennett IV seems to be ready to serve as Matthew Stafford's understudy Two years ago, with Rams backup quarterback Jimmy Garoppolo due to miss the first two games of the regular season because of a PED suspension, the Rams weren't sure Stetson Bennett IV was ready to serve as the understudy ",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/stetson-bennett-iv-seems-to-be-ready-to-serve-as-matthew-staffords-understudy",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T12:52:14.652523+00:00"
+    },
+    {
+      "player": "Dak Prescott",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Joe Milton has strong game, but Cowboys backup QB competition \"long from over\" The Cowboys know Dak Prescott is their st",
+      "excerpt": "Joe Milton has strong game, but Cowboys backup QB competition \"long from over\" The Cowboys know Dak Prescott is their starting quarterback, but they still have a decision to make about who will be the next man up on the depth chart.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/joe-milton-has-strong-game-but-cowboys-backup-qb-competition-long-from-over",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T12:52:14.652246+00:00"
+    },
     {
       "player": "Donovan Mitchell",
       "team": "Unknown",
