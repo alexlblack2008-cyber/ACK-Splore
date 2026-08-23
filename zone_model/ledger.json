@@ -260,5 +260,23 @@
     "actual_runs": 6,
     "pnl": -100.0,
     "settled_at": "2026-08-23T14:30:37.049889"
+  },
+  {
+    "bet_date": "2026-08-23",
+    "game_pk": 823421,
+    "home_team": "Philadelphia Phillies",
+    "away_team": "St. Louis Cardinals",
+    "umpire": "Laz Diaz",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.74,
+    "edge_runs": 1.24,
+    "confidence": 0.79,
+    "kelly_fraction": 0.0395,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
