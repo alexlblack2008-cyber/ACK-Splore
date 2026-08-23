@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-08-23T15:28:59.520315+00:00",
-  "signal_count": 43,
+  "updated_at": "2026-08-23T18:38:17.910901+00:00",
+  "signal_count": 47,
   "signals": [
+    {
+      "player": "George Kittle",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "49ers activate George Kittle from PUP list Kittle, who suffered a torn Achilles tendon in January, is now eligible to pr",
+      "excerpt": "49ers activate George Kittle from PUP list Kittle, who suffered a torn Achilles tendon in January, is now eligible to practice and may be ready to play in Week One.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/49ers-activate-george-kittle-from-pup-list",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T18:37:56.928867+00:00"
+    },
+    {
+      "player": "Drake Maye",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Mike Vrabel is protecting key starters in preseason due to depth concerns Patriots coach Mike Vrabel has kept quarterbac",
+      "excerpt": "Mike Vrabel is protecting key starters in preseason due to depth concerns Patriots coach Mike Vrabel has kept quarterback Drake Maye and other key starters out of the first two preseason games.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/mike-vrabel-is-protecting-key-starters-in-preseason-due-to-depth-concerns",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T18:37:56.928779+00:00"
+    },
+    {
+      "player": "Garrett Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kellen Moore: We wanted to accomplish more offensively on Saturday Zach Wilson made a good case for the Saints' backup q",
+      "excerpt": "Kellen Moore: We wanted to accomplish more offensively on Saturday Zach Wilson made a good case for the Saints' backup quarterback job in the team's first preseason game, but his second outing did not go as well.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kellen-moore-we-wanted-to-accomplish-more-offensively-on-saturday",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T18:37:56.928660+00:00"
+    },
+    {
+      "player": "Russell Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kellen Moore: We wanted to accomplish more offensively on Saturday Zach Wilson made a good case for the Saints' backup q",
+      "excerpt": "Kellen Moore: We wanted to accomplish more offensively on Saturday Zach Wilson made a good case for the Saints' backup quarterback job in the team's first preseason game, but his second outing did not go as well.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kellen-moore-we-wanted-to-accomplish-more-offensively-on-saturday",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T18:37:56.928630+00:00"
+    },
     {
       "player": "Lamar Jackson",
       "team": "Unknown",
