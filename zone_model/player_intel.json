@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-23T12:52:34.346266+00:00",
-  "signal_count": 42,
+  "updated_at": "2026-08-23T15:28:59.520315+00:00",
+  "signal_count": 43,
   "signals": [
+    {
+      "player": "Lamar Jackson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "RB Ja\u2019Quinden Jackson was released from hospital, returned home with Eagles Saturday night The Eagles shared a positive ",
+      "excerpt": "RB Ja\u2019Quinden Jackson was released from hospital, returned home with Eagles Saturday night The Eagles shared a positive update on running back Ja'Quinden Jackson after a scary moment in Saturday's game against the Patriots.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/rb-jaquinden-jackson-was-released-from-hospital-traveled-with-eagles-saturday-night",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T15:28:39.341376+00:00"
+    },
     {
       "player": "Matthew Stafford",
       "team": "Unknown",
