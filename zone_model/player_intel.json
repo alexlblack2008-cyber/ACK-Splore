@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-23T18:38:17.910901+00:00",
-  "signal_count": 47,
+  "updated_at": "2026-08-23T21:27:27.191557+00:00",
+  "signal_count": 48,
   "signals": [
+    {
+      "player": "Jazz Chisholm",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Chisholm, Rice answer bell to help Yankees snap out of clutch futility ",
+      "excerpt": "Chisholm, Rice answer bell to help Yankees snap out of clutch futility ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/jazz-chisholm-jr-ben-rice-lead-yankees-over-blue-jays",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T21:27:07.546683+00:00"
+    },
     {
       "player": "George Kittle",
       "team": "Unknown",
