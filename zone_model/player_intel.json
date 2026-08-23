@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-08-22T21:28:09.407213+00:00",
-  "signal_count": 28,
+  "updated_at": "2026-08-23T01:47:19.077735+00:00",
+  "signal_count": 31,
   "signals": [
+    {
+      "player": "Anthony Richardson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Anthony Richardson: I'm just looking forward to helping the team Anthony Richardson's future with the Colts has been deb",
+      "excerpt": "Anthony Richardson: I'm just looking forward to helping the team Anthony Richardson's future with the Colts has been debated often since he requested a trade this offseason and assistant General Manager Ed Dodds gave a strong hint about how things are going to play out last week.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/anthony-richardson-im-just-looking-forward-to-helping-the-team",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T01:46:58.033810+00:00"
+    },
+    {
+      "player": "Josh Allen",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Josh Allen is \"very, very sad and angry\" with how news of Ed Oliver's son passing emerged The news came out on Friday be",
+      "excerpt": "Josh Allen is \"very, very sad and angry\" with how news of Ed Oliver's son passing emerged The news came out on Friday before the Bills or the DL announced the death of Oliver's 2-year-old.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/josh-allen-is-very-very-sad-and-angry-with-how-news-of-ed-olivers-son-passing-emerged",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T01:46:58.033363+00:00"
+    },
+    {
+      "player": "Cody Bellinger",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "\u2018I\u2019m ready to go\u2019: Bellinger (hamstring) eyeing Sunday return to Yanks ",
+      "excerpt": "\u2018I\u2019m ready to go\u2019: Bellinger (hamstring) eyeing Sunday return to Yanks ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/cody-bellinger-yankees-hamstring-injury-rehab",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-23T01:46:57.184063+00:00"
+    },
     {
       "player": "Juan Soto",
       "team": "Unknown",
