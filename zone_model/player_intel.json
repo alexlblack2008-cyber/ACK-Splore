@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-24T13:02:23.269060+00:00",
-  "signal_count": 61,
+  "updated_at": "2026-08-24T15:45:41.000697+00:00",
+  "signal_count": 63,
   "signals": [
+    {
+      "player": "Matthew Stafford",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Stetson Bennett IV seems to be ready to serve as Matthew Stafford's understudy Two years ago, with Rams backup quarterba",
+      "excerpt": "Stetson Bennett IV seems to be ready to serve as Matthew Stafford's understudy Two years ago, with Rams backup quarterback Jimmy Garoppolo due to miss the first two games of the regular season because of a PED suspension, the Rams weren't sure Stetson Bennett IV was ready to serve as the understudy ",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/stetson-bennett-iv-seems-to-be-ready-to-serve-as-matthew-staffords-understudy",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-24T15:45:18.540059+00:00"
+    },
+    {
+      "player": "William Contreras",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "How outstanding was Contreras' 452-foot, 116 mph homer? ",
+      "excerpt": "How outstanding was Contreras' 452-foot, 116 mph homer? ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/willson-contreras-astounding-homer-ranks-among-red-sox-best",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-24T15:45:17.924036+00:00"
+    },
     {
       "player": "Dak Prescott",
       "team": "Unknown",
