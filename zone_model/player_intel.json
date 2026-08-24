@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-24T09:55:17.240539+00:00",
-  "signal_count": 59,
+  "updated_at": "2026-08-24T13:02:23.269060+00:00",
+  "signal_count": 61,
   "signals": [
+    {
+      "player": "Dak Prescott",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Joe Milton has strong game, but Cowboys backup QB competition \"long from over\" The Cowboys know Dak Prescott is their st",
+      "excerpt": "Joe Milton has strong game, but Cowboys backup QB competition \"long from over\" The Cowboys know Dak Prescott is their starting quarterback, but they still have a decision to make about who will be the next man up on the depth chart.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/joe-milton-has-strong-game-but-cowboys-backup-qb-competition-long-from-over",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-24T13:02:02.467464+00:00"
+    },
+    {
+      "player": "Zack Wheeler",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Wheeler goes for his first win since July 12 as he faces Mariners ",
+      "excerpt": "Wheeler goes for his first win since July 12 as he faces Mariners ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/zack-wheeler-starts-vs-mariners-august-24",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-08-24T13:02:01.941380+00:00"
+    },
     {
       "player": "Juan Soto",
       "team": "Unknown",
