@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-26T01:45:06.675658+00:00",
-  "signal_count": 90,
+  "updated_at": "2026-08-26T03:58:04.096271+00:00",
+  "signal_count": 92,
   "signals": [
+    {
+      "player": "Pete Alonso",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Alonso's four hits in five innings fuels O's offensive outburst in St. Louis ",
+      "excerpt": "Alonso's four hits in five innings fuels O's offensive outburst in St. Louis ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/pete-alonso-goes-4-for-4-against-cardinals",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T03:57:39.919077+00:00"
+    },
+    {
+      "player": "Yordan Alvarez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Diaz and MVP candidate Alvarez pace Astros' comeback win in Bronx ",
+      "excerpt": "Diaz and MVP candidate Alvarez pace Astros' comeback win in Bronx ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/alvarez-diaz-help-astros-complete-comeback-over-yankees",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-08-26T03:57:39.918832+00:00"
+    },
     {
       "player": "Patrick Mahomes",
       "team": "Unknown",
