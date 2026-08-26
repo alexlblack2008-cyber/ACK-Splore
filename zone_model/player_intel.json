@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-08-26T09:50:26.195198+00:00",
-  "signal_count": 100,
+  "updated_at": "2026-08-26T13:04:39.644579+00:00",
+  "signal_count": 103,
   "signals": [
+    {
+      "player": "Diontae Johnson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ben Johnson: Left tackle is still a hot spot for us The Bears opened training camp without certainty about their starter",
+      "excerpt": "Ben Johnson: Left tackle is still a hot spot for us The Bears opened training camp without certainty about their starter at left tackle and they have not put it to bed.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ben-johnson-left-tackle-is-still-a-hot-spot-for-us",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T13:04:18.043321+00:00"
+    },
+    {
+      "player": "Nick Boutte",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Eliot Wolf on Kayshon Boutte trade: Jaylen Reed was someone we wanted to acquire When the Patriots traded Kayshon Boutte",
+      "excerpt": "Eliot Wolf on Kayshon Boutte trade: Jaylen Reed was someone we wanted to acquire When the Patriots traded Kayshon Boutte to the Texans this week, much of the focus was on the Texans' need for a wideout and New England's increased depth at receiver.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/eliot-wolf-on-kayshon-boutte-trade-jaylen-reed-was-someone-we-wanted-to-acquire",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T13:04:18.043270+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Report: Giants WR Calvin Austin tore his ACL Signs point to wide receiver Malik Nabers being back in the Giants lineup f",
+      "excerpt": "Report: Giants WR Calvin Austin tore his ACL Signs point to wide receiver Malik Nabers being back in the Giants lineup for Week 1 after tearing his ACL last season, but one of their other wideouts won't be joining him on the field.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/report-giants-wr-calvin-austin-tore-his-acl",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T13:04:18.043159+00:00"
+    },
     {
       "player": "Russell Wilson",
       "team": "Unknown",
