@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-08-25T21:35:08.384281+00:00",
-  "signal_count": 88,
+  "updated_at": "2026-08-26T01:45:06.675658+00:00",
+  "signal_count": 90,
   "signals": [
+    {
+      "player": "Patrick Mahomes",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Patrick Mahomes plans to \"go out there and be myself\" Week One Mahomes expects to play against the Broncos in the Monday",
+      "excerpt": "Patrick Mahomes plans to \"go out there and be myself\" Week One Mahomes expects to play against the Broncos in the Monday Night Football opener.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/patrick-mahomes-plans-to-go-out-there-and-be-myself-week-one",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T01:44:44.398826+00:00"
+    },
+    {
+      "player": "Adley Rutschman",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Rutschman out of Red Sox lineup due to elbow soreness ",
+      "excerpt": "Rutschman out of Red Sox lineup due to elbow soreness ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/adley-rutschman-out-of-red-sox-lineup-against-marlins",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-26T01:44:43.604183+00:00"
+    },
     {
       "player": "Juan Soto",
       "team": "Unknown",
