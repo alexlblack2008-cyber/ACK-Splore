@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-26T13:04:39.644579+00:00",
-  "signal_count": 103,
+  "updated_at": "2026-08-26T16:23:36.365251+00:00",
+  "signal_count": 104,
   "signals": [
+    {
+      "player": "Sandy Alcantara",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Emotional Alcantara takes his place on leaders wall in Marlins Museum ",
+      "excerpt": "Emotional Alcantara takes his place on leaders wall in Marlins Museum ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/sandy-alcantara-honored-by-marlins-museum-at-loandepot-park",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-08-26T16:23:13.408027+00:00"
+    },
     {
       "player": "Diontae Johnson",
       "team": "Unknown",
