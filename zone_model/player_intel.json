@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-08-26T19:56:14.889061+00:00",
-  "signal_count": 105,
+  "updated_at": "2026-08-27T00:37:21.166177+00:00",
+  "signal_count": 109,
   "signals": [
+    {
+      "player": "Bryce Harper",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Harper's hot August -- at the plate and in the outfield -- just keeps going ",
+      "excerpt": "Harper's hot August -- at the plate and in the outfield -- just keeps going ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/bryce-harper-extends-on-base-streak-in-phillies-win",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T00:37:01.289480+00:00"
+    },
+    {
+      "player": "Jordan Walker",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "From Walker winning Derby to Wetherholt's breakout, how can Cards build off fun '26? ",
+      "excerpt": "From Walker winning Derby to Wetherholt's breakout, how can Cards build off fun '26? ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/the-cardinals-have-exceeded-expectations-in-2026-season",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T00:37:01.289440+00:00"
+    },
+    {
+      "player": "Christian Yelich",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Pratt's benching was about Brewers' culture -- not just him Murphy, Yelich, Frelick, Bauers talk rookie, Crew's commitme",
+      "excerpt": "Pratt's benching was about Brewers' culture -- not just him Murphy, Yelich, Frelick, Bauers talk rookie, Crew's commitment to winning attitude",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/cooper-pratt-s-benching-discussed-by-brewers-players-pat-murphy",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T00:37:01.289334+00:00"
+    },
+    {
+      "player": "Tarik Skubal",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Skubal to face Tigers for 1st time since trade to Dodgers on Friday in Detroit ",
+      "excerpt": "Skubal to face Tigers for 1st time since trade to Dodgers on Friday in Detroit ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/tarik-skubal-start-against-tigers",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-08-27T00:37:01.288883+00:00"
+    },
     {
       "player": "Lamar Jackson",
       "team": "Unknown",
