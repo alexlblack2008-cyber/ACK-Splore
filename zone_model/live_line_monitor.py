@@ -464,8 +464,24 @@ def scan_once() -> int:
             if sig:
                 signals.append(sig)
 
-            # Fire alerts
-            for sig in signals:
+            # Determine alert threshold:
+            # Sunday (NFL) = any single strong signal worth sending
+            # All other days = 2+ signals must agree on same game
+            is_sunday = datetime.now(timezone.utc).weekday() == 6
+            strong_signals = [s for s in signals if s["type"] != "model_divergence"]
+            all_signals    = signals
+
+            if is_sunday:
+                # Sunday: fire each strong signal individually; model divergence
+                # only fires if another signal also hit the same game
+                candidates = strong_signals if strong_signals else []
+                if not strong_signals and len(all_signals) >= 2:
+                    candidates = all_signals
+            else:
+                # Non-Sunday: require 2+ signals (any type) on the same game
+                candidates = signals if len(signals) >= 2 else []
+
+            for sig in candidates:
                 if _should_alert(game_id, sig["type"] + sig["field"], state):
                     subject, body = _format_alert(
                         label, home, away, sig,
