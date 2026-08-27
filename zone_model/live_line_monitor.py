@@ -388,15 +388,15 @@ def _format_alert(
 
 
 # ── Cooldown: don't spam same game + signal type within 30 min ────────────────
+# Persisted in .line_state.json so it survives between GitHub Actions runs.
 
-_alerted: dict[str, float] = {}
-
-def _should_alert(game_id: str, sig_type: str) -> bool:
+def _should_alert(game_id: str, sig_type: str, state: dict) -> bool:
     key = f"{game_id}|{sig_type}"
-    last = _alerted.get(key, 0)
+    alerted = state.setdefault("_alerted", {})
+    last = alerted.get(key, 0)
     if time.time() - last < 1800:   # 30 min cooldown
         return False
-    _alerted[key] = time.time()
+    alerted[key] = time.time()
     return True
 
 
@@ -466,7 +466,7 @@ def scan_once() -> int:
 
             # Fire alerts
             for sig in signals:
-                if _should_alert(game_id, sig["type"] + sig["field"]):
+                if _should_alert(game_id, sig["type"] + sig["field"], state):
                     subject, body = _format_alert(
                         label, home, away, sig,
                         current_total, current_spread, commence)
