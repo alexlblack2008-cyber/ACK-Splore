@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-08-27T00:37:21.166177+00:00",
-  "signal_count": 109,
+  "updated_at": "2026-08-27T14:01:48.636678+00:00",
+  "signal_count": 114,
   "signals": [
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "New safety-rule system would have resulted in one suspension in 2024 and one in 2025 The NFL and NFL Players Association",
+      "excerpt": "New safety-rule system would have resulted in one suspension in 2024 and one in 2025 The NFL and NFL Players Association have agreed to a new system aimed at enhancing player safety.",
+      "source": "PFT Weather",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/new-safety-rule-system-would-have-resulted-in-one-suspension-in-2024-and-one-in-2025",
+      "confidence": 0.6,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T14:01:32.508442+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Jayden Daniels: I've said everything I needed to say about my LSU jersey number Commanders quarterback Jayden Daniels do",
+      "excerpt": "Jayden Daniels: I've said everything I needed to say about my LSU jersey number Commanders quarterback Jayden Daniels does not want to talk about his battle with LSU about the school not retiring his jersey number.",
+      "source": "PFT Weather",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jayden-daniels-ive-said-everything-i-needed-to-say-about-my-lsu-jersey-number",
+      "confidence": 0.6,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T14:01:32.508187+00:00"
+    },
+    {
+      "player": "Lamar Jackson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Lamar Jackson: Ja'Kobi Lane is like Odell Beckham Jr., DeAndre Hopkins with his hands Throughout training camp, reports ",
+      "excerpt": "Lamar Jackson: Ja'Kobi Lane is like Odell Beckham Jr., DeAndre Hopkins with his hands Throughout training camp, reports out of Baltimore have indicated rookie receiver Ja'Kobi Lane could be a significant part of the Ravens' offense in the coming season.",
+      "source": "PFT Weather",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/lamar-jackson-jakobi-lane-is-like-odell-beckham-jr-deandre-hopkins-with-his-hands",
+      "confidence": 0.6,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T14:01:32.507969+00:00"
+    },
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "New safety-rule system would have resulted in one suspension in 2024 and one in 2025 The NFL and NFL Players Association",
+      "excerpt": "New safety-rule system would have resulted in one suspension in 2024 and one in 2025 The NFL and NFL Players Association have agreed to a new system aimed at enhancing player safety.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/new-safety-rule-system-would-have-resulted-in-one-suspension-in-2024-and-one-in-2025",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T14:01:28.649690+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Jayden Daniels: I've said everything I needed to say about my LSU jersey number Commanders quarterback Jayden Daniels do",
+      "excerpt": "Jayden Daniels: I've said everything I needed to say about my LSU jersey number Commanders quarterback Jayden Daniels does not want to talk about his battle with LSU about the school not retiring his jersey number.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jayden-daniels-ive-said-everything-i-needed-to-say-about-my-lsu-jersey-number",
+      "confidence": 0.7,
+      "prop_impact": "under",
+      "detected_at": "2026-08-27T14:01:28.649413+00:00"
+    },
     {
       "player": "Bryce Harper",
       "team": "Unknown",
@@ -1419,5 +1484,6 @@
       "prop_impact": "under",
       "detected_at": "2026-08-21T20:16:07.815019+00:00"
     }
-  ]
+  ],
+  "_alert_cooldowns": {}
 }
