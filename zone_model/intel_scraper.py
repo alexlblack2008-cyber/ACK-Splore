@@ -69,6 +69,57 @@ POSITIVE_KEYWORDS = [
     "best shape", "locked in", "excited", "confident",
 ]
 
+# ── Line-moving events — trigger immediate email alerts ───────────────────────
+
+# QB scratch / backup starting (NFL total moves 4-7 pts)
+QB_SCRATCH_KEYWORDS = [
+    "backup qb", "backup quarterback", "will start at quarterback",
+    "starting in place of", "qb scratch", "quarterback scratch",
+    "will not play", "ruled out at quarterback", "emergency qb",
+    "practice squad qb", "third-string qb", "benched", "benching the starter",
+]
+
+# Late scratch / game-time decision for star non-QB
+LATE_SCRATCH_KEYWORDS = [
+    "late scratch", "game-time decision", "game time decision",
+    "will not play tonight", "will not play sunday", "ruled out today",
+    "scratched from lineup", "out for tonight", "out for sunday",
+    "inactive list", "did not participate", "dnp",
+]
+
+# Starting pitcher scratch (MLB total moves 1.5-2 runs)
+PITCHER_SCRATCH_KEYWORDS = [
+    "scratched from start", "will not start", "pushes back start",
+    "skipping his start", "bullpen game", "opener game",
+    "pushed to tomorrow", "extra rest", "arm fatigue",
+    "forearm tightness", "elbow discomfort", "scratched today",
+]
+
+# Weather — wind/rain crushes outdoor totals
+WEATHER_KEYWORDS = [
+    "wind advisory", "mph winds", "heavy rain", "rainy conditions",
+    "thunderstorm", "weather delay", "weather concern",
+    "outdoor stadium", "open air", "dome advantage",
+    "precipitation", "snow game", "cold weather game",
+]
+
+# Suspension — disciplinary ruling before game
+SUSPENSION_KEYWORDS = [
+    "suspended", "suspension", "one-game suspension", "ejected",
+    "disciplinary action", "league discipline", "nfl discipline",
+    "nba discipline", "mlb discipline", "fined and suspended",
+    "serving suspension", "appealing suspension",
+]
+
+# Player activated from IR / IL — returning star upgrades total
+ACTIVATION_KEYWORDS = [
+    "activated from ir", "activated from injured reserve",
+    "activated from il", "off the injured list", "cleared to return",
+    "returns to lineup", "back in lineup", "will play tonight",
+    "makes his return", "returns from injury", "reinstated",
+    "will play sunday", "expected to play", "good to go",
+]
+
 # MLB-specific keywords
 MLB_USAGE_UP = [
     "lineup spot", "batting cleanup", "top of the order", "leadoff",
@@ -114,6 +165,8 @@ RSS_FEEDS = [
     ("Athletic NFL", "https://theathletic.com/nfl/feed/"),
     ("Athletic NBA", "https://theathletic.com/nba/feed/"),
     ("Athletic MLB", "https://theathletic.com/mlb/feed/"),
+    # Weather / game conditions (outdoor stadiums)
+    ("PFT Weather", "https://profootballtalk.nbcsports.com/feed/"),  # PFT covers weather impacts
 ]
 
 # ── Key reporters to monitor on X (public profiles) ───────────────────────────
@@ -295,7 +348,22 @@ def _fetch(url: str) -> str:
 def _classify_signal(text: str, sport: str = "") -> tuple[str, str]:
     """Returns (signal_type, prop_impact)."""
     t = text.lower()
-    # MLB-specific checks first
+
+    # ── High-priority line-movers (checked first for all sports) ──────────────
+    if any(k in t for k in ACTIVATION_KEYWORDS):
+        return "activation", "over"
+    if any(k in t for k in QB_SCRATCH_KEYWORDS):
+        return "qb_scratch", "under"
+    if any(k in t for k in LATE_SCRATCH_KEYWORDS):
+        return "late_scratch", "under"
+    if sport == "mlb" and any(k in t for k in PITCHER_SCRATCH_KEYWORDS):
+        return "pitcher_scratch", "under"
+    if any(k in t for k in WEATHER_KEYWORDS):
+        return "weather", "under"
+    if any(k in t for k in SUSPENSION_KEYWORDS):
+        return "suspension", "under"
+
+    # ── Standard signals ───────────────────────────────────────────────────────
     if sport == "mlb":
         if any(k in t for k in MLB_INJURY_KEYWORDS + INJURY_KEYWORDS):
             return "injury", "under"
@@ -308,6 +376,7 @@ def _classify_signal(text: str, sport: str = "") -> tuple[str, str]:
         if any(k in t for k in POSITIVE_KEYWORDS):
             return "positive", "over"
         return "neutral", "neutral"
+
     if any(k in t for k in INJURY_KEYWORDS):
         return "injury", "under"
     if any(k in t for k in DRAMA_KEYWORDS):
@@ -343,6 +412,30 @@ def _extract_players(text: str, sport: str) -> list[str]:
 
 def _player_team(player: str, sport: str) -> str:
     """Best-effort team lookup — expands over time as intel accumulates."""
+    return "Unknown"
+
+
+# NFL/MLB city/team names for weather and game-level signal extraction
+_TEAM_NAMES = [
+    "Chiefs", "Bills", "Patriots", "Dolphins", "Jets", "Ravens", "Bengals",
+    "Browns", "Steelers", "Titans", "Colts", "Jaguars", "Texans", "Broncos",
+    "Raiders", "Chargers", "Cowboys", "Giants", "Eagles", "Commanders",
+    "Bears", "Lions", "Packers", "Vikings", "Falcons", "Panthers", "Saints",
+    "Buccaneers", "Cardinals", "Rams", "49ers", "Seahawks",
+    # MLB
+    "Yankees", "Red Sox", "Mets", "Cubs", "Dodgers", "Giants", "Braves",
+    "Cardinals", "Astros", "Phillies", "Padres", "Brewers", "Marlins",
+    "Nationals", "Rockies", "Diamondbacks", "Pirates", "Reds", "Tigers",
+    "Twins", "White Sox", "Guardians", "Royals", "Athletics", "Angels",
+    "Mariners", "Rangers", "Blue Jays", "Rays", "Orioles",
+]
+
+def _extract_team_hint(text: str, sport: str) -> str:
+    """Find first team name mentioned in text for game-level signals."""
+    tl = text.lower()
+    for team in _TEAM_NAMES:
+        if team.lower() in tl:
+            return team
     return "Unknown"
 
 
@@ -415,15 +508,34 @@ def _scrape_x_profile(username: str) -> list[dict]:
 def _process_item(text: str, source: str, url: str, sport: str) -> list[PlayerSignal]:
     """Turn one article/post into zero or more PlayerSignal objects."""
     signals = []
+    sig_type, prop_impact = _classify_signal(text, sport)
+    if sig_type == "neutral":
+        return signals
+
+    credibility = SOURCE_CREDIBILITY.get(source, 0.60)
+
+    # Weather / suspension / game-level signals don't need a specific player name
+    game_level_types = {"weather", "suspension", "qb_scratch", "pitcher_scratch"}
+    if sig_type in game_level_types:
+        # Extract any team or city name as a proxy for the game
+        team_hint = _extract_team_hint(text, sport)
+        signals.append(PlayerSignal(
+            player      = team_hint or "Game",
+            team        = team_hint,
+            sport       = sport,
+            signal_type = sig_type,
+            headline    = text[:120],
+            excerpt     = text[:300],
+            source      = source,
+            url         = url,
+            confidence  = credibility,
+            prop_impact = prop_impact,
+        ))
+        return signals
+
     players = _extract_players(text, sport)
     if not players:
         return signals
-
-    sig_type, prop_impact = _classify_signal(text, sport)
-    if sig_type == "neutral":
-        return signals  # only store actionable signals
-
-    credibility = SOURCE_CREDIBILITY.get(source, 0.60)
 
     for player in players:
         signals.append(PlayerSignal(
@@ -615,10 +727,16 @@ def get_prop_edge(player_name: str, sport: str) -> tuple[str, float]:
 # ── Breaking alert: injury / upgrade before the line moves ────────────────────
 
 # Signal types that are worth an immediate email
-BREAKING_SIGNAL_TYPES = {"injury", "usage_up", "positive"}
+BREAKING_SIGNAL_TYPES = {
+    "injury", "usage_up", "positive",
+    "qb_scratch", "late_scratch", "pitcher_scratch",
+    "weather", "suspension", "activation",
+}
 
 # Minimum source credibility to send a breaking alert (avoids noise from low-tier outlets)
+# Weather gets a lower bar since it's factual, not rumour
 BREAKING_MIN_CONFIDENCE = 0.75
+WEATHER_MIN_CONFIDENCE  = 0.60
 
 
 def _send_breaking_alert(sig: PlayerSignal) -> None:
@@ -631,12 +749,24 @@ def _send_breaking_alert(sig: PlayerSignal) -> None:
         return
 
     type_labels = {
-        "injury":   "🩹 INJURY ALERT",
-        "usage_up": "⬆ UPGRADE ALERT",
-        "positive": "✅ PLAYER UPGRADE",
+        "injury":         "🩹 INJURY ALERT",
+        "usage_up":       "⬆ UPGRADE ALERT",
+        "positive":       "✅ PLAYER CLEARED",
+        "qb_scratch":     "🚨 QB SCRATCH",
+        "late_scratch":   "🚨 LATE SCRATCH",
+        "pitcher_scratch":"🚨 PITCHER SCRATCH",
+        "weather":        "🌧 WEATHER ALERT",
+        "suspension":     "⛔ SUSPENSION",
+        "activation":     "✅ PLAYER ACTIVATED",
+    }
+    impact_map = {
+        "injury": "UNDER", "qb_scratch": "UNDER", "late_scratch": "UNDER",
+        "pitcher_scratch": "UNDER", "weather": "UNDER", "suspension": "UNDER",
+        "drama": "UNDER", "usage_down": "UNDER",
+        "usage_up": "OVER", "positive": "OVER", "activation": "OVER",
     }
     tag    = type_labels.get(sig.signal_type, "⚡ BREAKING INTEL")
-    impact = "UNDER" if sig.signal_type == "injury" else "OVER"
+    impact = impact_map.get(sig.signal_type, sig.prop_impact.upper())
     sport  = sig.sport.upper()
 
     subject = f"{tag} — {sig.player} ({sport}) → Bet {impact} before line moves"
@@ -704,7 +834,8 @@ def _fire_breaking_alerts(new_signals: list[PlayerSignal], existing: dict) -> No
     for sig in new_signals:
         if sig.signal_type not in BREAKING_SIGNAL_TYPES:
             continue
-        if sig.confidence < BREAKING_MIN_CONFIDENCE:
+        min_conf = WEATHER_MIN_CONFIDENCE if sig.signal_type == "weather" else BREAKING_MIN_CONFIDENCE
+        if sig.confidence < min_conf:
             continue
 
         key  = f"{sig.player}|{sig.signal_type}"
