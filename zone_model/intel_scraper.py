@@ -142,31 +142,33 @@ MLB_INJURY_KEYWORDS = [
 ]
 
 # ── Reporter RSS feeds ─────────────────────────────────────────────────────────
+# ESPN blocks GitHub Actions IPs — replaced with alternatives that work
 
 RSS_FEEDS = [
-    # ESPN NFL/NBA/MLB
-    ("ESPN NFL", "https://www.espn.com/espn/rss/nfl/news"),
-    ("ESPN NBA", "https://www.espn.com/espn/rss/nba/news"),
-    ("ESPN MLB", "https://www.espn.com/espn/rss/mlb/news"),
-    ("ESPN NFL Insider", "https://www.espn.com/espn/rss/nfl/insider/news"),
+    # Pro Football Talk — fast on injuries, suspensions, depth chart moves
+    ("PFT", "https://profootballtalk.nbcsports.com/feed/"),
     # NFL.com
     ("NFL.com", "https://www.nfl.com/rss/rsslanding?searchString=news"),
-    # MLB.com
+    # MLB.com official feed
     ("MLB.com", "https://www.mlb.com/feeds/news/rss.xml"),
-    # Pro Football Talk
-    ("PFT", "https://profootballtalk.nbcsports.com/feed/"),
-    # NBC Sports MLB
-    ("HBT", "https://mlb.nbcsports.com/feed/"),
-    # Bleacher Report
-    ("BR NFL", "https://bleacherreport.com/nfl.rss"),
-    ("BR NBA", "https://bleacherreport.com/nba.rss"),
-    ("BR MLB", "https://bleacherreport.com/mlb.rss"),
-    # The Athletic (limited headlines)
-    ("Athletic NFL", "https://theathletic.com/nfl/feed/"),
-    ("Athletic NBA", "https://theathletic.com/nba/feed/"),
-    ("Athletic MLB", "https://theathletic.com/mlb/feed/"),
-    # Weather / game conditions (outdoor stadiums)
-    ("PFT Weather", "https://profootballtalk.nbcsports.com/feed/"),  # PFT covers weather impacts
+    # MLB Trade Rumors — fastest for IL moves, lineup scratches, roster moves
+    ("MLBTR", "https://www.mlbtraderumors.com/feed"),
+    # RotoWorld NFL injuries/depth chart
+    ("RotoWorld NFL", "https://www.rotoworld.com/rss/feed/nfl"),
+    # RotoWorld MLB injuries/lineup
+    ("RotoWorld MLB", "https://www.rotoworld.com/rss/feed/mlb"),
+    # RotoWorld NBA
+    ("RotoWorld NBA", "https://www.rotoworld.com/rss/feed/nba"),
+    # RotoBaller NFL
+    ("RotoBaller NFL", "https://www.rotoballer.com/feed?sport=football"),
+    # RotoBaller MLB
+    ("RotoBaller MLB", "https://www.rotoballer.com/feed?sport=baseball"),
+    # CBS Sports NFL
+    ("CBS NFL", "https://www.cbssports.com/rss/headlines/nfl/"),
+    # CBS Sports MLB
+    ("CBS MLB", "https://www.cbssports.com/rss/headlines/mlb/"),
+    # CBS Sports NBA
+    ("CBS NBA", "https://www.cbssports.com/rss/headlines/nba/"),
 ]
 
 # ── Key reporters to monitor on X (public profiles) ───────────────────────────
@@ -245,10 +247,11 @@ SOURCE_CREDIBILITY = {
     "BNightengale": 0.85, "Joelsherman1": 0.80,   "JeffPassan": 0.90,
     "Heyblasty": 0.78,    "EvanWainerwright": 0.75, "tangotiger": 0.80,
     # Outlets
-    "ESPN NFL": 0.78, "ESPN NBA": 0.78, "ESPN MLB": 0.78,
-    "NFL.com": 0.75,  "MLB.com": 0.80,  "HBT": 0.72,
-    "PFT": 0.70,      "BR NFL": 0.65,   "BR NBA": 0.65,   "BR MLB": 0.65,
-    "Athletic NFL": 0.80, "Athletic NBA": 0.80, "Athletic MLB": 0.80,
+    "PFT": 0.78,          "NFL.com": 0.75,
+    "MLB.com": 0.80,      "MLBTR": 0.82,
+    "RotoWorld NFL": 0.76, "RotoWorld MLB": 0.76, "RotoWorld NBA": 0.76,
+    "RotoBaller NFL": 0.72, "RotoBaller MLB": 0.72,
+    "CBS NFL": 0.75,      "CBS MLB": 0.75,       "CBS NBA": 0.75,
 }
 
 # NFL and NBA rosters for player name matching (key names — model learns more over time)
@@ -345,47 +348,68 @@ def _fetch(url: str) -> str:
         return ""
 
 
-def _classify_signal(text: str, sport: str = "") -> tuple[str, str]:
-    """Returns (signal_type, prop_impact)."""
+def _classify_signal(text: str, sport: str = "", player: str = "") -> tuple[str, str]:
+    """
+    Returns (signal_type, prop_impact).
+    When a player name is given, signal keywords must appear within 150 chars
+    of that player's name to avoid matching unrelated parts of the article.
+    """
     t = text.lower()
 
-    # ── High-priority line-movers (checked first for all sports) ──────────────
-    if any(k in t for k in ACTIVATION_KEYWORDS):
+    # Build a focused window around the player name if known
+    if player:
+        pl = player.lower()
+        idx = t.find(pl)
+        if idx >= 0:
+            window = t[max(0, idx - 50): idx + len(pl) + 150]
+        else:
+            # Try last name only
+            last = pl.split()[-1]
+            idx = t.find(last)
+            window = t[max(0, idx - 50): idx + len(last) + 150] if idx >= 0 else t
+    else:
+        window = t  # game-level signals use full text
+
+    def _hit(keywords: list) -> bool:
+        return any(k in window for k in keywords)
+
+    # ── High-priority line-movers ──────────────────────────────────────────────
+    if _hit(ACTIVATION_KEYWORDS):
         return "activation", "over"
-    if any(k in t for k in QB_SCRATCH_KEYWORDS):
+    if _hit(QB_SCRATCH_KEYWORDS):
         return "qb_scratch", "under"
-    if any(k in t for k in LATE_SCRATCH_KEYWORDS):
+    if _hit(LATE_SCRATCH_KEYWORDS):
         return "late_scratch", "under"
-    if sport == "mlb" and any(k in t for k in PITCHER_SCRATCH_KEYWORDS):
+    if sport == "mlb" and _hit(PITCHER_SCRATCH_KEYWORDS):
         return "pitcher_scratch", "over"
-    if any(k in t for k in WEATHER_KEYWORDS):
+    if _hit(WEATHER_KEYWORDS):
         return "weather", "under"
-    if any(k in t for k in SUSPENSION_KEYWORDS):
+    if _hit(SUSPENSION_KEYWORDS):
         return "suspension", "under"
 
     # ── Standard signals ───────────────────────────────────────────────────────
     if sport == "mlb":
-        if any(k in t for k in MLB_INJURY_KEYWORDS + INJURY_KEYWORDS):
+        if _hit(MLB_INJURY_KEYWORDS + INJURY_KEYWORDS):
             return "injury", "under"
-        if any(k in t for k in DRAMA_KEYWORDS):
+        if _hit(DRAMA_KEYWORDS):
             return "drama", "under"
-        if any(k in t for k in MLB_USAGE_UP + USAGE_UP_KEYWORDS):
+        if _hit(MLB_USAGE_UP + USAGE_UP_KEYWORDS):
             return "usage_up", "over"
-        if any(k in t for k in MLB_USAGE_DOWN + USAGE_DOWN_KEYWORDS):
+        if _hit(MLB_USAGE_DOWN + USAGE_DOWN_KEYWORDS):
             return "usage_down", "under"
-        if any(k in t for k in POSITIVE_KEYWORDS):
+        if _hit(POSITIVE_KEYWORDS):
             return "positive", "over"
         return "neutral", "neutral"
 
-    if any(k in t for k in INJURY_KEYWORDS):
+    if _hit(INJURY_KEYWORDS):
         return "injury", "under"
-    if any(k in t for k in DRAMA_KEYWORDS):
+    if _hit(DRAMA_KEYWORDS):
         return "drama", "under"
-    if any(k in t for k in USAGE_UP_KEYWORDS):
+    if _hit(USAGE_UP_KEYWORDS):
         return "usage_up", "over"
-    if any(k in t for k in USAGE_DOWN_KEYWORDS):
+    if _hit(USAGE_DOWN_KEYWORDS):
         return "usage_down", "under"
-    if any(k in t for k in POSITIVE_KEYWORDS):
+    if _hit(POSITIVE_KEYWORDS):
         return "positive", "over"
     return "neutral", "neutral"
 
@@ -508,16 +532,14 @@ def _scrape_x_profile(username: str) -> list[dict]:
 def _process_item(text: str, source: str, url: str, sport: str) -> list[PlayerSignal]:
     """Turn one article/post into zero or more PlayerSignal objects."""
     signals = []
-    sig_type, prop_impact = _classify_signal(text, sport)
-    if sig_type == "neutral":
-        return signals
-
     credibility = SOURCE_CREDIBILITY.get(source, 0.60)
+    players = _extract_players(text, sport)
 
-    # Weather / suspension / game-level signals don't need a specific player name
+    # Game-level signals (weather, suspension, QB scratch, pitcher scratch)
+    # don't need a specific player — classify on full text and use team as label
     game_level_types = {"weather", "suspension", "qb_scratch", "pitcher_scratch"}
+    sig_type, prop_impact = _classify_signal(text, sport, player="")
     if sig_type in game_level_types:
-        # Extract any team or city name as a proxy for the game
         team_hint = _extract_team_hint(text, sport)
         signals.append(PlayerSignal(
             player      = team_hint or "Game",
@@ -533,11 +555,14 @@ def _process_item(text: str, source: str, url: str, sport: str) -> list[PlayerSi
         ))
         return signals
 
-    players = _extract_players(text, sport)
     if not players:
         return signals
 
+    # For player-level signals, classify within the window around their name
     for player in players:
+        sig_type, prop_impact = _classify_signal(text, sport, player=player)
+        if sig_type == "neutral":
+            continue
         signals.append(PlayerSignal(
             player      = player,
             team        = _player_team(player, sport),
@@ -557,7 +582,12 @@ def scrape_rss_feeds() -> list[PlayerSignal]:
     signals = []
     for source, feed_url in RSS_FEEDS:
         sl = source.lower()
-        sport = "mlb" if "mlb" in sl or "hbt" in sl else "nfl" if "nfl" in sl or "pft" in sl else "nba"
+        if "mlb" in sl or "baseball" in sl:
+            sport = "mlb"
+        elif "nba" in sl or "basketball" in sl:
+            sport = "nba"
+        else:
+            sport = "nfl"
         xml   = _fetch(feed_url)
         if not xml:
             print(f"  [RSS] {source}: no data")
