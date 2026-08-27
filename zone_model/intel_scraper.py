@@ -19,11 +19,14 @@ from __future__ import annotations
 import json
 import os
 import re
+import smtplib
 import time
 import urllib.request
 import urllib.error
 import urllib.parse
 from datetime import datetime, timezone, timedelta
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from typing import Optional
 from dataclasses import dataclass, field, asdict
 
@@ -508,12 +511,17 @@ def _save(all_signals: list[PlayerSignal]) -> None:
         if s.get("detected_at", "") >= day_ago:
             recent_keys.add(f"{s['player']}|{s['signal_type']}|{s['source']}")
 
+    truly_new: list[PlayerSignal] = []
     new_dicts = []
     for sig in all_signals:
         key = f"{sig.player}|{sig.signal_type}|{sig.source}"
         if key not in recent_keys:
             new_dicts.append(asdict(sig))
+            truly_new.append(sig)
             recent_keys.add(key)
+
+    # Fire breaking alerts for new high-confidence injury / upgrade signals
+    _fire_breaking_alerts(truly_new, existing)
 
     merged = old_kept + new_dicts
     merged.sort(key=lambda x: x.get("detected_at", ""), reverse=True)
@@ -522,6 +530,7 @@ def _save(all_signals: list[PlayerSignal]) -> None:
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "signal_count": len(merged),
         "signals": merged,
+        "_alert_cooldowns": existing.get("_alert_cooldowns", {}),
     }
     with open(INTEL_PATH, "w") as f:
         json.dump(output, f, indent=2)
@@ -601,6 +610,115 @@ def get_prop_edge(player_name: str, sport: str) -> tuple[str, float]:
         boost = min(0.08, under_weight * 0.03)
         return "under", round(boost, 3)
     return "neutral", 0.0
+
+
+# ── Breaking alert: injury / upgrade before the line moves ────────────────────
+
+# Signal types that are worth an immediate email
+BREAKING_SIGNAL_TYPES = {"injury", "usage_up", "positive"}
+
+# Minimum source credibility to send a breaking alert (avoids noise from low-tier outlets)
+BREAKING_MIN_CONFIDENCE = 0.75
+
+
+def _send_breaking_alert(sig: PlayerSignal) -> None:
+    """Send an immediate email for a high-confidence injury or upgrade signal."""
+    gmail_from = os.environ.get("GMAIL_FROM", "")
+    gmail_to   = os.environ.get("GMAIL_TO", gmail_from)
+    password   = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if not all([gmail_from, gmail_to, password]):
+        print(f"[BREAKING — no email configured] {sig.player}: {sig.headline[:80]}")
+        return
+
+    type_labels = {
+        "injury":   "🩹 INJURY ALERT",
+        "usage_up": "⬆ UPGRADE ALERT",
+        "positive": "✅ PLAYER UPGRADE",
+    }
+    tag    = type_labels.get(sig.signal_type, "⚡ BREAKING INTEL")
+    impact = "UNDER" if sig.signal_type == "injury" else "OVER"
+    sport  = sig.sport.upper()
+
+    subject = f"{tag} — {sig.player} ({sport}) → Bet {impact} before line moves"
+
+    plain = (
+        f"{tag}\n\n"
+        f"Player : {sig.player}\n"
+        f"Team   : {sig.team}\n"
+        f"Sport  : {sport}\n"
+        f"Impact : Bet {impact}\n"
+        f"Source : @{sig.source}  (credibility {sig.confidence:.0%})\n\n"
+        f"Headline:\n{sig.headline}\n\n"
+        f"Excerpt:\n{sig.excerpt}\n\n"
+        f"Detected: {sig.detected_at}\n\n"
+        "Act fast — Vegas adjusts within minutes of breaking injury news."
+    )
+
+    html = f"""
+    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto">
+      <h2 style="color:#c0392b">{tag}</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:15px">
+        <tr><td style="padding:6px;color:#888">Player</td><td style="padding:6px"><b>{sig.player}</b></td></tr>
+        <tr><td style="padding:6px;color:#888">Team</td><td style="padding:6px">{sig.team}</td></tr>
+        <tr><td style="padding:6px;color:#888">Sport</td><td style="padding:6px">{sport}</td></tr>
+        <tr><td style="padding:6px;color:#888">Bet</td>
+            <td style="padding:6px;font-size:18px;font-weight:bold;color:{'#e74c3c' if impact=='UNDER' else '#27ae60'}">{impact}</td></tr>
+        <tr><td style="padding:6px;color:#888">Source</td><td style="padding:6px">@{sig.source} ({sig.confidence:.0%} credibility)</td></tr>
+      </table>
+      <p style="background:#f8f8f8;padding:12px;border-left:4px solid #c0392b;margin:16px 0">
+        <b>Headline:</b> {sig.headline}
+      </p>
+      <p style="color:#555">{sig.excerpt}</p>
+      <p style="color:#e74c3c;font-weight:bold">
+        ⏱ Act fast — Vegas adjusts within minutes of breaking injury/upgrade news.
+      </p>
+    </div>
+    """
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"]    = gmail_from
+    msg["To"]      = gmail_to
+    msg.attach(MIMEText(plain, "plain"))
+    msg.attach(MIMEText(html,  "html"))
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(gmail_from, password)
+            smtp.sendmail(gmail_from, gmail_to.split(","), msg.as_string())
+        print(f"  📧 Breaking alert sent: {subject}")
+    except Exception as e:
+        print(f"  ✗ Email failed: {e}")
+
+
+def _fire_breaking_alerts(new_signals: list[PlayerSignal], existing: dict) -> None:
+    """
+    For each genuinely new high-confidence signal, send an immediate email.
+    Cooldown: 6 hours per player+signal_type, stored in player_intel.json.
+    """
+    cooldowns = existing.get("_alert_cooldowns", {})
+    now = datetime.now(timezone.utc)
+    six_hours_ago = (now - timedelta(hours=6)).isoformat()
+    fired = 0
+
+    for sig in new_signals:
+        if sig.signal_type not in BREAKING_SIGNAL_TYPES:
+            continue
+        if sig.confidence < BREAKING_MIN_CONFIDENCE:
+            continue
+
+        key  = f"{sig.player}|{sig.signal_type}"
+        last = cooldowns.get(key, "")
+        if last >= six_hours_ago:
+            continue  # already alerted within 6 hours
+
+        _send_breaking_alert(sig)
+        cooldowns[key] = now.isoformat()
+        fired += 1
+
+    existing["_alert_cooldowns"] = cooldowns
+    if fired:
+        print(f"[intel_scraper] {fired} breaking alert(s) sent")
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
