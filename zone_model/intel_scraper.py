@@ -357,7 +357,7 @@ def _classify_signal(text: str, sport: str = "") -> tuple[str, str]:
     if any(k in t for k in LATE_SCRATCH_KEYWORDS):
         return "late_scratch", "under"
     if sport == "mlb" and any(k in t for k in PITCHER_SCRATCH_KEYWORDS):
-        return "pitcher_scratch", "under"
+        return "pitcher_scratch", "over"
     if any(k in t for k in WEATHER_KEYWORDS):
         return "weather", "under"
     if any(k in t for k in SUSPENSION_KEYWORDS):
@@ -761,7 +761,7 @@ def _send_breaking_alert(sig: PlayerSignal) -> None:
     }
     impact_map = {
         "injury": "UNDER", "qb_scratch": "UNDER", "late_scratch": "UNDER",
-        "pitcher_scratch": "UNDER", "weather": "UNDER", "suspension": "UNDER",
+        "pitcher_scratch": "OVER",  "weather": "UNDER", "suspension": "UNDER",
         "drama": "UNDER", "usage_down": "UNDER",
         "usage_up": "OVER", "positive": "OVER", "activation": "OVER",
     }
