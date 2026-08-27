@@ -65,8 +65,8 @@ MAX_PICKS = 5
 # Minimum thresholds to issue a pick
 # Edge requires real market totals from Odds API — without them confidence
 # drops and picks are suppressed. Key must be set in GitHub secrets.
-MIN_EDGE   = 0.30   # runs (lowered: 0.35 was too strict with real lines)
-MIN_CONF   = 0.33
+MIN_EDGE   = 0.40   # runs — calibrated for 2026 ABS era baseline
+MIN_CONF   = 0.42
 
 
 @dataclass
@@ -342,14 +342,18 @@ def score_all_games(game_date: str | None = None) -> list[ScoredGame]:
         form_adj  = (form_run_adjustment(home_form, "mlb") +
                      form_run_adjustment(away_form, "mlb"))
 
-        # Inject lineup, weather, and form into fair total post-hoc
+        # Inject lineup, weather, and form into fair total post-hoc.
+        # Cap the combined secondary adjustment at ±0.6 runs so noisy signals
+        # can't rescue a marginal pick that the zone model already rejected.
         lineup_total_adj = lineup_adj["total_lineup_adj"]
-        combined_adj = lineup_total_adj + weather_adj + form_adj
+        combined_adj = max(-0.6, min(0.6, lineup_total_adj + weather_adj + form_adj))
         output.fair_total  = round(output.fair_total + combined_adj, 2)
         output.edge_runs   = round(output.fair_total - market_total, 2)
         output.edge_pct    = round(output.edge_runs / market_total, 4)
-        # Re-evaluate recommendation
-        if abs(output.edge_runs) >= MIN_EDGE and output.confidence >= MIN_CONF:
+        # Re-evaluate recommendation; unknown umpires require higher confidence
+        unknown_ump = ump_name not in UMPIRE_PROFILES or ump_name == "__UNKNOWN__"
+        eff_min_conf = 0.55 if unknown_ump else MIN_CONF
+        if abs(output.edge_runs) >= MIN_EDGE and output.confidence >= eff_min_conf:
             output.recommendation = "OVER" if output.edge_runs > 0 else "UNDER"
         else:
             output.recommendation = "NO BET"

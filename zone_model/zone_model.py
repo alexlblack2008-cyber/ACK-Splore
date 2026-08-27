@@ -308,10 +308,15 @@ def compute_fair_total(game: GameInput) -> ModelOutput:
     )
 
     # --- Recommendation thresholds ---
-    MIN_EDGE_RUNS = 0.30
-    MIN_CONFIDENCE = 0.33
+    MIN_EDGE_RUNS = 0.40
+    MIN_CONFIDENCE = 0.42
 
-    if abs(edge_runs) >= MIN_EDGE_RUNS and raw_confidence >= MIN_CONFIDENCE:
+    # Without a known umpire we lose the primary model edge; require higher bar
+    unknown_ump = (game.umpire_name not in UMPIRE_PROFILES or
+                   game.umpire_name == "__UNKNOWN__")
+    effective_min_conf = 0.55 if unknown_ump else MIN_CONFIDENCE
+
+    if abs(edge_runs) >= MIN_EDGE_RUNS and raw_confidence >= effective_min_conf:
         recommendation = "OVER" if edge_runs > 0 else "UNDER"
     else:
         recommendation = "NO BET"

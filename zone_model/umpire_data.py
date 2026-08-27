@@ -107,10 +107,12 @@ UMPIRE_PROFILES = {
     "__UNKNOWN__":            {"csraa":  0.0, "run_impact":  0.00, "k_factor": 1.00, "bb_factor": 1.00, "games": 0},
 }
 
-# League-average context anchors (2024-2025 MLB seasons)
+# League-average context anchors (2026 MLB season, ABS era)
+# ABS challenge system suppresses run scoring ~0.5-0.8 runs vs 2024-2025.
+# Market totals in 2026 are priced at ~8.0-8.5; baseline calibrated to match.
 LEAGUE_AVG = {
-    "runs_per_game_per_team": 4.43,
-    "k_per_game":              8.9,
-    "bb_per_game":             3.2,
-    "total_avg":               9.1,
+    "runs_per_game_per_team": 4.10,
+    "k_per_game":              9.2,
+    "bb_per_game":             2.9,
+    "total_avg":               8.2,
 }
