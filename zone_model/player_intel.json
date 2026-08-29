@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-29T16:35:12.080736+00:00",
-  "signal_count": 190,
+  "updated_at": "2026-08-29T20:48:13.495932+00:00",
+  "signal_count": 191,
   "signals": [
+    {
+      "player": "Chris Olave",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Chris Olave's new deal has guarantee waiver for career-ending concussion The new contract recently signed by Saints rece",
+      "excerpt": "Chris Olave's new deal has guarantee waiver for career-ending concussion The new contract recently signed by Saints receiver Chris Olave comes with an important caveat.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/chris-olaves-new-deal-has-guarantee-waiver-for-career-ending-concussion",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T20:47:51.798845+00:00"
+    },
     {
       "player": "Tarik Skubal",
       "team": "Unknown",
@@ -2509,6 +2522,7 @@
     "Ravens|suspension": "2026-08-29T16:35:12.080679+00:00",
     "Juan Soto|injury": "2026-08-29T16:35:12.080679+00:00",
     "Lane Thomas|injury": "2026-08-29T16:35:12.080679+00:00",
-    "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00"
+    "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00",
+    "Chris Olave|injury": "2026-08-29T20:48:13.495878+00:00"
   }
 }
