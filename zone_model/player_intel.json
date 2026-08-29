@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-08-29T09:55:13.861891+00:00",
-  "signal_count": 184,
+  "updated_at": "2026-08-29T16:35:12.080736+00:00",
+  "signal_count": 190,
   "signals": [
+    {
+      "player": "Tarik Skubal",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_down",
+      "headline": "The Opener: White Sox, Skubal, Sosa, Doubleheaders The White Sox improved to 71-63 after Friday&#8217;s 7-4 victory over",
+      "excerpt": "The Opener: White Sox, Skubal, Sosa, Doubleheaders The White Sox improved to 71-63 after Friday&#8217;s 7-4 victory over the Twins, making some unique history in the process.\u00a0 As per MLB.com&#8217;s Sarah Langs, the 71 wins are the most of any team in history coming off at least three consecutive 10",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/the-opener-white-sox-skubal-sosa-doubleheaders.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:49.310552+00:00"
+    },
+    {
+      "player": "Willy Adames",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Giants Notes: Adames, Mayer, Bullpen Giants shortstop Willy Adames was diagnosed with a torn UCL in his non-throwing elb",
+      "excerpt": "Giants Notes: Adames, Mayer, Bullpen Giants shortstop Willy Adames was diagnosed with a torn UCL in his non-throwing elbow earlier this week.\u00a0 Rather than surgery, Adames received a platelet-rich plasma injection on Thursday and will go with a rest-and-rehab approach to his recovery, according to Su",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/giants-notes-adames-mayer-bullpen.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:49.310353+00:00"
+    },
+    {
+      "player": "Lane Thomas",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Cardinals Place Blaze Jordan On 10-Day Injured List Prior to Friday&#8217;s game, the Cardinals placed third baseman Bla",
+      "excerpt": "Cardinals Place Blaze Jordan On 10-Day Injured List Prior to Friday&#8217;s game, the Cardinals placed third baseman Blaze Jordan on the 10-day injured list due to a left ankle sprain.\u00a0 Utilityman Thomas Saggese was called up from Triple-A to take Jordan&#8217;s spot on the active roster. The IL pla",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/cardinals-place-blaze-jordan-on-10-day-injured-list.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:49.310256+00:00"
+    },
+    {
+      "player": "Juan Soto",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Mets Activate Juan Soto From Injured List The Mets announced that Juan Soto has been activated from the 10-day injured l",
+      "excerpt": "Mets Activate Juan Soto From Injured List The Mets announced that Juan Soto has been activated from the 10-day injured list, with infielder Eric Wagaman optioned to Triple-A in the corresponding move.\u00a0 Soto returns after a little more than a month on the IL due to a left calf strain. More to come&#8",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/mets-activate-juan-soto-from-injured-list.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:49.310041+00:00"
+    },
+    {
+      "player": "Ravens",
+      "team": "Ravens",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "Tyler Loop is suddenly on shaky ground in Baltimore Last year, with the Ravens planning to move on from former All-Pro k",
+      "excerpt": "Tyler Loop is suddenly on shaky ground in Baltimore Last year, with the Ravens planning to move on from former All-Pro kicker Justin Tucker (who has completely fallen off the map after his Personal Conduct Policy suspension), they invested a sixth-round pick in his replacement, Tyler Loop.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/tyler-loop-is-suddenly-on-shaky-ground-in-baltimore",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:47.261439+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "QB Connor Bazelak among early Bucs cuts Quarterback Connor Bazelak fell behind rookie Jalon Daniels on the Buccaneers' d",
+      "excerpt": "QB Connor Bazelak among early Bucs cuts Quarterback Connor Bazelak fell behind rookie Jalon Daniels on the Buccaneers' depth chart this offseason and he's now off the roster altogether.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/qb-connor-bazelak-among-early-bucs-cuts",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T16:34:47.260758+00:00"
+    },
     {
       "player": "Tarik Skubal",
       "team": "Unknown",
@@ -2427,6 +2505,10 @@
     "Alvin Kamara|injury": "2026-08-29T01:39:25.740034+00:00",
     "Sam LaPorta|injury": "2026-08-29T01:39:25.740034+00:00",
     "Lamar Jackson|usage_up": "2026-08-29T01:39:25.740034+00:00",
-    "Tarik Skubal|usage_up": "2026-08-29T09:55:13.861841+00:00"
+    "Tarik Skubal|usage_up": "2026-08-29T09:55:13.861841+00:00",
+    "Ravens|suspension": "2026-08-29T16:35:12.080679+00:00",
+    "Juan Soto|injury": "2026-08-29T16:35:12.080679+00:00",
+    "Lane Thomas|injury": "2026-08-29T16:35:12.080679+00:00",
+    "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00"
   }
 }
