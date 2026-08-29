@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-08-29T20:48:13.495932+00:00",
-  "signal_count": 191,
+  "updated_at": "2026-08-29T23:11:23.900631+00:00",
+  "signal_count": 195,
   "signals": [
+    {
+      "player": "Shohei Ohtani",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Shohei Ohtani Will Not Pitch Sunday; Dodgers Determining Next Steps Knee and biceps issues have prevented the Dodgers&#8",
+      "excerpt": "Shohei Ohtani Will Not Pitch Sunday; Dodgers Determining Next Steps Knee and biceps issues have prevented the Dodgers&#8217; Shohei Ohtani from pitching since July 3, and a return to the mound is not imminent. The Dodgers hoped to start Ohtani against the Tigers on Sunday, but they have scrapped tho",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/shohei-ohtani-will-not-pitch-sunday-dodgers-determining-next-steps.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T23:11:03.052681+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Mets Place Luis Robert Jr. On Waivers The Mets have placed outfielder Luis Robert Jr. on outright waivers, Anthony DiCom",
+      "excerpt": "Mets Place Luis Robert Jr. On Waivers The Mets have placed outfielder Luis Robert Jr. on outright waivers, Anthony DiComo of MLB.com reports. The league&#8217;s other 29 teams have 48 hours to claim Robert, who is eligible to continue playing for the Mets during the process. The Reds took the same t",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/mets-place-luis-robert-jr-on-waivers.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T23:11:03.052448+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Mets place Robert on outright waivers (source) ",
+      "excerpt": "Mets place Robert on outright waivers (source) ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/mets-luis-robert-jr-waivers",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T23:11:02.542131+00:00"
+    },
+    {
+      "player": "Giants",
+      "team": "Giants",
+      "sport": "mlb",
+      "signal_type": "suspension",
+      "headline": "Giants coach ejected during lineup card exchange ",
+      "excerpt": "Giants coach ejected during lineup card exchange ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-08-29T23:11:02.542060+00:00"
+    },
     {
       "player": "Chris Olave",
       "team": "Unknown",
@@ -2492,11 +2544,11 @@
     "Caleb Williams|positive": "2026-08-29T01:39:25.740034+00:00",
     "Kyren Williams|positive": "2026-08-29T01:39:25.740034+00:00",
     "Tarik Skubal|injury": "2026-08-28T15:12:52.988716+00:00",
-    "Luis Robert|injury": "2026-08-28T00:20:12.871923+00:00",
+    "Luis Robert|injury": "2026-08-29T23:11:23.900566+00:00",
     "Packers|suspension": "2026-08-29T01:39:25.740034+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
     "Unknown|suspension": "2026-08-28T15:12:52.988716+00:00",
-    "Shohei Ohtani|injury": "2026-08-29T01:39:25.740034+00:00",
+    "Shohei Ohtani|injury": "2026-08-29T23:11:23.900566+00:00",
     "Shane Bieber|injury": "2026-08-29T01:39:25.740034+00:00",
     "Cal Raleigh|injury": "2026-08-29T01:39:25.740034+00:00",
     "Vladimir Guerrero Jr|injury": "2026-08-29T01:39:25.740034+00:00",
@@ -2523,6 +2575,7 @@
     "Juan Soto|injury": "2026-08-29T16:35:12.080679+00:00",
     "Lane Thomas|injury": "2026-08-29T16:35:12.080679+00:00",
     "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00",
-    "Chris Olave|injury": "2026-08-29T20:48:13.495878+00:00"
+    "Chris Olave|injury": "2026-08-29T20:48:13.495878+00:00",
+    "Giants|suspension": "2026-08-29T23:11:23.900566+00:00"
   }
 }
