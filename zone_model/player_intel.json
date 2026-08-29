@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-08-29T01:39:25.740224+00:00",
-  "signal_count": 183,
+  "updated_at": "2026-08-29T09:55:13.861891+00:00",
+  "signal_count": 184,
   "signals": [
+    {
+      "player": "Tarik Skubal",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Tarik Skubal emotional in return to Detroit with Dodgers, faces mixed reaction from Tigers fans There were scattered boo",
+      "excerpt": "Tarik Skubal emotional in return to Detroit with Dodgers, faces mixed reaction from Tigers fans There were scattered boos for Skubal before he worked six excellent innings",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/tarik-skubal-detroit-return-tigers-dodgers/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-08-29T09:54:57.372083+00:00"
+    },
     {
       "player": "LeBron James",
       "team": "Unknown",
@@ -2413,6 +2426,7 @@
     "Breece Hall|injury": "2026-08-29T01:39:25.740034+00:00",
     "Alvin Kamara|injury": "2026-08-29T01:39:25.740034+00:00",
     "Sam LaPorta|injury": "2026-08-29T01:39:25.740034+00:00",
-    "Lamar Jackson|usage_up": "2026-08-29T01:39:25.740034+00:00"
+    "Lamar Jackson|usage_up": "2026-08-29T01:39:25.740034+00:00",
+    "Tarik Skubal|usage_up": "2026-08-29T09:55:13.861841+00:00"
   }
 }
