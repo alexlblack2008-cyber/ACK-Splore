@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-08-30T20:52:42.322286+00:00",
-  "signal_count": 238,
+  "updated_at": "2026-08-30T23:20:33.884241+00:00",
+  "signal_count": 243,
   "signals": [
+    {
+      "player": "Xavier Worthy",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Patriots get to 53 with Brendan Schooler on NFI, Harold Landry on PUP The Patriots are down to 53 on their active roster",
+      "excerpt": "Patriots get to 53 with Brendan Schooler on NFI, Harold Landry on PUP The Patriots are down to 53 on their active roster, with two noteworthy players opening the season still dealing with injuries.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/patriots-get-to-53-with-brendan-schooler-on-nfi-harold-landry-on-pup",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T23:20:12.164864+00:00"
+    },
+    {
+      "player": "Kyren Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "excerpt": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/sam-williams-among-the-cowboys-cuts-to-53",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T23:20:12.164000+00:00"
+    },
+    {
+      "player": "Caleb Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "excerpt": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/sam-williams-among-the-cowboys-cuts-to-53",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T23:20:12.163985+00:00"
+    },
+    {
+      "player": "Javonte Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "excerpt": "Sam Williams among the Cowboys' cuts to 53 The Cowboys have only two tailbacks on their initial 53-player roster.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/sam-williams-among-the-cowboys-cuts-to-53",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T23:20:12.163966+00:00"
+    },
+    {
+      "player": "49ers",
+      "team": "49ers",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "49ers move Mykel Williams to reserve/PUP and Christian Kirk to IR during cut to 53-man roster Defensive end Mykel Willia",
+      "excerpt": "49ers move Mykel Williams to reserve/PUP and Christian Kirk to IR during cut to 53-man roster Defensive end Mykel Williams will not play in at least the first four games of the 49ers' season.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/49ers-move-mykel-williams-to-reserve-pup-and-christian-kirk-to-ir-during-cut-to-53-man-roster",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T23:20:12.163417+00:00"
+    },
     {
       "player": "Josh Jacobs",
       "team": "Unknown",
@@ -3141,6 +3206,8 @@
     "Buccaneers|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Dolphins|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Panthers|qb_scratch": "2026-08-30T20:52:42.322209+00:00",
-    "Josh Jacobs|injury": "2026-08-30T20:52:42.322209+00:00"
+    "Josh Jacobs|injury": "2026-08-30T20:52:42.322209+00:00",
+    "49ers|qb_scratch": "2026-08-30T23:20:33.884173+00:00",
+    "Xavier Worthy|injury": "2026-08-30T23:20:33.884173+00:00"
   }
 }
