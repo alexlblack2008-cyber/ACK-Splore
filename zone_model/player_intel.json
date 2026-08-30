@@ -1,7 +1,98 @@
 {
-  "updated_at": "2026-08-30T11:42:59.294913+00:00",
-  "signal_count": 219,
+  "updated_at": "2026-08-30T16:30:20.969244+00:00",
+  "signal_count": 226,
   "signals": [
+    {
+      "player": "George Kittle",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Will George Kittle Play in Week 1? Fantasy Football Injury Update San Francisco 49ers tight end George Kittle put togeth",
+      "excerpt": "Will George Kittle Play in Week 1? Fantasy Football Injury Update San Francisco 49ers tight end George Kittle put together another strong fantasy football campaign in 2025, establishing himself as one of the league's top tight ends once again. Despite missing seven games throughout the year, he stil",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/will-george-kittle-play-in-week-1-fantasy-football-injury-update-2026/1919606",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:30:02.815024+00:00"
+    },
+    {
+      "player": "Jackson Chourio",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "drama",
+      "headline": "The Opener: Crow-Armstrong, Tigers, Yankees, Red Sox Brewers left fielder Jackson Chourio reached 20 home runs for the t",
+      "excerpt": "The Opener: Crow-Armstrong, Tigers, Yankees, Red Sox Brewers left fielder Jackson Chourio reached 20 home runs for the third consecutive season in yesterday&#8217;s 5-3 win over the Rangers. Facing Cal Quantrill in the bottom of the first, Chourio took an 89 mph cutter out to right center field for ",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/08/the-opener-crow-armstrong-tigers-yankees-red-sox.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:30:00.217456+00:00"
+    },
+    {
+      "player": "Jahmyr Gibbs",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "Dan Campbell \"comfortable\" with Jacob Saylors as Lions' No. 2 running back The Lions came into the summer with a plan fo",
+      "excerpt": "Dan Campbell \"comfortable\" with Jacob Saylors as Lions' No. 2 running back The Lions came into the summer with a plan for Isiah Pacheco to be their No. 2 running back behind Jahmyr Gibbs, but Pacheco has dealt with multiple injuries this month and that may lead them in a different direction.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/dan-campbell-comfortable-with-jacob-saylors-as-lions-no-2-running-back",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:29:58.821841+00:00"
+    },
+    {
+      "player": "Dolphins",
+      "team": "Dolphins",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Dolphins waive QB Cam Miller The Dolphins traded Quinn Ewers to the Jaguars on Saturday and they've parted ways with ano",
+      "excerpt": "Dolphins waive QB Cam Miller The Dolphins traded Quinn Ewers to the Jaguars on Saturday and they've parted ways with another backup quarterback on Sunday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/dolphins-waive-qb-cam-miller",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:29:58.821459+00:00"
+    },
+    {
+      "player": "Buccaneers",
+      "team": "Buccaneers",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Buccaneers to release Jake Browning; Jalon Daniels set to be No. 2 QB The Buccaneers gave undrafted rookie Jalon Daniels",
+      "excerpt": "Buccaneers to release Jake Browning; Jalon Daniels set to be No. 2 QB The Buccaneers gave undrafted rookie Jalon Daniels a shot to win the backup quarterback job and he took full advantage of it.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/buccaneers-to-release-jake-browning-jalon-daniels-set-to-be-no-2-qb",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:29:58.821294+00:00"
+    },
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "The new suspension formula has a few more wrinkles to keep in mind The NFL and NFL Players Association announced this we",
+      "excerpt": "The new suspension formula has a few more wrinkles to keep in mind The NFL and NFL Players Association announced this week, out of the blue, a new procedure for imposing automatic suspensions on players who commit three violations of one of five specific safety rules: hip-drop tackles, horse-collar ",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/the-new-suspension-formula-has-a-few-more-wrinkles-to-keep-in-mind",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:29:58.821061+00:00"
+    },
+    {
+      "player": "Bills",
+      "team": "Bills",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Bills cut third-string QB Shane Buechele The Bills will not be keeping three quarterbacks on the 53-player roster.",
+      "excerpt": "Bills cut third-string QB Shane Buechele The Bills will not be keeping three quarterbacks on the 53-player roster.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bills-cut-third-string-qb-shane-buechele",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-08-30T16:29:58.820614+00:00"
+    },
     {
       "player": "Tarik Skubal",
       "team": "Unknown",
@@ -2859,7 +2950,7 @@
     "Luis Robert|injury": "2026-08-29T23:11:23.900566+00:00",
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
-    "Unknown|suspension": "2026-08-28T15:12:52.988716+00:00",
+    "Unknown|suspension": "2026-08-30T16:30:20.969160+00:00",
     "Shohei Ohtani|injury": "2026-08-29T23:11:23.900566+00:00",
     "Shane Bieber|injury": "2026-08-30T04:57:19.770209+00:00",
     "Cal Raleigh|injury": "2026-08-30T04:57:19.770209+00:00",
@@ -2889,6 +2980,9 @@
     "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00",
     "Chris Olave|injury": "2026-08-29T20:48:13.495878+00:00",
     "Giants|suspension": "2026-08-29T23:11:23.900566+00:00",
-    "Unknown|qb_scratch": "2026-08-30T04:57:19.770209+00:00"
+    "Unknown|qb_scratch": "2026-08-30T04:57:19.770209+00:00",
+    "Bills|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
+    "Buccaneers|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
+    "Dolphins|qb_scratch": "2026-08-30T16:30:20.969160+00:00"
   }
 }
