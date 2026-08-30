@@ -472,10 +472,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 3,
+    "pnl": -100.0,
+    "settled_at": "2026-08-30T19:41:09.737620"
   },
   {
     "bet_date": "2026-08-29",
@@ -490,10 +490,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.1167,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 8,
+    "pnl": 90.91,
+    "settled_at": "2026-08-30T19:41:09.737645"
   },
   {
     "bet_date": "2026-08-29",
@@ -508,10 +508,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 6,
+    "pnl": -100.0,
+    "settled_at": "2026-08-30T19:41:09.737759"
   },
   {
     "bet_date": "2026-08-29",
@@ -526,10 +526,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 8,
+    "pnl": 90.91,
+    "settled_at": "2026-08-30T19:41:09.737745"
   },
   {
     "bet_date": "2026-08-29",
@@ -544,10 +544,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 13,
+    "pnl": 90.91,
+    "settled_at": "2026-08-30T19:41:09.737723"
   },
   {
     "bet_date": "2026-08-29",
@@ -562,10 +562,10 @@
     "confidence": 0.36,
     "kelly_fraction": 0.0435,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 11,
+    "pnl": 90.91,
+    "settled_at": "2026-08-30T19:41:09.737713"
   },
   {
     "bet_date": "2026-08-29",
@@ -580,10 +580,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 6,
+    "pnl": -100.0,
+    "settled_at": "2026-08-30T19:41:09.737565"
   },
   {
     "bet_date": "2026-08-29",
@@ -598,10 +598,10 @@
     "confidence": 0.374,
     "kelly_fraction": 0.042,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 13,
+    "pnl": 90.91,
+    "settled_at": "2026-08-30T19:41:09.737728"
   },
   {
     "bet_date": "2026-08-29",
@@ -615,6 +615,24 @@
     "edge_runs": 1.63,
     "confidence": 0.383,
     "kelly_fraction": 0.046,
+    "stake": 100.0,
+    "outcome": "push",
+    "actual_runs": 8,
+    "pnl": 0,
+    "settled_at": "2026-08-30T19:41:09.737699"
+  },
+  {
+    "bet_date": "2026-08-30",
+    "game_pk": 823987,
+    "home_team": "Los Angeles Angels",
+    "away_team": "Philadelphia Phillies",
+    "umpire": "Dan Bellino",
+    "recommendation": "OVER",
+    "market_total": 7.5,
+    "fair_total": 9.15,
+    "edge_runs": 1.65,
+    "confidence": 0.622,
+    "kelly_fraction": 0.068,
     "stake": 100.0,
     "outcome": "pending",
     "actual_runs": null,
