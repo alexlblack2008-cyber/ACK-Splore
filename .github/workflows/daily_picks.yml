@@ -2,8 +2,8 @@ name: Zone Model — Daily Picks
 
 on:
   schedule:
-    # Noon ET = 17:00 UTC  (single daily run — umpires posted by this time)
-    - cron: '0 17 * * *'
+    # 11:45 AM ET = 16:45 UTC  (ahead of noon runner congestion)
+    - cron: '45 16 * * *'
   workflow_dispatch:  # allows manual trigger from GitHub Actions tab
 
 jobs:
