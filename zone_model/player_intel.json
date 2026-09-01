@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-09-01T08:30:51.592585+00:00",
-  "signal_count": 286,
+  "updated_at": "2026-09-01T14:04:38.064041+00:00",
+  "signal_count": 292,
   "signals": [
+    {
+      "player": "Tarik Skubal",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Tarik Skubal emotional in return to Detroit with Dodgers, faces mixed reaction from Tigers fans There were scattered boo",
+      "excerpt": "Tarik Skubal emotional in return to Detroit with Dodgers, faces mixed reaction from Tigers fans There were scattered boos for Skubal before he worked six excellent innings",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/tarik-skubal-detroit-return-tigers-dodgers/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-01T14:04:20.319080+00:00"
+    },
+    {
+      "player": "Freddy Peralta",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Mets vs. Rays MLB picks: Freddy Peralta in potentially good karma spot Tuesday against team that traded him Rays pitcher",
+      "excerpt": "Mets vs. Rays MLB picks: Freddy Peralta in potentially good karma spot Tuesday against team that traded him Rays pitcher Freddy Peralta faces a Mets team tonight that traded him a month ago",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/betting/news/mets-vs-rays-mlb-picks-freddy-peralta-in-potentially-good-karma-spot-tuesday-against-team-that-traded-him/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-01T14:04:20.317598+00:00"
+    },
+    {
+      "player": "Yordan Alvarez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "September storylines in MLB: Playoff races, Yordan Alvarez&#039;s Triple Crown pursuit, hot seats and more The final mon",
+      "excerpt": "September storylines in MLB: Playoff races, Yordan Alvarez&#039;s Triple Crown pursuit, hot seats and more The final month of the 2026 regular season is here and it&#039;s chock full of narratives",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/mlb-september-storylines-playoff-races-yordan-alvarez-triple-crown-mvp-ohtani-crow-armstrong-misiorowski/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-01T14:04:20.317397+00:00"
+    },
+    {
+      "player": "Julio Rodriguez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Running Back Fantasy Football Waiver Wire Pickups for Week 1 - Chris Rodriguez Jr., Mike Washington Jr., Jonah Coleman, ",
+      "excerpt": "Running Back Fantasy Football Waiver Wire Pickups for Week 1 - Chris Rodriguez Jr., Mike Washington Jr., Jonah Coleman, MarShawn Lloyd As you are reading this, you have either finished assembling rosters or are about to finalize the process of constructing teams during the remaining days of draft se",
+      "source": "RotoBaller MLB",
+      "url": "https://www.rotoballer.com/running-back-waiver-wire-pickups-fantasy-football-week-1-2026/1912372",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T14:04:19.407058+00:00"
+    },
+    {
+      "player": "Keon Coleman",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Running Back Fantasy Football Waiver Wire Pickups for Week 1 - Chris Rodriguez Jr., Mike Washington Jr., Jonah Coleman, ",
+      "excerpt": "Running Back Fantasy Football Waiver Wire Pickups for Week 1 - Chris Rodriguez Jr., Mike Washington Jr., Jonah Coleman, MarShawn Lloyd As you are reading this, you have either finished assembling rosters or are about to finalize the process of constructing teams during the remaining days of draft se",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/running-back-waiver-wire-pickups-fantasy-football-week-1-2026/1912372",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T14:04:18.357418+00:00"
+    },
+    {
+      "player": "Joe Burrow",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Joe Burrow on Super Bowl goals: \"If you don\u2019t talk about it, I don\u2019t know how you can do it.\u201d Not many teams that have m",
+      "excerpt": "Joe Burrow on Super Bowl goals: \"If you don\u2019t talk about it, I don\u2019t know how you can do it.\u201d Not many teams that have missed the playoffs for three straight seasons are viewed as a team of destiny.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/joe-burrow-on-super-bowl-goals-if-you-dont-talk-about-it-i-dont-know-how-you-can-do-it",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T14:04:13.800880+00:00"
+    },
     {
       "player": "LeBron James",
       "team": "Unknown",
@@ -3753,7 +3831,7 @@
     "Alvin Kamara|injury": "2026-08-29T01:39:25.740034+00:00",
     "Sam LaPorta|injury": "2026-08-29T01:39:25.740034+00:00",
     "Lamar Jackson|usage_up": "2026-08-31T05:02:16.921009+00:00",
-    "Tarik Skubal|usage_up": "2026-08-31T13:20:50.873258+00:00",
+    "Tarik Skubal|usage_up": "2026-09-01T14:04:38.063952+00:00",
     "Ravens|suspension": "2026-08-29T16:35:12.080679+00:00",
     "Juan Soto|injury": "2026-08-29T16:35:12.080679+00:00",
     "Lane Thomas|injury": "2026-08-29T16:35:12.080679+00:00",
@@ -3776,6 +3854,9 @@
     "William Contreras|injury": "2026-08-31T20:44:46.257304+00:00",
     "Jazz Chisholm|injury": "2026-08-31T20:44:46.257304+00:00",
     "Red Sox|pitcher_scratch": "2026-09-01T00:30:59.876959+00:00",
-    "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00"
+    "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00",
+    "Joe Burrow|injury": "2026-09-01T14:04:38.063952+00:00",
+    "Yordan Alvarez|usage_up": "2026-09-01T14:04:38.063952+00:00",
+    "Freddy Peralta|usage_up": "2026-09-01T14:04:38.063952+00:00"
   }
 }
