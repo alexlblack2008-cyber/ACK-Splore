@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-09-01T14:04:38.064041+00:00",
-  "signal_count": 292,
+  "updated_at": "2026-09-01T18:18:39.134331+00:00",
+  "signal_count": 294,
   "signals": [
+    {
+      "player": "Jake Ferguson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Week 1 Waiver Wire Pickups - Brenton Strange, Chig Okonkwo, Terrance Ferguson Fantasy Football Outlooks As fantasy footb",
+      "excerpt": "Week 1 Waiver Wire Pickups - Brenton Strange, Chig Okonkwo, Terrance Ferguson Fantasy Football Outlooks As fantasy football drafts wind down and Week 1 approaches, many fantasy football managers may have already begun checking the waiver wire for options to improve their teams. Whether a draft didn'",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/week-1-waiver-wire-pickups-brenton-strange-chig-okonkwo-terrance-ferguson-fantasy-football-outlooks/1920974",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T18:18:18.199009+00:00"
+    },
+    {
+      "player": "Julio Rodriguez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Pirates Select Christian Bethancourt The Pirates have selected the contract of catcher Christian Bethancourt, per a team",
+      "excerpt": "Pirates Select Christian Bethancourt The Pirates have selected the contract of catcher Christian Bethancourt, per a team announcement. They also recalled southpaw Brandon Eisert. Catcher Endy Rodriguez, who recently underwent hip surgery, heads to the 60-day IL to open a 40-man roster spot for Betha",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/pirates-select-christian-bethancourt.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T18:18:15.199867+00:00"
+    },
     {
       "player": "Tarik Skubal",
       "team": "Unknown",
@@ -3857,6 +3883,7 @@
     "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00",
     "Joe Burrow|injury": "2026-09-01T14:04:38.063952+00:00",
     "Yordan Alvarez|usage_up": "2026-09-01T14:04:38.063952+00:00",
-    "Freddy Peralta|usage_up": "2026-09-01T14:04:38.063952+00:00"
+    "Freddy Peralta|usage_up": "2026-09-01T14:04:38.063952+00:00",
+    "Julio Rodriguez|injury": "2026-09-01T18:18:39.134272+00:00"
   }
 }
