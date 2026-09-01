@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-08-31T20:44:46.257396+00:00",
-  "signal_count": 274,
+  "updated_at": "2026-09-01T00:30:59.877022+00:00",
+  "signal_count": 277,
   "signals": [
+    {
+      "player": "Josh Jacobs",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kaleb Johnson trade grades: Packers gain Josh Jacobs insurance by acquiring former Steelers RB Johnson was selected by P",
+      "excerpt": "Kaleb Johnson trade grades: Packers gain Josh Jacobs insurance by acquiring former Steelers RB Johnson was selected by Pittsburgh in the third round of the 2025 NFL Draft out of Iowa",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/kaleb-johnson-traded-to-packers-josh-jacobs-insurance/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T00:30:42.660353+00:00"
+    },
+    {
+      "player": "CJ Abrams",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Abrams scratched Monday vs. Marlins with back tightness ",
+      "excerpt": "Abrams scratched Monday vs. Marlins with back tightness ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/cj-abrams-scratched-from-monday-s-game-with-back-tightness",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-09-01T00:30:38.937056+00:00"
+    },
+    {
+      "player": "Red Sox",
+      "team": "Red Sox",
+      "sport": "mlb",
+      "signal_type": "pitcher_scratch",
+      "headline": "Red Sox give Gray extra rest to recharge for stretch run ",
+      "excerpt": "Red Sox give Gray extra rest to recharge for stretch run ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/sonny-gray-extra-rest-red-sox-rotation",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-09-01T00:30:38.936920+00:00"
+    },
     {
       "player": "Jazz Chisholm",
       "team": "Unknown",
@@ -3609,7 +3648,7 @@
     "Buccaneers|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Dolphins|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Panthers|qb_scratch": "2026-08-30T20:52:42.322209+00:00",
-    "Josh Jacobs|injury": "2026-08-30T20:52:42.322209+00:00",
+    "Josh Jacobs|injury": "2026-09-01T00:30:59.876959+00:00",
     "49ers|qb_scratch": "2026-08-30T23:20:33.884173+00:00",
     "Xavier Worthy|injury": "2026-08-30T23:20:33.884173+00:00",
     "Pete Alonso|injury": "2026-08-31T05:02:16.921009+00:00",
@@ -3618,6 +3657,8 @@
     "Eagles|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "Jets|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "William Contreras|injury": "2026-08-31T20:44:46.257304+00:00",
-    "Jazz Chisholm|injury": "2026-08-31T20:44:46.257304+00:00"
+    "Jazz Chisholm|injury": "2026-08-31T20:44:46.257304+00:00",
+    "Red Sox|pitcher_scratch": "2026-09-01T00:30:59.876959+00:00",
+    "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00"
   }
 }
