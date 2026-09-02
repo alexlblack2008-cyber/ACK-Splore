@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-02T20:53:50.093013+00:00",
-  "signal_count": 328,
+  "updated_at": "2026-09-02T23:13:05.824704+00:00",
+  "signal_count": 333,
   "signals": [
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "suspension",
+      "headline": "Why wasn&#039;t Kawhi Leonard&#039;s contract wasn&#039;t voided? The differences vs. NBA&#039;s last major cap circumve",
+      "excerpt": "Why wasn&#039;t Kawhi Leonard&#039;s contract wasn&#039;t voided? The differences vs. NBA&#039;s last major cap circumvention case While the Clippers got hammered for cap circumvention, Kawhi Leonard avoided a suspension or voided contract from the NBA",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/kawhi-leonard-contract-voided-differences-nba-joe-smith/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T23:12:48.087638+00:00"
+    },
+    {
+      "player": "Jazz Chisholm",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Red Sox broadcaster apologizes for comments about Yankees&#039; Jazz Chisholm Jr. during blowout: &#039;Crossed a line&#",
+      "excerpt": "Red Sox broadcaster apologizes for comments about Yankees&#039; Jazz Chisholm Jr. during blowout: &#039;Crossed a line&#039; Radio announcer Will Flemming took offense when Chisholm stole two bases with the Yankees up 7-1 in the eighth inning",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/red-sox-broadcaster-will-flemming-yankees-jazz-chisholm-jr-austin-wells/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T23:12:47.755551+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_down",
+      "headline": "Orioles claim Luis Robert Jr. off waivers from Mets: After selling at deadline, Baltimore scrambling for help The Oriole",
+      "excerpt": "Orioles claim Luis Robert Jr. off waivers from Mets: After selling at deadline, Baltimore scrambling for help The Orioles, despite a sub-.500 record, are just one game behind the Guardians for a wild-card berth",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/orioles-luis-robert-jr-mets-waivers/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T23:12:47.755451+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Malik Nabers injury status: Giants WR shares honest assessment of progress, Week 1 availability Nabers&#039; availabilit",
+      "excerpt": "Malik Nabers injury status: Giants WR shares honest assessment of progress, Week 1 availability Nabers&#039; availability for Week 1 is still up in the air",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/malik-nabers-injury-status-giants-wr-shares-honest-assessment-of-progress-week-1-availability/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T23:12:47.417445+00:00"
+    },
+    {
+      "player": "Lamar Jackson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Eric DeCosta \"optimistic\" about a deal for Lamar Jackson before March The Ravens quarterback has two seasons left on his",
+      "excerpt": "Eric DeCosta \"optimistic\" about a deal for Lamar Jackson before March The Ravens quarterback has two seasons left on his deal, with a cap hit of $84.340 million for 2027.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/eric-decosta-optimistic-about-a-deal-for-lamar-jackson-before-march",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T23:12:42.376674+00:00"
+    },
     {
       "player": "Vikings",
       "team": "Vikings",
@@ -4276,7 +4341,7 @@
     "Luis Robert|injury": "2026-08-31T20:44:46.257304+00:00",
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
-    "Unknown|suspension": "2026-09-02T04:02:39.957206+00:00",
+    "Unknown|suspension": "2026-09-02T23:13:05.824620+00:00",
     "Shohei Ohtani|injury": "2026-09-02T11:03:02.789766+00:00",
     "Shane Bieber|injury": "2026-08-31T05:02:16.921009+00:00",
     "Cal Raleigh|injury": "2026-09-02T16:24:05.515160+00:00",
@@ -4320,7 +4385,7 @@
     "Eagles|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "Jets|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "William Contreras|injury": "2026-08-31T20:44:46.257304+00:00",
-    "Jazz Chisholm|injury": "2026-09-01T23:13:00.966858+00:00",
+    "Jazz Chisholm|injury": "2026-09-02T23:13:05.824620+00:00",
     "Red Sox|pitcher_scratch": "2026-09-01T00:30:59.876959+00:00",
     "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00",
     "Joe Burrow|injury": "2026-09-01T14:04:38.063952+00:00",
@@ -4332,9 +4397,10 @@
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
     "Adley Rutschman|injury": "2026-09-01T23:13:00.966858+00:00",
     "Lourdes Gurriel Jr|activation": "2026-09-01T23:13:00.966858+00:00",
-    "Malik Nabers|injury": "2026-09-01T23:13:00.966858+00:00",
+    "Malik Nabers|injury": "2026-09-02T23:13:05.824620+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-02T16:24:05.515160+00:00",
-    "A.J. Brown|injury": "2026-09-02T20:53:50.092952+00:00"
+    "A.J. Brown|injury": "2026-09-02T20:53:50.092952+00:00",
+    "Lamar Jackson|injury": "2026-09-02T23:13:05.824620+00:00"
   }
 }
