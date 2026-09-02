@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-02T16:24:05.515260+00:00",
-  "signal_count": 325,
+  "updated_at": "2026-09-02T20:53:50.093013+00:00",
+  "signal_count": 328,
   "signals": [
+    {
+      "player": "Vikings",
+      "team": "Vikings",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Vikings GM Nolan Teasley: J.J. McCarthy is practicing, expect him on Week 1 roster Vikings backup quarterback J.J.",
+      "excerpt": "Vikings GM Nolan Teasley: J.J. McCarthy is practicing, expect him on Week 1 roster Vikings backup quarterback J.J.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/vikings-gm-nolan-teasley-j-j-mccarthy-is-practicing-expect-him-on-week-1-roster",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T20:53:25.614360+00:00"
+    },
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Jalen Hurts acknowledges that \"clearly\" he and A.J. Brown grew apart Jalen Hurts acknowledged the obvious: He and wide r",
+      "excerpt": "Jalen Hurts acknowledges that \"clearly\" he and A.J. Brown grew apart Jalen Hurts acknowledged the obvious: He and wide receiver A.J.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jalen-hurts-acknowledges-that-clearly-he-and-a-j-brown-grew-apart",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T20:53:25.613375+00:00"
+    },
+    {
+      "player": "A.J. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Jalen Hurts acknowledges that \"clearly\" he and A.J. Brown grew apart Jalen Hurts acknowledged the obvious: He and wide r",
+      "excerpt": "Jalen Hurts acknowledges that \"clearly\" he and A.J. Brown grew apart Jalen Hurts acknowledged the obvious: He and wide receiver A.J.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jalen-hurts-acknowledges-that-clearly-he-and-a-j-brown-grew-apart",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-02T20:53:25.613339+00:00"
+    },
     {
       "player": "Tarik Skubal",
       "team": "Unknown",
@@ -4251,7 +4290,7 @@
     "Chargers|qb_scratch": "2026-08-30T20:52:42.322209+00:00",
     "Steelers|qb_scratch": "2026-08-28T15:12:52.988716+00:00",
     "Chris Sale|injury": "2026-09-02T11:03:02.789766+00:00",
-    "Vikings|qb_scratch": "2026-08-29T01:39:25.740034+00:00",
+    "Vikings|qb_scratch": "2026-09-02T20:53:50.092952+00:00",
     "Nick Boutte|injury": "2026-08-31T05:02:16.921009+00:00",
     "Max Fried|injury": "2026-08-30T04:57:19.770209+00:00",
     "Jackson Chourio|injury": "2026-09-02T04:02:39.957206+00:00",
@@ -4277,7 +4316,7 @@
     "Xavier Worthy|injury": "2026-08-30T23:20:33.884173+00:00",
     "Pete Alonso|injury": "2026-08-31T05:02:16.921009+00:00",
     "Lamar Jackson|positive": "2026-08-31T13:20:50.873258+00:00",
-    "Jalen Hurts|injury": "2026-08-31T13:20:50.873258+00:00",
+    "Jalen Hurts|injury": "2026-09-02T20:53:50.092952+00:00",
     "Eagles|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "Jets|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "William Contreras|injury": "2026-08-31T20:44:46.257304+00:00",
@@ -4295,6 +4334,7 @@
     "Lourdes Gurriel Jr|activation": "2026-09-01T23:13:00.966858+00:00",
     "Malik Nabers|injury": "2026-09-01T23:13:00.966858+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
-    "Mike Trout|injury": "2026-09-02T16:24:05.515160+00:00"
+    "Mike Trout|injury": "2026-09-02T16:24:05.515160+00:00",
+    "A.J. Brown|injury": "2026-09-02T20:53:50.092952+00:00"
   }
 }
