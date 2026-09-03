@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-02T23:13:05.824704+00:00",
-  "signal_count": 333,
+  "updated_at": "2026-09-03T04:01:05.504331+00:00",
+  "signal_count": 336,
   "signals": [
+    {
+      "player": "49ers",
+      "team": "49ers",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "Jed York, 49ers' brass are making plans in advance of potential suspension With 49ers owner Jed York facing a potential ",
+      "excerpt": "Jed York, 49ers' brass are making plans in advance of potential suspension With 49ers owner Jed York facing a potential suspension as a result of his recent no-contest plea on charges arising from a recent prostitution arrest in Ohio, the powers-that-be are making plans now in the event York isn't a",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jed-york-49ers-brass-are-making-plans-in-advance-of-potential-suspension",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-03T04:00:44.134204+00:00"
+    },
+    {
+      "player": "Russell Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "positive",
+      "headline": "Report: Cardinals have \"movement\" in talks with WR Michael Wilson The Cardinals and the representation for wide receiver",
+      "excerpt": "Report: Cardinals have \"movement\" in talks with WR Michael Wilson The Cardinals and the representation for wide receiver Michael Wilson have negotiated a contract extension for awhile.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/report-cardinals-have-movement-in-talks-with-wr-michael-wilson",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-09-03T04:00:44.134109+00:00"
+    },
+    {
+      "player": "Garrett Wilson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "positive",
+      "headline": "Report: Cardinals have \"movement\" in talks with WR Michael Wilson The Cardinals and the representation for wide receiver",
+      "excerpt": "Report: Cardinals have \"movement\" in talks with WR Michael Wilson The Cardinals and the representation for wide receiver Michael Wilson have negotiated a contract extension for awhile.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/report-cardinals-have-movement-in-talks-with-wr-michael-wilson",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-09-03T04:00:44.134063+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -4401,6 +4440,9 @@
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-02T16:24:05.515160+00:00",
     "A.J. Brown|injury": "2026-09-02T20:53:50.092952+00:00",
-    "Lamar Jackson|injury": "2026-09-02T23:13:05.824620+00:00"
+    "Lamar Jackson|injury": "2026-09-02T23:13:05.824620+00:00",
+    "Garrett Wilson|positive": "2026-09-03T04:01:05.504258+00:00",
+    "Russell Wilson|positive": "2026-09-03T04:01:05.504258+00:00",
+    "49ers|suspension": "2026-09-03T04:01:05.504258+00:00"
   }
 }
