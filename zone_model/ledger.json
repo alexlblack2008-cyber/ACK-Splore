@@ -778,9 +778,9 @@
     "confidence": 0.462,
     "kelly_fraction": 0.0405,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 14,
+    "pnl": 90.91,
+    "settled_at": "2026-09-03T19:41:29.927655"
   }
 ]
