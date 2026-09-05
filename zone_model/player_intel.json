@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-09-05T14:58:13.844550+00:00",
-  "signal_count": 420,
+  "updated_at": "2026-09-05T17:15:51.695908+00:00",
+  "signal_count": 421,
   "signals": [
+    {
+      "player": "Cardinals",
+      "team": "Cardinals",
+      "sport": "mlb",
+      "signal_type": "suspension",
+      "headline": "Cardinals&#039; Oliver Marmol ejected by &#039;power-hungry&#039; umpire Doug Eddings, who told rookie to straighten hat",
+      "excerpt": "Cardinals&#039; Oliver Marmol ejected by &#039;power-hungry&#039; umpire Doug Eddings, who told rookie to straighten hat The Cardinals manager came to the defense of reliever Hancel Rincon, who was making his MLB debut",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/doug-eddings-umpire-cardinals-oliver-marmol-ejected-hancel-rincon/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T17:15:33.774264+00:00"
+    },
     {
       "player": "Jalen Hurts",
       "team": "Unknown",
@@ -5550,6 +5563,7 @@
     "Astros|suspension": "2026-09-05T04:00:08.723376+00:00",
     "Padres|suspension": "2026-09-05T04:00:08.723376+00:00",
     "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00",
-    "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00"
+    "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00",
+    "Cardinals|suspension": "2026-09-05T17:15:51.695853+00:00"
   }
 }
