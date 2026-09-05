@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-05T10:23:40.217546+00:00",
-  "signal_count": 415,
+  "updated_at": "2026-09-05T14:58:13.844550+00:00",
+  "signal_count": 420,
   "signals": [
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Da",
+      "excerpt": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Daniels, Joe Burrow, Tyler Shough, Brock Purdy, Drake Maye Who Should I Draft? Use this tool to assist you with some common 2026 fantasy football draft decisions regarding players li",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/who-should-i-draft-for-fantasy-football-outlooks-for-trevor-lawrence-jalen-hurts-jaxson-dart-kyler-murray-jordan-love-jayden-daniels-joe-burrow-tyler-shough-brock-purdy-drake-maye/1923606",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T14:57:54.736192+00:00"
+    },
+    {
+      "player": "Kyler Murray",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Da",
+      "excerpt": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Daniels, Joe Burrow, Tyler Shough, Brock Purdy, Drake Maye Who Should I Draft? Use this tool to assist you with some common 2026 fantasy football draft decisions regarding players li",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/who-should-i-draft-for-fantasy-football-outlooks-for-trevor-lawrence-jalen-hurts-jaxson-dart-kyler-murray-jordan-love-jayden-daniels-joe-burrow-tyler-shough-brock-purdy-drake-maye/1923606",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T14:57:54.736175+00:00"
+    },
+    {
+      "player": "Trevor Lawrence",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Da",
+      "excerpt": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Daniels, Joe Burrow, Tyler Shough, Brock Purdy, Drake Maye Who Should I Draft? Use this tool to assist you with some common 2026 fantasy football draft decisions regarding players li",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/who-should-i-draft-for-fantasy-football-outlooks-for-trevor-lawrence-jalen-hurts-jaxson-dart-kyler-murray-jordan-love-jayden-daniels-joe-burrow-tyler-shough-brock-purdy-drake-maye/1923606",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T14:57:54.736126+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Da",
+      "excerpt": "Who Should I Draft for Fantasy Football? Trevor Lawrence, Jalen Hurts, Jaxson Dart, Kyler Murray, Jordan Love, Jayden Daniels, Joe Burrow, Tyler Shough, Brock Purdy, Drake Maye Who Should I Draft? Use this tool to assist you with some common 2026 fantasy football draft decisions regarding players li",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/who-should-i-draft-for-fantasy-football-outlooks-for-trevor-lawrence-jalen-hurts-jaxson-dart-kyler-murray-jordan-love-jayden-daniels-joe-burrow-tyler-shough-brock-purdy-drake-maye/1923606",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T14:57:54.736064+00:00"
+    },
+    {
+      "player": "Jeff McNeil",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "The Opener: Guardians Walk-Offs, White Sox Sluggers, Campusano For the first time since 2002, the A&#8217;s hit four hom",
+      "excerpt": "The Opener: Guardians Walk-Offs, White Sox Sluggers, Campusano For the first time since 2002, the A&#8217;s hit four home runs in one inning (h/t Martin Gallegos of MLB.com). Max Muncy, Alika Williams, Jeff McNeil, and Zack Gelof all went deep in the third inning on Friday. It wasn&#8217;t a Sacrame",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/the-opener-guardians-walk-offs-white-sox-sluggers-campusano.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-05T14:57:52.435643+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -5484,6 +5549,7 @@
     "Paul George|injury": "2026-09-05T04:00:08.723376+00:00",
     "Astros|suspension": "2026-09-05T04:00:08.723376+00:00",
     "Padres|suspension": "2026-09-05T04:00:08.723376+00:00",
-    "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00"
+    "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00",
+    "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00"
   }
 }
