@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-09-05T17:15:51.695908+00:00",
-  "signal_count": 421,
+  "updated_at": "2026-09-05T20:12:29.175650+00:00",
+  "signal_count": 427,
   "signals": [
+    {
+      "player": "Lane Thomas",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in",
+      "excerpt": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in 12-Team PPR leagues POSITIONAL VALUE: WR3/FLEX ANALYSIS: Are NFL fans being too harsh on Marvin Harrison Jr.? The Ohio State product was picked fourth overall in 2024 and had an o",
+      "source": "RotoBaller MLB",
+      "url": "https://www.rotoballer.com/marvin-harrison-jr-start-em-sit-em-fantasy-football-picks-for-week-1-2026/1924039",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T20:12:10.610478+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in",
+      "excerpt": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in 12-Team PPR leagues POSITIONAL VALUE: WR3/FLEX ANALYSIS: Are NFL fans being too harsh on Marvin Harrison Jr.? The Ohio State product was picked fourth overall in 2024 and had an o",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/marvin-harrison-jr-start-em-sit-em-fantasy-football-picks-for-week-1-2026/1924039",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T20:12:09.755405+00:00"
+    },
+    {
+      "player": "Ladd McConkey",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in",
+      "excerpt": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in 12-Team PPR leagues POSITIONAL VALUE: WR3/FLEX ANALYSIS: Are NFL fans being too harsh on Marvin Harrison Jr.? The Ohio State product was picked fourth overall in 2024 and had an o",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/marvin-harrison-jr-start-em-sit-em-fantasy-football-picks-for-week-1-2026/1924039",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T20:12:09.755365+00:00"
+    },
+    {
+      "player": "Brian Thomas Jr",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in",
+      "excerpt": "Marvin Harrison Jr. - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as WR3 in 12-Team PPR leagues POSITIONAL VALUE: WR3/FLEX ANALYSIS: Are NFL fans being too harsh on Marvin Harrison Jr.? The Ohio State product was picked fourth overall in 2024 and had an o",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/marvin-harrison-jr-start-em-sit-em-fantasy-football-picks-for-week-1-2026/1924039",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T20:12:09.755350+00:00"
+    },
+    {
+      "player": "Najee Harris",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "Jaylen Warren - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as RB2 in PPR l",
+      "excerpt": "Jaylen Warren - Start &#039;Em, Sit &#039;Em Fantasy Football Picks for Week 1 (2026) BALLER MOVE: Start as RB2 in PPR leagues POSITIONAL VALUE: RB2 ANALYSIS: After three seasons as the Steelers' RB2 behind Najee Harris and making zero starts, Jaylen Warren finally took the starting job in 2025 and ",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/jaylen-warren-start-em-sit-em-fantasy-football-picks-for-week-1-2026/1924031",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T20:12:09.755231+00:00"
+    },
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "pitcher_scratch",
+      "headline": "Latest On Nick Pivetta Nick Pivetta&#8217;s minor league rehab assignment was halted after just one outing on August 4, ",
+      "excerpt": "Latest On Nick Pivetta Nick Pivetta&#8217;s minor league rehab assignment was halted after just one outing on August 4, as Pivetta left the game due to elbow discomfort.\u00a0 He returned to pitch three innings with A-level Lake Elsinore on August 25, and then 4 1/3 shutout innings with Triple-A El Paso ",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/latest-on-nick-pivetta.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-05T20:12:07.564156+00:00"
+    },
     {
       "player": "Cardinals",
       "team": "Cardinals",
@@ -5564,6 +5642,7 @@
     "Padres|suspension": "2026-09-05T04:00:08.723376+00:00",
     "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00",
     "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00",
-    "Cardinals|suspension": "2026-09-05T17:15:51.695853+00:00"
+    "Cardinals|suspension": "2026-09-05T17:15:51.695853+00:00",
+    "Unknown|pitcher_scratch": "2026-09-05T20:12:29.175592+00:00"
   }
 }
