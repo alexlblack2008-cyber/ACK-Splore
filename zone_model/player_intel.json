@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-05T20:12:29.175650+00:00",
-  "signal_count": 427,
+  "updated_at": "2026-09-05T22:44:47.448938+00:00",
+  "signal_count": 432,
   "signals": [
+    {
+      "player": "Jaylen Brown",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "Celtics owner Bill Chisholm says &#039;best brains in basketball&#039; convinced him to trade Jaylen Brown Chisholm had ",
+      "excerpt": "Celtics owner Bill Chisholm says &#039;best brains in basketball&#039; convinced him to trade Jaylen Brown Chisholm had trepidation, but Brad Stevens and Boston&#039;s front office had &#039;conviction&#039; about trading Brown, he said",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/celtics-bill-chisholm-brad-stevens-jaylen-brown-trade-76ers/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T22:44:31.451730+00:00"
+    },
+    {
+      "player": "Kawhi Leonard",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more",
+      "excerpt": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more The Kawhi trade to the Raptors should go through, but the Clippers&#039; appeals process is much less clear",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/whats-next-kawhi-leonard-clippers-five-lingering-questions/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T22:44:31.450181+00:00"
+    },
+    {
+      "player": "Klay Thompson",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston wor",
+      "excerpt": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston worked out a below-max deal for Thompson to lock him into its long-term core",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/amen-thompson-contract-extension-houston-rockets/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T22:44:31.449861+00:00"
+    },
+    {
+      "player": "Shohei Ohtani",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Dodgers mulling IL stint for Shohei Ohtani as superstar deals with two nagging injuries Ohtani (0 for 4 with four strike",
+      "excerpt": "Dodgers mulling IL stint for Shohei Ohtani as superstar deals with two nagging injuries Ohtani (0 for 4 with four strikeouts on Wednesday) has not looked like himself recently, and the Dodgers could give him some time off",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/dodgers-il-stint-shohei-ohtani-two-nagging-injuries/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T22:44:31.049767+00:00"
+    },
+    {
+      "player": "Freddie Freeman",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Rockies Select Vimael Machin, Place Willi Castro On 10-Day Injured List 5:20PM: Machin&#8217;s contract selection has be",
+      "excerpt": "Rockies Select Vimael Machin, Place Willi Castro On 10-Day Injured List 5:20PM: Machin&#8217;s contract selection has been officially announced, and Castro was placed on the 10-day IL (retroactive to September 2) due to what the team termed as left heel inflammation.\u00a0 To create a 40-man roster spot,",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/rockies-to-select-vimael-machin-place-willi-castro-on-injured-list.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-05T22:44:27.398476+00:00"
+    },
     {
       "player": "Lane Thomas",
       "team": "Unknown",
@@ -5564,13 +5629,13 @@
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
     "Unknown|suspension": "2026-09-05T10:23:40.217479+00:00",
-    "Shohei Ohtani|injury": "2026-09-05T04:00:08.723376+00:00",
+    "Shohei Ohtani|injury": "2026-09-05T22:44:47.448842+00:00",
     "Shane Bieber|injury": "2026-08-31T05:02:16.921009+00:00",
     "Cal Raleigh|injury": "2026-09-04T22:56:57.134951+00:00",
     "Vladimir Guerrero Jr|injury": "2026-08-30T04:57:19.770209+00:00",
-    "Klay Thompson|injury": "2026-09-04T20:38:43.834891+00:00",
-    "Jaylen Brown|injury": "2026-09-04T20:38:43.834891+00:00",
-    "Kawhi Leonard|injury": "2026-09-05T04:00:08.723376+00:00",
+    "Klay Thompson|injury": "2026-09-05T22:44:47.448842+00:00",
+    "Jaylen Brown|injury": "2026-09-05T22:44:47.448842+00:00",
+    "Kawhi Leonard|injury": "2026-09-05T22:44:47.448842+00:00",
     "LeBron James|injury": "2026-09-03T16:14:28.781366+00:00",
     "Bradley Beal|injury": "2026-09-02T11:03:02.789766+00:00",
     "Dolphins|suspension": "2026-08-28T15:12:52.988716+00:00",
@@ -5643,6 +5708,7 @@
     "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00",
     "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00",
     "Cardinals|suspension": "2026-09-05T17:15:51.695853+00:00",
-    "Unknown|pitcher_scratch": "2026-09-05T20:12:29.175592+00:00"
+    "Unknown|pitcher_scratch": "2026-09-05T20:12:29.175592+00:00",
+    "Freddie Freeman|injury": "2026-09-05T22:44:47.448842+00:00"
   }
 }
