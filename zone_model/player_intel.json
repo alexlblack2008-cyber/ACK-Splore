@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-06T15:19:01.706389+00:00",
-  "signal_count": 454,
+  "updated_at": "2026-09-06T20:16:46.416305+00:00",
+  "signal_count": 457,
   "signals": [
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "pitcher_scratch",
+      "headline": "Latest On Nick Pivetta Nick Pivetta\u2019s minor league rehab assignment was halted after just one outing on August 4, as Piv",
+      "excerpt": "Latest On Nick Pivetta Nick Pivetta\u2019s minor league rehab assignment was halted after just one outing on August 4, as Pivetta left the game due to elbow discomfort.\u00a0 He returned to pitch three innings with A-level Lake Elsinore on August 25, and then 4 1/3 shutout innings with Triple-A El Paso on Aug",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/latest-on-nick-pivetta.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-06T20:16:25.063005+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Orioles Place Luis Robert Jr. On 10-Day IL Orioles outfielder Luis Robert Jr. is headed to the 10-day injured list with ",
+      "excerpt": "Orioles Place Luis Robert Jr. On 10-Day IL Orioles outfielder Luis Robert Jr. is headed to the 10-day injured list with left hamstring discomfort (retroactive to Sept. 5), the team announced. The O&#8217;s recalled right-hander Anthony Nunez from Triple-A Norfolk to take Robert&#8217;s roster spot. ",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/orioles-place-luis-robert-jr-on-10-day-il.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-06T20:16:25.062368+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "O's place OF Robert on IL with left hamstring discomfort ",
+      "excerpt": "O's place OF Robert on IL with left hamstring discomfort ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/luis-robert-jr-injured-list-left-hamstring",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-09-06T20:16:24.429222+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -5911,7 +5950,7 @@
     "Caleb Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Kyren Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Tarik Skubal|injury": "2026-08-28T15:12:52.988716+00:00",
-    "Luis Robert|injury": "2026-09-03T23:10:39.781596+00:00",
+    "Luis Robert|injury": "2026-09-06T20:16:46.416233+00:00",
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
     "Unknown|suspension": "2026-09-06T10:42:31.930677+00:00",
@@ -5994,7 +6033,7 @@
     "Blue Jays|pitcher_scratch": "2026-09-05T10:23:40.217479+00:00",
     "Jeff McNeil|usage_up": "2026-09-05T14:58:13.844457+00:00",
     "Cardinals|suspension": "2026-09-05T17:15:51.695853+00:00",
-    "Unknown|pitcher_scratch": "2026-09-05T20:12:29.175592+00:00",
+    "Unknown|pitcher_scratch": "2026-09-06T20:16:46.416233+00:00",
     "Freddie Freeman|injury": "2026-09-05T22:44:47.448842+00:00",
     "Zack Wheeler|usage_up": "2026-09-06T04:07:17.402410+00:00",
     "Dodgers|pitcher_scratch": "2026-09-06T04:07:17.402410+00:00"
