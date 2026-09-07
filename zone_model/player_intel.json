@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-09-06T22:50:26.309829+00:00",
-  "signal_count": 468,
+  "updated_at": "2026-09-07T04:06:19.736617+00:00",
+  "signal_count": 469,
   "signals": [
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "&quot;My Guys&quot; For 2026 Fantasy Football - Thunder Dan&#039;s Favorite Draft Picks No preseason is complete without",
+      "excerpt": "&quot;My Guys&quot; For 2026 Fantasy Football - Thunder Dan&#039;s Favorite Draft Picks No preseason is complete without going on the record with your favorite players for the upcoming season. Last year I had a few nice hits with Jaxon Smith-Njigba and Tyler Warren having big seasons, but I also whi",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/must-have-fantasy-football-values-sleeper-picks-my-guys-thunderdan/1898502",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-07T04:06:01.970030+00:00"
+    },
     {
       "player": "Jalen Hurts",
       "team": "Unknown",
