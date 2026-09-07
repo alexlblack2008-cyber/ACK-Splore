@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-07T12:11:02.979623+00:00",
-  "signal_count": 482,
+  "updated_at": "2026-09-07T19:04:35.352079+00:00",
+  "signal_count": 486,
   "signals": [
+    {
+      "player": "Ronald Acuna Jr",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "The Opener: Guardians Walk-Off, Dodgers Comeback, Pivetta Return, Braves outfielder Ronald Acuna Jr. belted a game-tying",
+      "excerpt": "The Opener: Guardians Walk-Off, Dodgers Comeback, Pivetta Return, Braves outfielder Ronald Acuna Jr. belted a game-tying home run in the eighth inning against the Phillies. As boos rained down in Philadelphia, Acuna emerged for a curtain call (video link via NBA Sports on X). &#8220;I love it when t",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/the-opener-guardians-walk-off-dodgers-comeback-pivetta-return.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-07T19:04:12.629569+00:00"
+    },
+    {
+      "player": "Tua Tagovailoa",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "Michael Penix will be inactive in Week 1 The Falcons will be starting Tua Tagovailoa in Week 1 against the Steelers and ",
+      "excerpt": "Michael Penix will be inactive in Week 1 The Falcons will be starting Tua Tagovailoa in Week 1 against the Steelers and they won't be turning to Michael Penix if they decide to make a change during the game.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/michael-penix-will-be-inactive-in-week-1",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-07T19:04:10.571112+00:00"
+    },
+    {
+      "player": "Justin Jefferson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Commanders to sign Van Jefferson to practice squad Wide receiver Van Jefferson did not make the cut to the 53-man roster",
+      "excerpt": "Commanders to sign Van Jefferson to practice squad Wide receiver Van Jefferson did not make the cut to the 53-man roster in Washington, but he's rejoining the Commanders ahead of their season opener.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/commanders-to-sign-van-jefferson-to-practice-squad",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-07T19:04:10.570813+00:00"
+    },
+    {
+      "player": "Rome Odunze",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Rome Odunze didn't practice Monday, but D'Andre Swift and Kyle Monangai did The Bears had some good news and some bad ne",
+      "excerpt": "Rome Odunze didn't practice Monday, but D'Andre Swift and Kyle Monangai did The Bears had some good news and some bad news on the injury front at Monday's practice.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/rome-odunze-didnt-practice-monday-but-dandre-swift-and-kyle-monangai-did",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-07T19:04:10.569273+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -6362,6 +6414,8 @@
     "Freddie Freeman|injury": "2026-09-05T22:44:47.448842+00:00",
     "Zack Wheeler|usage_up": "2026-09-06T04:07:17.402410+00:00",
     "Dodgers|pitcher_scratch": "2026-09-06T22:50:26.309712+00:00",
-    "Julio Rodriguez|usage_up": "2026-09-06T22:50:26.309712+00:00"
+    "Julio Rodriguez|usage_up": "2026-09-06T22:50:26.309712+00:00",
+    "Rome Odunze|injury": "2026-09-07T19:04:35.351991+00:00",
+    "Ronald Acuna Jr|injury": "2026-09-07T19:04:35.351991+00:00"
   }
 }
