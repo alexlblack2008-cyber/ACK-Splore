@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-08T04:08:14.261831+00:00",
-  "signal_count": 496,
+  "updated_at": "2026-09-08T11:01:41.577635+00:00",
+  "signal_count": 500,
   "signals": [
+    {
+      "player": "Trey McBride",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "positive",
+      "headline": "NFL Preseason Tight End Power Rankings: Projecting All 32 Starters in 2026 NFL tight end rooms are taking shape around t",
+      "excerpt": "NFL Preseason Tight End Power Rankings: Projecting All 32 Starters in 2026 NFL tight end rooms are taking shape around the league. The stars such as Trey McBride and Brock Bowers are locked into their positions at the top. However, newcomers such as Colston Loveland and Tyler Warren are generating b",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/nfl-preseason-tight-end-power-rankings-projecting-all-32-starters-2026/1917277",
+      "confidence": 0.72,
+      "prop_impact": "over",
+      "detected_at": "2026-09-08T11:01:23.697143+00:00"
+    },
+    {
+      "player": "Jake Ferguson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "NFL Preseason Tight End Power Rankings: Projecting All 32 Starters in 2026 NFL tight end rooms are taking shape around t",
+      "excerpt": "NFL Preseason Tight End Power Rankings: Projecting All 32 Starters in 2026 NFL tight end rooms are taking shape around the league. The stars such as Trey McBride and Brock Bowers are locked into their positions at the top. However, newcomers such as Colston Loveland and Tyler Warren are generating b",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/nfl-preseason-tight-end-power-rankings-projecting-all-32-starters-2026/1917277",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-08T11:01:23.697098+00:00"
+    },
+    {
+      "player": "Shohei Ohtani",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "activation",
+      "headline": "Ohtani returns to lineup, but is unlikely to pitch again in 2026 LA's two-way star hopes to use 2026 as a 'learning expe",
+      "excerpt": "Ohtani returns to lineup, but is unlikely to pitch again in 2026 LA's two-way star hopes to use 2026 as a 'learning experience' in order to return to pitching next year",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/shohei-ohtani-unlikely-to-pitch-in-2026-will-focus-on-hitting",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-09-08T11:01:19.542003+00:00"
+    },
+    {
+      "player": "Jonathan Taylor",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "NFL fines Cam Taylor-Britt and four other players for preseason Week 3 infractions The NFL fines players for illegal hit",
+      "excerpt": "NFL fines Cam Taylor-Britt and four other players for preseason Week 3 infractions The NFL fines players for illegal hits during the preseason, but for the third and final week of the preseason, those fines were fairly limited.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/nfl-fines-cam-taylor-britt-and-four-other-players-for-preseason-week-3-infractions",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-08T11:01:18.330157+00:00"
+    },
     {
       "player": "Shohei Ohtani",
       "team": "Unknown",
@@ -6549,6 +6601,7 @@
     "Ronald Acuna Jr|injury": "2026-09-07T19:04:35.351991+00:00",
     "Kyle Schwarber|injury": "2026-09-07T23:23:25.868960+00:00",
     "Luis Robert|activation": "2026-09-07T23:23:25.868960+00:00",
-    "Shohei Ohtani|usage_up": "2026-09-08T04:08:14.261766+00:00"
+    "Shohei Ohtani|usage_up": "2026-09-08T04:08:14.261766+00:00",
+    "Shohei Ohtani|activation": "2026-09-08T11:01:41.577572+00:00"
   }
 }
