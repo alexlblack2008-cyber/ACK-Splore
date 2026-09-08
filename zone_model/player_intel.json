@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-09-07T23:23:25.869089+00:00",
-  "signal_count": 494,
+  "updated_at": "2026-09-08T04:08:14.261831+00:00",
+  "signal_count": 496,
   "signals": [
+    {
+      "player": "Shohei Ohtani",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Shohei Ohtani Not Likely To Pitch Again In 2026 TODAY: Ohtani is hitting leadoff as the Dodgers&#8217; designated hitter",
+      "excerpt": "Shohei Ohtani Not Likely To Pitch Again In 2026 TODAY: Ohtani is hitting leadoff as the Dodgers&#8217; designated hitter in today&#8217;s lineup against the Reds, Roberts told SportsNet LA and other media.\u00a0 Roberts again declined to totally rule Ohtani out as a pitcher, but &#8220;he&#8217;s not goi",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/shohei-ohtani-not-likely-to-pitch-again-in-2026.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-08T04:07:52.392665+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Shohei Ohtani Not Likely To Pitch Again In 2026 TODAY: Ohtani is hitting leadoff as the Dodgers&#8217; designated hitter",
+      "excerpt": "Shohei Ohtani Not Likely To Pitch Again In 2026 TODAY: Ohtani is hitting leadoff as the Dodgers&#8217; designated hitter in today&#8217;s lineup against the Reds, Roberts told SportsNet LA and other media.\u00a0 Roberts again declined to totally rule Ohtani out as a pitcher, but &#8220;he&#8217;s not goi",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/shohei-ohtani-not-likely-to-pitch-again-in-2026.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-08T04:07:52.392626+00:00"
+    },
     {
       "player": "Jaylen Brown",
       "team": "Unknown",
@@ -6431,7 +6457,7 @@
     "Caleb Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Kyren Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Tarik Skubal|injury": "2026-08-28T15:12:52.988716+00:00",
-    "Luis Robert|injury": "2026-09-06T20:16:46.416233+00:00",
+    "Luis Robert|injury": "2026-09-08T04:08:14.261766+00:00",
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
     "Unknown|suspension": "2026-09-07T12:11:02.979425+00:00",
@@ -6522,6 +6548,7 @@
     "Rome Odunze|injury": "2026-09-07T19:04:35.351991+00:00",
     "Ronald Acuna Jr|injury": "2026-09-07T19:04:35.351991+00:00",
     "Kyle Schwarber|injury": "2026-09-07T23:23:25.868960+00:00",
-    "Luis Robert|activation": "2026-09-07T23:23:25.868960+00:00"
+    "Luis Robert|activation": "2026-09-07T23:23:25.868960+00:00",
+    "Shohei Ohtani|usage_up": "2026-09-08T04:08:14.261766+00:00"
   }
 }
