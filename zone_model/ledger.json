@@ -1066,10 +1066,10 @@
     "confidence": 0.452,
     "kelly_fraction": 0.0441,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 18,
+    "pnl": 90.91,
+    "settled_at": "2026-09-10T19:29:22.052694"
   },
   {
     "bet_date": "2026-09-09",
@@ -1084,10 +1084,10 @@
     "confidence": 0.343,
     "kelly_fraction": 0.0241,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 14,
+    "pnl": 90.91,
+    "settled_at": "2026-09-10T19:29:22.052644"
   },
   {
     "bet_date": "2026-09-09",
@@ -1102,10 +1102,10 @@
     "confidence": 0.335,
     "kelly_fraction": 0.0618,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 14,
+    "pnl": 90.91,
+    "settled_at": "2026-09-10T19:29:22.052734"
   },
   {
     "bet_date": "2026-09-09",
@@ -1119,6 +1119,42 @@
     "edge_runs": 0.35,
     "confidence": 0.339,
     "kelly_fraction": 0.0003,
+    "stake": 100.0,
+    "outcome": "won",
+    "actual_runs": 10,
+    "pnl": 90.91,
+    "settled_at": "2026-09-10T19:29:22.052715"
+  },
+  {
+    "bet_date": "2026-09-10",
+    "game_pk": 823088,
+    "home_team": "Seattle Mariners",
+    "away_team": "Texas Rangers",
+    "umpire": "Rob Drake",
+    "recommendation": "OVER",
+    "market_total": 7.0,
+    "fair_total": 9.25,
+    "edge_runs": 2.25,
+    "confidence": 0.507,
+    "kelly_fraction": 0.0832,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
+  },
+  {
+    "bet_date": "2026-09-10",
+    "game_pk": 824550,
+    "home_team": "Chicago White Sox",
+    "away_team": "Pittsburgh Pirates",
+    "umpire": "Unknown",
+    "recommendation": "UNDER",
+    "market_total": 7.5,
+    "fair_total": 6.14,
+    "edge_runs": -1.36,
+    "confidence": 0.335,
+    "kelly_fraction": 0.0618,
     "stake": 100.0,
     "outcome": "pending",
     "actual_runs": null,
