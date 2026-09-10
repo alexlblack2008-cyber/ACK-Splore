@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-10T11:02:39.120384+00:00",
-  "signal_count": 597,
+  "updated_at": "2026-09-10T16:13:28.085831+00:00",
+  "signal_count": 602,
   "signals": [
+    {
+      "player": "George Kittle",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kittle, Bosa off the injury report; will play in Week 1 vs. Rams in Australia Kittle tore his Achilles in the wild card ",
+      "excerpt": "Kittle, Bosa off the injury report; will play in Week 1 vs. Rams in Australia Kittle tore his Achilles in the wild card round of last year&#039;s playoffs, while Bosa suffered an early-season injury in 2025",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/kittle-bosa-off-the-injury-report-will-play-in-week-1-vs-rams/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-10T16:13:09.685971+00:00"
+    },
+    {
+      "player": "A.J. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Should I Drop Romeo Doubs? Fantasy Football Outlook for Week 1 (2026) New England Patriots wide receiver Romeo Doubs had",
+      "excerpt": "Should I Drop Romeo Doubs? Fantasy Football Outlook for Week 1 (2026) New England Patriots wide receiver Romeo Doubs had a disappointing team debut on Wednesday evening. Facing the Seahawks, the newly signed wideout didn't live up to expectations as he failed to make an impact on the scoresheet. Eve",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/should-i-drop-romeo-doubs-for-fantasy-football-week-1-2026/1927480",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-10T16:13:08.387706+00:00"
+    },
+    {
+      "player": "Luis Robert",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Dodgers To Place Shohei Ohtani On 15-Day IL After being in and out of the lineup over the past week, Dodgers two-way sta",
+      "excerpt": "Dodgers To Place Shohei Ohtani On 15-Day IL After being in and out of the lineup over the past week, Dodgers two-way star Shohei Ohtani is landing on the injured list, manager Dave Roberts told reporters last night. Ohtani has been working through knee and arm injuries. Given his two-way status, he&",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/dodgers-to-place-shohei-ohtani-on-15-day-il.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-10T16:13:05.768551+00:00"
+    },
+    {
+      "player": "Bryce Young",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Bryce Young: Contract's out of my control, I'm just about football Panthers owner David Tepper weighed in on quarterback",
+      "excerpt": "Bryce Young: Contract's out of my control, I'm just about football Panthers owner David Tepper weighed in on quarterback Bryce Young's future on Wednesday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bryce-young-contracts-out-of-my-control-im-just-about-football",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-10T16:13:04.315809+00:00"
+    },
+    {
+      "player": "Dolphins",
+      "team": "Dolphins",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "\"Strong possibility\" Tua Tagovailoa will be cut, if/when benched On Sunday, Falcons quarterback Tua Tagovailoa returns t",
+      "excerpt": "\"Strong possibility\" Tua Tagovailoa will be cut, if/when benched On Sunday, Falcons quarterback Tua Tagovailoa returns to the place where he made his last start with the Dolphins.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/strong-possibility-tua-tagovailoa-will-be-cut-if-when-benched",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-10T16:13:04.315338+00:00"
+    },
     {
       "player": "Jaylen Brown",
       "team": "Unknown",
@@ -7770,7 +7835,7 @@
     "Caleb Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Kyren Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Tarik Skubal|injury": "2026-09-09T23:07:44.525528+00:00",
-    "Luis Robert|injury": "2026-09-08T04:08:14.261766+00:00",
+    "Luis Robert|injury": "2026-09-10T16:13:28.085723+00:00",
     "Packers|suspension": "2026-08-30T04:57:19.770209+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
     "Unknown|suspension": "2026-09-09T23:07:44.525528+00:00",
@@ -7806,7 +7871,7 @@
     "Unknown|qb_scratch": "2026-09-10T11:02:39.120257+00:00",
     "Bills|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Buccaneers|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
-    "Dolphins|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
+    "Dolphins|qb_scratch": "2026-09-10T16:13:28.085723+00:00",
     "Panthers|qb_scratch": "2026-08-30T20:52:42.322209+00:00",
     "Josh Jacobs|injury": "2026-09-01T00:30:59.876959+00:00",
     "49ers|qb_scratch": "2026-09-08T21:00:12.312999+00:00",
@@ -7877,9 +7942,10 @@
     "Puka Nacua|positive": "2026-09-09T20:48:41.791163+00:00",
     "Patrick Mahomes|positive": "2026-09-09T20:48:41.791163+00:00",
     "Patriots|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
-    "George Kittle|injury": "2026-09-09T23:07:44.525528+00:00",
+    "George Kittle|injury": "2026-09-10T16:13:28.085723+00:00",
     "Malik Nabers|positive": "2026-09-09T23:07:44.525528+00:00",
     "Sam Darnold|injury": "2026-09-10T04:11:59.931104+00:00",
-    "Drake Maye|injury": "2026-09-10T04:11:59.931104+00:00"
+    "Drake Maye|injury": "2026-09-10T04:11:59.931104+00:00",
+    "Bryce Young|injury": "2026-09-10T16:13:28.085723+00:00"
   }
 }
