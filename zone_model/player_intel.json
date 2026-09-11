@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-09-11T04:11:02.585535+00:00",
-  "signal_count": 640,
+  "updated_at": "2026-09-11T11:00:47.604349+00:00",
+  "signal_count": 642,
   "signals": [
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Why Seahawks defense is built to survive life without Sam Darnold Seattle&#039;s defense gives them a shot in every game",
+      "excerpt": "Why Seahawks defense is built to survive life without Sam Darnold Seattle&#039;s defense gives them a shot in every game, which makes it dangerous",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/why-seahawks-defense-is-built-to-survive-life-without-sam-darnold/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-11T11:00:30.462396+00:00"
+    },
+    {
+      "player": "A.J. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Patriots&#039; A.J. Brown believed to have suffered high ankle sprain, expected to miss four weeks Brown will have an MR",
+      "excerpt": "Patriots&#039; A.J. Brown believed to have suffered high ankle sprain, expected to miss four weeks Brown will have an MRI today to determine the severity of the injury",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/patriots-a-j-brown-injures-ankle-ruled-out/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-11T11:00:30.461277+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -8391,7 +8417,7 @@
     "Malik Nabers|injury": "2026-09-10T23:03:00.920821+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-10T20:43:27.285732+00:00",
-    "A.J. Brown|injury": "2026-09-10T04:11:59.931104+00:00",
+    "A.J. Brown|injury": "2026-09-11T11:00:47.604241+00:00",
     "Lamar Jackson|injury": "2026-09-02T23:13:05.824620+00:00",
     "Garrett Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "Russell Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
@@ -8438,7 +8464,7 @@
     "Patriots|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
     "George Kittle|injury": "2026-09-11T04:11:02.585396+00:00",
     "Malik Nabers|positive": "2026-09-09T23:07:44.525528+00:00",
-    "Sam Darnold|injury": "2026-09-10T04:11:59.931104+00:00",
+    "Sam Darnold|injury": "2026-09-11T11:00:47.604241+00:00",
     "Drake Maye|injury": "2026-09-10T04:11:59.931104+00:00",
     "Bryce Young|injury": "2026-09-10T16:13:28.085723+00:00",
     "Tua Tagovailoa|injury": "2026-09-10T20:43:27.285732+00:00",
