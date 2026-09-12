@@ -14,74 +14,99 @@
 </helmet>
 <div style="width:520px;height:800px;background:#eae5da;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;font-family:Georgia,'Times New Roman',serif;">
   <div style="width:440px;height:600px;background:#1b140f;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,0.28), inset 0 2px 0 rgba(255,255,255,0.35);">
-    <svg viewBox="0 0 404 564" width="404" height="564" style="display:block;background:#ece0c4;">
+    <svg viewBox="0 0 404 564" width="404" height="564" style="display:block;background:#120d0a;">
       <defs>
         <clipPath id="shoulderClip">
-          <path d="M90,564 L90,440 Q100,400 150,392 L205,392 L205,564 Z"/>
+          <path d="M90,564 L90,440 Q100,400 150,392 L210,392 L210,564 Z"/>
         </clipPath>
         <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
-          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0"/>
         </filter>
       </defs>
 
-      <!-- background color blocks -->
-      <polygon points="0,0 260,0 404,160 404,564 0,564" fill="#2f7a72"/>
-      <polygon points="260,0 404,0 404,160" fill="#e2a63b"/>
-      <polygon points="0,360 190,564 0,564" fill="#a6402c"/>
+      <!-- shattered background -->
+      <polygon points="0,0 180,0 90,140 0,90" fill="#1f6f6a"/>
+      <polygon points="180,0 404,0 404,120 260,180 210,90" fill="#e8c92a"/>
+      <polygon points="404,120 404,320 300,260 260,180" fill="#d6336c"/>
+      <polygon points="404,320 404,564 240,564 300,260" fill="#4a2545"/>
+      <polygon points="0,320 0,564 240,564 180,400 90,420" fill="#a6402c"/>
+      <polygon points="0,90 90,140 90,420 0,320" fill="#e2701a"/>
+      <polygon points="90,140 210,90 260,180 180,400 90,420" fill="#120d0a" opacity="0.85"/>
 
-      <!-- shoulders / torso -->
-      <path d="M90,564 L90,440 Q100,400 150,392 L260,392 Q310,400 320,440 L320,564 Z" fill="#c8503c" stroke="#151009" stroke-width="6"/>
+      <!-- ghost double-exposure face -->
+      <g transform="translate(40,26) rotate(-8 205 195)" opacity="0.3">
+        <path d="M140,150 Q125,90 180,60 Q235,30 285,70 Q320,100 305,150 Q330,190 300,230 Q325,270 285,300 Q300,335 255,345 Q205,355 170,330 Q130,320 125,275 Q100,255 115,215 Q95,180 120,160 Q125,150 140,150 Z" fill="none" stroke="#f2e8d2" stroke-width="4"/>
+        <ellipse cx="175" cy="150" rx="24" ry="15" fill="none" stroke="#f2e8d2" stroke-width="3"/>
+        <ellipse cx="266" cy="150" rx="18" ry="10" fill="none" stroke="#f2e8d2" stroke-width="3"/>
+      </g>
+
+      <!-- shoulders / torso, checkerboard -->
+      <path d="M90,564 L90,440 Q100,400 150,392 L260,392 Q310,400 320,440 L320,564 Z" fill="#e8c92a" stroke="#f2e8d2" stroke-width="6"/>
       <g clip-path="url(#shoulderClip)">
-        <rect x="88" y="392" width="120" height="172" fill="#e2a63b"/>
-        <circle cx="112" cy="420" r="6" fill="#151009"/>
-        <circle cx="140" cy="435" r="6" fill="#151009"/>
-        <circle cx="168" cy="420" r="6" fill="#151009"/>
-        <circle cx="126" cy="460" r="6" fill="#151009"/>
-        <circle cx="154" cy="470" r="6" fill="#151009"/>
-        <circle cx="112" cy="500" r="6" fill="#151009"/>
-        <circle cx="140" cy="510" r="6" fill="#151009"/>
-        <circle cx="168" cy="495" r="6" fill="#151009"/>
-        <circle cx="126" cy="540" r="6" fill="#151009"/>
+        <rect x="90" y="392" width="30" height="30" fill="#120d0a"/><rect x="120" y="392" width="30" height="30" fill="#f2e8d2"/><rect x="150" y="392" width="30" height="30" fill="#120d0a"/><rect x="180" y="392" width="30" height="30" fill="#f2e8d2"/>
+        <rect x="90" y="422" width="30" height="30" fill="#f2e8d2"/><rect x="120" y="422" width="30" height="30" fill="#120d0a"/><rect x="150" y="422" width="30" height="30" fill="#f2e8d2"/><rect x="180" y="422" width="30" height="30" fill="#120d0a"/>
+        <rect x="90" y="452" width="30" height="30" fill="#120d0a"/><rect x="120" y="452" width="30" height="30" fill="#f2e8d2"/><rect x="150" y="452" width="30" height="30" fill="#120d0a"/><rect x="180" y="452" width="30" height="30" fill="#f2e8d2"/>
+        <rect x="90" y="482" width="30" height="30" fill="#f2e8d2"/><rect x="120" y="482" width="30" height="30" fill="#120d0a"/><rect x="150" y="482" width="30" height="30" fill="#f2e8d2"/><rect x="180" y="482" width="30" height="30" fill="#120d0a"/>
+        <rect x="90" y="512" width="30" height="30" fill="#120d0a"/><rect x="120" y="512" width="30" height="30" fill="#f2e8d2"/><rect x="150" y="512" width="30" height="30" fill="#120d0a"/><rect x="180" y="512" width="30" height="30" fill="#f2e8d2"/>
+        <rect x="90" y="542" width="30" height="30" fill="#f2e8d2"/><rect x="120" y="542" width="30" height="30" fill="#120d0a"/><rect x="150" y="542" width="30" height="30" fill="#f2e8d2"/><rect x="180" y="542" width="30" height="30" fill="#120d0a"/>
       </g>
 
       <!-- neck -->
-      <rect x="172" y="340" width="64" height="60" fill="#eddcae" stroke="#151009" stroke-width="5"/>
+      <rect x="172" y="340" width="64" height="60" fill="#d6336c" stroke="#120d0a" stroke-width="5"/>
 
       <!-- head -->
-      <path d="M140,150 Q125,90 180,60 Q235,30 285,70 Q320,100 305,150 Q330,190 300,230 Q325,270 285,300 Q300,335 255,345 Q205,355 170,330 Q130,320 125,275 Q100,255 115,215 Q95,180 120,160 Q125,150 140,150 Z" fill="#f2e8d2" stroke="#151009" stroke-width="7"/>
+      <path d="M140,150 Q125,90 180,60 Q235,30 285,70 Q320,100 305,150 Q330,190 300,230 Q325,270 285,300 Q300,335 255,345 Q205,355 170,330 Q130,320 125,275 Q100,255 115,215 Q95,180 120,160 Q125,150 140,150 Z" fill="#f2e8d2" stroke="#120d0a" stroke-width="7"/>
+      <!-- extra fracture cracks across the face -->
+      <path d="M150,110 L230,175 L195,260" stroke="#120d0a" stroke-width="2.5" fill="none" opacity="0.55"/>
+      <path d="M285,120 L235,190 L270,280" stroke="#120d0a" stroke-width="2.5" fill="none" opacity="0.55"/>
 
-      <!-- cheek fragment accent -->
-      <polygon points="120,200 150,215 125,240" fill="#c8503c" opacity="0.85"/>
+      <!-- cheek fragment accents -->
+      <polygon points="120,200 150,215 125,240" fill="#e2701a" opacity="0.9"/>
+      <polygon points="290,220 315,245 280,255" fill="#d6336c" opacity="0.85"/>
 
       <!-- profile nose wedge -->
-      <polygon points="225,140 275,190 220,215 200,175" fill="#e2a63b" stroke="#151009" stroke-width="5"/>
+      <polygon points="225,140 275,190 220,215 200,175" fill="#e8c92a" stroke="#120d0a" stroke-width="5"/>
 
       <!-- frontal eye -->
-      <ellipse cx="175" cy="150" rx="24" ry="15" fill="#ffffff" stroke="#151009" stroke-width="5"/>
-      <circle cx="175" cy="150" r="6" fill="#151009"/>
+      <ellipse cx="175" cy="150" rx="24" ry="15" fill="#e8c92a" stroke="#120d0a" stroke-width="5"/>
+      <circle cx="175" cy="150" r="6" fill="#120d0a"/>
 
       <!-- profile eye -->
-      <polygon points="255,135 288,145 268,163 244,153" fill="#3d8a68" stroke="#151009" stroke-width="5"/>
-      <circle cx="266" cy="150" r="5" fill="#151009"/>
+      <polygon points="255,135 288,145 268,163 244,153" fill="#d6336c" stroke="#120d0a" stroke-width="5"/>
+      <circle cx="266" cy="150" r="5" fill="#120d0a"/>
 
-      <!-- eyebrows -->
-      <path d="M150,128 Q175,112 202,128" stroke="#151009" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M240,118 Q262,104 288,118" stroke="#151009" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <!-- extra floating third eye -->
+      <ellipse cx="312" cy="232" rx="14" ry="9" fill="#e2701a" stroke="#120d0a" stroke-width="4"/>
+      <circle cx="312" cy="232" r="4" fill="#120d0a"/>
 
-      <!-- mouth -->
-      <path d="M175,245 Q210,272 258,240 Q222,290 175,245 Z" fill="#a6402c" stroke="#151009" stroke-width="5"/>
+      <!-- jagged eyebrows -->
+      <path d="M148,130 L165,118 L178,128 L195,114 L206,126" stroke="#120d0a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M238,120 L255,104 L268,116 L283,100 L292,112" stroke="#120d0a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-      <!-- hair -->
-      <path d="M120,110 Q110,40 185,25 Q260,5 305,55 Q335,30 315,85 Q295,50 260,45 Q278,80 250,72 Q225,35 195,52 Q168,35 150,68 Q130,58 120,110 Z" fill="#151009"/>
-      <path d="M260,45 Q300,35 315,70" fill="#e2a63b" opacity="0.9"/>
+      <!-- screaming mouth -->
+      <path d="M165,232 Q210,296 275,228 Q258,272 210,288 Q165,272 165,232 Z" fill="#120d0a"/>
+      <polygon points="172,236 182,236 177,250" fill="#f2e8d2"/>
+      <polygon points="192,238 202,238 197,252" fill="#f2e8d2"/>
+      <polygon points="212,236 222,236 217,250" fill="#f2e8d2"/>
+      <polygon points="232,234 242,234 237,248" fill="#f2e8d2"/>
+      <polygon points="250,230 258,228 254,242" fill="#f2e8d2"/>
+
+      <!-- jagged spiked hair -->
+      <path d="M120,120 L100,40 L150,70 L165,15 L195,65 L225,10 L255,60 L285,20 L305,70 L335,35 L330,100 L300,80 L280,115 L250,75 L230,110 L200,70 L175,105 L150,75 L130,100 Z" fill="#120d0a"/>
+      <path d="M225,10 L255,60 L235,55 L215,20 Z" fill="#d6336c" opacity="0.9"/>
+
+      <!-- shards bursting off the head -->
+      <polygon points="300,230 340,210 335,250" fill="#f2e8d2" stroke="#120d0a" stroke-width="3"/>
+      <polygon points="115,275 75,290 100,310" fill="#f2e8d2" stroke="#120d0a" stroke-width="3"/>
+      <polygon points="120,160 85,150 100,190" fill="#e8c92a" stroke="#120d0a" stroke-width="3"/>
 
       <rect x="0" y="0" width="404" height="564" filter="url(#grain)"/>
     </svg>
   </div>
   <div style="margin-top:22px;text-align:center;max-width:380px;">
-    <div style="font-style:italic;font-size:18px;color:#2a2420;letter-spacing:0.3px;">Head, Composition No. 1</div>
-    <div style="font-size:11px;color:#6b6258;margin-top:6px;letter-spacing:0.6px;text-transform:uppercase;">Original study &middot; in the manner of Picasso &middot; Synthetic Cubism</div>
+    <div style="font-style:italic;font-size:18px;color:#2a2420;letter-spacing:0.3px;">Head, Composition No. 2 (Fractured)</div>
+    <div style="font-size:11px;color:#6b6258;margin-top:6px;letter-spacing:0.6px;text-transform:uppercase;">Original study &middot; in the manner of Picasso &middot; Synthetic Cubism, intensified</div>
   </div>
 </div>
 </x-dc>
