@@ -44,6 +44,7 @@ from bonus_pick import get_bonus_pick, format_bonus_pick
 from nfl_nba_picks import (
     score_nfl_games, score_nba_games, format_nfl_nba_section, ScoredNFLNBAGame,
 )
+from cfb_picks import score_cfb_games, format_cfb_section
 from parlay_builder import build_sunday_parlays, format_sunday_parlays
 
 try:
@@ -501,6 +502,14 @@ def format_daily_report_with_bonus(
     d = _date.fromisoformat(game_date)
     is_sunday = d.weekday() == 6  # Monday=0, Sunday=6
 
+    # ── CFB (Thu–Sat games) ───────────────────────────────────────────────────
+    try:
+        cfb_scored  = score_cfb_games(game_date)
+        cfb_section = format_cfb_section(cfb_scored, game_date)
+    except Exception as e:
+        print(f"  [CFB] Scoring error: {e}")
+        cfb_scored, cfb_section = [], ""
+
     # ── NFL (statistical model, primary) ──────────────────────────────────────
     try:
         nfl_scored  = score_nfl_games(game_date)
@@ -570,7 +579,7 @@ def format_daily_report_with_bonus(
     except Exception:
         bonus_section = ""
 
-    return nfl_section + nba_section + main + parlay_section + bonus_section
+    return cfb_section + nfl_section + nba_section + main + parlay_section + bonus_section
 
 
 def run_daily(game_date=None, log_to_ledger: bool = True) -> str:
