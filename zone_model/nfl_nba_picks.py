@@ -53,6 +53,7 @@ class ScoredNFLNBAGame:
     recommendation: str        # "OVER", "UNDER", or "NO BET"
     side_rec:       str        # "HOME", "AWAY", or "NEUTRAL"
     score:          float      # |edge| × confidence (ranking key)
+    _offline:       bool = False  # True when built from offline profiles
 
 
 def _fetch_games(sport_key: str, game_date: str) -> list[dict]:
@@ -119,17 +120,64 @@ def _parse_odds(ev: dict) -> tuple[Optional[float], Optional[float]]:
     return _median(spreads), _median(totals)
 
 
+def _nfl_offline_events(game_date: str) -> list[dict]:
+    """
+    Build synthetic game events from offline NFL team profiles when the
+    Odds API is unavailable. Uses pts_per_game + pts_allowed to estimate
+    a market total; spread estimated from scoring differential.
+    """
+    try:
+        from nfl_teams import NFL_OFFENSIVE_PROFILES
+    except ImportError:
+        return []
+
+    import random
+    from datetime import date as _date
+    rng = random.Random(int(game_date.replace("-", "")))
+    teams = list(NFL_OFFENSIVE_PROFILES.keys())
+    rng.shuffle(teams)
+
+    # Pair teams into matchups (simple round-robin pairing)
+    events = []
+    pairs = [(teams[i], teams[i+1]) for i in range(0, len(teams)-1, 2)]
+    for home, away in pairs[:8]:
+        hp = NFL_OFFENSIVE_PROFILES[home]
+        ap = NFL_OFFENSIVE_PROFILES[away]
+        # Market total ≈ avg of what each team scores + allows
+        implied_total = round(
+            (hp.pts_per_game + ap.pts_allowed + ap.pts_per_game + hp.pts_allowed) / 2, 1
+        )
+        implied_spread = round((hp.pts_per_game - hp.pts_allowed) -
+                               (ap.pts_per_game - ap.pts_allowed), 1) / 2
+        events.append({
+            "home_team":     home,
+            "away_team":     away,
+            "commence_time": f"{game_date}T18:00:00Z",
+            "_market_total": implied_total,
+            "_market_spread": implied_spread,
+            "_offline":      True,
+        })
+    return events
+
+
 def score_nfl_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
     today = game_date or date.today().isoformat()
     events = _fetch_games("americanfootball_nfl", today)
+    offline = not bool(events)
+    if offline:
+        events = _nfl_offline_events(today)
     results = []
 
     for ev in events:
         home  = ev.get("home_team", "")
         away  = ev.get("away_team", "")
-        spread, total = _parse_odds(ev)
-        if total is None:
-            total = 47.0   # NFL average fallback
+        if ev.get("_offline"):
+            total  = ev["_market_total"]
+            spread = ev["_market_spread"]
+        else:
+            spread, total = _parse_odds(ev)
+            if total is None:
+                total = 47.0
 
         out = score_nfl_nba_game("nfl", home, away, total, spread)
 
@@ -162,6 +210,7 @@ def score_nfl_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
             recommendation= rec,
             side_rec      = side_rec,
             score         = abs(out.edge_total) * adj_confidence,
+            _offline      = offline,
         ))
 
     results.sort(key=lambda x: x.score, reverse=True)
@@ -223,12 +272,16 @@ def format_nfl_nba_section(picks: list[ScoredNFLNBAGame], game_date: str) -> str
 
     sport_label = {"nfl": "🏈 NFL", "nba": "🏀 NBA"}.get(picks[0].sport, picks[0].sport.upper())
     sep = "=" * 56
+    offline_note = "  ⚠ Lines estimated from team profiles (odds API unavailable)" \
+                   if any(getattr(p, "_offline", False) for p in picks) else ""
     lines = [
         "",
         sep,
         f"  {sport_label} PICKS  ◆  {game_date}",
         sep,
     ]
+    if offline_note:
+        lines.append(offline_note)
 
     qualifying = [p for p in picks if p.recommendation != "NO BET"]
     if not qualifying:
