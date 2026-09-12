@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-12T10:29:45.434168+00:00",
-  "signal_count": 686,
+  "updated_at": "2026-09-12T15:23:18.461888+00:00",
+  "signal_count": 691,
   "signals": [
+    {
+      "player": "A.J. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Patriots WR A.J. Brown headed to IR with high ankle sprain, next steps for New England Brown suffered the injury in the ",
+      "excerpt": "Patriots WR A.J. Brown headed to IR with high ankle sprain, next steps for New England Brown suffered the injury in the third quarter of the season opener against the Seahawks",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/patriots-a-j-brown-injured-reserve/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-12T15:23:01.399625+00:00"
+    },
+    {
+      "player": "Saquon Barkley",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Running Back Matchups to Target in Week 1 (2026) - Saquon Barkley, D&#039;Andre Swift, Omarion Hampton, More... After sp",
+      "excerpt": "Running Back Matchups to Target in Week 1 (2026) - Saquon Barkley, D&#039;Andre Swift, Omarion Hampton, More... After spending a good chunk of the late summer researching and writing about running backs for redraft leagues, it's finally time to focus on some key Week 1 matchups. Welcome back to my r",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/nfl-dfs-picks-running-backs-to-target-in-week-1-2/1923472",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-12T15:23:00.219591+00:00"
+    },
+    {
+      "player": "Shohei Ohtani",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "The Opener: Brewers, Caminero, Wild Card Races While Shohei Ohtani&#8217;s IL placement has dominated the headlines, the",
+      "excerpt": "The Opener: Brewers, Caminero, Wild Card Races While Shohei Ohtani&#8217;s IL placement has dominated the headlines, the rest of the Dodgers seem to be rounding into postseason form.\u00a0 Friday&#8217;s 6-2 victory over the Marlins extended the Dodgers&#8217; winning streak to eight games, as Kyle Tucke",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/the-opener-brewers-caminero-wild-card-races.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-12T15:22:57.884705+00:00"
+    },
+    {
+      "player": "Braves",
+      "team": "Braves",
+      "sport": "mlb",
+      "signal_type": "pitcher_scratch",
+      "headline": "Jesus Luzardo Scratched From Start Due To Shoulder Stifness Jesus Luzardo and Tyler Mahle have been two of the best pitc",
+      "excerpt": "Jesus Luzardo Scratched From Start Due To Shoulder Stifness Jesus Luzardo and Tyler Mahle have been two of the best pitchers in baseball over the last month, making for a tremendous pitching matchup in today&#8217;s game between the Phillies and Braves.\u00a0 However, the Phils will now be going with a b",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/jesus-luzardo-scratched-from-start-due-to-shoulder-stifness.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-09-12T15:22:57.884533+00:00"
+    },
+    {
+      "player": "Julio Rodriguez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Twins Promote Emmanuel Rodriguez For MLB Debut The Twins announced that top outfield prospect Emmanuel Rodriguez has bee",
+      "excerpt": "Twins Promote Emmanuel Rodriguez For MLB Debut The Twins announced that top outfield prospect Emmanuel Rodriguez has been called up from Triple-A St. Paul.\u00a0 Infielder Ben Ross was optioned to Triple-A in the corresponding move, and Rodriguez is already on Minnesota&#8217;s 40-man roster. Rodriguez f",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/twins-promote-emmanuel-rodriguez-for-mlb-debut.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-12T15:22:57.884408+00:00"
+    },
     {
       "player": "Sam Darnold",
       "team": "Unknown",
@@ -8980,7 +9045,7 @@
     "Joe Burrow|injury": "2026-09-08T23:20:34.189474+00:00",
     "Yordan Alvarez|usage_up": "2026-09-12T10:29:45.434086+00:00",
     "Freddy Peralta|usage_up": "2026-09-08T21:00:12.312999+00:00",
-    "Julio Rodriguez|injury": "2026-09-04T04:03:52.959220+00:00",
+    "Julio Rodriguez|injury": "2026-09-12T15:23:18.461784+00:00",
     "Ja'Marr Chase|injury": "2026-09-11T20:49:14.151554+00:00",
     "Tee Higgins|injury": "2026-09-11T20:49:14.151554+00:00",
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
@@ -8989,7 +9054,7 @@
     "Malik Nabers|injury": "2026-09-11T23:08:52.913225+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-10T20:43:27.285732+00:00",
-    "A.J. Brown|injury": "2026-09-11T20:49:14.151554+00:00",
+    "A.J. Brown|injury": "2026-09-12T15:23:18.461784+00:00",
     "Lamar Jackson|injury": "2026-09-11T16:16:54.878771+00:00",
     "Garrett Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "Russell Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
@@ -9019,7 +9084,7 @@
     "Ronald Acuna Jr|injury": "2026-09-07T19:04:35.351991+00:00",
     "Kyle Schwarber|injury": "2026-09-07T23:23:25.868960+00:00",
     "Luis Robert|activation": "2026-09-07T23:23:25.868960+00:00",
-    "Shohei Ohtani|usage_up": "2026-09-08T04:08:14.261766+00:00",
+    "Shohei Ohtani|usage_up": "2026-09-12T15:23:18.461784+00:00",
     "Shohei Ohtani|activation": "2026-09-08T11:01:41.577572+00:00",
     "Aaron Rodgers|injury": "2026-09-11T16:16:54.878771+00:00",
     "Corbin Burnes|activation": "2026-09-08T21:00:12.312999+00:00",
@@ -9051,6 +9116,7 @@
     "Josh Allen|injury": "2026-09-11T16:16:54.878771+00:00",
     "Ravens|qb_scratch": "2026-09-11T20:49:14.151554+00:00",
     "Tua Tagovailoa|late_scratch": "2026-09-11T20:49:14.151554+00:00",
-    "Yordan Alvarez|injury": "2026-09-11T23:08:52.913225+00:00"
+    "Yordan Alvarez|injury": "2026-09-11T23:08:52.913225+00:00",
+    "Braves|pitcher_scratch": "2026-09-12T15:23:18.461784+00:00"
   }
 }
