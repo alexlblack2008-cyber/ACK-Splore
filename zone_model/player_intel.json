@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-12T04:10:55.355444+00:00",
-  "signal_count": 683,
+  "updated_at": "2026-09-12T10:29:45.434168+00:00",
+  "signal_count": 686,
   "signals": [
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Weekend Players To Cut for Week 1 Lineups - Romeo Doubs, Malik Davis, George Holani, Tank Dell, Zach Charbonnet, Jalen M",
+      "excerpt": "Weekend Players To Cut for Week 1 Lineups - Romeo Doubs, Malik Davis, George Holani, Tank Dell, Zach Charbonnet, Jalen McMillan, Josh Jacobs, Makai Lemon, Sam Darnold Welcome back, RotoBallers, to our Weekend Cut List Rankings for fantasy football Week 1 of the 2026 NFL season. With two NFL games be",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/weekend-cut-list-rankings-fantasy-football-drops-week-1-2026/1927957",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-12T10:29:27.162215+00:00"
+    },
+    {
+      "player": "Josh Jacobs",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Weekend Players To Cut for Week 1 Lineups - Romeo Doubs, Malik Davis, George Holani, Tank Dell, Zach Charbonnet, Jalen M",
+      "excerpt": "Weekend Players To Cut for Week 1 Lineups - Romeo Doubs, Malik Davis, George Holani, Tank Dell, Zach Charbonnet, Jalen McMillan, Josh Jacobs, Makai Lemon, Sam Darnold Welcome back, RotoBallers, to our Weekend Cut List Rankings for fantasy football Week 1 of the 2026 NFL season. With two NFL games be",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/weekend-cut-list-rankings-fantasy-football-drops-week-1-2026/1927957",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-12T10:29:27.162176+00:00"
+    },
+    {
+      "player": "Yordan Alvarez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Are we witnessing the most unique batting title race in history? Alvarez and Simpson chasing batting crown in very diffe",
+      "excerpt": "Are we witnessing the most unique batting title race in history? Alvarez and Simpson chasing batting crown in very different ways",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/yordan-alvarez-and-chandler-simpson-in-unique-al-batting-title-race",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-09-12T10:29:23.918973+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -8939,7 +8978,7 @@
     "Red Sox|pitcher_scratch": "2026-09-01T00:30:59.876959+00:00",
     "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00",
     "Joe Burrow|injury": "2026-09-08T23:20:34.189474+00:00",
-    "Yordan Alvarez|usage_up": "2026-09-08T21:00:12.312999+00:00",
+    "Yordan Alvarez|usage_up": "2026-09-12T10:29:45.434086+00:00",
     "Freddy Peralta|usage_up": "2026-09-08T21:00:12.312999+00:00",
     "Julio Rodriguez|injury": "2026-09-04T04:03:52.959220+00:00",
     "Ja'Marr Chase|injury": "2026-09-11T20:49:14.151554+00:00",
