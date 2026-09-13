@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-13T11:32:50.467466+00:00",
-  "signal_count": 743,
+  "updated_at": "2026-09-13T16:01:21.741000+00:00",
+  "signal_count": 746,
   "signals": [
+    {
+      "player": "Julio Rodriguez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Twins Promote Emmanuel Rodriguez For MLB Debut The Twins announced that top outfield prospect Emmanuel Rodriguez has bee",
+      "excerpt": "Twins Promote Emmanuel Rodriguez For MLB Debut The Twins announced that top outfield prospect Emmanuel Rodriguez has been called up from Triple-A St. Paul.\u00a0 Infielder Ben Ross was optioned to Triple-A in the corresponding move, and Rodriguez is already on Minnesota&#8217;s 40-man roster. Rodriguez f",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/twins-promote-emmanuel-rodriguez-for-mlb-debut.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T16:00:59.228915+00:00"
+    },
+    {
+      "player": "Lourdes Gurriel Jr",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Diamondbacks Designate Lourdes Gurriel Jr. For Assignment The Diamondbacks announced that outfielder Lourdes Gurriel Jr.",
+      "excerpt": "Diamondbacks Designate Lourdes Gurriel Jr. For Assignment The Diamondbacks announced that outfielder Lourdes Gurriel Jr. has been designated for assignment.\u00a0 The move opens up a spot on Arizona&#8217;s 40-man roster, and infielder Jose Fernandez was called up from Triple-A Reno to take Gurriel&#8217",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/diamondbacks-designate-lourdes-gurriel-jr-for-assignment.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T16:00:59.228332+00:00"
+    },
+    {
+      "player": "Alvin Kamara",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "activation",
+      "headline": "Alvin Kamara is not expected to play on Sunday The Saints are set to open the 2026 season without running back Alvin Kam",
+      "excerpt": "Alvin Kamara is not expected to play on Sunday The Saints are set to open the 2026 season without running back Alvin Kamara.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/alvin-kamara-is-not-expected-to-play-on-sunday",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-09-13T16:00:57.118129+00:00"
+    },
     {
       "player": "Patrick Mahomes",
       "team": "Unknown",
@@ -9721,7 +9760,7 @@
     "Joe Burrow|injury": "2026-09-08T23:20:34.189474+00:00",
     "Yordan Alvarez|usage_up": "2026-09-12T10:29:45.434086+00:00",
     "Freddy Peralta|usage_up": "2026-09-08T21:00:12.312999+00:00",
-    "Julio Rodriguez|injury": "2026-09-12T15:23:18.461784+00:00",
+    "Julio Rodriguez|injury": "2026-09-13T16:01:21.740923+00:00",
     "Ja'Marr Chase|injury": "2026-09-11T20:49:14.151554+00:00",
     "Tee Higgins|injury": "2026-09-11T20:49:14.151554+00:00",
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
@@ -9798,6 +9837,8 @@
     "Framber Valdez|injury": "2026-09-12T20:25:56.135224+00:00",
     "Amon-Ra St. Brown|positive": "2026-09-12T20:25:56.135224+00:00",
     "Sam LaPorta|positive": "2026-09-12T20:25:56.135224+00:00",
-    "Bo Nix|injury": "2026-09-13T04:22:37.760582+00:00"
+    "Bo Nix|injury": "2026-09-13T04:22:37.760582+00:00",
+    "Alvin Kamara|activation": "2026-09-13T16:01:21.740923+00:00",
+    "Lourdes Gurriel Jr|injury": "2026-09-13T16:01:21.740923+00:00"
   }
 }
