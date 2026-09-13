@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-13T20:36:49.327527+00:00",
-  "signal_count": 758,
+  "updated_at": "2026-09-13T23:03:40.009904+00:00",
+  "signal_count": 762,
   "signals": [
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Will Brinson&#039;s NFL Week 1 predictions and picks: Best bets, player props, anytime TD scorers for Sunday Backing hom",
+      "excerpt": "Will Brinson&#039;s NFL Week 1 predictions and picks: Best bets, player props, anytime TD scorers for Sunday Backing home underdogs like the Colts and Texans offers strong Week 1 value, while Jalen Hurts and the Eagles are primed to cover against the Commanders",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/betting/news/will-brinsons-nfl-week-1-predictions-and-picks-best-bets-player-props-anytime-td-scorers-for-sunday/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T23:03:22.023820+00:00"
+    },
+    {
+      "player": "Kyler Murray",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Vikings rule out QB Kyler Murray with a concussion in Minnesota debut vs. Packers Murray&#039;s debut ends early with hi",
+      "excerpt": "Vikings rule out QB Kyler Murray with a concussion in Minnesota debut vs. Packers Murray&#039;s debut ends early with him being ruled out after a late hit in the first quarter",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/vikings-rule-out-qb-kyler-murray-with-a-concussion-vs-packers/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T23:03:22.022474+00:00"
+    },
+    {
+      "player": "Kyler Murray",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kyler Murray ruled out with concussion Murray sustained a hard blow to the head while sliding on a scramble in the first",
+      "excerpt": "Kyler Murray ruled out with concussion Murray sustained a hard blow to the head while sliding on a scramble in the first quarter.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kyler-murray-ruled-out-with-concussion",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T23:03:16.220134+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Sunday Night Football: Malik Nabers is active for Giants-Cowboys Nabers is officially playing Week 1, returning from a t",
+      "excerpt": "Sunday Night Football: Malik Nabers is active for Giants-Cowboys Nabers is officially playing Week 1, returning from a torn ACL suffered last season.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/sunday-night-football-malik-nabers-is-active-for-giants-cowboys",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-13T23:03:16.219251+00:00"
+    },
     {
       "player": "Kawhi Leonard",
       "team": "Unknown",
@@ -9906,7 +9958,7 @@
     "Xavier Worthy|injury": "2026-08-30T23:20:33.884173+00:00",
     "Pete Alonso|injury": "2026-08-31T05:02:16.921009+00:00",
     "Lamar Jackson|positive": "2026-09-12T20:25:56.135224+00:00",
-    "Jalen Hurts|injury": "2026-09-12T20:25:56.135224+00:00",
+    "Jalen Hurts|injury": "2026-09-13T23:03:40.009824+00:00",
     "Eagles|qb_scratch": "2026-09-13T20:36:49.327345+00:00",
     "Jets|qb_scratch": "2026-08-31T20:44:46.257304+00:00",
     "William Contreras|injury": "2026-09-13T20:36:49.327345+00:00",
@@ -9922,7 +9974,7 @@
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
     "Adley Rutschman|injury": "2026-09-01T23:13:00.966858+00:00",
     "Lourdes Gurriel Jr|activation": "2026-09-01T23:13:00.966858+00:00",
-    "Malik Nabers|injury": "2026-09-13T04:22:37.760582+00:00",
+    "Malik Nabers|injury": "2026-09-13T23:03:40.009824+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-12T22:56:05.346686+00:00",
     "A.J. Brown|injury": "2026-09-12T15:23:18.461784+00:00",
@@ -9998,6 +10050,7 @@
     "Lourdes Gurriel Jr|injury": "2026-09-13T16:01:21.740923+00:00",
     "Zay Flowers|injury": "2026-09-13T20:36:49.327345+00:00",
     "Brian Thomas Jr|injury": "2026-09-13T20:36:49.327345+00:00",
-    "William Contreras|activation": "2026-09-13T20:36:49.327345+00:00"
+    "William Contreras|activation": "2026-09-13T20:36:49.327345+00:00",
+    "Kyler Murray|injury": "2026-09-13T23:03:40.009824+00:00"
   }
 }
