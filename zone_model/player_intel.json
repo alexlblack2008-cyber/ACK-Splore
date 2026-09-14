@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-09-14T04:29:27.619611+00:00",
-  "signal_count": 771,
+  "updated_at": "2026-09-14T12:26:57.613727+00:00",
+  "signal_count": 772,
   "signals": [
+    {
+      "player": "Matthew Stafford",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Matthew Stafford, Ja&#039;Marr Chase, Drake London, Co",
+      "excerpt": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Matthew Stafford, Ja&#039;Marr Chase, Drake London, Colston Loveland Football is back! The 2026 NFL season kicked off this past week with a plethora of exciting primetime games, plus a stacked slate of Sunday contests. This week featu",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/biggest-busts-fantasy-football-week-1-disappointments-2025-2/1930400",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-14T12:26:38.092549+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
