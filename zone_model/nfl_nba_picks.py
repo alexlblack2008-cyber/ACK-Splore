@@ -40,6 +40,17 @@ NFL_MIN_CONF      = 0.48
 NBA_MIN_EDGE_PTS  = 3.5
 NBA_MIN_CONF      = 0.48
 
+# NFL game days: Mon=0, Thu=3, Sun=6; late-season Sat (Dec 12+)
+_NFL_GAME_DAYS = {0, 3, 6}
+
+
+def _is_nfl_game_day(d: date) -> bool:
+    if d.weekday() in _NFL_GAME_DAYS:
+        return True
+    if d.weekday() == 5 and d.month == 12 and d.day >= 12:
+        return True
+    return False
+
 
 @dataclass
 class ScoredNFLNBAGame:
@@ -160,8 +171,95 @@ def _nfl_offline_events(game_date: str) -> list[dict]:
     return events
 
 
+@dataclass
+class NFLPropLine:
+    player:  str
+    team:    str
+    prop:    str      # "passing_yards", "rushing_yards", "receiving_yards"
+    line:    float    # season avg used as synthetic market line
+    avg:     float
+    vs_mult: float    # opponent defense multiplier
+    adj:     float    # (avg * vs_mult) - line
+    rec:     str      # "OVER" or "UNDER"
+    note:    str
+
+
+def _nfl_props_for_game(home: str, away: str) -> list[NFLPropLine]:
+    """
+    Generate player prop leans using static profiles + opponent defense mult.
+    Season avg is the synthetic line; opp-adjusted projection is the lean.
+    Only surfaces props with ≥ 5pt projected deviation from the line.
+    """
+    try:
+        from nfl_teams import (
+            NFL_OFFENSIVE_PROFILES, QB_PROP_PROFILES, SKILL_PLAYER_PROPS,
+        )
+        from props_model import NFL_DEF_ALLOWED
+    except ImportError:
+        return []
+
+    props: list[NFLPropLine] = []
+
+    for team, opp in ((home, away), (away, home)):
+        prof = NFL_OFFENSIVE_PROFILES.get(team)
+        if not prof:
+            continue
+
+        # QB passing yards
+        qb = QB_PROP_PROFILES.get(prof.qb_name)
+        if qb:
+            def_mult = NFL_DEF_ALLOWED["passing_yards"].get(
+                opp, NFL_DEF_ALLOWED["passing_yards"]["__default__"])
+            line    = round(qb.pass_yds_avg / 0.5) * 0.5
+            adj_avg = qb.pass_yds_avg * def_mult
+            diff    = adj_avg - line
+            if abs(diff) >= 8.0:
+                props.append(NFLPropLine(
+                    player=qb.name, team=team, prop="passing_yards",
+                    line=line, avg=round(qb.pass_yds_avg, 1),
+                    vs_mult=round(def_mult, 2), adj=round(diff, 1),
+                    rec="OVER" if diff > 0 else "UNDER",
+                    note=f"vs {opp} def {def_mult:.2f}x",
+                ))
+
+        # WR/TE receiving yards + RB rushing yards
+        for player_name in (prof.wr1, prof.wr2, prof.te1, prof.rb1):
+            sp = SKILL_PLAYER_PROPS.get(player_name)
+            if not sp:
+                continue
+            if sp["pos"] == "RB":
+                def_mult = NFL_DEF_ALLOWED["rushing_yards"].get(
+                    opp, NFL_DEF_ALLOWED["rushing_yards"]["__default__"])
+                base_avg, prop_key = sp["rush_yds"], "rushing_yards"
+            else:
+                def_mult = NFL_DEF_ALLOWED["receiving_yards"].get(
+                    opp, NFL_DEF_ALLOWED["receiving_yards"]["__default__"])
+                base_avg, prop_key = sp["rec_yds"], "receiving_yards"
+
+            line    = round(base_avg / 0.5) * 0.5
+            adj_avg = base_avg * def_mult
+            diff    = adj_avg - line
+            if abs(diff) >= 5.0:
+                props.append(NFLPropLine(
+                    player=player_name, team=team, prop=prop_key,
+                    line=line, avg=round(base_avg, 1),
+                    vs_mult=round(def_mult, 2), adj=round(diff, 1),
+                    rec="OVER" if diff > 0 else "UNDER",
+                    note=f"vs {opp} def {def_mult:.2f}x",
+                ))
+
+    props.sort(key=lambda p: abs(p.adj), reverse=True)
+    return props[:6]
+
+
 def score_nfl_games(game_date: str | None = None) -> list[ScoredNFLNBAGame]:
     today = game_date or date.today().isoformat()
+    d = date.fromisoformat(today)
+
+    # Only return picks on actual NFL game days
+    if not _is_nfl_game_day(d):
+        return []
+
     events = _fetch_games("americanfootball_nfl", today)
     offline = not bool(events)
     if offline:
@@ -306,6 +404,21 @@ def format_nfl_nba_section(picks: list[ScoredNFLNBAGame], game_date: str) -> str
         lines.append("  Research:")
         for r in out.rationale[:4]:
             lines.append(f"    • {r}")
+        # Player props for NFL games
+        if picks[0].sport == "nfl":
+            try:
+                prop_lines = _nfl_props_for_game(p.home_team, p.away_team)
+                if prop_lines:
+                    lines.append("  Props (projected vs opp defense):")
+                    for pl in prop_lines:
+                        sym = "▲" if pl.rec == "OVER" else "▼"
+                        lines.append(
+                            f"    {sym} {pl.player} ({pl.team})  "
+                            f"{pl.rec} {pl.line} {pl.prop.replace('_', ' ')}  "
+                            f"[avg {pl.avg}, mult {pl.vs_mult:.2f}x, adj {pl.adj:+.1f}]"
+                        )
+            except Exception:
+                pass
         # Intel signals summary
         if _INTEL_AVAILABLE:
             sigs = get_team_signals(p.home_team, p.sport) + get_team_signals(p.away_team, p.sport)
