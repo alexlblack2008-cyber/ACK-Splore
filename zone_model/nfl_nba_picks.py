@@ -47,7 +47,11 @@ _NFL_GAME_DAYS = {0, 3, 6}
 def _is_nfl_game_day(d: date) -> bool:
     if d.weekday() in _NFL_GAME_DAYS:
         return True
+    # Late-season Saturday games (Week 14+, mid-December)
     if d.weekday() == 5 and d.month == 12 and d.day >= 12:
+        return True
+    # NFL Brazil international game: one Friday in September each year
+    if d.weekday() == 4 and d.month == 9:
         return True
     return False
 
