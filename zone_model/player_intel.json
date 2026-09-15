@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-09-15T11:31:23.879021+00:00",
-  "signal_count": 801,
+  "updated_at": "2026-09-15T16:44:42.342023+00:00",
+  "signal_count": 807,
   "signals": [
+    {
+      "player": "Hunter Brown",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Royals vs. Astros MLB picks: With ace Hunter Brown pitching, not a game playoff-hopeful Houston can lose Houston can&#03",
+      "excerpt": "Royals vs. Astros MLB picks: With ace Hunter Brown pitching, not a game playoff-hopeful Houston can lose Houston can&#039;t really afford a Tuesday loss behind ace Hunter Brown vs. the Royals",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/betting/news/royals-vs-astros-mlb-picks-with-ace-hunter-brown-pitching-not-a-game-playoff-hopeful-houston-can-lose/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-15T16:44:23.349615+00:00"
+    },
+    {
+      "player": "Trevor Lawrence",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Six lessons learned from Week 1: Caleb Williams is taking another leap, don&#039;t forget about Trevor Lawrence Plus, Ke",
+      "excerpt": "Six lessons learned from Week 1: Caleb Williams is taking another leap, don&#039;t forget about Trevor Lawrence Plus, Kenneth Walker III might just be the answer to the Chiefs&#039; biggest problem",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/six-lessons-learned-from-nfl-week-1/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-15T16:44:22.966103+00:00"
+    },
+    {
+      "player": "A.J. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "2026 NFL Week 2 injury panic meter: Myles Garrett, A.J. Brown, Sam Darnold sidelined with lower body issues Gauging the ",
+      "excerpt": "2026 NFL Week 2 injury panic meter: Myles Garrett, A.J. Brown, Sam Darnold sidelined with lower body issues Gauging the outlook for some of the league&#039;s biggest Week 1 injuries",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/2026-nfl-week-2-injury-panic-meter-myles-garrett-a-j-brown-sam-darnold/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-15T16:44:22.965759+00:00"
+    },
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "2026 NFL Week 2 injury panic meter: Myles Garrett, A.J. Brown, Sam Darnold sidelined with lower body issues Gauging the ",
+      "excerpt": "2026 NFL Week 2 injury panic meter: Myles Garrett, A.J. Brown, Sam Darnold sidelined with lower body issues Gauging the outlook for some of the league&#039;s biggest Week 1 injuries",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/2026-nfl-week-2-injury-panic-meter-myles-garrett-a-j-brown-sam-darnold/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-15T16:44:22.965735+00:00"
+    },
+    {
+      "player": "Corbin Carroll",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_down",
+      "headline": "The Opener: Carroll Walk-Off, Peters At-Bat, Clinches With Christian Koss flying down the line, Cardinals shortstop Masy",
+      "excerpt": "The Opener: Carroll Walk-Off, Peters At-Bat, Clinches With Christian Koss flying down the line, Cardinals shortstop Masyn Winn unleashed a 99.8 mph throw to end last night&#8217;s game (video link via MLB on X). It was the second-fastest infield assist in the Statcast era (h/t Sarah Langs of MLB.com",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/the-opener-carroll-walk-off-peters-at-bat-clinches.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-15T16:44:18.391994+00:00"
+    },
+    {
+      "player": "Lamar Jackson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Todd Monken responds to Mike Tomlin: It's not Browns being Browns, it's Browns playing poorly for one week During the pr",
+      "excerpt": "Todd Monken responds to Mike Tomlin: It's not Browns being Browns, it's Browns playing poorly for one week During the pregame show for Sunday night's matchup between the Cowboys and Giants, new NBC analyst Mike Tomlin quoted one of his former players when talking about Cleveland's ugly 34-10 loss to",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/todd-monken-responds-to-mike-tomlin-its-not-browns-being-browns-its-browns-playing-poorly-for-one-week",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-15T16:44:16.035736+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -10484,8 +10562,8 @@
     "Malik Nabers|injury": "2026-09-14T19:47:44.566121+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-12T22:56:05.346686+00:00",
-    "A.J. Brown|injury": "2026-09-12T15:23:18.461784+00:00",
-    "Lamar Jackson|injury": "2026-09-13T20:36:49.327345+00:00",
+    "A.J. Brown|injury": "2026-09-15T16:44:42.341932+00:00",
+    "Lamar Jackson|injury": "2026-09-15T16:44:42.341932+00:00",
     "Garrett Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "Russell Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "49ers|suspension": "2026-09-03T04:01:05.504258+00:00",
@@ -10531,7 +10609,7 @@
     "Patriots|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
     "George Kittle|injury": "2026-09-11T16:16:54.878771+00:00",
     "Malik Nabers|positive": "2026-09-09T23:07:44.525528+00:00",
-    "Sam Darnold|injury": "2026-09-15T04:29:41.689539+00:00",
+    "Sam Darnold|injury": "2026-09-15T16:44:42.341932+00:00",
     "Drake Maye|injury": "2026-09-10T04:11:59.931104+00:00",
     "Bryce Young|injury": "2026-09-10T16:13:28.085723+00:00",
     "Tua Tagovailoa|injury": "2026-09-12T22:56:05.346686+00:00",
@@ -10563,6 +10641,8 @@
     "Kyren Williams|injury": "2026-09-15T04:29:41.689539+00:00",
     "Caleb Williams|injury": "2026-09-15T04:29:41.689539+00:00",
     "Javonte Williams|injury": "2026-09-15T04:29:41.689539+00:00",
-    "Ladd McConkey|injury": "2026-09-14T23:48:29.094814+00:00"
+    "Ladd McConkey|injury": "2026-09-14T23:48:29.094814+00:00",
+    "Trevor Lawrence|injury": "2026-09-15T16:44:42.341932+00:00",
+    "Hunter Brown|usage_up": "2026-09-15T16:44:42.341932+00:00"
   }
 }
