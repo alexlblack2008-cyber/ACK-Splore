@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-09-16T11:17:26.018058+00:00",
-  "signal_count": 825,
+  "updated_at": "2026-09-16T16:37:43.090210+00:00",
+  "signal_count": 826,
   "signals": [
+    {
+      "player": "Bryce Young",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Fact or Fiction: Fantasy Football Outlooks for Bryce Young, Chuba Hubbard, Kyle Monangai, Jalen Coker, Mike Gesicki The ",
+      "excerpt": "Fact or Fiction: Fantasy Football Outlooks for Bryce Young, Chuba Hubbard, Kyle Monangai, Jalen Coker, Mike Gesicki The 2026 NFL season has begun at long last, and it has already treated us to some great matchups. The Bills left Houston with a high-scoring 36-31 victory, the Lions survived a late Sa",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/fantasy-football-start-em-sit-em-picks-bryce-young-chuba-hubbard-kyle-monangai-jalen-coker-mike-gesicki/1932100",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-16T16:37:23.355953+00:00"
+    },
     {
       "player": "Jalen Hurts",
       "team": "Unknown",
