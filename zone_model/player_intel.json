@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-18T04:16:01.539211+00:00",
-  "signal_count": 909,
+  "updated_at": "2026-09-18T10:59:08.847770+00:00",
+  "signal_count": 912,
   "signals": [
+    {
+      "player": "Kawhi Leonard",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more",
+      "excerpt": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more The Kawhi trade to the Raptors should go through, but the Clippers&#039; appeals process is much less clear",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/whats-next-kawhi-leonard-clippers-five-lingering-questions/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T10:58:51.007909+00:00"
+    },
+    {
+      "player": "Klay Thompson",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston wor",
+      "excerpt": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston worked out a below-max deal for Thompson to lock him into its long-term core",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/amen-thompson-contract-extension-houston-rockets/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T10:58:51.007569+00:00"
+    },
+    {
+      "player": "Luis Castillo",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "White Sox Move Luis Castillo To Bullpen The White Sox will use\u00a0Luis Castillo out of the bullpen, manager Will Venable to",
+      "excerpt": "White Sox Move Luis Castillo To Bullpen The White Sox will use\u00a0Luis Castillo out of the bullpen, manager Will Venable told reporters on Thursday (link via Jesse Rogers of ESPN). Rookie\u00a0David Sandlin will start tomorrow against Detroit. Chicago acquired Castillo from Seattle at the deadline. It was t",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/white-sox-move-luis-castillo-to-bullpen.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T10:58:45.775572+00:00"
+    },
     {
       "player": "LeBron James",
       "team": "Unknown",
@@ -11834,9 +11873,9 @@
     "Shane Bieber|injury": "2026-08-31T05:02:16.921009+00:00",
     "Cal Raleigh|injury": "2026-09-09T23:07:44.525528+00:00",
     "Vladimir Guerrero Jr|injury": "2026-08-30T04:57:19.770209+00:00",
-    "Klay Thompson|injury": "2026-09-17T04:31:12.678553+00:00",
+    "Klay Thompson|injury": "2026-09-18T10:59:08.847670+00:00",
     "Jaylen Brown|injury": "2026-09-10T11:02:39.120257+00:00",
-    "Kawhi Leonard|injury": "2026-09-17T21:12:18.489195+00:00",
+    "Kawhi Leonard|injury": "2026-09-18T10:59:08.847670+00:00",
     "LeBron James|injury": "2026-09-18T04:16:01.539087+00:00",
     "Bradley Beal|injury": "2026-09-02T11:03:02.789766+00:00",
     "Dolphins|suspension": "2026-08-28T15:12:52.988716+00:00",
@@ -11978,6 +12017,7 @@
     "Josiah Gray|activation": "2026-09-17T21:12:18.489195+00:00",
     "Zay Flowers|late_scratch": "2026-09-17T21:12:18.489195+00:00",
     "Justin Herbert|injury": "2026-09-18T04:16:01.539087+00:00",
-    "Stephen Curry|injury": "2026-09-18T04:16:01.539087+00:00"
+    "Stephen Curry|injury": "2026-09-18T04:16:01.539087+00:00",
+    "Luis Castillo|injury": "2026-09-18T10:59:08.847670+00:00"
   }
 }
