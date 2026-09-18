@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-09-18T16:13:37.035090+00:00",
-  "signal_count": 919,
+  "updated_at": "2026-09-18T20:44:59.569697+00:00",
+  "signal_count": 924,
   "signals": [
+    {
+      "player": "Paul George",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "positive",
+      "headline": "Who will be next member from 2023 NBA Draft class to sign a big-money extension? Jazz guard Keyonte George agreed to a $",
+      "excerpt": "Who will be next member from 2023 NBA Draft class to sign a big-money extension? Jazz guard Keyonte George agreed to a $157.5 million deal this week, so who&#039;s next in line to get paid?",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/next-member-2023-nba-draft-class-big-money-extension-keyonte-george/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-18T20:44:41.295196+00:00"
+    },
+    {
+      "player": "Kyler Murray",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Vikings rule out Kyler Murray for Week 2 vs. Bears, Carson Wentz to start Murray remains in concussion protocol after hi",
+      "excerpt": "Vikings rule out Kyler Murray for Week 2 vs. Bears, Carson Wentz to start Murray remains in concussion protocol after his anticipated Vikings debut lasted less than one quarter",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/kyler-murray-injury-vikings-qb-carson-wentz/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T20:44:40.511836+00:00"
+    },
+    {
+      "player": "Spencer Steer",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Reds Claim Oswaldo Cabrera The Reds have claimed infielder/outfielder Oswaldo Cabrera off waivers from the Yankees, acco",
+      "excerpt": "Reds Claim Oswaldo Cabrera The Reds have claimed infielder/outfielder Oswaldo Cabrera off waivers from the Yankees, according to announcements from both clubs. Alfre Alvarez of Con Las Bases Llenas reported the claim prior to the official announcement. Cabrera had been designated for assignment by t",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/reds-claim-oswaldo-cabrera.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T20:44:35.688618+00:00"
+    },
+    {
+      "player": "Jonathan Taylor",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Zac Taylor: Joe Burrow was a full participant on Friday, feels good Burrow appears set to start against Houston on Sunda",
+      "excerpt": "Zac Taylor: Joe Burrow was a full participant on Friday, feels good Burrow appears set to start against Houston on Sunday despite dealing with a back issue this week.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/zac-taylor-joe-burrow-was-a-full-participant-on-friday-feels-good",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T20:44:34.136733+00:00"
+    },
+    {
+      "player": "Chiefs",
+      "team": "Chiefs",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Anthony Richardson set to be QB2 on Sunday, Ashton Dulin ruled out The Colts have ruled out one player for Sunday night'",
+      "excerpt": "Anthony Richardson set to be QB2 on Sunday, Ashton Dulin ruled out The Colts have ruled out one player for Sunday night's matchup with the Chiefs, but their backup quarterback will be OK to play.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/anthony-richardson-set-to-be-qb2-on-sunday-ashton-dulin-ruled-out",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-18T20:44:34.136537+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -12029,7 +12094,7 @@
     "Adley Rutschman|usage_up": "2026-09-03T20:52:08.398218+00:00",
     "Rams|suspension": "2026-09-10T20:43:27.285732+00:00",
     "Rams|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
-    "Jonathan Taylor|injury": "2026-09-09T20:48:41.791163+00:00",
+    "Jonathan Taylor|injury": "2026-09-18T20:44:59.569566+00:00",
     "Rays|pitcher_scratch": "2026-09-15T21:08:25.144180+00:00",
     "Kevin Durant|injury": "2026-09-17T21:12:18.489195+00:00",
     "LeBron James|activation": "2026-09-17T21:12:18.489195+00:00",
@@ -12092,7 +12157,7 @@
     "Zay Flowers|injury": "2026-09-17T21:12:18.489195+00:00",
     "Brian Thomas Jr|injury": "2026-09-13T20:36:49.327345+00:00",
     "William Contreras|activation": "2026-09-13T20:36:49.327345+00:00",
-    "Kyler Murray|injury": "2026-09-18T04:16:01.539087+00:00",
+    "Kyler Murray|injury": "2026-09-18T20:44:59.569566+00:00",
     "Logan Webb|usage_up": "2026-09-15T04:29:41.689539+00:00",
     "Kyren Williams|injury": "2026-09-17T11:25:34.629540+00:00",
     "Caleb Williams|injury": "2026-09-17T11:25:34.629540+00:00",
@@ -12109,6 +12174,9 @@
     "Zay Flowers|late_scratch": "2026-09-17T21:12:18.489195+00:00",
     "Justin Herbert|injury": "2026-09-18T04:16:01.539087+00:00",
     "Stephen Curry|injury": "2026-09-18T04:16:01.539087+00:00",
-    "Luis Castillo|injury": "2026-09-18T10:59:08.847670+00:00"
+    "Luis Castillo|injury": "2026-09-18T10:59:08.847670+00:00",
+    "Chiefs|qb_scratch": "2026-09-18T20:44:59.569566+00:00",
+    "Spencer Steer|injury": "2026-09-18T20:44:59.569566+00:00",
+    "Paul George|positive": "2026-09-18T20:44:59.569566+00:00"
   }
 }
