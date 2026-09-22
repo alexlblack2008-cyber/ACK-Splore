@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-21T23:59:09.968441+00:00",
-  "signal_count": 1081,
+  "updated_at": "2026-09-22T04:43:23.561021+00:00",
+  "signal_count": 1085,
   "signals": [
+    {
+      "player": "Dylan Cease",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Dylan Cease Dealing With Shoulder Inflammation Dylan Cease will not pitch for the Blue Jays during this week&#8217;s ser",
+      "excerpt": "Dylan Cease Dealing With Shoulder Inflammation Dylan Cease will not pitch for the Blue Jays during this week&#8217;s series at Camden Yards. The likely AL Cy Young finalist tells reporters (including Keegan Matheson of MLB.com and Shi Davidi of Sportsnet) that he&#8217;s been diagnosed with shoulder",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/dylan-cease-dealing-with-shoulder-inflammation.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T04:43:03.045586+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Malik Nabers returns to Monday night game on next drive Nabers was back on the next drive after suffering shoulder injur",
+      "excerpt": "Malik Nabers returns to Monday night game on next drive Nabers was back on the next drive after suffering shoulder injury.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/malik-nabers-returns-to-monday-night-game-on-next-drive",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T04:43:01.679254+00:00"
+    },
+    {
+      "player": "Davante Adams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Monday Night Football: Matthew Stafford, Davante Adams have Rams up 14-3 at halftime The Rams are playing without wide r",
+      "excerpt": "Monday Night Football: Matthew Stafford, Davante Adams have Rams up 14-3 at halftime The Rams are playing without wide receiver Puka Nacua and pass rusher Myles Garrett.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/monday-night-football-matthew-stafford-davante-adams-have-rams-up-14-3-at-halftime",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T04:43:01.678935+00:00"
+    },
+    {
+      "player": "Matthew Stafford",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Monday Night Football: Matthew Stafford, Davante Adams have Rams up 14-3 at halftime The Rams are playing without wide r",
+      "excerpt": "Monday Night Football: Matthew Stafford, Davante Adams have Rams up 14-3 at halftime The Rams are playing without wide receiver Puka Nacua and pass rusher Myles Garrett.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/monday-night-football-matthew-stafford-davante-adams-have-rams-up-14-3-at-halftime",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T04:43:01.678884+00:00"
+    },
     {
       "player": "Kawhi Leonard",
       "team": "Unknown",
@@ -14121,7 +14173,7 @@
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
     "Adley Rutschman|injury": "2026-09-01T23:13:00.966858+00:00",
     "Lourdes Gurriel Jr|activation": "2026-09-01T23:13:00.966858+00:00",
-    "Malik Nabers|injury": "2026-09-15T21:08:25.144180+00:00",
+    "Malik Nabers|injury": "2026-09-22T04:43:23.560889+00:00",
     "Kirk Cousins|injury": "2026-09-02T16:24:05.515160+00:00",
     "Mike Trout|injury": "2026-09-19T22:50:26.969943+00:00",
     "A.J. Brown|injury": "2026-09-17T21:12:18.489195+00:00",
@@ -14179,7 +14231,7 @@
     "Spencer Strider|usage_up": "2026-09-10T20:43:27.285732+00:00",
     "Zay Flowers|positive": "2026-09-10T23:03:00.920821+00:00",
     "Brock Purdy|injury": "2026-09-11T04:11:02.585396+00:00",
-    "Matthew Stafford|injury": "2026-09-11T04:11:02.585396+00:00",
+    "Matthew Stafford|injury": "2026-09-22T04:43:23.560889+00:00",
     "Kyler Murray|positive": "2026-09-11T04:11:02.585396+00:00",
     "Puka Nacua|injury": "2026-09-21T23:59:09.968273+00:00",
     "Luis Robert|usage_up": "2026-09-18T16:13:37.034932+00:00",
@@ -14231,6 +14283,8 @@
     "Jayden Daniels|injury": "2026-09-21T23:59:09.968273+00:00",
     "David Njoku|injury": "2026-09-20T23:07:19.088374+00:00",
     "Steelers|suspension": "2026-09-21T19:55:52.873596+00:00",
-    "Drake London|injury": "2026-09-21T19:55:52.873596+00:00"
+    "Drake London|injury": "2026-09-21T19:55:52.873596+00:00",
+    "Davante Adams|injury": "2026-09-22T04:43:23.560889+00:00",
+    "Dylan Cease|injury": "2026-09-22T04:43:23.560889+00:00"
   }
 }
