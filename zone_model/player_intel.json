@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-22T16:43:26.010995+00:00",
-  "signal_count": 1098,
+  "updated_at": "2026-09-22T21:09:02.180672+00:00",
+  "signal_count": 1102,
   "signals": [
+    {
+      "player": "Kawhi Leonard",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more",
+      "excerpt": "What&#039;s next after NBA&#039;s Clippers punishment? Five lingering questions about Kawhi Leonard trade, appeals, more The Kawhi trade to the Raptors should go through, but the Clippers&#039; appeals process is much less clear",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/whats-next-kawhi-leonard-clippers-five-lingering-questions/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T21:08:44.698948+00:00"
+    },
+    {
+      "player": "Klay Thompson",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston wor",
+      "excerpt": "Rockets, Amen Thompson agree to $208 million extension as Houston banks on continued growth from rising star Houston worked out a below-max deal for Thompson to lock him into its long-term core",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/amen-thompson-contract-extension-houston-rockets/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T21:08:44.698644+00:00"
+    },
+    {
+      "player": "Kawhi Leonard",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "positive",
+      "headline": "Kawhi Leonard contract breakdown: What $115 million extension means as Raptors try to compete in loaded East Leonard&#03",
+      "excerpt": "Kawhi Leonard contract breakdown: What $115 million extension means as Raptors try to compete in loaded East Leonard&#039;s new deal with the Raptors will come in slightly below the max",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/kawhi-leonard-toronto-raptors-contract-extension/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-09-22T21:08:44.697064+00:00"
+    },
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "NFL 2026 backup QB rankings: A look at the five best and worst signal callers Injuries across the league have exposed a ",
+      "excerpt": "NFL 2026 backup QB rankings: A look at the five best and worst signal callers Injuries across the league have exposed a severe shortage of reliable depth as developmental pipelines struggle to produce capable passers",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/nfl-2026-backup-qb-rankings-five-best-worst/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-22T21:08:43.764788+00:00"
+    },
     {
       "player": "Stephen Curry",
       "team": "Unknown",
@@ -14291,9 +14343,9 @@
     "Shane Bieber|injury": "2026-08-31T05:02:16.921009+00:00",
     "Cal Raleigh|injury": "2026-09-09T23:07:44.525528+00:00",
     "Vladimir Guerrero Jr|injury": "2026-08-30T04:57:19.770209+00:00",
-    "Klay Thompson|injury": "2026-09-21T19:55:52.873596+00:00",
+    "Klay Thompson|injury": "2026-09-22T21:09:02.180564+00:00",
     "Jaylen Brown|injury": "2026-09-10T11:02:39.120257+00:00",
-    "Kawhi Leonard|injury": "2026-09-21T19:55:52.873596+00:00",
+    "Kawhi Leonard|injury": "2026-09-22T21:09:02.180564+00:00",
     "LeBron James|injury": "2026-09-22T16:43:26.010906+00:00",
     "Bradley Beal|injury": "2026-09-02T11:03:02.789766+00:00",
     "Dolphins|suspension": "2026-08-28T15:12:52.988716+00:00",
@@ -14316,7 +14368,7 @@
     "Willy Adames|injury": "2026-08-29T16:35:12.080679+00:00",
     "Chris Olave|injury": "2026-09-18T23:09:32.737271+00:00",
     "Giants|suspension": "2026-08-29T23:11:23.900566+00:00",
-    "Unknown|qb_scratch": "2026-09-10T11:02:39.120257+00:00",
+    "Unknown|qb_scratch": "2026-09-22T21:09:02.180564+00:00",
     "Bills|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Buccaneers|qb_scratch": "2026-08-30T16:30:20.969160+00:00",
     "Dolphins|qb_scratch": "2026-09-19T04:12:21.979887+00:00",
@@ -14455,6 +14507,7 @@
     "Drake London|injury": "2026-09-21T19:55:52.873596+00:00",
     "Davante Adams|injury": "2026-09-22T04:43:23.560889+00:00",
     "Dylan Cease|injury": "2026-09-22T04:43:23.560889+00:00",
-    "Giants|pitcher_scratch": "2026-09-22T11:21:22.688609+00:00"
+    "Giants|pitcher_scratch": "2026-09-22T11:21:22.688609+00:00",
+    "Kawhi Leonard|positive": "2026-09-22T21:09:02.180564+00:00"
   }
 }
