@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-09-23T11:16:18.117778+00:00",
-  "signal_count": 1119,
+  "updated_at": "2026-09-23T16:38:18.189115+00:00",
+  "signal_count": 1122,
   "signals": [
+    {
+      "player": "Josh Allen",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "Ranking MVP candidates after Week 2: Josh Allen takes early lead, but a RB not too far behind Evaluating 10 players who ",
+      "excerpt": "Ranking MVP candidates after Week 2: Josh Allen takes early lead, but a RB not too far behind Evaluating 10 players who have made a case for early MVP consideration",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/ranking-mvp-candidates-after-week-2-josh-allen-kenneth-walker/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-23T16:37:58.920286+00:00"
+    },
+    {
+      "player": "Malik Nabers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Fantasy Football Matchups We Love - Start &#039;Em, Sit &#039;Em Picks for Week 3 (2026) We are already entering Week 3 ",
+      "excerpt": "Fantasy Football Matchups We Love - Start &#039;Em, Sit &#039;Em Picks for Week 3 (2026) We are already entering Week 3 of the NFL season. Injuries are upon us in a big way, which makes weekly lineup decisions that much more difficult. Fantasy managers are already digging into the bench and waivers ",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/fantasy-football-matchups-we-love-start-em-sit-em-picks-for-week-3-2026/1947692",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-09-23T16:37:57.631532+00:00"
+    },
+    {
+      "player": "Zack Wheeler",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "The Opener: Wheeler, Rodon, Rays The Twins set an American League record on Tuesday when reliever Jeff Hoffman finished ",
+      "excerpt": "The Opener: Wheeler, Rodon, Rays The Twins set an American League record on Tuesday when reliever Jeff Hoffman finished off a victory over the Giants. Hoffman became the 15th Twin to earn a save this season (h/t Aaron Gleeman of AaronGleeman.com). 1. Wheeler notches 2,000th strikeout Phillies righty",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/the-opener-wheeler-rodon-rays-clinch.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-23T16:37:55.309652+00:00"
+    },
     {
       "player": "Derrick Henry",
       "team": "Unknown",
@@ -14730,6 +14769,7 @@
     "Dylan Cease|injury": "2026-09-22T04:43:23.560889+00:00",
     "Giants|pitcher_scratch": "2026-09-22T11:21:22.688609+00:00",
     "Kawhi Leonard|positive": "2026-09-22T21:09:02.180564+00:00",
-    "Derrick Henry|injury": "2026-09-23T11:16:18.117644+00:00"
+    "Derrick Henry|injury": "2026-09-23T11:16:18.117644+00:00",
+    "Zack Wheeler|injury": "2026-09-23T16:38:18.188990+00:00"
   }
 }
