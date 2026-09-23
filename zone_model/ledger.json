@@ -1588,10 +1588,10 @@
     "confidence": 0.663,
     "kelly_fraction": 0.0388,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 9,
+    "pnl": 90.91,
+    "settled_at": "2026-09-23T20:04:21.085496"
   },
   {
     "bet_date": "2026-09-22",
@@ -1606,10 +1606,10 @@
     "confidence": 0.377,
     "kelly_fraction": 0.024,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 9,
+    "pnl": 90.91,
+    "settled_at": "2026-09-23T20:04:21.085502"
   },
   {
     "bet_date": "2026-09-22",
@@ -1624,10 +1624,10 @@
     "confidence": 0.352,
     "kelly_fraction": 0.0256,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 10,
+    "pnl": 90.91,
+    "settled_at": "2026-09-23T20:04:21.085416"
   },
   {
     "bet_date": "2026-09-22",
@@ -1642,10 +1642,10 @@
     "confidence": 0.506,
     "kelly_fraction": 0.0185,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "won",
+    "actual_runs": 10,
+    "pnl": 90.91,
+    "settled_at": "2026-09-23T20:04:21.085490"
   },
   {
     "bet_date": "2026-09-22",
@@ -1659,6 +1659,42 @@
     "edge_runs": 0.3,
     "confidence": 0.454,
     "kelly_fraction": 0.022,
+    "stake": 100.0,
+    "outcome": "lost",
+    "actual_runs": 5,
+    "pnl": -100.0,
+    "settled_at": "2026-09-23T20:04:21.085472"
+  },
+  {
+    "bet_date": "2026-09-23",
+    "game_pk": 824868,
+    "home_team": "Atlanta Braves",
+    "away_team": "Cincinnati Reds",
+    "umpire": "Derek Thomas",
+    "recommendation": "UNDER",
+    "market_total": 8.5,
+    "fair_total": 5.97,
+    "edge_runs": -2.53,
+    "confidence": 0.341,
+    "kelly_fraction": 0.0256,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
+  },
+  {
+    "bet_date": "2026-09-23",
+    "game_pk": 823410,
+    "home_team": "Philadelphia Phillies",
+    "away_team": "Milwaukee Brewers",
+    "umpire": "Dan Bellino",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.37,
+    "edge_runs": 0.87,
+    "confidence": 0.486,
+    "kelly_fraction": 0.0311,
     "stake": 100.0,
     "outcome": "pending",
     "actual_runs": null,
