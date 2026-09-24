@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Right-of-Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#E6EAE1; --panel:#F5F6F1; --panel-2:#ECEFE7; --ink:#1E2B38; --ink-2:#56626E; --rule:#C7CEC3;
+  --hivis:#E8590C; --hivis-ink:#FFFFFF; --water:#8DB8C7;
+  --good:#2F7D4F; --warn:#B7790A; --bad:#BF3A2B;
+  --zr:#EFD77A; --zc:#E39A96; --zi:#B4A2D6;
+  --display:"Overpass","Highway Gothic","Arial Narrow",system-ui,sans-serif;
+  --mono:"Overpass Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:14px/1.45 var(--display);}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible{outline:2px solid var(--hivis);outline-offset:2px}
+
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding-block:10px;padding-inline:16px;border-bottom:2px solid var(--ink);background:var(--panel)}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand h1{margin:0;font-weight:900;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
+.brand h1 span{display:inline-block;background:var(--hivis);color:var(--hivis-ink);padding:0 6px;margin-left:2px;transform:skewX(-8deg)}
+.brand small{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 16px}
+.stat{display:flex;flex-direction:column;line-height:1.1}
+.stat b{font-family:var(--mono);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
+.stat i{font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.stat b.neg{color:var(--bad)}
+.speed{display:flex;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden}
+.speed button{background:transparent;border:0;padding:5px 10px;font-weight:800;font-size:12px;cursor:pointer;border-right:1.5px solid var(--ink)}
+.speed button:last-child{border-right:0}
+.speed button[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+
+.app{display:grid;grid-template-columns:210px minmax(0,1fr) 320px;gap:14px;padding-inline:16px;padding-block:14px;max-width:1680px;margin:0 auto;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:6px}
+.panel h2{margin:0;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel h2 em{font-style:normal;font-family:var(--mono);font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-2)}
+.pbody{padding:10px 12px}
+
+/* tools */
+.tools{display:flex;flex-direction:column;gap:10px}
+.tgroup{display:flex;flex-direction:column;gap:3px}
+.tgroup > span{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);padding:0 2px}
+.tool{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:8px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:5px 7px;cursor:pointer}
+.tool:hover{border-color:var(--ink-2)}
+.tool[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.tool[disabled]{opacity:.45;cursor:not-allowed}
+.tool .sw{width:22px;height:18px;border-radius:3px;border:1px solid rgba(0,0,0,.25);display:grid;place-items:center;font:600 9px/1 var(--mono);color:#1E2B38}
+.tool .nm{font-weight:600;font-size:13px;line-height:1.15;white-space:nowrap}
+.tool .cs{font-family:var(--mono);font-size:11px;opacity:.75;white-space:nowrap}
+.tool kbd{font-family:var(--mono);font-size:10px;opacity:.55}
+.tooldesc{font-size:12px;color:var(--ink-2);min-height:3.2em}
+
+/* map */
+.mapwrap{display:flex;flex-direction:column;gap:8px;min-width:0}
+.maptop{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.maptop > span{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-right:4px}
+.chip{border:1px solid var(--rule);background:var(--panel);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.legend{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.canvasbox{position:relative;border:2px solid var(--ink);border-radius:4px;overflow:hidden;background:#DDE3D3;line-height:0}
+canvas#map{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.titleblock{position:absolute;right:0;bottom:0;background:rgba(245,246,241,.94);border-left:1.5px solid var(--ink);border-top:1.5px solid var(--ink);font:11px/1.3 var(--mono);padding:5px 9px;pointer-events:none;line-height:1.35}
+.titleblock b{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+.news{display:flex;flex-direction:column;gap:2px;font-size:12.5px;max-height:120px;overflow:auto;padding:8px 12px}
+.news div{display:grid;grid-template-columns:74px 1fr;gap:8px}
+.news time{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.news .bad{color:var(--bad);font-weight:600}
+.news .good{color:var(--good);font-weight:600}
+
+/* side */
+.side{display:flex;flex-direction:column;gap:12px}
+.wo{display:flex;flex-direction:column}
+.wo-item{display:grid;grid-template-columns:4px 1fr auto;gap:10px;padding:8px 12px;border-bottom:1px solid var(--rule);align-items:center;cursor:pointer}
+.wo-item:last-child{border-bottom:0}
+.wo-item:hover{background:var(--panel-2)}
+.wo-item .sev{align-self:stretch;border-radius:2px;background:var(--warn)}
+.wo-item .sev.s3{background:var(--bad)}
+.wo-item b{display:block;font-size:13px}
+.wo-item small{display:block;font-size:11.5px;color:var(--ink-2);font-family:var(--mono)}
+.btn{border:1.5px solid var(--ink);background:var(--panel);border-radius:4px;padding:4px 9px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--panel-2)}
+.btn.hv{background:var(--hivis);border-color:var(--hivis);color:var(--hivis-ink)}
+.btn.hv:hover{filter:brightness(.95)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.status-pill{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:999px;background:var(--panel-2);border:1px solid var(--rule);white-space:nowrap}
+.empty{padding:12px;color:var(--ink-2);font-size:12.5px}
+
+.grades{display:grid;grid-template-columns:1fr auto;gap:0}
+.grades div{padding:6px 12px;border-bottom:1px solid var(--rule);font-size:13px;display:flex;flex-direction:column}
+.grades div small{font-family:var(--mono);font-size:10.5px;color:var(--ink-2)}
+.grades .g{font:900 20px/1 var(--display);display:grid;place-items:center;width:44px}
+.g.A{color:var(--good)}.g.B{color:#5E8C2E}.g.C{color:var(--warn)}.g.D{color:#C8601A}.g.F{color:var(--bad)}.g.NA{color:var(--ink-2);font-size:13px}
+
+.kv{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:12.5px}
+.kv dt{color:var(--ink-2)}
+.kv dd{margin:0;font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.kv .tot{border-top:1px solid var(--rule);padding-top:4px;font-weight:600;color:var(--ink)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.row label{font-size:12px;font-weight:600}
+input[type=range]{accent-color:var(--hivis);flex:1;min-width:90px}
+
+.rci{display:flex;gap:14px;align-items:flex-end;height:74px;padding:6px 12px 10px}
+.rci .bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+.rci .track{flex:1;width:100%;position:relative;border-left:1px solid var(--rule);border-right:1px solid var(--rule);background:linear-gradient(var(--rule),var(--rule)) center/100% 1px no-repeat}
+.rci .fill{position:absolute;left:18%;right:18%;border-radius:2px}
+.rci span{font-size:11px;font-weight:800}
+
+.insp{font-size:12.5px}
+.insp h3{margin:0 0 4px;font-size:15px;font-weight:800}
+.insp p{margin:6px 0 0;color:var(--ink-2)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--rule);margin:2px 3px 0 0}
+.tag.ok{color:var(--good);border-color:currentColor}.tag.no{color:var(--bad);border-color:currentColor}
+
+.modal{position:fixed;inset:0;background:rgba(30,43,56,.45);display:grid;place-items:center;padding:16px;z-index:10}
+.modal .card{background:var(--panel);border:2px solid var(--ink);border-radius:6px;max-width:520px;width:100%;padding:18px 20px}
+.modal h3{margin:0 0 8px;font-size:20px;font-weight:900;text-transform:uppercase}
+.modal p,.modal li{font-size:13.5px}
+.modal ul{padding-left:18px;margin:8px 0}
+
+@media (max-width:1180px){
+  .app{grid-template-columns:200px minmax(0,1fr)}
+  .side{grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+}
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .tools{flex-direction:row;flex-wrap:wrap}
+  .tgroup{flex:1 1 100%}
+  .tgroup .list{display:flex;flex-wrap:wrap;gap:4px}
+  .tool{width:auto;grid-template-columns:18px auto auto}
+  .tool kbd{display:none}
+  .legend{margin-left:0}
+  .brand{margin-right:0;width:100%}
+}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><h1>Right<span>of Way</span></h1><small id="cityname">City of Millbrook · Dept. of Public Works</small></div>
+  <div class="stats">
+    <div class="stat"><b id="sDate">—</b><i>Date</i></div>
+    <div class="stat"><b id="sFunds">—</b><i>Treasury</i></div>
+    <div class="stat"><b id="sPop">—</b><i>Residents</i></div>
+    <div class="stat"><b id="sJobs">—</b><i>Jobs</i></div>
+    <div class="stat"><b id="sHappy">—</b><i>Approval</i></div>
+    <div class="stat"><b id="sCrew">—</b><i>Crews free</i></div>
+  </div>
+  <div class="speed" role="group" aria-label="Simulation speed">
+    <button id="sp0" data-sp="0">Pause</button><button id="sp1" data-sp="1">1×</button><button id="sp2" data-sp="3">3×</button>
+  </div>
+</header>
+
+<main class="app">
+  <aside class="panel">
+    <h2>Toolbox <em id="toolKey"></em></h2>
+    <div class="pbody">
+      <div class="tools" id="tools"></div>
+      <p class="tooldesc" id="toolDesc"></p>
+      <div class="row"><button class="btn" id="helpBtn">How to play</button><button class="btn" id="newBtn">New city</button></div>
+    </div>
+  </aside>
+
+  <section class="mapwrap">
+    <div class="maptop" id="overlays">
+      <span>Map layer</span>
+    </div>
+    <div class="canvasbox">
+      <canvas id="map" aria-label="City map"></canvas>
+      <div class="titleblock" id="titleblock"></div>
+    </div>
+    <div class="panel"><h2>Dispatch log <em>newest first</em></h2><div class="news" id="news"></div></div>
+  </section>
+
+  <aside class="side">
+    <div class="panel">
+      <h2>Work orders <em id="woCount"></em></h2>
+      <div class="wo" id="wo"></div>
+    </div>
+    <div class="panel">
+      <h2>Inspector <em id="inspXY"></em></h2>
+      <div class="pbody insp" id="insp"></div>
+    </div>
+    <div class="panel">
+      <h2>Infrastructure report card <em id="gpa"></em></h2>
+      <div class="grades" id="grades"></div>
+    </div>
+    <div class="panel">
+      <h2>Zoning demand</h2>
+      <div class="rci" id="rci"></div>
+    </div>
+    <div class="panel">
+      <h2>Monthly budget <em id="budgetMonth"></em></h2>
+      <div class="pbody">
+        <dl class="kv" id="budget"></dl>
+        <div class="row"><label for="tax">Property tax</label><input type="range" id="tax" min="5" max="15" step="1"><b id="taxv" style="font-family:var(--mono)"></b></div>
+        <div class="row"><button class="btn" id="bondBtn">Issue $10k bond</button><small id="bondInfo" style="color:var(--ink-2);font-size:11.5px"></small></div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<div class="modal" id="modal" hidden><div class="card" id="modalCard"></div></div>
+
+<script>
+"use strict";
+// ─── constants ───────────────────────────────────────────────────────────────
+const W = 48, H = 32, T = 20;
+const GRASS = 0, WATER = 1, FOREST = 2;
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const START_YEAR = 2027;
+const SAVE_KEY = "right-of-way-city-v1";
+
+const ZONE = {
+  R: { pop: [0, 12, 30, 60], jobs: [0, 0, 0, 0] },
+  C: { pop: [0, 0, 0, 0], jobs: [0, 8, 20, 40] },
+  I: { pop: [0, 0, 0, 0], jobs: [0, 12, 28, 45] },
+};
+const CAP = { power: 60, pump: 0.30, sewage: 0.26 };        // MW, MGD, MGD
+const UPKEEP = { road: 1, ave: 2, bridge: 8, power: 150, pump: 80, sewage: 100, fire: 60, depot: 70, park: 5, levee: 1 };
+const ROAD_CAP = { road: 60, ave: 160, bridge: 60 };          // vehicles per peak hour
+const RADIUS = { fire: 7, depot: 8, park: 4 };
+
+const TOOLS = [
+  { id: "inspect", name: "Inspect", group: "Survey", cost: 0, key: "q", sw: "#FFFFFF", glyph: "?", desc: "Click any tile to read pavement condition (PCI), bridge rating, V/C ratio and utility service." },
+  { id: "road", name: "Street", group: "Transport", cost: 50, key: "1", sw: "#6E737A", desc: "Two-lane street, $50 per tile. Drag to lay a run. Streets are the right-of-way for power lines and water and sewer mains. Over the river it becomes a bridge ($600)." },
+  { id: "ave", name: "Avenue", group: "Transport", cost: 250, key: "2", sw: "#474B52", unlock: 500, desc: "Widen a street to a 4-lane avenue. Capacity goes from 60 to 160 vehicles per hour. Unlocks at 500 residents." },
+  { id: "R", name: "Residential", group: "Zoning", cost: 20, key: "3", sw: "#EFD77A", glyph: "R", desc: "Zone for housing. Grows when it has street access, power and water, and people want to move in." },
+  { id: "C", name: "Commercial", group: "Zoning", cost: 20, key: "4", sw: "#E39A96", glyph: "C", desc: "Zone for shops and offices. Needs residents nearby to shop there." },
+  { id: "I", name: "Industrial", group: "Zoning", cost: 20, key: "5", sw: "#B4A2D6", glyph: "I", desc: "Zone for factories. Lots of jobs, but pollution lowers nearby home values." },
+  { id: "power", name: "Power plant", group: "Utilities", cost: 3000, key: "6", sw: "#F2C14E", glyph: "PW", desc: "60 MW gas plant. Power flows along connected streets, so the plant must touch the network it feeds." },
+  { id: "pump", name: "Water plant", group: "Utilities", cost: 1500, key: "7", sw: "#8DB8C7", glyph: "WT", desc: "0.30 MGD intake and treatment plant. Must sit on the riverbank next to a street." },
+  { id: "sewage", name: "Sewage plant", group: "Utilities", cost: 2500, key: "8", sw: "#9FA88A", glyph: "WW", desc: "0.26 MGD treatment plant on the riverbank. Without enough capacity, sewers overflow and the state fines the city." },
+  { id: "fire", name: "Fire station", group: "Services", cost: 1200, key: "9", sw: "#D9534F", glyph: "FD", desc: "Puts out fires within 7 tiles before they spread." },
+  { id: "depot", name: "Works depot", group: "Services", cost: 1000, key: "0", sw: "#E8590C", glyph: "DPW", desc: "Adds a repair crew and runs preventive maintenance on streets and bridges within 8 tiles. Preventive work costs far less than emergency repair." },
+  { id: "park", name: "Park", group: "Services", cost: 200, key: "p", sw: "#7FB069", glyph: "♣", desc: "Raises approval and home values within 4 tiles." },
+  { id: "levee", name: "Levee", group: "Services", cost: 150, key: "l", sw: "#A78B63", glyph: "LV", desc: "Earthen embankment on the riverbank. Protects this tile and its neighbors from floods." },
+  { id: "repair", name: "Repair", group: "Maintain", cost: 0, key: "e", sw: "#FFFFFF", glyph: "🔧", desc: "Resurface a street or rehab a bridge back to full condition. Emergency rates: $6 per point on streets, $25 per point on bridges." },
+  { id: "bulldoze", name: "Demolish", group: "Maintain", cost: 10, key: "x", sw: "#FFFFFF", glyph: "✕", desc: "Clear a tile. $10 per tile." },
+];
+const TOOL = Object.fromEntries(TOOLS.map(t => [t.id, t]));
+
+const INC = {
+  main:   { name: "Water main break",   days: 3,  cost: 800,  sev: 2, desc: "A cast-iron main failed under the street. Water can't flow past this point, and the city loses $25 a day in treated water." },
+  sink:   { name: "Sinkhole",           days: 5,  cost: 1500, sev: 3, desc: "The roadway collapsed. Traffic, power and water can't pass this tile." },
+  bridge: { name: "Bridge closed",      days: 12, cost: 6000, sev: 3, desc: "Inspection rated this bridge structurally deficient. It is closed to traffic. If it keeps deteriorating it will collapse." },
+  plant:  { name: "Power plant trip",   days: 4,  cost: 2000, sev: 3, desc: "A turbine tripped offline. Everything this plant fed is on reduced supply." },
+  lines:  { name: "Power line down",    days: 2,  cost: 400,  sev: 2, desc: "Storm damage. Power can't pass this tile." },
+  pump:   { name: "Water plant failure",days: 3,  cost: 1200, sev: 3, desc: "High-service pumps failed. This plant isn't producing water." },
+  flood:  { name: "Flooded facility",   days: 6,  cost: 2500, sev: 3, desc: "Floodwater got into the plant. It's offline until it's pumped out and rebuilt." },
+  fire:   { name: "Structure fire",     days: 1,  cost: 600,  sev: 2, desc: "No fire station covers this block, so the fire is spreading. Call mutual aid from a neighboring town, or build a fire station." },
+};
+
+const MILESTONES = [
+  { pop: 500,  text: "Avenues unlocked. Widen busy streets before they hit LOS F.", grant: 0 },
+  { pop: 900,  text: "Town charter granted. State grant of $5,000.", grant: 5000 },
+  { pop: 1500, text: "City status reached. Federal infrastructure grant of $15,000.", grant: 15000 },
+  { pop: 4000, text: "Regional hub. Metropolitan planning grant of $30,000.", grant: 30000 },
+];
+
+// ─── state ───────────────────────────────────────────────────────────────────
+let S;          // game state
+let tool = "inspect", overlay = "base", speed = 1;
+let hover = null, sel = null, painting = false, lastPaint = -1;
+
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const idx = (x, y) => y * W + x;
+const inb = (x, y) => x >= 0 && y >= 0 && x < W && y < H;
+const hash = (x, y) => (((x * 928371 + y * 123457) ^ (x * y * 7919)) >>> 0) % 997 / 997;
+const N4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+function newTile(ter) { return { ter, b: null, lvl: 0, cond: 100, load: 0, pw: false, wt: false, sw: false, fW: false, fP: false, sink: false, closed: false, off: false, fire: 0, flood: 0, bad: 0 }; }
+const T_ = (x, y) => S.tiles[idx(x, y)];
+const isRoad = t => t && (t.b === "road" || t.b === "ave" || t.b === "bridge");
+const isZone = t => t && (t.b === "R" || t.b === "C" || t.b === "I");
+const riverAt = y => 33 + Math.round(3 * Math.sin(y / 4.5) + 1.5 * Math.sin(y / 2.1));
+
+function newCity(seed = 7) {
+  const rnd = mulberry32(seed);
+  S = { day: 0, funds: 25000, tax: 9, bonds: [], tiles: [], inc: [], news: [], nextId: 1, milestones: 0,
+        happy: 65, heat: 0, month: null, history: [], ledger: { maint: 0, emergency: 0, fines: 0, water: 0 } };
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const rc = riverAt(y);
+    let ter = (x >= rc - 1 && x <= rc + 1) ? WATER : GRASS;
+    if (ter === GRASS) {
+      const f = Math.sin(x * 0.45 + seed) * Math.cos(y * 0.5) + rnd() * 0.6;
+      if (f > 0.95 || (x > 40 && rnd() < 0.35) || (y < 4 && x > 20 && rnd() < 0.3)) ter = FOREST;
+    }
+    S.tiles.push(newTile(ter));
+  }
+  const put = (x, y, b, extra = {}) => { const t = T_(x, y); if (b === "road" && t.ter === WATER) b = "bridge"; else if (t.ter === WATER) return; if (t.ter === FOREST) t.ter = GRASS; Object.assign(t, { b }, extra); };
+  const ex = riverAt(15) - 2;                       // last land tile before river on Main St
+  for (let x = 3; x < ex; x++) put(x, 15, "road");
+  put(2, 15, "power"); put(ex, 15, "pump");
+  for (let y = 9; y <= 21; y++) { put(9, y, "road"); put(17, y, "road"); }
+  for (let y = 11; y <= 19; y++) put(24, y, "road");
+  for (let x = 9; x <= 17; x++) { put(x, 9, "road"); put(x, 21, "road", { cond: 38 + rnd() * 10 }); }
+  for (let x = 25; x <= 42; x++) put(x, 12, "road", { cond: T_(x, 12).ter === WATER ? 36 : 70 });
+  // zoning
+  for (let y = 10; y <= 20; y++) for (const x of [16, 18]) if (y !== 15) put(x, y, "R");
+  for (let x = 10; x <= 16; x++) { put(x, 10, "R"); put(x, 20, "R"); put(x, 8, "R"); put(x, 22, "R"); }
+  for (let x = 10; x <= 16; x++) { put(x, 14, "C"); put(x, 16, "C"); }
+  for (let x = 4; x <= 8; x++) { put(x, 14, "I"); put(x, 16, "I"); }
+  for (let y = 11; y <= 18; y++) if (y !== 12 && y !== 15) put(25, y, "R");
+  for (let x = riverAt(11) + 3; x <= 41; x++) { put(x, 11, "R"); put(x, 13, "R"); }
+  put(20, 17, "park"); put(19, 13, "fire");
+  put(18, 21, "road"); put(19, 21, "road"); put(19, 20, "depot", { });
+  // develop the core
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y); if (!isZone(t) || x > 26) continue;
+    const r = rnd();
+    t.lvl = t.b === "R" ? (r < .05 ? 2 : r < .4 ? 1 : 0) : t.b === "C" ? (r < .2 ? 2 : r < .8 ? 1 : 0) : (r < .8 ? 1 : 0);
+  }
+  S.tiles.forEach(t => { if (isRoad(t) && t.cond === 100) t.cond = 62 + rnd() * 30; });
+  computeNetworks();
+  // the job waiting on day one
+  const brk = T_(21, 15); brk.fW = true; brk.cond = 31;
+  addInc("main", 21, 15, true);
+  log("Welcome, City Engineer. A water main just broke on Main St, between the business district and the water plant. Everything west of it is on reduced supply. Open Work Orders and dispatch a crew.", "bad");
+  log("The Riverside bridge on 12th St is rated poor. Watch it on the Condition layer.");
+  computeNetworks(); computeTraffic(); computeStats();
+}
+
+// ─── networks ────────────────────────────────────────────────────────────────
+function passable(t, m) {
+  if (!isRoad(t) || t.sink) return false;
+  if (m === "power" && t.fP) return false;
+  if (m === "water" && t.fW) return false;
+  return true;
+}
+function demandOf(t, m) {
+  const z = ZONE[t.b]; if (!z || !t.lvl) return 0;
+  const p = z.pop[t.lvl], j = z.jobs[t.lvl];
+  if (m === "power") return (p * 0.04 + j * 0.05) * (S.heat > 0 ? 1.3 : 1);
+  if (m === "water") return (p * 150 + j * 50) / 1e6;
+  return (p * 150 + j * 50) * 0.9 / 1e6;
+}
+function computeNetworks() {
+  S.net = {};
+  for (const [m, plant, flag] of [["power", "power", "pw"], ["water", "pump", "wt"], ["sewer", "sewage", "sw"]]) {
+    const comp = new Int32Array(W * H).fill(-1), comps = [];
+    for (let i = 0; i < W * H; i++) {
+      if (comp[i] >= 0 || !passable(S.tiles[i], m)) continue;
+      const c = comps.length; comps.push({ supply: 0, demand: 0 });
+      const q = [i]; comp[i] = c;
+      while (q.length) { const k = q.pop(), x = k % W, y = (k / W) | 0;
+        for (const [dx, dy] of N4) { const nx = x + dx, ny = y + dy; if (!inb(nx, ny)) continue; const j = idx(nx, ny);
+          if (comp[j] < 0 && passable(S.tiles[j], m)) { comp[j] = c; q.push(j); } } }
+    }
+    const adj = (x, y) => { for (const [dx, dy] of N4) { const nx = x + dx, ny = y + dy; if (inb(nx, ny) && comp[idx(nx, ny)] >= 0) return comp[idx(nx, ny)]; } return -1; };
+    let supply = 0, demand = 0, served = 0;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const t = T_(x, y);
+      if (t.b === plant) { const c = adj(x, y); t.link = c >= 0; if (c >= 0 && !t.off) { comps[c].supply += CAP[plant]; supply += CAP[plant]; } }
+    }
+    const bc = [];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const t = T_(x, y); if (!isZone(t)) continue;
+      const c = adj(x, y); bc.push([t, c, x, y]);
+      if (c >= 0) { const d = demandOf(t, m); comps[c].demand += d; demand += d; }
+    }
+    for (const [t, c, x, y] of bc) {
+      if (c < 0) { t[flag] = false; continue; }
+      const k = comps[c], ratio = k.demand > 0 ? Math.min(1, k.supply / k.demand) : (k.supply > 0 ? 1 : 0);
+      t[flag] = k.supply > 0 && hash(x, y) < ratio + 0.0001;
+      if (t.lvl && t[flag]) served += demandOf(t, m);
+    }
+    // store per-road ratio for overlays
+    for (let i = 0; i < W * H; i++) { const t = S.tiles[i]; if (!isRoad(t)) continue; const c = comp[i];
+      t["r_" + m] = c < 0 ? -1 : (comps[c].supply <= 0 ? 0 : Math.min(1, comps[c].demand > 0 ? comps[c].supply / comps[c].demand : 1)); }
+    S.net[m] = { supply, demand, served: demand > 0 ? served / demand : 1 };
+  }
+}
+
+function computeTraffic() {
+  for (const t of S.tiles) t.load = 0;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y); if (!isZone(t) || !t.lvl) continue;
+    const size = ZONE[t.b].pop[t.lvl] + ZONE[t.b].jobs[t.lvl];
+    for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) {
+      const d = Math.abs(dx) + Math.abs(dy); if (d > 3) continue;
+      const nx = x + dx, ny = y + dy; if (!inb(nx, ny)) continue;
+      const r = T_(nx, ny); if (isRoad(r) && !r.sink && !r.closed) r.load += size * 0.42 / (d + 1);
+    }
+  }
+}
+const vcOf = t => t.load / ROAD_CAP[t.b];
+function los(vc) { return vc < 0.6 ? "A" : vc < 0.7 ? "B" : vc < 0.8 ? "C" : vc < 0.9 ? "D" : vc < 1 ? "E" : "F"; }
+function pciLabel(c) { return c >= 85 ? "Good" : c >= 70 ? "Satisfactory" : c >= 55 ? "Fair" : c >= 40 ? "Poor" : c >= 25 ? "Very poor" : c >= 10 ? "Serious" : "Failed"; }
+const nbi = c => Math.max(0, Math.min(9, Math.round(c / 100 * 9)));
+
+// ─── stats & grades ──────────────────────────────────────────────────────────
+function inRadius(x, y, type, r, needOn = true) {
+  for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+    if (Math.abs(dx) + Math.abs(dy) > r) continue; const nx = x + dx, ny = y + dy;
+    if (inb(nx, ny)) { const t = T_(nx, ny); if (t.b === type && (!needOn || !t.off)) return true; }
+  }
+  return false;
+}
+function computeStats() {
+  let pop = 0, jobs = 0, cJobs = 0, iJobs = 0, parks = 0;
+  let rc = 0, rcond = 0, rcong = 0, bc = 0, bcond = 0, bclosed = 0, nearRiver = 0, protectedN = 0;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y);
+    if (isZone(t)) { pop += ZONE[t.b].pop[t.lvl]; const j = ZONE[t.b].jobs[t.lvl]; jobs += j; if (t.b === "C") cJobs += j; if (t.b === "I") iJobs += j;
+      if (t.lvl && riverside(x, y)) { nearRiver++; if (leveed(x, y)) protectedN++; } }
+    if (t.b === "park") parks++;
+    if (t.b === "road" || t.b === "ave") { rc++; rcond += t.cond; if (vcOf(t) >= 0.9) rcong++; }
+    if (t.b === "bridge") { bc++; bcond += t.cond; if (t.closed) bclosed++; }
+  }
+  Object.assign(S, { pop, jobs, cJobs, iJobs });
+  const tr = S.tax - 9;
+  S.demand = {
+    R: clamp((jobs * 1.15 + 70 - pop) / Math.max(60, pop * 0.25) - tr * 0.06, -1, 1),
+    C: clamp((pop * 0.35 + 15 - cJobs) / Math.max(30, pop * 0.12) - tr * 0.06, -1, 1),
+    I: clamp((pop * 0.45 + 25 - iJobs) / Math.max(30, pop * 0.15) - tr * 0.06, -1, 1),
+  };
+  const open = S.inc.filter(i => i.status !== "done");
+  const out = (1 - S.net.power.served) + (1 - S.net.water.served);
+  const avgCond = rc ? rcond / rc : 100, congPct = rc ? rcong / rc : 0;
+  const overflow = S.net.sewer.demand > S.net.sewer.supply && S.pop > 150;
+  let h = 72 - tr * 3 - out * 35 - congPct * 25 - Math.max(0, 60 - avgCond) * 0.4 - open.length * 2.5 - (overflow ? 10 : 0) + Math.min(10, parks * 60 / Math.max(1, pop / 10));
+  S.happy = clamp(S.happy * 0.8 + clamp(h, 0, 100) * 0.2, 0, 100);
+  S.overflow = overflow;
+
+  const margin = n => n.demand <= 0 ? 100 : clamp((n.supply / n.demand - 1) / 0.25, 0, 1) * 100;
+  const count = k => open.filter(i => i.kind === k).length;
+  const g = [];
+  g.push(["Roads", `PCI ${avgCond.toFixed(0)} · ${(congPct * 100).toFixed(0)}% at LOS E–F`, avgCond * 0.75 + (1 - congPct) * 25 - count("sink") * 8]);
+  g.push(["Bridges", bc ? `${bc} spans · avg NBI ${nbi(bcond / bc)} · ${bclosed} closed` : "No bridges", bc ? bcond / bc - bclosed * 20 + 8 : null]);
+  g.push(["Drinking water", `${S.net.water.supply.toFixed(2)} of ${S.net.water.demand.toFixed(2)} MGD · ${count("main")} breaks`, S.net.water.served * 70 + margin(S.net.water) * 0.3 - count("main") * 8 - count("pump") * 10]);
+  g.push(["Energy", `${S.net.power.supply.toFixed(0)} of ${S.net.power.demand.toFixed(0)} MW`, S.net.power.served * 70 + margin(S.net.power) * 0.3 - count("lines") * 5 - count("plant") * 10]);
+  g.push(["Wastewater", `${S.net.sewer.supply.toFixed(2)} of ${S.net.sewer.demand.toFixed(2)} MGD${overflow ? " · overflowing" : ""}`, S.pop < 150 && !S.net.sewer.demand ? null : S.net.sewer.served * 70 + margin(S.net.sewer) * 0.3]);
+  g.push(["Levees", nearRiver ? `${protectedN} of ${nearRiver} riverside blocks protected` : "No riverside development", nearRiver ? protectedN / nearRiver * 100 : null]);
+  S.grades = g;
+}
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const letter = s => s == null ? "NA" : s >= 90 ? "A" : s >= 80 ? "B" : s >= 70 ? "C" : s >= 60 ? "D" : "F";
+function riverside(x, y) { for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const nx = x + dx, ny = y + dy; if (inb(nx, ny) && T_(nx, ny).ter === WATER && T_(nx, ny).b !== "bridge") return true; } return false; }
+function leveed(x, y) { for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const nx = x + dx, ny = y + dy; if (inb(nx, ny) && T_(nx, ny).b === "levee") return true; } return false; }
+
+// ─── incidents ───────────────────────────────────────────────────────────────
+function addInc(kind, x, y, quiet) {
+  if (S.inc.some(i => i.status !== "done" && i.kind === kind && i.x === x && i.y === y)) return;
+  const inc = { id: S.nextId++, kind, x, y, start: S.day, status: "open", left: 0 };
+  S.inc.push(inc);
+  if (!quiet) log(`${INC[kind].name} at ${street(x, y)}.`, "bad");
+  return inc;
+}
+function street(x, y) { const L = n => String.fromCharCode(65 + n); return `grid ${x < 26 ? L(x) : "A" + L(x - 26)}-${y + 1}`; }
+function crews() { let n = 1; for (const t of S.tiles) if (t.b === "depot") n++; const busy = S.inc.filter(i => i.status === "crew" && i.kind !== "fire").length; return { total: n, free: n - busy }; }
+function dispatch(id) {
+  const i = S.inc.find(k => k.id === id); if (!i || i.status !== "open") return;
+  const d = INC[i.kind];
+  if (i.kind !== "fire" && crews().free <= 0) { log("No crews available. Build a Public Works depot to add a crew.", "bad"); return; }
+  if (S.funds < d.cost) { log(`Not enough funds for ${d.name.toLowerCase()} repair ($${d.cost.toLocaleString()}).`, "bad"); return; }
+  S.funds -= d.cost; S.ledger.emergency += d.cost; i.status = "crew"; i.left = d.days;
+  log(i.kind === "fire" ? `Mutual aid engines en route to ${street(i.x, i.y)}.` : `Crew dispatched to ${d.name.toLowerCase()} at ${street(i.x, i.y)}. ETA ${d.days} days.`);
+  updateUI();
+}
+function resolve(i) {
+  const t = T_(i.x, i.y); i.status = "done";
+  switch (i.kind) {
+    case "main": t.fW = false; t.cond = Math.min(100, t.cond + 30); break;
+    case "sink": t.sink = false; t.cond = 100; break;
+    case "bridge": t.closed = false; t.cond = 100; break;
+    case "plant": case "pump": case "flood": t.off = false; break;
+    case "lines": t.fP = false; break;
+    case "fire": t.fire = 0; break;
+  }
+  log(`${INC[i.kind].name} at ${street(i.x, i.y)} resolved.`, "good");
+}
+function rollIncidents() {
+  const rnd = Math.random;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y);
+    if (isRoad(t)) {
+      if (t.b !== "bridge" && !t.fW && !t.sink && t.r_water > 0 && t.cond < 65 && rnd() < 0.0007 * (65 - t.cond) / 65) { t.fW = true; addInc("main", x, y); }
+      if (t.b !== "bridge" && !t.sink && t.cond < 20 && rnd() < 0.003) { t.sink = true; t.fW = false; clearInc(x, y, "main"); addInc("sink", x, y); }
+      if (t.b === "bridge" && !t.closed && t.cond < 30) { t.closed = true; addInc("bridge", x, y); }
+      if (t.b === "bridge" && t.cond <= 3) collapse(x, y);
+    }
+    if (t.b === "power" && !t.off && t.link) {
+      const load = S.net.power.supply ? S.net.power.demand / S.net.power.supply : 0;
+      if (rnd() < 0.0012 + (load > 0.9 ? 0.012 : 0)) { t.off = true; addInc("plant", x, y); }
+    }
+    if (t.b === "pump" && !t.off && t.link && rnd() < 0.0012) { t.off = true; addInc("pump", x, y); }
+    if (isZone(t) && t.lvl && !t.fire) {
+      const p = 0.00012 * (t.b === "I" ? 2.5 : 1) * (S.heat > 0 ? 1.6 : 1);
+      if (rnd() < p) { t.fire = 1; log(`Fire reported at ${street(x, y)}.`, "bad"); }
+    }
+  }
+  const m = monthOf(S.day);
+  if (S.heat <= 0 && (m >= 5 && m <= 7) && rnd() < 0.012) { S.heat = 10; log("Heat wave: power demand up 30% for 10 days. Watch plant load.", "bad"); }
+  if (S.day > 60 && rnd() < (m >= 2 && m <= 5 ? 0.004 : 0.0012)) storm();
+}
+function clearInc(x, y, kind) { S.inc.forEach(i => { if (i.status !== "done" && i.x === x && i.y === y && i.kind === kind) i.status = "done"; }); }
+function collapse(x, y) {
+  const t = T_(x, y); clearInc(x, y, "bridge");
+  Object.assign(t, newTile(WATER));
+  S.funds -= 4000; S.ledger.fines += 4000; S.happy = Math.max(0, S.happy - 15);
+  log(`Bridge span at ${street(x, y)} collapsed. $4,000 liability settlement. The crossing must be rebuilt.`, "bad");
+}
+function storm() {
+  const y0 = Math.floor(Math.random() * (H - 10)), hit = [];
+  log(`Severe storm. The river is cresting between rows ${y0 + 1} and ${y0 + 10}.`, "bad");
+  for (let y = y0; y < y0 + 10; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y); if (t.ter === WATER || t.b === "levee" || !riverside(x, y) || leveed(x, y)) continue;
+    t.flood = 6;
+    if (isZone(t) && t.lvl) { t.lvl--; hit.push(1); }
+    if (isRoad(t)) t.cond = Math.max(0, t.cond - 35);
+    if ((t.b === "pump" || t.b === "sewage" || t.b === "power") && !t.off) { t.off = true; addInc("flood", x, y); }
+  }
+  if (hit.length) log(`Flooding damaged ${hit.length} unprotected riverside buildings. Levees would have held.`, "bad");
+  const roads = []; S.tiles.forEach((t, i) => { if (isRoad(t) && t.b !== "bridge" && t.r_power > 0 && !t.fP) roads.push(i); });
+  for (let k = 0; k < 2 + Math.floor(Math.random() * 3) && roads.length; k++) {
+    const i = roads.splice(Math.floor(Math.random() * roads.length), 1)[0]; S.tiles[i].fP = true; addInc("lines", i % W, (i / W) | 0, true);
+  }
+  log("Power lines down across town. Check Work Orders.", "bad");
+}
+function progressIncidents() {
+  for (const i of S.inc) {
+    if (i.status === "crew") { if (--i.left <= 0) resolve(i); continue; }
+    if (i.status !== "open") continue;
+    const age = S.day - i.start, t = T_(i.x, i.y);
+    if (i.kind === "main") { S.funds -= 25; S.ledger.water += 25;
+      if (age > 25) { i.status = "done"; t.fW = false; t.sink = true; addInc("sink", i.x, i.y); log(`The unrepaired main at ${street(i.x, i.y)} washed out the road base. It's a sinkhole now.`, "bad"); } }
+    if (i.kind === "bridge") t.cond = Math.max(0, t.cond - 0.25);
+  }
+  S.inc = S.inc.filter(i => i.status !== "done" || S.day - i.start < 400);
+}
+function fires() {
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y); if (!t.fire) continue;
+    const covered = inRadius(x, y, "fire", RADIUS.fire);
+    t.fire++;
+    if (covered) { if (t.fire > 2) { t.fire = 0; if (t.lvl > 1) t.lvl--; log(`Fire at ${street(x, y)} knocked down by the fire department.`); } continue; }
+    const i = S.inc.find(k => k.kind === "fire" && k.x === x && k.y === y && k.status !== "done") || addInc("fire", x, y, true);
+    if (i && i.status === "crew") continue;
+    if (Math.random() < 0.3) for (const [dx, dy] of N4) { const n = inb(x + dx, y + dy) && T_(x + dx, y + dy); if (n && isZone(n) && n.lvl && !n.fire && Math.random() < 0.5) n.fire = 1; }
+    if (t.fire > 7) { t.fire = 0; t.lvl = 0; if (i) i.status = "done"; log(`Building at ${street(x, y)} burned down.`, "bad"); }
+  }
+}
+
+// ─── simulation ──────────────────────────────────────────────────────────────
+const monthOf = d => Math.floor(d / 30) % 12;
+function dateStr(d) { return `${MONTHS[monthOf(d)]} ${String(d % 30 + 1).padStart(2, "0")}, ${START_YEAR + Math.floor(d / 360)}`; }
+function day() {
+  S.day++;
+  if (S.heat > 0) S.heat--;
+  computeNetworks(); computeTraffic();
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y);
+    if (t.flood) t.flood--;
+    if (isRoad(t)) { const vc = Math.min(2, vcOf(t));
+      t.cond = Math.max(0, t.cond - (t.b === "bridge" ? 0.03 + 0.03 * vc : t.b === "ave" ? 0.02 + 0.04 * vc : 0.025 + 0.05 * vc)); }
+    if (isZone(t)) grow(t, x, y);
+  }
+  maintenance(); rollIncidents(); progressIncidents(); fires();
+  computeStats();
+  milestones();
+  if (S.day % 30 === 0) month();
+}
+function access(x, y) { for (const [dx, dy] of N4) { const nx = x + dx, ny = y + dy; if (inb(nx, ny)) { const r = T_(nx, ny); if (isRoad(r) && !r.sink && !r.closed) return true; } } return false; }
+function grow(t, x, y) {
+  if (t.fire) return;
+  const ok = access(x, y) && t.pw && t.wt;
+  if (t.lvl && !ok) { if (++t.bad > 40 && Math.random() < 0.15) { t.bad = 20; t.lvl--; if (Math.random() < .4) log(`A ${t.b === "R" ? "household" : "business"} at ${street(x, y)} moved out after losing service.`); } return; }
+  t.bad = Math.max(0, t.bad - 1);
+  if (!ok || Math.random() > 0.035 * (S.happy / 65)) return;
+  let score = S.demand[t.b] * 60 + S.happy * 0.5;
+  if (t.b === "R") { if (inRadius(x, y, "park", RADIUS.park)) score += 12;
+    for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) { const n = inb(x + dx, y + dy) && T_(x + dx, y + dy); if (n && n.b === "I" && n.lvl) score -= 3; } }
+  let cong = 0; for (const [dx, dy] of N4) { const n = inb(x + dx, y + dy) && T_(x + dx, y + dy); if (isRoad(n)) cong = Math.max(cong, vcOf(n)); }
+  if (cong > 1) score -= 20;
+  if (t.flood) score -= 30;
+  const need = [25, 35, 48][t.lvl] ?? 999;
+  if (t.lvl === 2 && !t.sw) return;              // mid-rise needs sewer
+  if (score > need && t.lvl < 3) t.lvl++;
+  else if (score < 5 && t.lvl > 0 && Math.random() < 0.3) t.lvl--;
+}
+function maintenance() {
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    if (T_(x, y).b !== "depot" || S.funds <= 0) continue;
+    const cand = [];
+    for (let dy = -RADIUS.depot; dy <= RADIUS.depot; dy++) for (let dx = -RADIUS.depot; dx <= RADIUS.depot; dx++) {
+      const nx = x + dx, ny = y + dy; if (!inb(nx, ny) || Math.abs(dx) + Math.abs(dy) > RADIUS.depot) continue;
+      const r = T_(nx, ny); if (isRoad(r) && r.cond < 80 && !r.closed && !r.sink) cand.push(r);
+    }
+    cand.sort((a, b) => a.cond - b.cond);
+    for (const r of cand.slice(0, 2)) { const pts = Math.min(5, 100 - r.cond), c = pts * (r.b === "bridge" ? 10 : 2.5);
+      r.cond += pts; S.funds -= c; S.ledger.maint += c; }
+  }
+}
+function upkeep() { let u = 0; for (const t of S.tiles) if (t.b && UPKEEP[t.b]) u += UPKEEP[t.b]; return u; }
+function month() {
+  const rev = Math.round(S.pop * S.tax * 0.22 + S.jobs * S.tax * 0.16);
+  const fees = Math.round(S.pop * (S.net.water.served) * 0.35);
+  const up = upkeep();
+  let debt = 0; S.bonds.forEach(b => { if (b.left > 0) { debt += 150; b.left--; } }); S.bonds = S.bonds.filter(b => b.left > 0);
+  let fine = 0; if (S.overflow) { fine = 500; log("State DEP notice of violation: combined sewer overflow into the river. $500 fine. Add wastewater capacity.", "bad"); }
+  S.funds += rev + fees - up - debt - fine;
+  const L = S.ledger;
+  S.month = { label: dateStr(S.day - 1).replace(/ \d\d,/, ""), rev, fees, up, debt, fine: fine + L.fines, maint: Math.round(L.maint), emergency: L.emergency, water: L.water };
+  S.month.net = rev + fees - up - debt - S.month.fine - S.month.maint - S.month.emergency - S.month.water;
+  S.ledger = { maint: 0, emergency: 0, fines: 0, water: 0 };
+  S.history.push(Math.round(S.funds)); if (S.history.length > 24) S.history.shift();
+  if (S.funds < 0) log("The treasury is in deficit. Raise taxes, issue a bond, or cut costs.", "bad");
+  save();
+}
+function milestones() {
+  while (S.milestones < MILESTONES.length && S.pop >= MILESTONES[S.milestones].pop) {
+    const m = MILESTONES[S.milestones++]; S.funds += m.grant; log(`Population ${m.pop.toLocaleString()}: ${m.text}`, "good"); buildTools();
+  }
+}
+
+// ─── building ────────────────────────────────────────────────────────────────
+function adjWater(x, y) { return N4.some(([dx, dy]) => inb(x + dx, y + dy) && T_(x + dx, y + dy).ter === WATER && T_(x + dx, y + dy).b !== "bridge"); }
+function adjRoad(x, y) { return N4.some(([dx, dy]) => inb(x + dx, y + dy) && isRoad(T_(x + dx, y + dy))); }
+function check(id, x, y) {
+  const t = T_(x, y), tl = TOOL[id];
+  if (tl.unlock && S.pop < tl.unlock && S.milestones < 1) return [false, `Unlocks at ${tl.unlock} residents`];
+  const clear = t.ter === FOREST ? 30 : 0;
+  switch (id) {
+    case "inspect": return [true, 0];
+    case "road": if (t.b && !(isZone(t) && !t.lvl)) return [false, "Occupied"]; return [true, t.ter === WATER ? 600 : 50 + clear];
+    case "ave": if (t.b !== "road") return [false, "Pick an existing street"]; return [true, 250];
+    case "R": case "C": case "I": if (t.ter === WATER) return [false, "Can't zone water"]; if (t.b && !isZone(t)) return [false, "Occupied"]; if (t.b === id) return [false, "Already zoned"]; if (t.lvl) return [false, "Demolish the building first"]; return [true, 20 + clear];
+    case "pump": case "sewage": case "levee":
+      if (t.ter === WATER) return [false, "Build on the bank"]; if (t.b && !(isZone(t) && !t.lvl)) return [false, "Occupied"];
+      if (!adjWater(x, y)) return [false, "Must touch the river"]; return [true, tl.cost + clear];
+    case "power": case "fire": case "depot": case "park":
+      if (t.ter === WATER) return [false, "Can't build on water"]; if (t.b && !(isZone(t) && !t.lvl)) return [false, "Occupied"]; return [true, tl.cost + clear];
+    case "repair": {
+      if (S.inc.some(i => i.status === "open" && i.x === x && i.y === y)) return [true, "dispatch"];
+      if (!isRoad(t)) return [false, "Only streets and bridges"]; if (t.cond >= 99) return [false, "Already in good repair"];
+      return [true, Math.ceil((100 - t.cond) * (t.b === "bridge" ? 25 : 6))];
+    }
+    case "bulldoze": if (!t.b) return t.ter === FOREST ? [true, 30] : [false, "Nothing here"]; return [true, 10];
+  }
+  return [false, ""];
+}
+function apply(x, y) {
+  const [ok, cost] = check(tool, x, y);
+  if (tool === "inspect") { sel = { x, y }; renderInspector(); return; }
+  if (!ok) { if (!painting || tool === "repair") flash(cost); return; }
+  if (cost === "dispatch") { const i = S.inc.find(i => i.status === "open" && i.x === x && i.y === y); dispatch(i.id); return; }
+  if (S.funds < cost) { flash(`Need $${cost.toLocaleString()}`); return; }
+  const t = T_(x, y);
+  S.funds -= cost;
+  if (tool === "repair") { S.ledger.emergency += cost; t.cond = 100; log(`Resurfaced ${t.b === "bridge" ? "bridge span" : "street"} at ${street(x, y)} for $${cost.toLocaleString()}.`); }
+  else if (tool === "bulldoze") { S.inc.forEach(i => { if (i.x === x && i.y === y) i.status = "done"; }); Object.assign(t, newTile(t.ter === FOREST ? GRASS : t.ter)); }
+  else if (tool === "ave") { t.b = "ave"; }
+  else { if (t.ter === FOREST) t.ter = GRASS; const b = tool === "road" && t.ter === WATER ? "bridge" : tool;
+    Object.assign(t, newTile(t.ter), { b }); }
+  sel = { x, y };
+  computeNetworks(); computeTraffic(); computeStats(); updateUI();
+}
+let flashMsg = null;
+function flash(msg) { if (!msg) return; flashMsg = { msg, until: performance.now() + 1400 }; }
+
+// ─── rendering ───────────────────────────────────────────────────────────────
+const cv = document.getElementById("map"), ctx = cv.getContext("2d");
+let dpr = 1;
+function sizeCanvas() { dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = W * T * dpr; cv.height = H * T * dpr; }
+const COL = { grass: "#DCE3D0", grass2: "#D5DDC8", forest: "#B7C9A0", tree: "#8FAA78", water: "#8DB8C7", water2: "#A6C9D5",
+  road: "#6E737A", ave: "#4A4E55", bridge: "#8B7E6B", lane: "#F5F6F1", yellow: "#F2C14E",
+  R: "#EFD77A", C: "#E39A96", I: "#B4A2D6", Rb: "#C9A63A", Cb: "#B6544F", Ib: "#7A62A6", ink: "#1E2B38", hivis: "#E8590C",
+  good: "#2F7D4F", warn: "#D69A12", bad: "#BF3A2B" };
+function ramp(v) { // 0..1 bad→good
+  const a = v < 0.5 ? [191, 58, 43] : [214, 154, 18], b = v < 0.5 ? [214, 154, 18] : [47, 125, 79], k = v < 0.5 ? v * 2 : (v - 0.5) * 2;
+  return `rgb(${a.map((c, i) => Math.round(c + (b[i] - c) * k)).join(",")})`;
+}
+const losCol = { A: "#2F7D4F", B: "#5E9C3A", C: "#A8A523", D: "#D69A12", E: "#D5661C", F: "#BF3A2B" };
+function draw(now) {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const pulse = (Math.sin(now / 220) + 1) / 2;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y), px = x * T, py = y * T;
+    // terrain
+    if (t.ter === WATER) { ctx.fillStyle = COL.water; ctx.fillRect(px, py, T, T);
+      ctx.strokeStyle = COL.water2; ctx.lineWidth = 1; ctx.beginPath(); const o = ((now / 90 + y * 5) % T); ctx.moveTo(px + o * 0.5, py + 7); ctx.lineTo(px + o * 0.5 + 6, py + 7); ctx.moveTo(px + (o * 0.5 + 9) % T, py + 14); ctx.lineTo(px + (o * 0.5 + 9) % T + 5, py + 14); ctx.stroke(); }
+    else { ctx.fillStyle = (x + y) % 2 ? COL.grass : COL.grass2; ctx.fillRect(px, py, T, T);
+      if (t.ter === FOREST) { ctx.fillStyle = COL.forest; ctx.fillRect(px, py, T, T); ctx.fillStyle = COL.tree;
+        for (const [ox, oy] of [[5, 6], [14, 5], [9, 13], [16, 15]]) { ctx.beginPath(); ctx.arc(px + ox, py + oy, 3.2, 0, 7); ctx.fill(); } } }
+    if (t.flood) { ctx.fillStyle = `rgba(90,150,180,${0.2 + t.flood * 0.07})`; ctx.fillRect(px, py, T, T); }
+    if (!t.b) continue;
+    if (isRoad(t)) drawRoad(t, x, y, px, py);
+    else if (isZone(t)) drawZone(t, px, py);
+    else drawFacility(t, px, py);
+  }
+  drawOverlay();
+  // incident markers
+  for (const i of S.inc) {
+    if (i.status === "done") continue;
+    const cx = i.x * T + T / 2, cy = i.y * T + T / 2, s = 7 + (i.status === "open" ? pulse * 3 : 0);
+    ctx.fillStyle = i.status === "crew" ? COL.ink : COL.hivis; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx, cy - s); ctx.lineTo(cx + s, cy); ctx.lineTo(cx, cy + s); ctx.lineTo(cx - s, cy); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.font = "800 10px Overpass, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(i.status === "crew" ? i.left : "!", cx, cy + 1);
+  }
+  // tool preview
+  if (hover) {
+    const { x, y } = hover, px = x * T, py = y * T;
+    if (RADIUS[tool]) { ctx.fillStyle = "rgba(232,89,12,.08)"; ctx.strokeStyle = "rgba(232,89,12,.5)"; ctx.setLineDash([3, 3]); ctx.beginPath();
+      const r = RADIUS[tool]; for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (Math.abs(dx) + Math.abs(dy) <= r && inb(x + dx, y + dy)) ctx.rect((x + dx) * T, (y + dy) * T, T, T);
+      ctx.fill(); ctx.setLineDash([]); }
+    const [ok, cost] = check(tool, x, y);
+    ctx.lineWidth = 2; ctx.strokeStyle = tool === "inspect" ? COL.ink : ok ? COL.good : COL.bad; ctx.strokeRect(px + 1, py + 1, T - 2, T - 2);
+    if (tool !== "inspect") {
+      const label = ok ? (cost === "dispatch" ? "Dispatch" : `$${cost.toLocaleString()}`) : cost;
+      ctx.font = "600 11px 'Overpass Mono', monospace"; const w = ctx.measureText(label).width + 10;
+      let lx = px + T + 4, ly = py - 4; if (lx + w > W * T) lx = px - w - 4; if (ly < 2) ly = py + T + 2;
+      ctx.fillStyle = ok ? COL.ink : COL.bad; ctx.fillRect(lx, ly, w, 16); ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(label, lx + 5, ly + 8.5);
+    }
+  }
+  if (sel) { ctx.setLineDash([4, 3]); ctx.lineWidth = 2; ctx.strokeStyle = COL.hivis; ctx.strokeRect(sel.x * T + 1, sel.y * T + 1, T - 2, T - 2); ctx.setLineDash([]); }
+  if (flashMsg && now < flashMsg.until) {
+    ctx.font = "800 13px Overpass, sans-serif"; const w = ctx.measureText(flashMsg.msg).width + 20;
+    ctx.fillStyle = COL.bad; ctx.fillRect(W * T / 2 - w / 2, 10, w, 26); ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(flashMsg.msg, W * T / 2, 24);
+  }
+}
+function drawRoad(t, x, y, px, py) {
+  if (t.b === "bridge") { ctx.fillStyle = COL.bridge; ctx.fillRect(px, py + 3, T, T - 6); ctx.fillStyle = COL.ink; ctx.fillRect(px, py + 2, T, 1.5); ctx.fillRect(px, py + T - 3.5, T, 1.5);
+    const vert = y > 0 && isRoad(T_(x, y - 1)) && !(x > 0 && isRoad(T_(x - 1, y)));
+    if (vert) { ctx.fillStyle = t.ter === WATER ? COL.water : COL.grass; ctx.fillRect(px, py, T, T); ctx.fillStyle = COL.bridge; ctx.fillRect(px + 3, py, T - 6, T); ctx.fillStyle = COL.ink; ctx.fillRect(px + 2, py, 1.5, T); ctx.fillRect(px + T - 3.5, py, 1.5, T); } }
+  else { ctx.fillStyle = t.b === "ave" ? COL.ave : COL.road; ctx.fillRect(px, py, T, T); }
+  // lane markings towards connected neighbors
+  const c = T / 2;
+  ctx.strokeStyle = t.b === "ave" ? COL.yellow : COL.lane; ctx.lineWidth = t.b === "ave" ? 1.5 : 1; ctx.setLineDash(t.b === "ave" ? [] : [3, 3]);
+  ctx.beginPath();
+  for (const [dx, dy] of N4) { const n = inb(x + dx, y + dy) && T_(x + dx, y + dy); if (isRoad(n)) { ctx.moveTo(px + c, py + c); ctx.lineTo(px + c + dx * c, py + c + dy * c); } }
+  ctx.stroke(); ctx.setLineDash([]);
+  if (t.cond < 45 && !t.sink && overlay === "base") { ctx.fillStyle = "rgba(30,30,30,.55)"; for (let k = 0; k < (t.cond < 25 ? 3 : 1); k++) { const h = hash(x + k, y * 3 + k); ctx.beginPath(); ctx.arc(px + 4 + h * 12, py + 4 + ((h * 97) % 1) * 12, 1.6, 0, 7); ctx.fill(); } }
+  if (t.sink) { ctx.fillStyle = "#2B2118"; ctx.beginPath(); ctx.ellipse(px + c, py + c, 7, 5.5, 0.3, 0, 7); ctx.fill(); }
+  if (t.closed) { ctx.strokeStyle = COL.hivis; ctx.lineWidth = 2; ctx.beginPath(); for (let k = -T; k < T; k += 6) { ctx.moveTo(px + Math.max(0, k), py + Math.max(0, -k)); ctx.lineTo(px + Math.min(T, k + T), py + Math.min(T, T - k)); } ctx.stroke(); }
+  if (t.fW) { ctx.fillStyle = "rgba(80,170,220,.8)"; ctx.beginPath(); ctx.arc(px + c, py + c, 5 + Math.sin(performance.now() / 150) * 1.5, 0, 7); ctx.fill(); }
+  if (t.fP) { ctx.strokeStyle = COL.yellow; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px + 6, py + 4); ctx.lineTo(px + 11, py + 10); ctx.lineTo(px + 8, py + 11); ctx.lineTo(px + 14, py + 17); ctx.stroke(); }
+}
+function drawZone(t, px, py) {
+  ctx.fillStyle = COL[t.b]; ctx.globalAlpha = 0.55; ctx.fillRect(px + 1, py + 1, T - 2, T - 2); ctx.globalAlpha = 1;
+  if (!t.lvl) { ctx.strokeStyle = COL[t.b + "b"]; ctx.lineWidth = 1; ctx.setLineDash([2, 2]); ctx.strokeRect(px + 2.5, py + 2.5, T - 5, T - 5); ctx.setLineDash([]); return; }
+  const inset = [0, 5, 3, 1.5][t.lvl];
+  ctx.fillStyle = "rgba(30,43,56,.25)"; ctx.fillRect(px + inset + 1.5, py + inset + 1.5, T - inset * 2, T - inset * 2);
+  ctx.fillStyle = COL[t.b + "b"]; ctx.fillRect(px + inset, py + inset, T - inset * 2, T - inset * 2);
+  ctx.fillStyle = "rgba(255,255,255,.35)";
+  if (t.lvl === 3) for (let k = 0; k < 3; k++) ctx.fillRect(px + 4, py + 4 + k * 4.5, T - 8, 1.5);
+  if (t.lvl === 2) ctx.fillRect(px + 5, py + 5, T - 10, 2);
+  if (t.fire) { const f = 0.5 + Math.sin(performance.now() / 90 + px) * 0.3; ctx.fillStyle = `rgba(232,89,12,${f})`; ctx.fillRect(px + 2, py + 2, T - 4, T - 4); ctx.fillStyle = "rgba(255,210,80,.9)"; ctx.beginPath(); ctx.moveTo(px + T / 2, py + 3); ctx.lineTo(px + 15, py + 16); ctx.lineTo(px + 5, py + 16); ctx.fill(); }
+  if (t.lvl && (!t.pw || !t.wt) && overlay === "base") { ctx.fillStyle = COL.bad; ctx.beginPath(); ctx.arc(px + T - 4, py + 4, 3, 0, 7); ctx.fill(); }
+}
+function drawFacility(t, px, py) {
+  const tl = TOOL[t.b];
+  if (t.b === "park") { ctx.fillStyle = "#A9CC8F"; ctx.fillRect(px + 1, py + 1, T - 2, T - 2); ctx.fillStyle = "#5F8F4E"; for (const [ox, oy] of [[6, 6], [14, 8], [8, 14]]) { ctx.beginPath(); ctx.arc(px + ox, py + oy, 3, 0, 7); ctx.fill(); } return; }
+  if (t.b === "levee") { ctx.fillStyle = "#A78B63"; ctx.fillRect(px, py, T, T); ctx.strokeStyle = "#7D6545"; ctx.lineWidth = 1; ctx.beginPath(); for (let k = 3; k < T; k += 4) { ctx.moveTo(px + k, py + 2); ctx.lineTo(px + k - 2, py + T - 2); } ctx.stroke(); return; }
+  ctx.fillStyle = "rgba(30,43,56,.3)"; ctx.fillRect(px + 2.5, py + 2.5, T - 3, T - 3);
+  ctx.fillStyle = tl.sw; ctx.fillRect(px + 1, py + 1, T - 3, T - 3);
+  ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.2; ctx.strokeRect(px + 1.5, py + 1.5, T - 4, T - 4);
+  ctx.fillStyle = t.b === "depot" ? "#fff" : COL.ink; ctx.font = `800 ${tl.glyph.length > 2 ? 7 : 8.5}px Overpass, sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(tl.glyph, px + T / 2 - 1, py + T / 2);
+  if (t.off || t.link === false) { ctx.strokeStyle = COL.bad; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px + 3, py + 3); ctx.lineTo(px + T - 3, py + T - 3); ctx.stroke(); }
+}
+function drawOverlay() {
+  if (overlay === "base") return;
+  ctx.fillStyle = "rgba(230,234,225,.55)"; ctx.fillRect(0, 0, W * T, H * T);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const t = T_(x, y), px = x * T, py = y * T;
+    let col = null;
+    if (overlay === "cond" && isRoad(t)) col = ramp(t.cond / 100);
+    if (overlay === "traffic" && isRoad(t)) col = losCol[los(vcOf(t))];
+    const m = { power: ["power", "pw", "fP"], water: ["water", "wt", "fW"], sewer: ["sewer", "sw", null] }[overlay];
+    if (m) {
+      if (isRoad(t)) { const r = t["r_" + m[0]]; col = (m[2] && t[m[2]]) || t.sink ? COL.hivis : r < 0 ? "#9AA0A6" : r === 0 ? "#9AA0A6" : ramp(r); }
+      if (isZone(t) && t.lvl) col = t[m[1]] ? "#3F7CAC" : COL.bad;
+      if (t.b === TOOL[overlay === "power" ? "power" : overlay === "water" ? "pump" : "sewage"].id) col = t.off ? COL.bad : COL.ink;
+    }
+    if (col) { ctx.fillStyle = col; ctx.fillRect(px + 2, py + 2, T - 4, T - 4); }
+  }
+}
+
+// ─── UI ──────────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const money = v => (v < 0 ? "−$" : "$") + Math.abs(Math.round(v)).toLocaleString();
+function log(text, cls = "") { S.news.unshift({ d: S.day, text, cls }); if (S.news.length > 60) S.news.pop(); renderNews(); }
+function renderNews() { const el = $("news"); if (!el) return; el.innerHTML = S.news.slice(0, 30).map(n => `<div><time>${dateStr(n.d).replace(/, \d+$/, "")}</time><span class="${n.cls}">${n.text}</span></div>`).join(""); }
+function buildTools() {
+  const groups = {}; TOOLS.forEach(t => (groups[t.group] ||= []).push(t));
+  $("tools").innerHTML = Object.entries(groups).map(([g, ts]) => `<div class="tgroup"><span>${g}</span><div class="list">${ts.map(t => {
+    const locked = t.unlock && S.pop < t.unlock && S.milestones < 1;
+    return `<button class="tool" data-tool="${t.id}" aria-pressed="${tool === t.id}" ${locked ? "disabled" : ""} title="${t.name} (${t.key.toUpperCase()})"><span class="sw" style="background:${t.sw}">${t.glyph || ""}</span><span class="nm">${t.name}</span><span class="cs">${locked ? "🔒" : t.cost ? "$" + (t.cost >= 1000 ? t.cost / 1000 + "k" : t.cost) : ""} <kbd>${t.key.toUpperCase()}</kbd></span></button>`;
+  }).join("")}</div></div>`).join("");
+  $("toolDesc").textContent = TOOL[tool].desc;
+}
+function setTool(id) { tool = id; document.querySelectorAll(".tool").forEach(b => b.setAttribute("aria-pressed", b.dataset.tool === id)); $("toolDesc").textContent = TOOL[id].desc; }
+const OVERLAYS = [["base", "Plan"], ["cond", "Condition"], ["traffic", "Traffic LOS"], ["power", "Power"], ["water", "Water"], ["sewer", "Sewer"]];
+const LEGENDS = {
+  base: [["#EFD77A", "Residential"], ["#E39A96", "Commercial"], ["#B4A2D6", "Industrial"], ["#E8590C", "Work order"]],
+  cond: [["#2F7D4F", "Good"], ["#D69A12", "Fair"], ["#BF3A2B", "Failing"]],
+  traffic: [["#2F7D4F", "LOS A"], ["#A8A523", "C"], ["#D69A12", "D"], ["#D5661C", "E"], ["#BF3A2B", "F"]],
+  power: [["#3F7CAC", "Served"], ["#BF3A2B", "No service"], ["#E8590C", "Fault"], ["#9AA0A6", "Not connected"]],
+};
+LEGENDS.water = LEGENDS.power; LEGENDS.sewer = LEGENDS.power;
+function buildOverlays() {
+  $("overlays").innerHTML = `<span>Map layer</span>` + OVERLAYS.map(([k, n]) => `<button class="chip" data-ov="${k}" aria-pressed="${overlay === k}">${n}</button>`).join("") + `<div class="legend">${LEGENDS[overlay].map(([c, n]) => `<span><i style="background:${c}"></i>${n}</span>`).join("")}</div>`;
+}
+function renderInspector() {
+  const el = $("insp");
+  if (!sel) { el.innerHTML = `<p style="margin:0">Pick <b>Inspect</b> and click a tile to see its condition and service.</p>`; $("inspXY").textContent = ""; return; }
+  const { x, y } = sel, t = T_(x, y); $("inspXY").textContent = street(x, y);
+  const tag = (ok, label) => `<span class="tag ${ok ? "ok" : "no"}">${label} ${ok ? "✓" : "✕"}</span>`;
+  let h = "";
+  const inc = S.inc.find(i => i.status !== "done" && i.x === x && i.y === y);
+  if (isRoad(t)) {
+    const vc = vcOf(t), name = { road: "Street, 2 lanes", ave: "Avenue, 4 lanes", bridge: "Bridge span" }[t.b];
+    h += `<h3>${name}</h3><dl class="kv">`;
+    h += t.b === "bridge" ? `<dt>NBI superstructure rating</dt><dd>${nbi(t.cond)} of 9${nbi(t.cond) <= 4 ? " · deficient" : ""}</dd>` : `<dt>Pavement condition (PCI)</dt><dd>${t.cond.toFixed(0)} · ${pciLabel(t.cond)}</dd>`;
+    h += `<dt>Peak volume / capacity</dt><dd>${t.load.toFixed(0)} / ${ROAD_CAP[t.b]} veh/h</dd><dt>V/C ratio</dt><dd>${vc.toFixed(2)}</dd><dt>Level of service</dt><dd>${los(vc)}</dd></dl>`;
+    h += `<p>${tag(!t.fP && t.r_power > 0, "Power line")}${tag(!t.fW && t.r_water > 0, "Water main")}${tag(t.r_sewer > 0, "Sewer")}</p>`;
+    if (!inc && t.cond < 99) h += `<div class="row"><button class="btn" data-repair="${x},${y}">Repair for ${money((100 - t.cond) * (t.b === "bridge" ? 25 : 6))}</button></div>`;
+    if (los(vc) >= "E" && t.b === "road") h += `<p>Over capacity. Widen to an avenue or add a parallel street.</p>`;
+  } else if (isZone(t)) {
+    const nm = { R: "Residential", C: "Commercial", I: "Industrial" }[t.b], lv = ["Vacant lot", "Low density", "Medium density", "High density"][t.lvl];
+    h += `<h3>${nm} · ${lv}</h3><dl class="kv"><dt>${t.b === "R" ? "Residents" : "Jobs"}</dt><dd>${t.b === "R" ? ZONE.R.pop[t.lvl] : ZONE[t.b].jobs[t.lvl]}</dd><dt>Power draw</dt><dd>${demandOf(t, "power").toFixed(2)} MW</dd><dt>Water use</dt><dd>${Math.round(demandOf(t, "water") * 1e6).toLocaleString()} gpd</dd></dl>`;
+    h += `<p>${tag(access(x, y), "Street")}${tag(t.pw, "Power")}${tag(t.wt, "Water")}${tag(t.sw, "Sewer")}${tag(inRadius(x, y, "fire", RADIUS.fire), "Fire cover")}</p>`;
+    if (!access(x, y)) h += `<p>Needs a street on one side to develop.</p>`;
+    else if (!t.pw || !t.wt) h += `<p>Missing utilities. Check the Power and Water layers for breaks or plants running over capacity.</p>`;
+    else if (t.lvl === 2 && !t.sw) h += `<p>Needs sewer service to grow past medium density.</p>`;
+  } else if (t.b) {
+    const tl = TOOL[t.b]; h += `<h3>${tl.name}</h3><dl class="kv"><dt>Status</dt><dd>${t.off ? "Offline" : t.link === false ? "Not on a street" : "Operating"}</dd><dt>Upkeep</dt><dd>${money(UPKEEP[t.b] || 0)}/mo</dd>`;
+    if (CAP[t.b]) { const m = { power: "power", pump: "water", sewage: "sewer" }[t.b], n = S.net[m], u = t.b === "power" ? "MW" : "MGD";
+      h += `<dt>Rated capacity</dt><dd>${CAP[t.b]} ${u}</dd><dt>Citywide load</dt><dd>${n.supply ? Math.round(n.demand / n.supply * 100) : "—"}%</dd>`; }
+    h += `</dl><p>${tl.desc}</p>`;
+  } else {
+    h += `<h3>${t.ter === WATER ? "Mill River" : t.ter === FOREST ? "Woodland" : "Open land"}</h3><p>${t.ter === WATER ? "Lay a street across to build a bridge. Build water and wastewater plants on the bank." : t.ter === FOREST ? "Clearing adds $30 to anything built here." : "Undeveloped parcel."}</p>`;
+  }
+  if (inc) { const d = INC[inc.kind]; h += `<p style="color:var(--bad)"><b>${d.name}.</b> ${d.desc}</p>`; }
+  el.innerHTML = h;
+}
+function renderWO() {
+  const open = S.inc.filter(i => i.status !== "done").sort((a, b) => (a.status === "crew") - (b.status === "crew") || INC[b.kind].sev - INC[a.kind].sev || a.start - b.start);
+  const c = crews();
+  $("woCount").textContent = `${open.length} open`;
+  $("wo").innerHTML = open.length ? open.map(i => { const d = INC[i.kind], age = S.day - i.start;
+    const act = i.status === "crew" ? `<span class="status-pill">On site · ${i.left}d</span>`
+      : `<button class="btn hv" data-dispatch="${i.id}" ${(i.kind !== "fire" && c.free <= 0) || S.funds < d.cost ? "disabled" : ""}>${i.kind === "fire" ? "Mutual aid" : "Dispatch"} ${money(d.cost)}</button>`;
+    return `<div class="wo-item" data-goto="${i.x},${i.y}"><span class="sev s${d.sev}"></span><div><b>${d.name}</b><small>${street(i.x, i.y)} · open ${age}d${i.kind === "bridge" ? " · NBI " + nbi(T_(i.x, i.y).cond) : ""}</small></div>${act}</div>`; }).join("")
+    : `<div class="empty">No open work orders. Use the quiet time to repair streets before they fail.</div>`;
+}
+function renderGrades() {
+  let sum = 0, n = 0;
+  $("grades").innerHTML = S.grades.map(([name, detail, score]) => { const L = letter(score); if (score != null) { sum += clamp(score, 0, 100); n++; }
+    return `<div><span>${name}</span><small>${detail}</small></div><div class="g ${L}">${L === "NA" ? "n/a" : L}</div>`; }).join("");
+  $("gpa").textContent = n ? `overall ${letter(sum / n)}` : "";
+}
+function renderRCI() {
+  $("rci").innerHTML = [["R", COL.Rb], ["C", COL.Cb], ["I", COL.Ib]].map(([k, c]) => { const v = S.demand[k], h = Math.abs(v) * 50;
+    return `<div class="bar"><div class="track"><div class="fill" style="background:${c};${v >= 0 ? `bottom:50%;height:${h}%` : `top:50%;height:${h}%;opacity:.45`}"></div></div><span>${k}</span></div>`; }).join("");
+}
+function renderBudget() {
+  const m = S.month;
+  $("budgetMonth").textContent = m ? m.label : "first report at month end";
+  const est = { rev: Math.round(S.pop * S.tax * 0.22 + S.jobs * S.tax * 0.16), fees: Math.round(S.pop * S.net.water.served * 0.35), up: upkeep() };
+  const rows = m ? [["Property & business tax", m.rev], ["Water & sewer fees", m.fees], ["Operations & upkeep", -m.up], ["Preventive maintenance", -m.maint], ["Emergency repairs", -m.emergency], ["Water lost to breaks", -m.water], ["Fines & settlements", -m.fine], ["Debt service", -m.debt]]
+    : [["Est. tax revenue", est.rev], ["Est. water & sewer fees", est.fees], ["Est. upkeep", -est.up]];
+  const net = m ? m.net : est.rev + est.fees - est.up;
+  $("budget").innerHTML = rows.filter(r => r[1] !== 0 || !m).map(([k, v]) => `<dt>${k}</dt><dd>${money(v)}</dd>`).join("") + `<dt class="tot">Net</dt><dd class="tot" style="color:${net < 0 ? "var(--bad)" : "var(--good)"}">${money(net)}</dd>`;
+  $("tax").value = S.tax; $("taxv").textContent = S.tax + "%";
+  const active = S.bonds.length; $("bondBtn").disabled = active >= 3;
+  $("bondInfo").textContent = active ? `${active} outstanding · $${active * 150}/mo for ${Math.max(...S.bonds.map(b => b.left))} mo` : "Repaid at $150/mo over 8 years";
+}
+function updateUI() {
+  $("sDate").textContent = dateStr(S.day);
+  $("sFunds").textContent = money(S.funds); $("sFunds").classList.toggle("neg", S.funds < 0);
+  $("sPop").textContent = S.pop.toLocaleString(); $("sJobs").textContent = S.jobs.toLocaleString();
+  $("sHappy").textContent = Math.round(S.happy) + "%";
+  const c = crews(); $("sCrew").textContent = `${c.free} of ${c.total}`;
+  $("titleblock").innerHTML = `<b>City of Millbrook · Master plan</b><br>Scale 1 tile = 1 block · Sheet C-1<br>${S.heat > 0 ? "HEAT ADVISORY · " : ""}${S.net.power.demand.toFixed(0)}/${S.net.power.supply.toFixed(0)} MW · ${S.net.water.demand.toFixed(2)}/${S.net.water.supply.toFixed(2)} MGD`;
+  renderWO(); renderGrades(); renderRCI(); renderBudget();
+  if (sel) renderInspector();
+  document.querySelectorAll(".speed button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.sp === speed));
+}
+
+// ─── persistence ─────────────────────────────────────────────────────────────
+function serialize() { return JSON.stringify(S); }
+function save() { try { localStorage.setItem(SAVE_KEY, serialize()); } catch (e) {} }
+function load() { try { const s = localStorage.getItem(SAVE_KEY); if (s) { S = JSON.parse(s); return true; } } catch (e) {} return false; }
+
+// ─── input ───────────────────────────────────────────────────────────────────
+function tileAt(e) { const r = cv.getBoundingClientRect(); const x = Math.floor((e.clientX - r.left) / r.width * W), y = Math.floor((e.clientY - r.top) / r.height * H); return inb(x, y) ? { x, y } : null; }
+const DRAG = new Set(["road", "ave", "R", "C", "I", "bulldoze", "levee", "repair"]);
+cv.addEventListener("pointerdown", e => { const p = tileAt(e); if (!p) return; cv.setPointerCapture(e.pointerId); painting = DRAG.has(tool); lastPaint = idx(p.x, p.y); apply(p.x, p.y); });
+cv.addEventListener("pointermove", e => { hover = tileAt(e); if (painting && hover && idx(hover.x, hover.y) !== lastPaint) { lastPaint = idx(hover.x, hover.y); apply(hover.x, hover.y); } });
+cv.addEventListener("pointerup", () => { painting = false; });
+cv.addEventListener("pointerleave", () => { hover = null; });
+document.addEventListener("click", e => {
+  const b = e.target.closest("button, .wo-item"); if (!b) return;
+  if (b.dataset.tool) setTool(b.dataset.tool);
+  else if (b.dataset.ov) { overlay = b.dataset.ov; buildOverlays(); }
+  else if (b.dataset.sp != null) { speed = +b.dataset.sp; updateUI(); }
+  else if (b.dataset.dispatch) { e.stopPropagation(); dispatch(+b.dataset.dispatch); }
+  else if (b.dataset.repair) { const [x, y] = b.dataset.repair.split(",").map(Number); const prev = tool; tool = "repair"; apply(x, y); tool = prev; renderInspector(); }
+  else if (b.dataset.goto) { const [x, y] = b.dataset.goto.split(",").map(Number); sel = { x, y }; renderInspector(); }
+});
+$("tax").addEventListener("input", e => { S.tax = +e.target.value; computeStats(); renderBudget(); renderRCI(); });
+$("bondBtn").addEventListener("click", () => { if (S.bonds.length >= 3) return; S.bonds.push({ left: 96 }); S.funds += 10000; log("Issued a $10,000 general obligation bond. Debt service is $150/month."); updateUI(); });
+$("helpBtn").addEventListener("click", () => showHelp());
+$("newBtn").addEventListener("click", () => {
+  modal(`<h3>Start a new city?</h3><p>This replaces Millbrook and everything you've built. The current city can't be recovered.</p><div class="row"><button class="btn hv" id="mYes">Start over</button><button class="btn" id="mNo">Keep playing</button></div>`);
+  $("mYes").onclick = () => { newCity(Math.floor(Math.random() * 1e6)); sel = null; closeModal(); buildTools(); buildOverlays(); renderNews(); updateUI(); renderInspector(); save(); };
+  $("mNo").onclick = closeModal;
+});
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === " ") { e.preventDefault(); speed = speed ? 0 : 1; updateUI(); return; }
+  const t = TOOLS.find(t => t.key === e.key.toLowerCase()); if (t && !(t.unlock && S.pop < t.unlock && S.milestones < 1)) setTool(t.id);
+  if (e.key === "Escape") { setTool("inspect"); closeModal(); }
+});
+function modal(html) { $("modalCard").innerHTML = html; $("modal").hidden = false; }
+function closeModal() { $("modal").hidden = true; }
+$("modal").addEventListener("click", e => { if (e.target.id === "modal") closeModal(); });
+function showHelp() {
+  modal(`<h3>City Engineer's brief</h3>
+  <p>You run public works for Millbrook. Grow the city, and keep its infrastructure standing while you do.</p>
+  <ul>
+    <li><b>Streets are the right-of-way.</b> Power lines and water and sewer mains run under them. A plant only serves buildings on the street network it touches.</li>
+    <li><b>Zones grow</b> when they have a street, power and water. Medium-density blocks need sewer service to go higher.</li>
+    <li><b>Everything wears out.</b> Pavement loses condition faster under heavy traffic. Old streets break water mains and open sinkholes. Bridges below NBI 3 close, and if you ignore them they collapse.</li>
+    <li><b>Work orders</b> list what's broken. Each repair takes a crew. Build Public Works depots for more crews and cheap preventive maintenance.</li>
+    <li><b>Storms</b> flood unprotected riverbanks and knock down power lines. Levees protect riverside blocks and plants.</li>
+    <li><b>Traffic</b> is graded by level of service (LOS A to F) from the volume-to-capacity ratio. Widen streets to avenues once they unlock.</li>
+  </ul>
+  <p>Keys: 1–0 tools, Q inspect, E repair, X demolish, P park, L levee, Space pause.</p>
+  <div class="row"><button class="btn hv" id="mOk">Get to work</button></div>`);
+  $("mOk").onclick = closeModal;
+}
+
+// ─── loop ────────────────────────────────────────────────────────────────────
+let acc = 0, last = performance.now();
+function frame(now) {
+  const dt = Math.min(250, now - last); last = now;
+  if (speed && $("modal").hidden) { acc += dt * speed * 2 / 1000; let n = 0; while (acc >= 1 && n < 8) { acc -= 1; n++; day(); } if (n) updateUI(); }
+  draw(now);
+  requestAnimationFrame(frame);
+}
+function start(data) {
+  let fresh = true;
+  if (data && data.state) { try { S = JSON.parse(data.state); fresh = false; } catch (e) {} }
+  if (fresh && load()) fresh = false;
+  if (fresh) newCity(7);
+  computeNetworks(); computeTraffic(); computeStats();
+  sizeCanvas(); buildTools(); buildOverlays(); renderNews(); updateUI(); renderInspector();
+  if (fresh) { sel = { x: 21, y: 15 }; renderInspector(); }
+  requestAnimationFrame(frame);
+}
+window.addEventListener("resize", sizeCanvas);
+try { window.claude?.hot?.snapshot?.(() => ({ state: serialize() })); } catch (e) {}
+const hot = window.claude?.hot;
+hot?.ready ? hot.ready(start) : start(hot?.data ?? {});
+</script>
+</body>
+</html>
