@@ -201,6 +201,10 @@ app.get("/", (req, res) => {
   res.redirect("/picks");
 });
 
+app.get("/golf", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "golf.html"));
+});
+
 app.get("/tour", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
