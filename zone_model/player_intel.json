@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-09-24T11:30:48.004064+00:00",
-  "signal_count": 1179,
+  "updated_at": "2026-09-24T16:57:10.378441+00:00",
+  "signal_count": 1181,
   "signals": [
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Mike Macdonald says Sam Darnold is &#039;on a good track&#039; to return from his glute injury Darnold has missed most o",
+      "excerpt": "Mike Macdonald says Sam Darnold is &#039;on a good track&#039; to return from his glute injury Darnold has missed most of the season&#039;s first two games",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/mike-macdonald-says-sam-darnold-is-on-a-good-track-to-return-from-his-glute-injury/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-24T16:56:53.282522+00:00"
+    },
+    {
+      "player": "Drake London",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Packers vs. Falcons odds, picks: Analysis, predictions, player props for Thursday Night Football Michael Penix Jr. retur",
+      "excerpt": "Packers vs. Falcons odds, picks: Analysis, predictions, player props for Thursday Night Football Michael Penix Jr. returns under center to revive Atlanta&#039;s offense, creating prime betting value on the spread, and Drake London player props against an injury-hit Green Bay squad",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/betting/news/packers-vs-falcons-odds-picks-analysis-predictions-player-props-for-thursday-night-football/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-24T16:56:53.282292+00:00"
+    },
     {
       "player": "Mike Trout",
       "team": "Unknown",
@@ -15445,7 +15471,7 @@
     "Patriots|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
     "George Kittle|injury": "2026-09-11T16:16:54.878771+00:00",
     "Malik Nabers|positive": "2026-09-09T23:07:44.525528+00:00",
-    "Sam Darnold|injury": "2026-09-22T11:21:22.688609+00:00",
+    "Sam Darnold|injury": "2026-09-24T16:57:10.378309+00:00",
     "Drake Maye|injury": "2026-09-21T19:55:52.873596+00:00",
     "Bryce Young|injury": "2026-09-10T16:13:28.085723+00:00",
     "Tua Tagovailoa|injury": "2026-09-18T23:09:32.737271+00:00",
@@ -15505,7 +15531,7 @@
     "Jayden Daniels|injury": "2026-09-24T11:30:48.003887+00:00",
     "David Njoku|injury": "2026-09-20T23:07:19.088374+00:00",
     "Steelers|suspension": "2026-09-23T04:22:11.007697+00:00",
-    "Drake London|injury": "2026-09-21T19:55:52.873596+00:00",
+    "Drake London|injury": "2026-09-24T16:57:10.378309+00:00",
     "Davante Adams|injury": "2026-09-22T04:43:23.560889+00:00",
     "Dylan Cease|injury": "2026-09-24T04:18:56.344776+00:00",
     "Giants|pitcher_scratch": "2026-09-22T11:21:22.688609+00:00",
