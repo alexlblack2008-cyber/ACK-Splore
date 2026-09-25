@@ -1700,5 +1700,23 @@
     "actual_runs": 5,
     "pnl": -100.0,
     "settled_at": "2026-09-24T20:19:05.483714"
+  },
+  {
+    "bet_date": "2026-09-25",
+    "game_pk": 823652,
+    "home_team": "Minnesota Twins",
+    "away_team": "Texas Rangers",
+    "umpire": "Chris Guccione",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.29,
+    "edge_runs": 0.79,
+    "confidence": 0.493,
+    "kelly_fraction": 0.03,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
