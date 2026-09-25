@@ -1,7 +1,98 @@
 {
-  "updated_at": "2026-09-24T21:24:00.065358+00:00",
-  "signal_count": 1193,
+  "updated_at": "2026-09-25T04:30:28.934036+00:00",
+  "signal_count": 1200,
   "signals": [
+    {
+      "player": "William Contreras",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Willson Contreras Dealing With Lingering Hand Pain Red Sox first baseman Willson Contreras is still dealing with pain in",
+      "excerpt": "Willson Contreras Dealing With Lingering Hand Pain Red Sox first baseman Willson Contreras is still dealing with pain in his right hand. He explained to reporters on Thursday that he&#8217;s been unable to swing the past two days due to lingering discomfort. Contreras has been out for a week after h",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/willson-contreras-dealing-with-lingering-hand-pain.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:07.181912+00:00"
+    },
+    {
+      "player": "Tee Higgins",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Ja'Marr Chase, Tee Higgins fined for celebrations the league deemed obscene The NFL is sometimes called the No Fun Leagu",
+      "excerpt": "Ja'Marr Chase, Tee Higgins fined for celebrations the league deemed obscene The NFL is sometimes called the No Fun League.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jamarr-chase-tee-higgins-fined-for-celebrations-the-league-deemed-obscene",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.102287+00:00"
+    },
+    {
+      "player": "Ja'Marr Chase",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Ja'Marr Chase, Tee Higgins fined for celebrations the league deemed obscene The NFL is sometimes called the No Fun Leagu",
+      "excerpt": "Ja'Marr Chase, Tee Higgins fined for celebrations the league deemed obscene The NFL is sometimes called the No Fun League.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jamarr-chase-tee-higgins-fined-for-celebrations-the-league-deemed-obscene",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.102272+00:00"
+    },
+    {
+      "player": "Amon-Ra St. Brown",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Amon-Ra St. Brown says he was fined nearly $60,000 for four smoking-related celebrations The No Fun League has cracked d",
+      "excerpt": "Amon-Ra St. Brown says he was fined nearly $60,000 for four smoking-related celebrations The No Fun League has cracked down particularly hard on celebrations this week.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/amon-ra-st-brown-says-he-was-fined-nearly-60-000-for-four-smoking-related-celebrations",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.102186+00:00"
+    },
+    {
+      "player": "Tony Pollard",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Titans RB Tony Pollard returns to limited work Thursday Titans running back Tony Pollard (ankle) practiced on Thursday, ",
+      "excerpt": "Titans RB Tony Pollard returns to limited work Thursday Titans running back Tony Pollard (ankle) practiced on Thursday, getting in limited work.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/titans-rb-tony-pollard-returns-to-limited-work-thursday",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.102028+00:00"
+    },
+    {
+      "player": "Puka Nacua",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Puka Nacua remains out of practice Thursday Rams wide receiver Puka Nacua sat out practice again Thursday.",
+      "excerpt": "Puka Nacua remains out of practice Thursday Rams wide receiver Puka Nacua sat out practice again Thursday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/puka-nacua-remains-out-of-practice-thursday",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.101681+00:00"
+    },
+    {
+      "player": "Bijan Robinson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Bijan Robinson's TD has Falcons tied 7-7 with Packers The Falcons became only the fourth team since 1978 without a red z",
+      "excerpt": "Bijan Robinson's TD has Falcons tied 7-7 with Packers The Falcons became only the fourth team since 1978 without a red zone drive through two games.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bijan-robinsons-td-has-falcons-tied-7-7-with-packers",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-25T04:30:05.101533+00:00"
+    },
     {
       "player": "Klay Thompson",
       "team": "Unknown",
@@ -15513,7 +15604,7 @@
     }
   ],
   "_alert_cooldowns": {
-    "Bijan Robinson|injury": "2026-08-30T04:57:19.770209+00:00",
+    "Bijan Robinson|injury": "2026-09-25T04:30:28.933888+00:00",
     "Javonte Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Caleb Williams|positive": "2026-08-30T04:57:19.770209+00:00",
     "Kyren Williams|positive": "2026-08-30T04:57:19.770209+00:00",
@@ -15564,7 +15655,7 @@
     "Jalen Hurts|injury": "2026-09-24T11:30:48.003887+00:00",
     "Eagles|qb_scratch": "2026-09-13T20:36:49.327345+00:00",
     "Jets|qb_scratch": "2026-09-17T16:44:08.154268+00:00",
-    "William Contreras|injury": "2026-09-19T04:12:21.979887+00:00",
+    "William Contreras|injury": "2026-09-25T04:30:28.933888+00:00",
     "Jazz Chisholm|injury": "2026-09-11T04:11:02.585396+00:00",
     "Red Sox|pitcher_scratch": "2026-09-01T00:30:59.876959+00:00",
     "CJ Abrams|injury": "2026-09-01T00:30:59.876959+00:00",
@@ -15637,7 +15728,7 @@
     "Brock Purdy|injury": "2026-09-11T04:11:02.585396+00:00",
     "Matthew Stafford|injury": "2026-09-22T04:43:23.560889+00:00",
     "Kyler Murray|positive": "2026-09-11T04:11:02.585396+00:00",
-    "Puka Nacua|injury": "2026-09-24T04:18:56.344776+00:00",
+    "Puka Nacua|injury": "2026-09-25T04:30:28.933888+00:00",
     "Luis Robert|usage_up": "2026-09-18T16:13:37.034932+00:00",
     "Josh Allen|injury": "2026-09-19T20:25:10.797038+00:00",
     "Ravens|qb_scratch": "2026-09-19T20:25:10.797038+00:00",
@@ -15701,6 +15792,7 @@
     "Stephen Curry|positive": "2026-09-24T21:24:00.065162+00:00",
     "Keon Coleman|injury": "2026-09-24T04:18:56.344776+00:00",
     "Aaron Jones|injury": "2026-09-24T04:18:56.344776+00:00",
-    "Gunnar Henderson|injury": "2026-09-24T04:18:56.344776+00:00"
+    "Gunnar Henderson|injury": "2026-09-24T04:18:56.344776+00:00",
+    "Tony Pollard|injury": "2026-09-25T04:30:28.933888+00:00"
   }
 }
