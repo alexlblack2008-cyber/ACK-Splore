@@ -6,130 +6,156 @@
 <title>Dogleg</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
 <style>
 :root{
   color-scheme: light;
-  --paper:#F4F0E4; --panel:#FBF9F2; --panel-2:#EFEADB; --ink:#1F2A22; --ink-2:#5E685F; --rule:#D8D1BD;
-  --club:#1E5B3A; --club-ink:#FFFFFF; --flag:#C8372D; --sand:#E7D9AE; --water:#3E7FAF;
-  --good:#2F7D4F; --warn:#B7790A; --bad:#BF3A2B;
-  --display:"Fraunces",Georgia,serif;
-  --ui:"Inter",system-ui,-apple-system,sans-serif;
+  --ground:#E7ECE4; --panel:#FFFFFF; --panel-2:#F1F4EF; --ink:#15251B; --ink-2:#56665B; --rule:#D2DACF;
+  --club:#0F4D2C; --club-2:#1A6A3F; --flag:#F2C230; --under:#C8102E;
+  --good:#23794A; --warn:#A86B00; --bad:#B42318;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --ui:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0;height:100%}
-body{background:var(--paper);color:var(--ink);font:13px/1.45 var(--ui);display:flex;flex-direction:column;min-height:100vh}
-button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,input:focus-visible{outline:2px solid var(--club);outline-offset:2px}
+body{background:var(--ground);color:var(--ink);font:14px/1.45 var(--ui);display:flex;flex-direction:column;min-height:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,tr:focus-visible{outline:2px solid var(--flag);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums}
+h1,h2,h3{text-wrap:balance}
 
-.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:10px 16px;background:var(--club);color:var(--club-ink)}
-.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
-.brand h1{margin:0;font:800 24px/1 var(--display);letter-spacing:-.01em}
-.brand h1 span{color:#F2C94C}
-.brand small{opacity:.75;font-size:11px}
-.stats{display:flex;flex-wrap:wrap;gap:6px 18px}
-.stat{display:flex;flex-direction:column;line-height:1.15}
-.stat b{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
-.stat i{font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;padding-block:10px;padding-inline:16px;background:var(--club);color:#fff}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand svg{flex-shrink:0}
+.brand h1{margin:0;font:800 28px/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.brand small{opacity:.7;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.stats{display:flex;flex-wrap:wrap;gap:6px 20px}
+.stat{display:flex;flex-direction:column;line-height:1.1}
+.stat b{font:700 20px/1.05 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.stat i{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 .stat b.over{color:#FFB4A8}
-.topbar .btn{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff}
+.topbar .btn{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff}
 .topbar .btn:hover{background:rgba(255,255,255,.12)}
+.topbtns{display:flex;gap:6px;flex-wrap:wrap}
 
 main{flex:1;display:flex;min-height:0}
-.stage{flex:1;min-width:0;display:flex;flex-direction:column;padding:12px 16px;gap:8px}
+.stage{flex:1;min-width:0;display:flex;flex-direction:column;padding-block:12px;padding-inline:16px;gap:8px}
 .mapwrap{position:relative;flex:1;min-height:280px;display:flex;align-items:center;justify-content:center}
-.maparea{position:relative;box-shadow:0 1px 0 var(--rule),0 8px 24px rgba(31,42,34,.12);border-radius:6px;overflow:hidden;background:#9aa874}
-.maparea canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:auto}
+.maparea{position:relative;box-shadow:0 1px 2px rgba(21,37,27,.2),0 10px 28px rgba(21,37,27,.14);border-radius:4px;overflow:hidden;background:#9aa874;max-width:100%}
+.maparea canvas{position:absolute;inset:0;width:100%;height:100%}
 #over{touch-action:none}
-.hint{font-size:12px;color:var(--ink-2);min-height:18px}
+.hint{font-size:13px;color:var(--ink-2);min-height:20px}
 .hint b{color:var(--ink)}
-.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2)}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .legend i{width:11px;height:11px;border-radius:2px;display:inline-block;border:1px solid rgba(0,0,0,.15)}
 
-aside{width:340px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--rule);overflow-y:auto;padding:14px 16px 24px}
-aside h2{font:600 16px/1.2 var(--display);margin:18px 0 8px}
+aside{width:360px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--rule);overflow-y:auto;padding-block:14px 24px;padding-inline:16px}
+aside h2{font:700 18px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:20px 0 8px}
 aside h2:first-child{margin-top:0}
-.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.tool{background:var(--panel-2);border:1.5px solid transparent;border-radius:6px;padding:7px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600}
+.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tool{background:var(--panel-2);border:1.5px solid transparent;border-radius:4px;padding:7px 2px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:600}
 .tool:hover{border-color:var(--rule)}
-.tool[aria-pressed="true"]{border-color:var(--club);background:#E3EEE4}
-.tool .sw{width:18px;height:18px;border-radius:4px;border:1px solid rgba(0,0,0,.18)}
-.tool kbd{font:500 9px var(--ui);color:var(--ink-2)}
-.row{display:flex;align-items:center;gap:8px;margin-top:8px}
-.row label{font-size:12px;color:var(--ink-2)}
+.tool[aria-pressed="true"]{border-color:var(--club);background:#E2EDE4}
+.tool .sw{width:18px;height:18px;border-radius:3px;border:1px solid rgba(0,0,0,.18)}
+.tool kbd{font:500 10px var(--ui);color:var(--ink-2)}
+.row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.row label{font-size:13px;color:var(--ink-2)}
 .row input[type=range]{flex:1;accent-color:var(--club)}
-.btn{background:var(--panel-2);border:1.5px solid var(--rule);border-radius:6px;padding:6px 10px;font-weight:600;font-size:12px}
+.btn{background:var(--panel-2);border:1.5px solid var(--rule);border-radius:4px;padding:6px 11px;font-weight:600;font-size:13px}
 .btn:hover{border-color:var(--ink-2)}
+.btn:disabled{opacity:.45;cursor:default}
 .btn.primary{background:var(--club);border-color:var(--club);color:#fff}
-.btn.primary:hover{background:#174a2f}
+.btn.primary:hover:not(:disabled){background:var(--club-2)}
 .btn.danger{color:var(--bad)}
-.btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 
-table.card{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:12px}
-table.card th{font-weight:600;color:var(--ink-2);font-size:10px;text-transform:uppercase;letter-spacing:.06em;text-align:right;padding:4px 4px;border-bottom:1.5px solid var(--ink)}
+.cardwrap{overflow-x:auto}
+table.card{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
+table.card th{font:700 11px var(--display);color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em;text-align:right;padding:4px;border-bottom:2px solid var(--ink)}
 table.card th:first-child,table.card td:first-child{text-align:left}
-table.card td{text-align:right;padding:5px 4px;border-bottom:1px solid var(--rule)}
-table.card tr.sel td{background:#E3EEE4}
-table.card tbody tr{cursor:pointer}
-table.card tbody tr:hover td{background:var(--panel-2)}
-table.card tfoot td{font-weight:700;border-bottom:0;border-top:1.5px solid var(--ink)}
-.holeno{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+table.card td{text-align:right;padding:4px;border-bottom:1px solid var(--rule)}
+table.card tbody tr.h{cursor:pointer}
+table.card tbody tr.h:hover td{background:var(--panel-2)}
+table.card tr.sel td{background:#E2EDE4}
+table.card tr.sub td{font-weight:700;background:var(--panel-2);border-bottom:2px solid var(--ink)}
+table.card tr.tot td{font-weight:700;border-bottom:0}
+.holeno{display:inline-flex;width:21px;height:21px;border-radius:50%;background:var(--ink);color:#fff;align-items:center;justify-content:center;font:700 12px var(--display)}
 .dim{color:var(--ink-2)}
-.pos{color:var(--bad)} .neg{color:var(--good)}
+.under{color:var(--under);font-weight:600}
 
-.detail{background:var(--panel-2);border-radius:8px;padding:10px 12px;margin-top:10px}
-.detail h3{margin:0 0 6px;font:600 14px var(--display)}
-.kv{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:12px}
+.detail{background:var(--panel-2);border-radius:4px;padding:10px 12px;margin-top:10px}
+.detail h3{margin:0 0 6px;font:700 17px var(--display);text-transform:uppercase;letter-spacing:.03em}
+.kv{display:grid;grid-template-columns:1fr auto;gap:2px 12px;font-size:13px}
 .kv span:nth-child(odd){color:var(--ink-2)}
 .kv span:nth-child(even){font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
-.notes{margin:8px 0 0;padding-left:16px;font-size:12px}
+.notes{margin:8px 0 0;padding-left:18px;font-size:13px}
 .notes li{margin:3px 0}
 .notes li.bad{color:var(--bad)} .notes li.warn{color:var(--warn)} .notes li.good{color:var(--good)}
 
-.bar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--club)}
-.bar.over i{background:var(--bad)}
-
-.modal{position:fixed;inset:0;background:rgba(20,30,22,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
-.sheet{background:var(--panel);border-radius:12px;max-width:620px;width:100%;max-height:calc(100vh - 32px);overflow-y:auto;padding:22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.sheet h2{font:800 26px/1.1 var(--display);margin:0 0 6px}
-.sheet p{margin:6px 0}
-.sheet ol{padding-left:18px}
-.sheet ol li{margin:5px 0}
-.big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:10px 0}
-.big b{font:800 54px/1 var(--display);color:var(--club)}
-.stars{font-size:26px;color:#D9A21B;letter-spacing:2px}
-.comp{display:grid;grid-template-columns:130px 1fr 36px;gap:6px 10px;align-items:center;font-size:12px;margin:12px 0}
-.comp .bar{height:8px}
+.modal{position:fixed;inset:0;background:rgba(10,24,15,.6);display:flex;align-items:flex-start;justify-content:center;padding:16px;z-index:10;overflow-y:auto}
+.sheet{background:var(--panel);border-radius:6px;max-width:820px;width:100%;margin-block:auto;padding-block:22px;padding-inline:24px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.sheet.narrow{max-width:560px}
+.sheet h2{font:800 34px/1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px}
+.sheet h3{font:700 19px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px}
+.sheet p{margin:6px 0;max-width:65ch}
+.sheet ol{padding-left:20px;max-width:65ch}
+.sheet ol li{margin:6px 0}
+.eyebrow{font:700 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.gradeRow{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;margin:12px 0 4px}
+.grade{font:800 96px/.85 var(--display);color:var(--club);letter-spacing:-.02em}
+.gradeRow .score{font:700 22px var(--display)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
+.comp{display:grid;grid-template-columns:120px 1fr 30px;gap:7px 10px;align-items:center;font-size:13px}
+.bar{height:8px;background:var(--panel-2);border-radius:4px;overflow:hidden;border:1px solid var(--rule)}
+.bar i{display:block;height:100%;background:var(--club);border-radius:0 4px 4px 0}
 .comp b{text-align:right;font-variant-numeric:tabular-nums}
-.quote{border-left:3px solid var(--club);padding:4px 10px;margin:8px 0;font-style:italic;color:var(--ink-2)}
+.match{display:flex;gap:14px;align-items:baseline;background:var(--panel-2);border-radius:4px;padding:12px 14px;margin:8px 0}
+.match b.pct{font:800 40px/1 var(--display);color:var(--club)}
+.match .nm{font:700 20px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.chartwrap{position:relative}
+.chartwrap svg{display:block;width:100%;height:auto}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:6px 8px;border-radius:4px;white-space:nowrap;transform:translate(-50%,-110%)}
+.quote{border-left:3px solid var(--flag);padding:3px 10px;margin:8px 0;font-style:italic;color:var(--ink-2)}
 .quote b{font-style:normal;color:var(--ink);font-weight:600}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:6px;font-size:12px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none}
+.saverow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--rule)}
+.saverow input{flex:1;min-width:180px;border:1.5px solid var(--rule);border-radius:4px;padding:6px 10px;background:var(--panel)}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px)}
 .toast.show{opacity:1}
+table.list{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.list th{font:700 11px var(--display);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);text-align:left;padding:5px 6px;border-bottom:2px solid var(--ink)}
+table.list td{padding:7px 6px;border-bottom:1px solid var(--rule);vertical-align:middle}
+table.list td.g{font:800 22px var(--display);color:var(--club)}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
 
-@media (max-width:860px){
+@media (max-width:900px){
   main{flex-direction:column}
   aside{width:auto;border-left:0;border-top:1px solid var(--rule)}
-  .stage{padding:10px 16px}
   .mapwrap{min-height:0}
+  .cols{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><h1>Dog<span>leg</span></h1><small>golf course architect</small></div>
-  <div class="stats">
-    <div class="stat"><b id="sHoles" class="num">0/9</b><i>Holes</i></div>
-    <div class="stat"><b id="sPar" class="num">–</b><i>Par</i></div>
-    <div class="stat"><b id="sYds" class="num">–</b><i>Yards</i></div>
-    <div class="stat"><b id="sCost" class="num">$0</b><i id="sBudget">Budget</i></div>
-    <div class="stat"><b id="sForest" class="num">0%</b><i>Forest cleared</i></div>
+  <div class="brand">
+    <svg width="22" height="30" viewBox="0 0 22 30" aria-hidden="true"><path d="M3 1v28" stroke="#fff" stroke-width="2.4" fill="none"/><path d="M4 2l16 5.5L4 13z" fill="#F2C230"/></svg>
+    <div><h1>Dogleg</h1><small>Golf course architect</small></div>
   </div>
-  <button class="btn" id="bHelp">How to play</button>
-  <button class="btn" id="bLand">New land</button>
+  <div class="stats">
+    <div class="stat"><b id="sHoles">0/18</b><i>Holes</i></div>
+    <div class="stat"><b id="sPar">–</b><i>Par</i></div>
+    <div class="stat"><b id="sYds">–</b><i>Yards</i></div>
+    <div class="stat"><b id="sCost">$0</b><i id="sBudget">Budget</i></div>
+    <div class="stat"><b id="sForest">0%</b><i>Forest cleared</i></div>
+  </div>
+  <div class="topbtns">
+    <button class="btn" id="bMine">My courses</button>
+    <button class="btn" id="bHelp">How to play</button>
+    <button class="btn" id="bLand">New land</button>
+  </div>
 </header>
 
 <main>
@@ -144,20 +170,20 @@ table.card tfoot td{font-weight:700;border-bottom:0;border-top:1.5px solid var(-
     <div class="legend">
       <span><i style="background:#98A86C"></i>Native rough</span>
       <span><i style="background:#355E3C"></i>Forest</span>
-      <span><i style="background:#4683AE"></i>Creek</span>
+      <span><i style="background:#4683AE"></i>Creek &amp; lake</span>
       <span><i style="background:#6E9C86"></i>Protected wetland</span>
       <span><i style="background:#62AE52"></i>Fairway</span>
       <span><i style="background:#7ACB69"></i>Green</span>
       <span><i style="background:#EBDDB2"></i>Bunker</span>
       <span><i style="background:#C9BFA8"></i>Clubhouse (OB)</span>
-      <span class="dim">1 square = 5 yds · contours every 5 ft</span>
+      <span>1 square = 5 yds · contours every 5 ft</span>
     </div>
   </section>
 
   <aside>
     <h2>Tools</h2>
     <div class="tools" id="tools"></div>
-    <div class="row"><label for="brush">Brush</label><input type="range" id="brush" min="1" max="5" value="2"><span id="brushV" class="num">2</span></div>
+    <div class="row"><label for="brush">Brush size</label><input type="range" id="brush" min="1" max="5" value="2"><span id="brushV" class="num">2</span></div>
     <div class="btns">
       <button class="btn" id="bUndo">Undo</button>
       <button class="btn danger" id="bDelHole" disabled>Delete hole</button>
@@ -165,54 +191,64 @@ table.card tfoot td{font-weight:700;border-bottom:0;border-top:1.5px solid var(-
     </div>
 
     <h2>Scorecard</h2>
+    <div class="cardwrap">
     <table class="card">
-      <thead><tr><th>Hole</th><th>Yds</th><th>Par</th><th title="Scratch golfer average">Scr</th><th title="Bogey golfer average">Bog</th><th title="Hazard in play (near-miss rate)">Risk</th></tr></thead>
+      <thead><tr><th>Hole</th><th>Yds</th><th>Par</th><th title="Scratch golfer average score">Scr</th><th title="Bogey golfer average score">Bog</th><th title="Share of shots finishing near a hazard">Risk</th></tr></thead>
       <tbody id="cardBody"></tbody>
-      <tfoot id="cardFoot"></tfoot>
     </table>
+    </div>
     <div id="detail"></div>
     <div class="btns" style="margin-top:14px">
       <button class="btn primary" id="bOpen" disabled>Open the course</button>
     </div>
-    <p class="dim" style="font-size:11px;margin-top:6px">Route all 9 holes to hold your grand opening. Golfers: scratch (280-yd drive) and bogey (215-yd drive), 150 simulated rounds each.</p>
+    <p class="dim" style="font-size:12px;margin-top:6px">Route all 18 holes to hold your grand opening. Each hole is played 120 times by the USGA&#39;s scratch golfer (250-yd drive, reaches 470 yds in two) and bogey golfer (200-yd drive, reaches 370 in two). Red scores are under par.</p>
   </aside>
 </main>
 
 <div class="modal" id="help" hidden>
-  <div class="sheet">
-    <h2>Build a nine</h2>
-    <p>You've bought a hilly piece of land. Design a 9-hole course that's fun, fair, walkable and doesn't wreck the woods. It also has to come in under budget.</p>
+  <div class="sheet narrow">
+    <div class="eyebrow">Your commission</div>
+    <h2>Build eighteen</h2>
+    <p>The club has bought 230 acres of rolling land with a creek, a lake, woods and a protected wetland. Design an 18-hole championship course. It should be fun and fair, it should be easy to walk, and it should come in under budget.</p>
     <ol>
-      <li><b>Route a hole</b> (R): click the tee, click dogleg turns, then click the last point again to place the green. Fairway, tee and green are shaped for you.</li>
-      <li><b>Shape it</b> with brushes: add bunkers and ponds where the landing zones are, widen fairways, clear trees, and erase to put it back to nature.</li>
-      <li><b>Playtest</b> (P): a scratch and a bogey golfer each play the hole. Watch where their shots go.</li>
-      <li><b>Par follows yardage</b>, like the USGA: up to 250 yds is a par 3, up to 470 is a par 4, up to 690 is a par 5.</li>
-      <li><b>Good design</b> puts hazards near the shots golfers actually hit, so good players have decisions to make and bogey players can still get round. Start hole 1 and finish hole 9 at the clubhouse, keep green-to-tee walks short, and don't route holes across each other.</li>
+      <li><b>Route a hole</b> (R): click the tee, click up to two dogleg turns, then click the last point again for the green. The tee, fairway and green are shaped for you.</li>
+      <li><b>Par follows the USGA's 2019 guidelines</b>: up to 260 yds is a par 3, up to 490 is a par 4, up to 710 is a par 5. Most championship courses are par 70–72, with four par 3s and four par 5s.</li>
+      <li><b>Two returning nines.</b> Holes 1 and 10 tee off at the clubhouse, and holes 9 and 18 finish there.</li>
+      <li><b>Shape it</b> with brushes. Put bunkers and ponds where the landing zones are, widen fairways, clear trees, or erase to return ground to nature.</li>
+      <li><b>Playtest</b> (P) to watch a group play the hole. Dots show where tee shots land.</li>
+      <li><b>Open the course</b> to get a grade, an official-style Course Rating and Slope, and the real courses yours plays most like.</li>
     </ol>
-    <p class="dim">Can't build in the creek or the protected wetland. Carrying a shot over them is fine. Anything off the property or into the clubhouse is out of bounds.</p>
-    <div class="btns"><button class="btn primary" id="bHelpClose">Let's build</button></div>
+    <p class="dim">You can't build in the creek, lake or wetland, but golfers can hit over them. Anything off the property or into the clubhouse is out of bounds.</p>
+    <div class="btns"><button class="btn primary" id="bHelpClose">Start designing</button></div>
   </div>
 </div>
 
-<div class="modal" id="results" hidden>
-  <div class="sheet" id="resultsBody"></div>
+<div class="modal" id="results" hidden><div class="sheet" id="resultsBody"></div></div>
+<div class="modal" id="mine" hidden><div class="sheet" id="mineBody"></div></div>
+<div class="modal" id="ask" hidden>
+  <div class="sheet narrow">
+    <h3 id="askTitle" style="margin-top:0">Are you sure?</h3>
+    <p id="askText"></p>
+    <div class="btns"><button class="btn danger" id="askYes">Yes</button><button class="btn" id="askNo">Cancel</button></div>
+  </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 "use strict";
 // ─── Constants ────────────────────────────────────────────────────────────
-const W = 180, H = 120, CELL = 5;          // grid cells; 1 cell = 5 yards
+const W = 260, H = 170, CELL = 5;          // grid cells; 1 cell = 5 yards
 const CPX = 4;                             // canvas pixels per cell
 const YPX = CPX / CELL;                    // canvas pixels per yard
 const MAPW = W * CELL, MAPH = H * CELL;     // yards
-const BUDGET = 5_500_000;
-const ROUNDS = 150;
+const HOLES = 18;
+const BUDGET = 12_000_000;
+const ROUNDS = 120;
 const D2R = Math.PI / 180;
 
 // natural terrain
-const N_NATIVE = 0, N_FOREST = 1, N_CREEK = 2, N_WET = 3, N_CLUB = 4;
+const N_NATIVE = 0, N_FOREST = 1, N_CREEK = 2, N_WET = 3, N_CLUB = 4, N_LAKE = 5;
 // built surfaces
 const B_NONE = 0, B_ROUGH = 1, B_FAIRWAY = 2, B_GREEN = 3, B_TEE = 4, B_BUNKER = 5, B_POND = 6;
 const COST = { [B_ROUGH]: 60, [B_FAIRWAY]: 380, [B_GREEN]: 2600, [B_TEE]: 1100, [B_BUNKER]: 1400, [B_POND]: 2200 };
@@ -221,7 +257,7 @@ const EARTH_COST = 90;        // per cell per foot of slope, for shaped surfaces
 const HOLE_FIXED = 45_000;    // irrigation mainline, cart path, signage per hole
 
 const TOOLS = [
-  { id: "route",   name: "Route",   key: "R", sw: "linear-gradient(135deg,#fff 0 45%,#C8372D 45% 55%,#fff 55%)" },
+  { id: "route",   name: "Route",   key: "R", sw: "linear-gradient(135deg,#fff 0 45%,#C8102E 45% 55%,#fff 55%)" },
   { id: "select",  name: "Select",  key: "S", sw: "#fff" },
   { id: "fairway", name: "Fairway", key: "F", sw: "#62AE52", b: B_FAIRWAY },
   { id: "green",   name: "Green",   key: "G", sw: "#7ACB69", b: B_GREEN },
@@ -230,6 +266,26 @@ const TOOLS = [
   { id: "pond",    name: "Pond",    key: "W", sw: "#3E7FAF", b: B_POND },
   { id: "clear",   name: "Clear",   key: "C", sw: "#86A763", b: B_ROUGH },
   { id: "erase",   name: "Erase",   key: "E", sw: "repeating-linear-gradient(45deg,#98A86C 0 3px,#355E3C 3px 6px)", b: B_NONE },
+];
+
+// Real courses to compare against. Back-tee figures, approximate; ratings and scorecards change over time.
+// Style: 0–1 for how much water, tree-lined corridors, bunkering and elevation change define the course.
+const REAL = [
+  { n: "Augusta National", loc: "Augusta, Georgia", par: 72, yds: 7555, cr: 76.2, sl: 137, note: "not officially rated; widely quoted estimate", water: .3, trees: .95, bunk: .35, elev: .8 },
+  { n: "Pebble Beach Golf Links", loc: "Pebble Beach, California", par: 72, yds: 6828, cr: 75.5, sl: 145, water: .55, trees: .2, bunk: .6, elev: .5 },
+  { n: "Pinehurst No. 2", loc: "Pinehurst, North Carolina", par: 72, yds: 7588, cr: 76.5, sl: 138, water: .05, trees: .6, bunk: .7, elev: .3 },
+  { n: "TPC Sawgrass Stadium", loc: "Ponte Vedra Beach, Florida", par: 72, yds: 7245, cr: 76.8, sl: 155, water: .9, trees: .6, bunk: .7, elev: .1 },
+  { n: "Bethpage Black", loc: "Farmingdale, New York", par: 71, yds: 7468, cr: 78.1, sl: 152, water: .05, trees: .8, bunk: .9, elev: .6 },
+  { n: "Whistling Straits", loc: "Haven, Wisconsin", par: 72, yds: 7790, cr: 77.2, sl: 152, water: .45, trees: .05, bunk: 1, elev: .5 },
+  { n: "Oakmont Country Club", loc: "Oakmont, Pennsylvania", par: 70, yds: 7255, cr: 77.5, sl: 147, water: .05, trees: .2, bunk: 1, elev: .4 },
+  { n: "Kiawah Island Ocean Course", loc: "Kiawah Island, South Carolina", par: 72, yds: 7356, cr: 79.1, sl: 155, water: .7, trees: .05, bunk: .6, elev: .1 },
+  { n: "Torrey Pines South", loc: "La Jolla, California", par: 72, yds: 7765, cr: 78.2, sl: 144, water: .1, trees: .3, bunk: .6, elev: .4 },
+  { n: "Bandon Dunes", loc: "Bandon, Oregon", par: 72, yds: 6732, cr: 74.1, sl: 143, water: .1, trees: .15, bunk: .6, elev: .5 },
+  { n: "Old Course, St Andrews", loc: "St Andrews, Scotland", par: 72, yds: 6721, cr: 73.1, sl: 132, water: .1, trees: 0, bunk: .9, elev: .05 },
+  { n: "Harbour Town Golf Links", loc: "Hilton Head, South Carolina", par: 71, yds: 7099, cr: 75.6, sl: 146, water: .5, trees: .9, bunk: .5, elev: .05 },
+  { n: "Typical private club", loc: "US benchmark", par: 72, yds: 6800, cr: 73.0, sl: 132, water: .3, trees: .7, bunk: .5, elev: .3, generic: true },
+  { n: "Typical resort course", loc: "US benchmark", par: 72, yds: 6700, cr: 72.4, sl: 129, water: .5, trees: .4, bunk: .5, elev: .2, generic: true },
+  { n: "Typical municipal course", loc: "US benchmark", par: 72, yds: 6400, cr: 70.8, sl: 122, water: .2, trees: .5, bunk: .3, elev: .3, generic: true },
 ];
 
 // ─── State ────────────────────────────────────────────────────────────────
@@ -242,18 +298,19 @@ const S = {
   noise: new Float32Array(W * H),
   hazDist: new Float32Array(W * H),
   forestTotal: 0,
-  club: null,          // {x,y} yards (entrance)
-  holes: [],           // {pts:[[x,y]...], cells:[[idx,b]...]}
+  club: null,
+  holes: [],
   sel: -1,
   tool: "route",
   brush: 2,
-  draft: null,         // route in progress: [[x,y]...]
+  draft: null,
   drag: null,
   painting: false,
   mouse: null,
-  sims: [],            // per-hole {s, b}
-  simDirty: true,
-  traces: null,        // playtest traces
+  sims: [],
+  allDirty: true,
+  dirtyBox: null,
+  traces: null,
   undo: [],
 };
 
@@ -268,27 +325,37 @@ function mulberry32(a) {
 }
 function gaussFn(rng) {
   return () => {
-    let u = 0, v = 0;
+    let u = 0;
     while (u === 0) u = rng();
-    v = rng();
-    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rng());
   };
 }
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 const fmt$ = v => "$" + (v >= 1e6 ? (v / 1e6).toFixed(2) + "M" : Math.round(v / 1000) + "k");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const idxOf = (x, y) => {
   const i = Math.floor(x / CELL), j = Math.floor(y / CELL);
   return (i < 0 || j < 0 || i >= W || j >= H) ? -1 : j * W + i;
 };
+const lastPt = h => h.pts[h.pts.length - 1];
 let toastT = 0;
 function toast(msg) {
   const t = document.getElementById("toast");
   t.textContent = msg; t.classList.add("show");
-  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2200);
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2400);
 }
-function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
 function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+function ask(title, text, yesLabel, onYes) {
+  document.getElementById("askTitle").textContent = title;
+  document.getElementById("askText").textContent = text;
+  const y = document.getElementById("askYes");
+  y.textContent = yesLabel;
+  y.onclick = () => { document.getElementById("ask").hidden = true; onYes(); };
+  document.getElementById("ask").hidden = false;
+  y.focus();
+}
 
 // ─── Terrain generation ───────────────────────────────────────────────────
 function valueNoise(seed) {
@@ -315,26 +382,36 @@ function generate(seed) {
   const { nat, elev, built, noise } = S;
   nat.fill(N_NATIVE); built.fill(B_NONE);
 
-  // clubhouse on the south edge
-  const ci = Math.round(W * (0.35 + rng() * 0.3)), cj = H - 9;
+  const ci = Math.round(W * (0.38 + rng() * 0.24)), cj = H - 9;
   S.club = [ci * CELL + 2.5, (cj - 4) * CELL];
 
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
     const k = j * W + i;
-    elev[k] = 70 * fbm(nE, i * 0.018, j * 0.018, 4) + 12 * (1 - j / H);
+    elev[k] = 80 * fbm(nE, i * 0.015, j * 0.015, 4) + 14 * (1 - j / H);
     noise[k] = nT(i * 0.9, j * 0.9);
   }
 
   // creek: meanders west → east through the middle band
-  let y0 = H * (0.3 + rng() * 0.25), prev = null;
+  const y0 = H * (0.38 + rng() * 0.2);
+  let prev = null;
   for (let i = 0; i < W; i++) {
-    const y = Math.round(y0 + 22 * (nC(i * 0.025, 3.7) - 0.5) + 10 * (nC(i * 0.07, 9.1) - 0.5));
+    const y = Math.round(y0 + 30 * (nC(i * 0.02, 3.7) - 0.5) + 12 * (nC(i * 0.06, 9.1) - 0.5));
     const a = prev === null ? y : Math.min(prev, y), b = prev === null ? y : Math.max(prev, y);
     for (let j = a; j <= b + 1; j++) if (j >= 0 && j < H) nat[j * W + i] = N_CREEK;
     prev = y;
   }
+  // a lake in the north half
+  {
+    const li = Math.round(W * (0.2 + rng() * 0.6)), lj = Math.round(H * (0.12 + rng() * 0.16));
+    const rx = 10 + rng() * 6, ry = 6 + rng() * 4;
+    for (let j = Math.floor(lj - ry * 1.6); j <= lj + ry * 1.6; j++) for (let i = Math.floor(li - rx * 1.6); i <= li + rx * 1.6; i++) {
+      if (i < 0 || j < 0 || i >= W || j >= H) continue;
+      const d = Math.hypot((i - li) / rx, (j - lj) / ry);
+      if (d < 0.8 + 0.4 * nF(i * 0.15 + 50, j * 0.15)) nat[j * W + i] = N_LAKE;
+    }
+  }
   // wetlands hugging the creek
-  const wetN = 2 + (rng() < 0.5 ? 1 : 0);
+  const wetN = 3 + (rng() < 0.5 ? 1 : 0);
   for (let w = 0; w < wetN; w++) {
     const wi = Math.round(25 + rng() * (W - 50));
     let wj = -1;
@@ -345,28 +422,30 @@ function generate(seed) {
       if (i < 0 || j < 0 || i >= W || j >= H) continue;
       const k = j * W + i;
       const d = Math.hypot((i - wi - dx) / 1.5, j - wj - dy);
-      if (d < r * (0.75 + 0.5 * nF(i * 0.3, j * 0.3)) && nat[k] !== N_CREEK) nat[k] = N_WET;
+      if (d < r * (0.75 + 0.5 * nF(i * 0.3, j * 0.3)) && nat[k] === N_NATIVE) nat[k] = N_WET;
     }
   }
   // forest patches
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
     const k = j * W + i;
     if (nat[k] !== N_NATIVE) continue;
-    const f = fbm(nF, i * 0.035, j * 0.035, 3) + 0.12 * (nT(i * 0.3, j * 0.3) - 0.5);
+    const f = fbm(nF, i * 0.03, j * 0.03, 3) + 0.12 * (nT(i * 0.3, j * 0.3) - 0.5);
     const edge = Math.min(i, j, W - 1 - i, H - 1 - j) < 3 ? 0.08 : 0;
-    if (f + edge > 0.56 && Math.hypot(i - ci, j - cj) > 16) nat[k] = N_FOREST;
+    if (f + edge > 0.56 && Math.hypot(i - ci, j - cj) > 18) nat[k] = N_FOREST;
   }
-  // creek bed sits low
-  for (let k = 0; k < W * H; k++) if (nat[k] === N_CREEK) elev[k] -= 4; else if (nat[k] === N_WET) elev[k] -= 1.5;
-  // clubhouse & parking: clear, flat
-  for (let j = cj - 12; j < H; j++) for (let i = ci - 14; i <= ci + 14; i++) {
+  for (let k = 0; k < W * H; k++) {
+    if (nat[k] === N_CREEK) elev[k] -= 4;
+    else if (nat[k] === N_LAKE) elev[k] -= 6;
+    else if (nat[k] === N_WET) elev[k] -= 1.5;
+  }
+  // clubhouse & practice ground: clear
+  for (let j = cj - 14; j < H; j++) for (let i = ci - 16; i <= ci + 16; i++) {
     if (i < 0 || i >= W || j < 0) continue;
     const k = j * W + i;
-    if (Math.hypot(i - ci, (j - cj) * 1.3) < 13 && nat[k] !== N_CREEK && nat[k] !== N_WET) nat[k] = N_NATIVE;
+    if (Math.hypot(i - ci, (j - cj) * 1.3) < 15 && nat[k] === N_FOREST) nat[k] = N_NATIVE;
   }
   for (let j = cj - 3; j <= Math.min(H - 1, cj + 5); j++) for (let i = ci - 7; i <= ci + 7; i++) nat[j * W + i] = N_CLUB;
 
-  // slope magnitude (ft per cell)
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
     const k = j * W + i;
     const ex = elev[j * W + Math.min(W - 1, i + 1)] - elev[j * W + Math.max(0, i - 1)];
@@ -375,11 +454,10 @@ function generate(seed) {
   }
   S.forestTotal = 0;
   for (let k = 0; k < W * H; k++) if (nat[k] === N_FOREST) S.forestTotal++;
-  S.holes = []; S.sel = -1; S.draft = null; S.traces = null; S.undo = [];
+  S.holes = []; S.sel = -1; S.draft = null; S.traces = null; S.undo = []; S.sims = []; S.allDirty = true;
 }
 
 // ─── Lies ─────────────────────────────────────────────────────────────────
-// fairway | tee | green | rough | native | trees | bunker | water | ob
 function lieIdx(k) {
   if (k < 0) return "ob";
   const b = S.built[k];
@@ -391,7 +469,7 @@ function lieIdx(k) {
   if (b === B_ROUGH) return "rough";
   const n = S.nat[k];
   if (n === N_FOREST) return "trees";
-  if (n === N_CREEK || n === N_WET) return "water";
+  if (n === N_CREEK || n === N_WET || n === N_LAKE) return "water";
   if (n === N_CLUB) return "ob";
   return "native";
 }
@@ -401,10 +479,7 @@ const elevAt = p => { const k = idxOf(p[0], p[1]); return k < 0 ? 0 : S.elev[k];
 
 function computeHazardDist() {
   const d = S.hazDist, INF = 1e9;
-  for (let k = 0; k < W * H; k++) {
-    const l = lieIdx(k);
-    d[k] = (l === "bunker" || l === "water") ? 0 : INF;
-  }
+  for (let k = 0; k < W * H; k++) { const l = lieIdx(k); d[k] = (l === "bunker" || l === "water") ? 0 : INF; }
   const A = 1, B = Math.SQRT2;
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
     const k = j * W + i; let v = d[k];
@@ -422,7 +497,7 @@ function computeHazardDist() {
 
 // ─── Hole geometry ────────────────────────────────────────────────────────
 function holeLen(pts) { let L = 0; for (let i = 1; i < pts.length; i++) L += dist(pts[i - 1], pts[i]); return L; }
-function parFor(yds) { return yds <= 250 ? 3 : yds <= 470 ? 4 : 5; }
+function parFor(yds) { return yds <= 260 ? 3 : yds <= 490 ? 4 : 5; }
 function pointAt(pts, s) {
   for (let i = 1; i < pts.length; i++) {
     const L = dist(pts[i - 1], pts[i]);
@@ -434,7 +509,11 @@ function pointAt(pts, s) {
   }
   return pts[pts.length - 1].slice();
 }
-// projection onto polyline → {s (arc length), d (distance)}
+function normalAt(pts, s, L) {
+  const a = pointAt(pts, Math.min(L, s + 5)), b = pointAt(pts, Math.max(0, s - 5));
+  const nx = -(a[1] - b[1]), ny = a[0] - b[0], nl = Math.hypot(nx, ny) || 1;
+  return [nx / nl, ny / nl];
+}
 function project(pts, p) {
   let best = { s: 0, d: Infinity }, acc = 0;
   for (let i = 1; i < pts.length; i++) {
@@ -450,19 +529,21 @@ function segIntersect(a, b, c, d) {
   const o = (p, q, r) => Math.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]));
   return o(a, b, c) !== o(a, b, d) && o(c, d, a) !== o(c, d, b) && o(a, b, c) !== 0 && o(c, d, a) !== 0;
 }
+function canBuild(k) { const n = S.nat[k]; return !(n === N_CREEK || n === N_WET || n === N_CLUB || n === N_LAKE); }
 
-function canBuild(k, b) {
-  const n = S.nat[k];
-  return !(n === N_CREEK || n === N_WET || n === N_CLUB);
+function markDirty(k) {
+  const x = (k % W) * CELL, y = Math.floor(k / W) * CELL, b = S.dirtyBox;
+  if (!b) S.dirtyBox = [x, y, x + CELL, y + CELL];
+  else { b[0] = Math.min(b[0], x); b[1] = Math.min(b[1], y); b[2] = Math.max(b[2], x + CELL); b[3] = Math.max(b[3], y + CELL); }
 }
+function setBuilt(k, b) { if (S.built[k] !== b) { S.built[k] = b; markDirty(k); return true; } return false; }
 
 function paintHole(h) {
   h.cells = [];
-  const L = holeLen(h.pts), par = parFor(L), tee = h.pts[0], pin = h.pts[h.pts.length - 1];
+  const L = holeLen(h.pts), par = parFor(L), tee = h.pts[0], pin = lastPt(h);
   const put = (k, b, over) => {
-    if (k < 0 || !canBuild(k, b)) return;
-    if (!over.includes(S.built[k])) return;
-    S.built[k] = b; h.cells.push([k, b]);
+    if (k < 0 || !canBuild(k) || !over.includes(S.built[k])) return;
+    setBuilt(k, b); h.cells.push([k, b]);
   };
   const disk = (c, r, b, over) => {
     const ci = c[0] / CELL, cj = c[1] / CELL;
@@ -473,16 +554,17 @@ function paintHole(h) {
   };
   disk(pin, 3.1, B_GREEN, [B_NONE, B_ROUGH, B_FAIRWAY]);
   disk(tee, 1.6, B_TEE, [B_NONE, B_ROUGH, B_FAIRWAY]);
-  // fairway corridor from the forward carry to the front of the green
   const s0 = par === 3 ? L - 30 : Math.min(L - 40, par === 5 ? 150 : Math.max(120, L * 0.42));
-  const s1 = L - 12, hw = par === 3 ? 7 : 16;
+  const s1 = L - 12, hw = par === 3 ? 7 : 16, rw = par === 3 ? 16 : 30;
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
   for (const p of h.pts) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }
-  for (let j = Math.floor((y0 - hw) / CELL); j <= (y1 + hw) / CELL; j++) for (let i = Math.floor((x0 - hw) / CELL); i <= (x1 + hw) / CELL; i++) {
+  for (let j = Math.floor((y0 - rw) / CELL); j <= (y1 + rw) / CELL; j++) for (let i = Math.floor((x0 - rw) / CELL); i <= (x1 + rw) / CELL; i++) {
     if (i < 0 || j < 0 || i >= W || j >= H) continue;
     const c = [i * CELL + 2.5, j * CELL + 2.5], pr = project(h.pts, c);
     const taper = pr.s > L - 60 ? 0.65 + 0.35 * (L - pr.s) / 60 : 1;
     if (pr.s >= s0 && pr.s <= s1 && pr.d <= hw * taper) put(j * W + i, B_FAIRWAY, [B_NONE, B_ROUGH]);
+    // cleared rough between fairway and tree line, like a real corridor
+    else if (pr.s >= Math.min(70, s0) && pr.s <= L && pr.d <= rw) put(j * W + i, B_ROUGH, [B_NONE]);
   }
   // rough collar around the green, and a cleared chute off the tee
   disk(pin, 6, B_ROUGH, [B_NONE]);
@@ -492,7 +574,7 @@ function paintHole(h) {
 function unpaintHole(h) {
   for (let n = h.cells.length - 1; n >= 0; n--) {
     const [k, b] = h.cells[n];
-    if (S.built[k] === b) S.built[k] = B_NONE;
+    if (S.built[k] === b) setBuilt(k, B_NONE);
   }
   h.cells = [];
 }
@@ -513,17 +595,12 @@ function costs() {
 
 // ─── Golfer simulation ────────────────────────────────────────────────────
 const GOLFERS = {
-  s: { name: "Scratch", drive: 282, wood: 245, dErr: 0.05, aErr: 3.0, mishit: 0.02, chipK: 0.09, chipC: 1.4, putK: 0.085, putRes: 0.08, bunkerFail: 0.04, trouble: 0.9 },
-  b: { name: "Bogey",   drive: 215, wood: 185, dErr: 0.09, aErr: 6.0, mishit: 0.11, chipK: 0.2, chipC: 3.2, putK: 0.13, putRes: 0.17, bunkerFail: 0.2, trouble: 1.0 },
+  s: { name: "Scratch", drive: 250, wood: 220, dErr: 0.05, aErr: 3.0, mishit: 0.02, chipK: 0.09, chipC: 1.4, putK: 0.085, putRes: 0.08, bunkerFail: 0.04, trouble: 0.9 },
+  b: { name: "Bogey",   drive: 200, wood: 170, dErr: 0.09, aErr: 6.0, mishit: 0.11, chipK: 0.2, chipC: 3.2, putK: 0.13, putRes: 0.17, bunkerFail: 0.2, trouble: 1.0 },
 };
 const LIE_MOD = {
-  tee:     { d: 1,    a: 1 },
-  fairway: { d: 1,    a: 1 },
-  green:   { d: 1,    a: 1 },
-  rough:   { d: 0.9,  a: 1.25 },
-  native:  { d: 0.75, a: 1.5 },
-  bunker:  { d: 0.62, a: 1.6 },
-  trees:   { d: 0.3,  a: 2.0 },
+  tee: { d: 1, a: 1 }, fairway: { d: 1, a: 1 }, green: { d: 1, a: 1 },
+  rough: { d: 0.9, a: 1.25 }, native: { d: 0.75, a: 1.5 }, bunker: { d: 0.62, a: 1.6 }, trees: { d: 0.3, a: 2.0 },
 };
 const LIE_PEN = { fairway: 0, tee: 0, green: -0.1, rough: 0.12, native: 0.32, bunker: 0.38, trees: 0.8, water: 1.15, ob: 2.0 };
 
@@ -533,35 +610,31 @@ function maxDist(g, lie, first) {
 }
 function expectedFrom(g, d) { return d <= 1 ? 0 : d <= 40 ? 2.2 + d * 0.006 : 2.44 + (d - 40) / (g.drive * 0.82); }
 
-// true if a shot of length D from p in direction (ux,uy) hits trees, returns the stop distance
+// trees stop low ball flight near the start and end of a shot; returns stop distance or -1
 function treeBlock(p, ux, uy, D, skip) {
   const apex = 30 + 0.3 * D;
   for (let s = skip; s < D; s += 4) {
     const t = s / D, hgt = 4 * apex * t * (1 - t);
     if (hgt > 55) continue;
-    const k = idxOf(p[0] + ux * s, p[1] + uy * s);
-    if (isTreeCell(k)) return s;
+    if (isTreeCell(idxOf(p[0] + ux * s, p[1] + uy * s))) return s;
   }
   return -1;
 }
 
 function chooseTarget(g, h, p, lie, first) {
-  const pts = h.pts, pin = pts[pts.length - 1], L = h.len;
+  const pts = h.pts, pin = lastPt(h), L = h.len;
   const maxD = maxDist(g, lie, first), sA = g.aErr * (LIE_MOD[lie] || LIE_MOD.rough).a * D2R;
   const cands = [];
   const dp = dist(p, pin);
   if (dp <= maxD) cands.push(pin);
   const s0 = project(pts, p).s;
   for (let s = s0 + 30; s < L; s += 10) {
-    const c = pointAt(pts, s), a = pointAt(pts, Math.min(L, s + 5)), b = pointAt(pts, Math.max(0, s - 5));
-    let nx = -(a[1] - b[1]), ny = a[0] - b[0]; const nl = Math.hypot(nx, ny) || 1; nx /= nl; ny /= nl;
+    const c = pointAt(pts, s), [nx, ny] = normalAt(pts, s, L);
     for (const off of [-13, 0, 13]) {
-      const q = [c[0] + nx * off, c[1] + ny * off];
-      const d = dist(p, q);
+      const q = [c[0] + nx * off, c[1] + ny * off], d = dist(p, q);
       if (d <= maxD && d > 20) cands.push(q);
     }
   }
-  // fallbacks: straight at the pin, or punch back to the line
   const ang = Math.atan2(pin[1] - p[1], pin[0] - p[0]);
   for (const f of [1, 0.6]) { const d = Math.min(maxD, dp) * f; if (d > 15) cands.push([p[0] + Math.cos(ang) * d, p[1] + Math.sin(ang) * d]); }
   const back = pointAt(pts, Math.min(L, s0 + 20));
@@ -577,8 +650,7 @@ function chooseTarget(g, h, p, lie, first) {
     for (const da of [-1.3, 0, 1.3]) for (const dd of [-1.2, 0, 1.2]) {
       const a = a0 + da * sA, r = D * (1 + dd * g.dErr);
       const q = [p[0] + Math.cos(a) * r, p[1] + Math.sin(a) * r];
-      const l = lieAt(q);
-      v += expectedFrom(g, dist(q, pin)) + (LIE_PEN[l] ?? 0.3) * g.trouble; n++;
+      v += expectedFrom(g, dist(q, pin)) + (LIE_PEN[lieAt(q)] ?? 0.3) * g.trouble; n++;
     }
     v /= n;
     if (treeBlock(p, Math.cos(a0), Math.sin(a0), D, lie === "trees" ? 8 : 4) >= 0) v += 0.9;
@@ -588,7 +660,7 @@ function chooseTarget(g, h, p, lie, first) {
 }
 
 function playHole(g, h, rng, gauss, trace) {
-  const pts = h.pts, pin = pts[pts.length - 1], par = h.par, cap = par + 4;
+  const pts = h.pts, pin = lastPt(h), par = h.par, cap = par + 4;
   let p = pts[0].slice(), lie = "tee", strokes = 0, first = true;
   const ev = { water: 0, ob: 0, bunker: 0, trees: 0, near: 0, full: 0, gir: false, tee: null };
   const path = trace ? [p.slice()] : null;
@@ -597,8 +669,7 @@ function playHole(g, h, rng, gauss, trace) {
     const dp = dist(p, pin);
     if (lie === "green") {
       let ft = dp * 3;
-      const slope = S.grad[idxOf(pin[0], pin[1])] || 0;
-      const k = g.putK * (1 + slope * 0.25);
+      const k = g.putK * (1 + (S.grad[idxOf(pin[0], pin[1])] || 0) * 0.25);
       for (let n = 0; n < 4; n++) {
         strokes++;
         const make = ft <= 1.5 ? 0.995 : Math.min(0.99, Math.exp(-k * (ft - 1.5)));
@@ -616,12 +687,11 @@ function playHole(g, h, rng, gauss, trace) {
       const a = rng() * Math.PI * 2;
       p = [pin[0] + Math.cos(a) * r, pin[1] + Math.sin(a) * r];
       lie = lieAt(p);
-      if (lie !== "green" && r <= 8) lie = "green";     // fringe: putt it
+      if (lie !== "green" && r <= 8) lie = "green";
       if (lie === "water" || lie === "ob") { p = [pin[0] + Math.cos(a) * 6, pin[1] + Math.sin(a) * 6]; lie = "green"; strokes++; }
       if (path) path.push(p.slice());
       continue;
     }
-    // full swing
     const c = chooseTarget(g, h, p, lie, first);
     const mod = LIE_MOD[lie] || LIE_MOD.rough;
     const D = dist(p, c), a0 = Math.atan2(c[1] - p[1], c[0] - p[0]);
@@ -629,11 +699,10 @@ function playHole(g, h, rng, gauss, trace) {
     if (rng() < g.mishit * (lie === "tee" ? 1 : 1.4)) dd *= 0.5 + rng() * 0.25;
     const a = a0 + gauss() * g.aErr * mod.a * D2R, ux = Math.cos(a), uy = Math.sin(a);
     strokes++;
-    // punching out of the woods: usually finds a gap under the branches
+    // punching out of the woods usually finds a gap under the branches
     const block = lie === "trees" && rng() < 0.75 ? -1 : treeBlock(p, ux, uy, dd, lie === "trees" ? 8 : 4);
     if (block >= 0) { dd = block; ev.trees++; }
     let land = [p[0] + ux * dd, p[1] + uy * dd], ll = lieAt(land);
-    // roll-out
     if (block < 0 && (ll === "fairway" || ll === "tee" || ll === "green" || ll === "rough")) {
       const roll = ll === "rough" ? D * 0.015 : ll === "green" ? D * 0.02 : D * 0.06;
       for (let s = 1; s <= roll; s++) {
@@ -643,11 +712,7 @@ function playHole(g, h, rng, gauss, trace) {
         if (ql === "bunker" || ql === "water") break;
       }
     }
-    if (ll === "ob") {
-      strokes++; ev.ob++;
-      if (path) path.push(land.slice(), p.slice());
-      continue;
-    }
+    if (ll === "ob") { strokes++; ev.ob++; if (path) path.push(land.slice(), p.slice()); continue; }
     if (ll === "water") {
       strokes++; ev.water++;
       let drop = p;
@@ -692,17 +757,28 @@ function simulateHole(h, hi) {
   return out;
 }
 
-function refreshHoles() {
-  for (const h of S.holes) { h.len = holeLen(h.pts); h.par = parFor(h.len); }
+function refreshHoles() { for (const h of S.holes) { h.len = holeLen(h.pts); h.par = parFor(h.len); } }
+function holeBox(h, pad) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const p of h.pts) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }
+  return [x0 - pad, y0 - pad, x1 + pad, y1 + pad];
 }
-function runSims() {
+// re-simulate only the holes a change could have affected
+function runSims(force) {
   refreshHoles();
   computeHazardDist();
-  S.sims = S.holes.map((h, i) => simulateHole(h, i));
-  S.simDirty = false;
+  const b = S.dirtyBox;
+  S.holes.forEach((h, i) => {
+    const hb = holeBox(h, 90);
+    const hit = b && !(b[2] < hb[0] || b[0] > hb[2] || b[3] < hb[1] || b[1] > hb[3]);
+    if (force || S.allDirty || !S.sims[i] || h.dirty || hit) { S.sims[i] = simulateHole(h, i); h.dirty = false; }
+  });
+  S.sims.length = S.holes.length;
+  S.allDirty = false; S.dirtyBox = null;
 }
+const simsReady = () => S.sims.length === S.holes.length && S.sims.every(Boolean) && !S.allDirty && !S.dirtyBox && !S.holes.some(h => h.dirty);
 
-// ─── Course rating ────────────────────────────────────────────────────────
+// ─── Course analysis & rating ─────────────────────────────────────────────
 function turnSign(h) {
   if (h.pts.length < 3) return 0;
   let tot = 0;
@@ -712,24 +788,80 @@ function turnSign(h) {
     const ang = Math.abs(Math.atan2(cr, (b[0] - a[0]) * (c[0] - b[0]) + (b[1] - a[1]) * (c[1] - b[1]))) / D2R;
     if (ang > 12) tot += Math.sign(cr);
   }
-  return Math.sign(tot); // screen coords: +1 = right, -1 = left
+  return Math.sign(tot);   // screen coords: +1 = right, -1 = left
+}
+function walkTo(i) {       // yards from the previous green (or clubhouse) to this tee
+  const from = (i === 0 || i === 9) ? S.club : lastPt(S.holes[i - 1]);
+  return dist(from, S.holes[i].pts[0]);
+}
+function holeFeatures(h) {
+  let water = false, treeSides = 0, samples = 0, bunk = 0;
+  for (let s = 30; s < h.len - 5; s += 10) {
+    const c = pointAt(h.pts, s), [nx, ny] = normalAt(h.pts, s, h.len);
+    for (let off = -20; off <= 20; off += 5) if (lieAt([c[0] + nx * off, c[1] + ny * off]) === "water") water = true;
+    for (const side of [-1, 1]) {
+      let t = false;
+      for (let off = 20; off <= 45; off += 5) if (isTreeCell(idxOf(c[0] + nx * off * side, c[1] + ny * off * side))) { t = true; break; }
+      if (t) treeSides++;
+    }
+    samples += 2;
+  }
+  const hb = holeBox(h, 25);
+  for (let j = Math.max(0, Math.floor(hb[1] / CELL)); j < Math.min(H, hb[3] / CELL); j++)
+    for (let i = Math.max(0, Math.floor(hb[0] / CELL)); i < Math.min(W, hb[2] / CELL); i++) {
+      const k = j * W + i;
+      if (S.built[k] === B_BUNKER && project(h.pts, [i * CELL + 2.5, j * CELL + 2.5]).d < 40) bunk++;
+    }
+  return { water, trees: samples ? treeSides / samples : 0, bunk };
+}
+function courseProfile() {
+  const f = S.holes.map(holeFeatures);
+  let lo = Infinity, hi = -Infinity;
+  for (const h of S.holes) for (let s = 0; s <= h.len; s += 20) { const e = elevAt(pointAt(h.pts, s)); lo = Math.min(lo, e); hi = Math.max(hi, e); }
+  const n = S.holes.length;
+  return {
+    water: f.filter(x => x.water).length / n,
+    trees: f.reduce((a, x) => a + x.trees, 0) / n,
+    bunk: clamp(f.reduce((a, x) => a + x.bunk, 0) / n / 30, 0, 1),
+    elev: clamp((hi - lo) / 110, 0, 1),
+    waterHoles: f.filter(x => x.water).length,
+    bunkerCells: f.reduce((a, x) => a + x.bunk, 0),
+    elevRange: hi - lo,
+    perHole: f,
+  };
+}
+function compareReal(me) {
+  const feat = c => [(c.cr - 72) / 3, (c.sl - 113) / 15, (c.yds - 6800) / 450, (c.par - 71) / 1.2, c.water / 0.3, c.trees / 0.3, c.bunk / 0.3, c.elev / 0.3];
+  const w = [1.4, 1.4, 1, 0.4, 1, 1, 1, 0.8], ws = w.reduce((a, b) => a + b, 0);
+  const fm = feat(me);
+  return REAL.map(c => {
+    const fc = feat(c);
+    let d2 = 0; for (let i = 0; i < fm.length; i++) d2 += w[i] * (fm[i] - fc[i]) ** 2;
+    const d = Math.sqrt(d2 / ws);
+    return { c, match: Math.round(100 * Math.exp(-d * d / 1.6)) };
+  }).sort((a, b) => b.match - a.match);
+}
+function letter(score) {
+  const t = [[93, "A+"], [87, "A"], [82, "A−"], [77, "B+"], [72, "B"], [67, "B−"], [62, "C+"], [57, "C"], [52, "C−"], [45, "D"]];
+  for (const [v, l] of t) if (score >= v) return l;
+  return "F";
 }
 
 function holeNotes(h, i) {
   const sim = S.sims[i], notes = [];
   if (!sim) return notes;
   const s = sim.s, b = sim.b;
-  if (h.len < 100) notes.push(["bad", "Under 100 yds — too short to count as a hole."]);
-  if (h.len > 690) notes.push(["bad", "Over 690 yds — longer than a par 5."]);
-  if (s.avg - h.par < -0.25) notes.push(["warn", `Scratch players average ${(s.avg - h.par).toFixed(2)} vs par. It's a birdie hole with nothing in the way.`]);
+  if (h.len < 100) notes.push(["bad", "Under 100 yds, which is too short to count as a hole."]);
+  if (h.len > 710) notes.push(["bad", "Over 710 yds, which is longer than a par 5."]);
+  if (s.avg - h.par < -0.25) notes.push(["warn", `Scratch players average ${(s.avg - h.par).toFixed(2)} to par. It's an easy birdie with nothing in the way.`]);
   if (s.avg - h.par > 0.55) notes.push(["warn", `Brutal for scratch players (+${(s.avg - h.par).toFixed(2)}).`]);
-  if (b.avg - h.par > 2.0) notes.push(["bad", `Bogey golfers average +${(b.avg - h.par).toFixed(1)}. That slows play and they'll quit.`]);
+  if (b.avg - h.par > 2.0) notes.push(["bad", `Bogey golfers average +${(b.avg - h.par).toFixed(1)}. That slows play and drives members away.`]);
   if (b.trouble > 0.4) notes.push(["bad", `${Math.round(b.trouble * 100)}% of bogey rounds lose a ball here.`]);
-  if ((s.near + b.near) / 2 < 0.08) notes.push(["warn", "No hazard sits near where the shots land, so there's nothing to think about."]);
-  else if ((s.near + b.near) / 2 > 0.2) notes.push(["good", "Hazards are in play near the landing zones. Nice strategic tension."]);
+  if ((s.near + b.near) / 2 < 0.08) notes.push(["warn", "No hazard sits near where shots land, so there's nothing to think about."]);
+  else if ((s.near + b.near) / 2 > 0.2) notes.push(["good", "Hazards are in play near the landing zones. Good strategic tension."]);
   if (b.trees > 0.35) notes.push(["warn", `Trees catch ${Math.round(b.trees * 100)}% of bogey rounds. Widen the corridor?`]);
-  const ti = i > 0 ? dist(S.holes[i - 1].pts[S.holes[i - 1].pts.length - 1], h.pts[0]) : dist(S.club, h.pts[0]);
-  if (ti > 140) notes.push(["warn", `${Math.round(ti)}-yd walk to this tee from ${i ? "the previous green" : "the clubhouse"}.`]);
+  const w = walkTo(i);
+  if (w > (i === 0 || i === 9 ? 150 : 140)) notes.push(["warn", `${Math.round(w)}-yd walk to this tee from ${(i === 0 || i === 9) ? "the clubhouse" : "the previous green"}.`]);
   if (!notes.length) notes.push(["good", "Plays fair for both golfers."]);
   return notes;
 }
@@ -738,15 +870,20 @@ function rateCourse() {
   const hs = S.holes, sims = S.sims, n = hs.length;
   const pars = hs.map(h => h.par), parTot = pars.reduce((a, b) => a + b, 0);
   const cnt = p => pars.filter(x => x === p).length;
-  const comp = {};
-  const tips = [];
+  const comp = {}, tips = [];
+  const lens = hs.map(h => h.len), yards = lens.reduce((a, b) => a + b, 0);
 
   // Par & length
   let pl = 100;
-  if (!cnt(3)) { pl -= 30; tips.push("Add at least one par 3 (≤ 250 yds)."); }
-  if (!cnt(5)) { pl -= 30; tips.push("Add at least one par 5 (471–690 yds)."); }
-  if (parTot < 33 || parTot > 37) { pl -= 20; tips.push(`Par ${parTot} is unusual for nine holes. Aim for 34–36.`); }
-  hs.forEach((h, i) => { if (h.len < 100 || h.len > 690) { pl -= 20; tips.push(`Hole ${i + 1} is ${Math.round(h.len)} yds. Keep holes between 100 and 690.`); } });
+  const p3 = cnt(3), p5 = cnt(5);
+  if (p3 < 3 || p3 > 5) { pl -= 15; tips.push(`You have ${p3} par 3${p3 === 1 ? "" : "s"}. Championship courses usually have 4 (3–5 is normal).`); }
+  if (p5 < 2 || p5 > 5) { pl -= 15; tips.push(`You have ${p5} par 5${p5 === 1 ? "" : "s"}. Most courses have 2–4.`); }
+  if (parTot < 69 || parTot > 73) { pl -= 20; tips.push(`Par ${parTot} is unusual for 18 holes. Aim for 70–72.`); }
+  const out = pars.slice(0, 9).reduce((a, b) => a + b, 0), inn = pars.slice(9).reduce((a, b) => a + b, 0);
+  if (out < 34 || out > 37 || inn < 34 || inn > 37) { pl -= 10; tips.push(`Your nines are par ${out} and par ${inn}. Balanced nines are 34–37 each.`); }
+  if (yards < 6000) { pl -= 15; tips.push(`At ${Math.round(yards).toLocaleString()} yds this plays like an executive course. Championship courses run 6,800–7,600.`); }
+  if (yards > 7900) { pl -= 10; tips.push(`At ${Math.round(yards).toLocaleString()} yds this is longer than any major championship venue.`); }
+  hs.forEach((h, i) => { if (h.len < 100 || h.len > 710) { pl -= 10; tips.push(`Hole ${i + 1} is ${Math.round(h.len)} yds. Keep holes between 100 and 710.`); } });
   comp.par = clamp(pl, 0, 100);
 
   // Playability
@@ -768,27 +905,27 @@ function rateCourse() {
     st += clamp(v, 0, 100);
   });
   comp.strat = st / n;
-  if (comp.strat < 55) tips.push("Put bunkers and water near where tee shots and approaches actually land. Use Playtest to see where that is.");
+  if (comp.strat < 55) tips.push("Put bunkers and water near where tee shots and approaches actually land. Playtest shows you where that is.");
 
   // Variety
-  const dirs = new Set(hs.map(h => { const a = h.pts[0], b = h.pts[h.pts.length - 1]; return Math.round(((Math.atan2(b[1] - a[1], b[0] - a[0]) / D2R + 360) % 360) / 45) % 8; }));
+  const dirs = new Set(hs.map(h => { const a = h.pts[0], b = lastPt(h); return Math.round(((Math.atan2(b[1] - a[1], b[0] - a[0]) / D2R + 360) % 360) / 45) % 8; }));
   const turns = new Set(hs.map(turnSign));
-  const lens = hs.map(h => h.len), mean = lens.reduce((a, b) => a + b, 0) / n;
-  const sd = Math.sqrt(lens.reduce((a, b) => a + (b - mean) ** 2, 0) / n);
-  comp.variety = clamp(35 * (new Set(pars).size / 3) + 30 * Math.min(1, dirs.size / 5) + 20 * (turns.size / 3) + 15 * Math.min(1, sd / 110), 0, 100);
+  const mean = yards / n, sd = Math.sqrt(lens.reduce((a, b) => a + (b - mean) ** 2, 0) / n);
+  let consec = 0;
+  for (let i = 2; i < n; i++) if (pars[i] === pars[i - 1] && pars[i] === pars[i - 2] && pars[i] !== 4) consec++;
+  comp.variety = clamp(35 * (new Set(pars).size / 3) + 30 * Math.min(1, dirs.size / 7) + 20 * (turns.size / 3) + 15 * Math.min(1, sd / 120) - consec * 8, 0, 100);
   if (turns.size < 3) tips.push("Mix it up: some doglegs left, some right, some straight.");
-  if (dirs.size < 4) tips.push("Point holes in more directions so the wind and sun change from hole to hole.");
+  if (dirs.size < 6) tips.push("Point holes in more directions so the wind and sun change as golfers go round.");
 
   // Routing & safety
   let rt = 100;
-  const d1 = dist(S.club, hs[0].pts[0]), d9 = dist(S.club, hs[n - 1].pts[hs[n - 1].pts.length - 1]);
-  if (d1 > 120) { rt -= Math.min(20, (d1 - 120) / 6); tips.push(`Hole 1 tees off ${Math.round(d1)} yds from the clubhouse.`); }
-  if (d9 > 120) { rt -= Math.min(20, (d9 - 120) / 6); tips.push(`Hole 9 finishes ${Math.round(d9)} yds from the clubhouse. Bring them home.`); }
+  const ends = [["Hole 1 tees off", walkTo(0)], ["Hole 10 tees off", walkTo(9)], ["Hole 9 finishes", dist(lastPt(hs[8]), S.club)], ["Hole 18 finishes", dist(lastPt(hs[17]), S.club)]];
+  for (const [label, d] of ends) if (d > 150) { rt -= Math.min(15, (d - 150) / 8); tips.push(`${label} ${Math.round(d)} yds from the clubhouse. Both nines should start and finish there.`); }
   let walk = 0;
   for (let i = 1; i < n; i++) {
-    const w = dist(hs[i - 1].pts[hs[i - 1].pts.length - 1], hs[i].pts[0]);
-    walk += w;
-    if (w > 110) rt -= Math.min(10, (w - 110) / 8);
+    if (i === 9) continue;
+    const w = walkTo(i); walk += w;
+    if (w > 120) rt -= Math.min(8, (w - 120) / 10);
   }
   let crossings = 0, close = 0;
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
@@ -800,70 +937,71 @@ function rateCourse() {
     for (let s = 60; s < hs[i].len - 40; s += 10) md = Math.min(md, project(B, pointAt(A, s)).d);
     if (md < 35) close++;
   }
-  rt -= crossings * 22 + close * 8;
-  if (crossings) tips.push(`${crossings} pair${crossings > 1 ? "s" : ""} of holes cross each other. That's a lawsuit waiting to happen.`);
-  if (close) tips.push(`${close} pair${close > 1 ? "s" : ""} of holes run within 35 yds of each other.`);
+  rt -= crossings * 15 + close * 5;
+  if (crossings) tips.push(`${crossings} pair${crossings > 1 ? "s" : ""} of holes cross each other. That's a safety problem and a liability.`);
+  if (close) tips.push(`${close} pair${close > 1 ? "s" : ""} of holes run within 35 yds of each other. Stray shots will hit golfers on the next hole.`);
   comp.route = clamp(rt, 0, 100);
 
   // Environment
   const c = costs();
-  comp.env = clamp(100 - c.clearedPct * 220, 0, 100);
-  if (c.clearedPct > 0.25) tips.push(`You cleared ${Math.round(c.clearedPct * 100)}% of the forest. Route through the open ground.`);
+  comp.env = clamp(100 - c.clearedPct * 200, 0, 100);
+  if (c.clearedPct > 0.25) tips.push(`You cleared ${Math.round(c.clearedPct * 100)}% of the forest. Route more holes through open ground.`);
 
   const W8 = { par: 0.15, play: 0.25, strat: 0.2, variety: 0.1, route: 0.15, env: 0.15 };
   let score = 0; for (const k in W8) score += W8[k] * comp[k];
   const over = c.total > BUDGET ? (c.total - BUDGET) / BUDGET : 0;
-  if (over > 0) { score *= Math.max(0.3, 1 - over * 2); tips.unshift(`Over budget by ${fmt$(c.total - BUDGET)}. The bank took a cut of your score.`); }
+  if (over > 0) { score *= Math.max(0.3, 1 - over * 2); tips.unshift(`You went ${fmt$(c.total - BUDGET)} over budget, and the board docked your grade.`); }
 
-  // USGA-style ratings (9-hole, men's): Course Rating ≈ scratch score, Slope = 5.381 × (bogey rating − course rating) × 2
+  // USGA-style ratings (men): Course Rating ≈ scratch score; Slope = 5.381 × (Bogey Rating − Course Rating)
   const cr = sims.reduce((a, s) => a + s.s.avg, 0), br = sims.reduce((a, s) => a + s.b.avg, 0);
-  const slope = clamp(Math.round(5.381 * (br - cr) * 2), 55, 155);
-  return { score, comp, tips, parTot, yards: lens.reduce((a, b) => a + b, 0), cr, br, slope, walk, cost: c, over };
+  const slope = clamp(Math.round(5.381 * (br - cr)), 55, 155);
+  const prof = courseProfile();
+  const me = { cr, sl: slope, yds: yards, par: parTot, water: prof.water, trees: prof.trees, bunk: prof.bunk, elev: prof.elev };
+  const matches = compareReal(me);
+
+  // signature hole: the most strategic hole that's still fair
+  let sig = 0, sigV = -1;
+  hs.forEach((h, i) => { const v = (sims[i].s.near + sims[i].b.near) / 2 * (1 - sims[i].b.trouble) + (prof.perHole[i].water ? 0.05 : 0) + (h.par === 3 ? 0.03 : 0); if (v > sigV) { sigV = v; sig = i; } });
+
+  return { score, grade: letter(score), comp, tips, parTot, out, inn, yards, cr, br, slope, walk, cost: c, over, prof, me, matches, sig };
 }
 
 // ─── Rendering ────────────────────────────────────────────────────────────
 const cT = document.getElementById("terrain"), cO = document.getElementById("over");
 const xT = cT.getContext("2d"), xO = cO.getContext("2d");
 cT.width = cO.width = W * CPX; cT.height = cO.height = H * CPX;
-let img = xT.createImageData(W * CPX, H * CPX);
+const img = xT.createImageData(W * CPX, H * CPX);
 
 function colorFor(k, i, j) {
   const b = S.built[k], n = S.nat[k], nz = S.noise[k];
-  let c;
-  if (b === B_FAIRWAY) c = ((Math.floor((i + j) / 3)) & 1) ? [98, 174, 82] : [106, 184, 88];
-  else if (b === B_GREEN) c = [122, 203, 105];
-  else if (b === B_TEE) c = [110, 189, 94];
-  else if (b === B_BUNKER) c = [235, 221, 178];
-  else if (b === B_POND) c = [62, 127, 175];
-  else if (b === B_ROUGH) c = [134, 167, 99];
-  else if (n === N_FOREST) c = [48 + nz * 16, 88 + nz * 20, 56 + nz * 10];
-  else if (n === N_CREEK) c = [70, 131, 174];
-  else if (n === N_WET) c = (((i + j) & 3) === 0) ? [88, 128, 110] : [110, 156, 134];
-  else if (n === N_CLUB) c = [201, 191, 168];
-  else c = [146 + nz * 14, 162 + nz * 12, 104 + nz * 8];
-  return c;
+  if (b === B_FAIRWAY) return ((Math.floor((i + j) / 3)) & 1) ? [98, 174, 82] : [106, 184, 88];
+  if (b === B_GREEN) return [122, 203, 105];
+  if (b === B_TEE) return [110, 189, 94];
+  if (b === B_BUNKER) return [235, 221, 178];
+  if (b === B_POND) return [62, 127, 175];
+  if (b === B_ROUGH) return [134, 167, 99];
+  if (n === N_FOREST) return [48 + nz * 16, 88 + nz * 20, 56 + nz * 10];
+  if (n === N_CREEK || n === N_LAKE) return [70, 131, 174];
+  if (n === N_WET) return (((i + j) & 3) === 0) ? [88, 128, 110] : [110, 156, 134];
+  if (n === N_CLUB) return [201, 191, 168];
+  return [146 + nz * 14, 162 + nz * 12, 104 + nz * 8];
 }
-
 function drawTerrain() {
   const d = img.data, E = S.elev, rowPx = W * CPX;
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
-    const k = j * W + i;
-    const c = colorFor(k, i, j);
-    // hillshade from NW
+    const k = j * W + i, c = colorFor(k, i, j);
     const ex = E[j * W + Math.min(W - 1, i + 1)] - E[j * W + Math.max(0, i - 1)];
     const ey = E[Math.min(H - 1, j + 1) * W + i] - E[Math.max(0, j - 1) * W + i];
-    let sh = 1 - (ex + ey) * 0.035;
-    sh = clamp(sh, 0.72, 1.2);
-    const water = S.built[k] === B_POND || S.nat[k] === N_CREEK;
-    if (water) sh = 1;
-    // contours
+    const water = S.built[k] === B_POND || S.nat[k] === N_CREEK || S.nat[k] === N_LAKE;
+    const sh = water ? 1 : clamp(1 - (ex + ey) * 0.035, 0.72, 1.2);
     const band = Math.floor(E[k] / 5);
     const contour = !water && ((i < W - 1 && Math.floor(E[k + 1] / 5) !== band) || (j < H - 1 && Math.floor(E[k + W] / 5) !== band));
+    const forest = S.nat[k] === N_FOREST && !S.built[k];
     for (let py = 0; py < CPX; py++) for (let px = 0; px < CPX; px++) {
       const o = ((j * CPX + py) * rowPx + i * CPX + px) * 4;
       let f = sh;
       if (contour && (px === CPX - 1 || py === CPX - 1)) f *= 0.84;
-      if (S.nat[k] === N_FOREST && !S.built[k] && ((px + py * 3 + i * 7 + j * 5) % 7 === 0)) f *= 0.75;
+      if (forest && ((px + py * 3 + i * 7 + j * 5) % 7 === 0)) f *= 0.75;
       d[o] = clamp(c[0] * f, 0, 255); d[o + 1] = clamp(c[1] * f, 0, 255); d[o + 2] = clamp(c[2] * f, 0, 255); d[o + 3] = 255;
     }
   }
@@ -875,16 +1013,16 @@ function drawFlag(ctx, p, num, sel) {
   ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.arc(x, y, 2.5, 0, 7); ctx.fill();
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.6;
   ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y - 20); ctx.stroke();
-  ctx.fillStyle = sel ? "#F2C94C" : "#C8372D";
-  ctx.beginPath(); ctx.moveTo(x, y - 20); ctx.lineTo(x + 12, y - 16); ctx.lineTo(x, y - 12); ctx.closePath(); ctx.fill();
-  if (num) { ctx.fillStyle = sel ? "#1F2A22" : "#fff"; ctx.font = "700 8px Inter,sans-serif"; ctx.fillText(num, x + 2, y - 13.5); }
+  ctx.fillStyle = sel ? "#F2C230" : "#C8102E";
+  ctx.beginPath(); ctx.moveTo(x, y - 20); ctx.lineTo(x + 13, y - 16); ctx.lineTo(x, y - 12); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = sel ? "#15251B" : "#fff"; ctx.font = "700 8px Barlow, sans-serif"; ctx.fillText(num, x + 1.5, y - 13.5);
 }
 function drawTee(ctx, p, num, sel) {
   const x = p[0] * YPX, y = p[1] * YPX;
-  ctx.fillStyle = sel ? "#F2C94C" : "#1F2A22";
+  ctx.fillStyle = sel ? "#F2C230" : "#15251B";
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.arc(x, y, 8, 0, 7); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = sel ? "#1F2A22" : "#fff"; ctx.font = "700 10px Inter,sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = sel ? "#15251B" : "#fff"; ctx.font = "700 11px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
   ctx.fillText(num, x, y + 0.5); ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
 }
 function drawLine(ctx, pts, color, w, dash) {
@@ -893,60 +1031,57 @@ function drawLine(ctx, pts, color, w, dash) {
   ctx.setLineDash([]);
 }
 function label(ctx, text, x, y) {
-  ctx.font = "600 11px Inter,sans-serif";
-  const w = ctx.measureText(text).width + 8;
-  ctx.fillStyle = "rgba(31,42,34,.85)"; ctx.fillRect(x, y - 11, w, 16);
-  ctx.fillStyle = "#fff"; ctx.fillText(text, x + 4, y + 1);
+  ctx.font = "600 12px Barlow, sans-serif";
+  const w = ctx.measureText(text).width + 10;
+  x = Math.min(x, cO.width - w - 2);
+  ctx.fillStyle = "rgba(21,37,27,.88)"; ctx.fillRect(x, y - 12, w, 18);
+  ctx.fillStyle = "#fff"; ctx.fillText(text, x + 5, y + 1);
 }
 
 function drawOverlay() {
   const ctx = xO;
   ctx.clearRect(0, 0, cO.width, cO.height);
-  // clubhouse
   const cx = S.club[0] * YPX, cy = S.club[1] * YPX;
   ctx.fillStyle = "#6B4E3A"; ctx.fillRect(cx - 26, cy + 18, 52, 22);
   ctx.fillStyle = "#8C3B2E"; ctx.beginPath(); ctx.moveTo(cx - 30, cy + 19); ctx.lineTo(cx, cy + 6); ctx.lineTo(cx + 30, cy + 19); ctx.fill();
-  ctx.fillStyle = "#1F2A22"; ctx.font = "700 9px Inter,sans-serif"; ctx.textAlign = "center"; ctx.fillText("CLUBHOUSE", cx, cy + 33); ctx.textAlign = "start";
+  ctx.fillStyle = "#15251B"; ctx.font = "700 10px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center"; ctx.fillText("CLUBHOUSE", cx, cy + 33); ctx.textAlign = "start";
 
-  // walking routes between holes
+  // walking routes
   for (let i = 0; i < S.holes.length; i++) {
-    const from = i ? S.holes[i - 1].pts[S.holes[i - 1].pts.length - 1] : S.club;
-    drawLine(ctx, [from, S.holes[i].pts[0]], "rgba(255,255,255,.55)", 1, [2, 4]);
+    const from = (i === 0 || i === 9) ? S.club : lastPt(S.holes[i - 1]);
+    drawLine(ctx, [from, S.holes[i].pts[0]], "rgba(255,255,255,.5)", 1, [2, 4]);
   }
-  if (S.holes.length === 9) drawLine(ctx, [S.holes[8].pts[S.holes[8].pts.length - 1], S.club], "rgba(255,255,255,.55)", 1, [2, 4]);
+  for (const k of [8, 17]) if (S.holes[k]) drawLine(ctx, [lastPt(S.holes[k]), S.club], "rgba(255,255,255,.5)", 1, [2, 4]);
 
-  // tee-shot landing scatter for the selected hole
   if (S.sel >= 0 && S.sims[S.sel] && !S.traces) {
     for (const gk of ["b", "s"]) {
-      ctx.fillStyle = gk === "s" ? "rgba(255,255,255,.85)" : "rgba(242,153,74,.9)";
+      ctx.fillStyle = gk === "s" ? "rgba(255,255,255,.9)" : "rgba(242,153,74,.95)";
       for (const t of S.sims[S.sel][gk].tees) { ctx.beginPath(); ctx.arc(t[0] * YPX, t[1] * YPX, 1.8, 0, 7); ctx.fill(); }
     }
   }
 
   S.holes.forEach((h, i) => {
     const sel = i === S.sel;
-    drawLine(ctx, h.pts, sel ? "#F2C94C" : "rgba(255,255,255,.9)", sel ? 2.2 : 1.4, [6, 4]);
+    drawLine(ctx, h.pts, sel ? "#F2C230" : "rgba(255,255,255,.9)", sel ? 2.2 : 1.4, [6, 4]);
     for (let k = 1; k < h.pts.length - 1; k++) {
-      const p = h.pts[k]; ctx.fillStyle = sel ? "#F2C94C" : "#fff";
+      const p = h.pts[k]; ctx.fillStyle = sel ? "#F2C230" : "#fff";
       ctx.beginPath(); ctx.arc(p[0] * YPX, p[1] * YPX, sel ? 4 : 2.5, 0, 7); ctx.fill();
     }
-    drawFlag(ctx, h.pts[h.pts.length - 1], String(i + 1), sel);
+    drawFlag(ctx, lastPt(h), String(i + 1), sel);
     drawTee(ctx, h.pts[0], String(i + 1), sel);
     if (sel) {
-      // yardage markers every 100 yds
       for (let s = 100; s < h.len - 20; s += 100) {
         const p = pointAt(h.pts, s);
-        ctx.fillStyle = "#fff"; ctx.font = "700 9px Inter,sans-serif";
+        ctx.fillStyle = "#fff"; ctx.font = "700 10px Barlow, sans-serif";
         ctx.fillText(String(s), p[0] * YPX + 5, p[1] * YPX - 4);
         ctx.beginPath(); ctx.arc(p[0] * YPX, p[1] * YPX, 2, 0, 7); ctx.fill();
       }
     }
   });
 
-  // playtest traces
   if (S.traces) {
-    const t = S.traces, prog = t.prog;
-    for (const tr of t.list) {
+    const prog = S.traces.prog;
+    for (const tr of S.traces.list) {
       const segs = tr.path.length - 1, upto = Math.min(segs, prog * segs);
       ctx.strokeStyle = tr.g === "s" ? "rgba(255,255,255,.9)" : "rgba(242,153,74,.95)";
       ctx.lineWidth = 1.2;
@@ -954,9 +1089,7 @@ function drawOverlay() {
       for (let s = 0; s < upto; s++) {
         const a = tr.path[s], b = tr.path[s + 1], f = Math.min(1, upto - s);
         const ax = a[0] * YPX, ay = a[1] * YPX, bx = (a[0] + (b[0] - a[0]) * f) * YPX, by = (a[1] + (b[1] - a[1]) * f) * YPX;
-        // arc the flight a little
-        const mx = (ax + bx) / 2, my = (ay + by) / 2 - Math.hypot(bx - ax, by - ay) * 0.12;
-        ctx.moveTo(ax, ay); ctx.quadraticCurveTo(mx, my, bx, by);
+        ctx.moveTo(ax, ay); ctx.quadraticCurveTo((ax + bx) / 2, (ay + by) / 2 - Math.hypot(bx - ax, by - ay) * 0.12, bx, by);
       }
       ctx.stroke();
       ctx.fillStyle = ctx.strokeStyle;
@@ -964,39 +1097,36 @@ function drawOverlay() {
     }
   }
 
-  // route draft
   if (S.draft) {
     const pts = S.mouse ? S.draft.concat([S.mouse]) : S.draft;
-    drawLine(ctx, pts, "#F2C94C", 2, [6, 4]);
+    drawLine(ctx, pts, "#F2C230", 2, [6, 4]);
     drawTee(ctx, S.draft[0], String(S.holes.length + 1), true);
-    S.draft.slice(1).forEach(p => { ctx.fillStyle = "#F2C94C"; ctx.beginPath(); ctx.arc(p[0] * YPX, p[1] * YPX, 4, 0, 7); ctx.fill(); });
-    if (S.mouse) {
-      const L = holeLen(pts);
-      label(ctx, `${Math.round(L)} yds · par ${parFor(L)}`, S.mouse[0] * YPX + 12, S.mouse[1] * YPX - 8);
-    }
+    S.draft.slice(1).forEach(p => { ctx.fillStyle = "#F2C230"; ctx.beginPath(); ctx.arc(p[0] * YPX, p[1] * YPX, 4, 0, 7); ctx.fill(); });
+    if (S.mouse) { const L = holeLen(pts); label(ctx, `${Math.round(L)} yds · par ${parFor(L)}`, S.mouse[0] * YPX + 12, S.mouse[1] * YPX - 8); }
   }
-  // brush cursor
   const tool = TOOLS.find(t => t.id === S.tool);
   if (S.mouse && tool && tool.b !== undefined) {
     ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 1.2;
     ctx.beginPath(); ctx.arc(S.mouse[0] * YPX, S.mouse[1] * YPX, S.brush * CPX, 0, 7); ctx.stroke();
   }
-  // elevation readout
   if (S.mouse && !S.draft) {
     const k = idxOf(S.mouse[0], S.mouse[1]);
     if (k >= 0) {
-      const names = { fairway: "Fairway", tee: "Tee", green: "Green", rough: "Cleared rough", native: "Native rough", trees: "Forest", bunker: "Bunker", water: S.nat[k] === N_WET && !S.built[k] ? "Protected wetland" : S.nat[k] === N_CREEK ? "Creek" : "Pond", ob: "Clubhouse (OB)" };
+      const n = S.nat[k];
+      const names = { fairway: "Fairway", tee: "Tee", green: "Green", rough: "Cleared rough", native: "Native rough", trees: "Forest", bunker: "Bunker",
+        water: S.built[k] === B_POND ? "Pond" : n === N_WET ? "Protected wetland" : n === N_LAKE ? "Lake" : "Creek", ob: "Clubhouse (OB)" };
       document.getElementById("hint").innerHTML = hintBase() + ` <span class="dim">· ${names[lieIdx(k)]} · ${Math.round(S.elev[k])} ft</span>`;
     }
   }
 }
 
 function hintBase() {
-  if (S.draft) return `<b>Hole ${S.holes.length + 1}:</b> click to add dogleg turns, then click the last point again to place the green. Backspace undoes a point, Esc cancels.`;
+  const n = S.holes.length;
+  if (S.draft) return `<b>Hole ${n + 1}:</b> click to add dogleg turns, then click the last point again to place the green. Backspace removes a point; Esc cancels.`;
   const t = S.tool;
-  if (t === "route") return S.holes.length >= 9 ? "All nine holes routed. Use Select to drag tees, turns and greens, or brushes to shape them." : `<b>Route hole ${S.holes.length + 1}:</b> click to place the tee${S.holes.length ? " near the last green" : " near the clubhouse"}.`;
+  if (t === "route") return n >= HOLES ? "All 18 holes are routed. Use Select to drag tees, turns and flags, or use the brushes to shape them." : `<b>Route hole ${n + 1}:</b> click to place the tee${n === 0 || n === 9 ? " near the clubhouse" : " near the last green"}.`;
   if (t === "select") return "<b>Select:</b> click a hole, then drag its tee, turns or flag to re-route it.";
-  return `<b>${TOOLS.find(x => x.id === t).name} brush:</b> click and drag to paint. [ and ] change the size.`;
+  return `<b>${TOOLS.find(x => x.id === t).name} brush:</b> click and drag to paint. Use [ and ] to change the size.`;
 }
 
 // ─── UI ───────────────────────────────────────────────────────────────────
@@ -1014,18 +1144,16 @@ function setTool(id) {
   document.getElementById("hint").innerHTML = hintBase();
   drawOverlay();
 }
-
 function fitMap() {
   const wrap = document.getElementById("mapwrap"), area = document.getElementById("maparea");
-  const aw = wrap.clientWidth, ah = Math.max(wrap.clientHeight, 240);
-  const r = W / H;
+  const aw = wrap.clientWidth, ah = Math.max(wrap.clientHeight, 240), r = W / H;
   let w = aw, h = aw / r;
-  if (h > ah && window.innerWidth > 860) { h = ah; w = h * r; }
+  if (h > ah && window.innerWidth > 900) { h = ah; w = h * r; }
   area.style.width = w + "px"; area.style.height = h + "px";
 }
 
 function pushUndo() {
-  S.undo.push({ built: S.built.slice(), holes: JSON.stringify(S.holes) });
+  S.undo.push({ built: S.built.slice(), holes: JSON.stringify(S.holes.map(h => ({ pts: h.pts, cells: h.cells }))) });
   if (S.undo.length > 40) S.undo.shift();
 }
 function doUndo() {
@@ -1033,6 +1161,7 @@ function doUndo() {
   if (!u) { toast("Nothing to undo"); return; }
   S.built.set(u.built); S.holes = JSON.parse(u.holes);
   if (S.sel >= S.holes.length) S.sel = S.holes.length - 1;
+  S.allDirty = true;
   changed(true);
 }
 
@@ -1041,16 +1170,15 @@ function changed(terrain) {
   refreshHoles();
   S.traces = null;
   if (terrain) drawTerrain();
-  S.simDirty = true;
   updateStats();
   drawOverlay();
   clearTimeout(simTimer);
-  simTimer = setTimeout(() => { runSims(); updateCard(); drawOverlay(); save(); }, 180);
+  simTimer = setTimeout(() => { runSims(); updateCard(); drawOverlay(); save(); }, 200);
 }
 
 function updateStats() {
   const c = costs(), n = S.holes.length;
-  document.getElementById("sHoles").textContent = `${n}/9`;
+  document.getElementById("sHoles").textContent = `${n}/${HOLES}`;
   document.getElementById("sPar").textContent = n ? S.holes.reduce((a, h) => a + h.par, 0) : "–";
   document.getElementById("sYds").textContent = n ? Math.round(S.holes.reduce((a, h) => a + h.len, 0)).toLocaleString() : "–";
   const sc = document.getElementById("sCost");
@@ -1059,29 +1187,38 @@ function updateStats() {
   document.getElementById("sForest").textContent = Math.round(c.clearedPct * 100) + "%";
   document.getElementById("bDelHole").disabled = S.sel < 0;
   document.getElementById("bPlay").disabled = S.sel < 0;
-  document.getElementById("bOpen").disabled = n < 9;
+  document.getElementById("bOpen").disabled = n < HOLES;
 }
 
 function updateCard() {
-  const body = document.getElementById("cardBody"), foot = document.getElementById("cardFoot");
+  const body = document.getElementById("cardBody");
   body.innerHTML = "";
+  const n = S.holes.length;
+  if (!n) { body.innerHTML = `<tr><td colspan="6" class="dim" style="text-align:left;padding:10px 4px">No holes yet. Pick Route and click near the clubhouse.</td></tr>`; updateDetail(); return; }
+  const fmtAvg = (v, par) => `<span class="${v - par < -0.05 ? "under" : ""}">${v.toFixed(2)}</span>`;
+  const sub = (label, a, b) => {
+    const hs = S.holes.slice(a, b); if (!hs.length) return;
+    const par = hs.reduce((x, h) => x + h.par, 0), yd = hs.reduce((x, h) => x + h.len, 0);
+    const ok = hs.every((_, k) => S.sims[a + k]);
+    const ss = ok ? hs.reduce((x, _, k) => x + S.sims[a + k].s.avg, 0) : 0, bb = ok ? hs.reduce((x, _, k) => x + S.sims[a + k].b.avg, 0) : 0;
+    const tr = document.createElement("tr"); tr.className = label === "Tot" ? "tot" : "sub";
+    tr.innerHTML = `<td>${label}</td><td>${Math.round(yd).toLocaleString()}</td><td>${par}</td><td>${ok ? `<span class="${ss - par < -0.05 ? "under" : ""}">${ss.toFixed(1)}</span>` : "…"}</td><td>${ok ? bb.toFixed(1) : "…"}</td><td></td>`;
+    body.appendChild(tr);
+  };
   S.holes.forEach((h, i) => {
     const sim = S.sims[i];
     const tr = document.createElement("tr");
-    if (i === S.sel) tr.className = "sel";
-    const rel = v => { const d = v - h.par; return `<span class="${d > 0.05 ? "pos" : d < -0.05 ? "neg" : ""}">${v.toFixed(2)}</span>`; };
+    tr.className = "h" + (i === S.sel ? " sel" : "");
+    tr.tabIndex = 0;
     const risk = sim ? Math.round((sim.s.near + sim.b.near) / 2 * 100) + "%" : "…";
-    tr.innerHTML = `<td><span class="holeno">${i + 1}</span></td><td>${Math.round(h.len)}</td><td>${h.par}</td><td>${sim ? rel(sim.s.avg) : "…"}</td><td>${sim ? rel(sim.b.avg) : "…"}</td><td>${risk}</td>`;
-    tr.onclick = () => { S.sel = i; S.traces = null; updateCard(); updateStats(); drawOverlay(); };
+    tr.innerHTML = `<td><span class="holeno">${i + 1}</span></td><td>${Math.round(h.len)}</td><td>${h.par}</td><td>${sim ? fmtAvg(sim.s.avg, h.par) : "…"}</td><td>${sim ? fmtAvg(sim.b.avg, h.par) : "…"}</td><td>${risk}</td>`;
+    const pick = () => { S.sel = i; S.traces = null; updateCard(); updateStats(); drawOverlay(); };
+    tr.onclick = pick; tr.onkeydown = e => { if (e.key === "Enter") pick(); };
     body.appendChild(tr);
+    if (i === 8) sub("Out", 0, 9);
   });
-  if (!S.holes.length) body.innerHTML = `<tr><td colspan="6" class="dim" style="text-align:left;padding:10px 4px">No holes yet. Pick Route and click near the clubhouse.</td></tr>`;
-  const n = S.holes.length;
-  if (n && S.sims.length === n) {
-    const par = S.holes.reduce((a, h) => a + h.par, 0);
-    const ss = S.sims.reduce((a, s) => a + s.s.avg, 0), bb = S.sims.reduce((a, s) => a + s.b.avg, 0);
-    foot.innerHTML = `<tr><td>Tot</td><td>${Math.round(S.holes.reduce((a, h) => a + h.len, 0))}</td><td>${par}</td><td>${ss.toFixed(1)}</td><td>${bb.toFixed(1)}</td><td></td></tr>`;
-  } else foot.innerHTML = "";
+  if (n > 9) sub("In", 9, 18);
+  if (n > 9) sub("Tot", 0, 18);
   updateDetail();
 }
 
@@ -1089,14 +1226,13 @@ function updateDetail() {
   const el = document.getElementById("detail");
   if (S.sel < 0 || !S.holes[S.sel] || !S.sims[S.sel]) { el.innerHTML = ""; return; }
   const h = S.holes[S.sel], sim = S.sims[S.sel], i = S.sel;
-  const dz = elevAt(h.pts[h.pts.length - 1]) - elevAt(h.pts[0]);
-  const turn = turnSign(h);
+  const dz = elevAt(lastPt(h)) - elevAt(h.pts[0]), turn = turnSign(h);
   const pct = v => Math.round(v * 100) + "%";
   el.innerHTML = `<div class="detail">
     <h3>Hole ${i + 1} · Par ${h.par} · ${Math.round(h.len)} yds</h3>
     <div class="kv">
       <span>Shape</span><span>${turn > 0 ? "Dogleg right" : turn < 0 ? "Dogleg left" : "Straight"}</span>
-      <span>Elevation, tee → green</span><span>${dz >= 0 ? "+" : ""}${Math.round(dz)} ft</span>
+      <span>Elevation, tee to green</span><span>${dz >= 0 ? "+" : ""}${Math.round(dz)} ft</span>
       <span>Plays like</span><span>${Math.round(h.len + dz / 3)} yds</span>
       <span>Greens in regulation (scr / bog)</span><span>${pct(sim.s.gir)} / ${pct(sim.b.gir)}</span>
       <span>Lost ball (scr / bog)</span><span>${pct(sim.s.trouble)} / ${pct(sim.b.trouble)}</span>
@@ -1104,7 +1240,7 @@ function updateDetail() {
       <span>Hit trees (scr / bog)</span><span>${pct(sim.s.trees)} / ${pct(sim.b.trees)}</span>
     </div>
     <ul class="notes">${holeNotes(h, i).map(([c, t]) => `<li class="${c}">${t}</li>`).join("")}</ul>
-    <p class="dim" style="font-size:11px;margin:6px 0 0">Dots show where tee shots land: <span style="color:#fff;background:#6d7f5a;padding:0 3px;border-radius:2px">white</span> scratch, <span style="color:#F2994A;font-weight:600">orange</span> bogey.</p>
+    <p class="dim" style="font-size:12px;margin:6px 0 0">Dots on the map show where tee shots land: white for scratch, orange for bogey.</p>
   </div>`;
 }
 
@@ -1117,9 +1253,9 @@ function validSpot(p, what) {
   const k = idxOf(p[0], p[1]);
   if (k < 0) return "Stay on the property.";
   const n = S.nat[k];
-  if (n === N_CREEK || n === N_WET) return `You can't put a ${what} in the ${n === N_WET ? "protected wetland" : "creek"}.`;
-  if (n === N_CLUB) return `That's the clubhouse.`;
-  if (S.built[k] === B_POND) return `That's a pond.`;
+  if (n === N_CREEK || n === N_WET || n === N_LAKE) return `You can't put a ${what} in the ${n === N_WET ? "protected wetland" : n === N_LAKE ? "lake" : "creek"}.`;
+  if (n === N_CLUB) return "That's the clubhouse.";
+  if (S.built[k] === B_POND) return "That's a pond.";
   return null;
 }
 function paintAt(p) {
@@ -1130,19 +1266,15 @@ function paintAt(p) {
     if (i < 0 || j < 0 || i >= W || j >= H) continue;
     if (Math.hypot(i + 0.5 - ci, j + 0.5 - cj) > r) continue;
     const k = j * W + i;
-    if (t.b !== B_NONE && !canBuild(k, t.b)) { blocked = true; continue; }
-    if (S.built[k] !== t.b) { S.built[k] = t.b; any = true; }
+    if (t.b !== B_NONE && !canBuild(k)) { blocked = true; continue; }
+    if (setBuilt(k, t.b)) any = true;
   }
-  if (blocked && !S._warned) { toast("Creek, wetland and clubhouse are off-limits."); S._warned = true; }
+  if (blocked && !S._warned) { toast("The creek, lake, wetland and clubhouse are off-limits."); S._warned = true; }
   return any;
 }
 function hitHandle(p) {
-  const tol = 14;
   const order = S.sel >= 0 ? [S.sel, ...S.holes.map((_, i) => i).filter(i => i !== S.sel)] : S.holes.map((_, i) => i);
-  for (const hi of order) {
-    const h = S.holes[hi];
-    for (let k = 0; k < h.pts.length; k++) if (dist(h.pts[k], p) < tol) return { hi, k };
-  }
+  for (const hi of order) { const h = S.holes[hi]; for (let k = 0; k < h.pts.length; k++) if (dist(h.pts[k], p) < 14) return { hi, k }; }
   return null;
 }
 
@@ -1152,13 +1284,13 @@ cO.addEventListener("pointerdown", e => {
   const t = TOOLS.find(x => x.id === S.tool);
   if (S.tool === "route") {
     if (!S.draft) {
-      if (S.holes.length >= 9) { toast("Nine holes is a full course. Delete one to re-route it."); return; }
+      if (S.holes.length >= HOLES) { toast("18 holes is a full course. Delete one to re-route it."); return; }
       const bad = validSpot(p, "tee"); if (bad) { toast(bad); return; }
       S.draft = [p];
     } else {
       const last = S.draft[S.draft.length - 1];
       if (S.draft.length >= 2 && dist(last, p) < 14) { finishRoute(); return; }
-      if (S.draft.length >= 4) { toast("Max 2 turns. Click the last point again to place the green."); return; }
+      if (S.draft.length >= 4) { toast("Two turns is the maximum. Click the last point again to place the green."); return; }
       S.draft.push(p);
     }
     document.getElementById("hint").innerHTML = hintBase();
@@ -1171,6 +1303,7 @@ cO.addEventListener("pointerdown", e => {
       pushUndo();
       S.sel = hh.hi; S.drag = hh; cO.setPointerCapture(e.pointerId);
       unpaintHole(S.holes[hh.hi]);
+      drawTerrain();
     } else {
       let best = -1, bd = 25;
       S.holes.forEach((h, i) => { const d = project(h.pts, p).d; if (d < bd) { bd = d; best = i; } });
@@ -1191,8 +1324,7 @@ cO.addEventListener("pointermove", e => {
   const p = evPos(e);
   S.mouse = p;
   if (S.drag) {
-    const h = S.holes[S.drag.hi];
-    h.pts[S.drag.k] = [clamp(p[0], 1, MAPW - 1), clamp(p[1], 1, MAPH - 1)];
+    S.holes[S.drag.hi].pts[S.drag.k] = [clamp(p[0], 1, MAPW - 1), clamp(p[1], 1, MAPH - 1)];
     refreshHoles();
   } else if (S.painting) {
     if (paintAt(p)) drawTerrain();
@@ -1202,11 +1334,11 @@ cO.addEventListener("pointermove", e => {
 function endPointer() {
   if (S.drag) {
     const h = S.holes[S.drag.hi];
-    const endIdx = S.drag.k === 0 ? 0 : S.drag.k === h.pts.length - 1 ? h.pts.length - 1 : -1;
-    const bad = endIdx >= 0 ? validSpot(h.pts[endIdx], endIdx ? "green" : "tee") : null;
-    if (bad) { toast(bad); const u = S.undo.pop(); S.built.set(u.built); S.holes = JSON.parse(u.holes); }
-    else paintHole(h);
+    const end = S.drag.k === 0 ? 0 : S.drag.k === h.pts.length - 1 ? h.pts.length - 1 : -1;
+    const bad = end >= 0 ? validSpot(h.pts[end], end ? "green" : "tee") : null;
     S.drag = null;
+    if (bad) { toast(bad); doUndo(); return; }
+    paintHole(h); h.dirty = true;
     changed(true);
   } else if (S.painting) {
     S.painting = false;
@@ -1222,10 +1354,10 @@ function finishRoute() {
   const bad = validSpot(pts[pts.length - 1], "green");
   if (bad) { toast(bad); return; }
   const L = holeLen(pts);
-  if (L < 100) { toast(`Only ${Math.round(L)} yds. Holes need at least 100.`); return; }
-  if (L > 690) { toast(`${Math.round(L)} yds is too long. Par 5s max out at 690.`); return; }
+  if (L < 100) { toast(`Only ${Math.round(L)} yds. A hole needs at least 100.`); return; }
+  if (L > 710) { toast(`${Math.round(L)} yds is too long. Par 5s top out at 710.`); return; }
   pushUndo();
-  const h = { pts: pts.map(p => p.slice()), cells: [] };
+  const h = { pts: pts.map(p => p.slice()), cells: [], dirty: true };
   paintHole(h);
   S.holes.push(h);
   S.sel = S.holes.length - 1;
@@ -1239,7 +1371,7 @@ function finishRoute() {
 let animId = 0;
 function playtest() {
   if (S.sel < 0) return;
-  if (S.simDirty) runSims();
+  if (!simsReady()) runSims();
   const h = S.holes[S.sel], list = [];
   const rng = mulberry32((Date.now() & 0xffff) + 1), gauss = gaussFn(rng);
   for (const gk of ["s", "b"]) for (let r = 0; r < 8; r++) {
@@ -1247,77 +1379,191 @@ function playtest() {
     list.push({ g: gk, path: res.path, strokes: res.strokes });
   }
   S.traces = { list, prog: 0 };
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   const t0 = performance.now();
   cancelAnimationFrame(animId);
+  const done = () => {
+    const avg = gk => (list.filter(x => x.g === gk).reduce((a, x) => a + x.strokes, 0) / 8).toFixed(1);
+    toast(`This group: scratch ${avg("s")}, bogey ${avg("b")} on a par ${h.par}`);
+  };
+  if (reduce) { S.traces.prog = 1; drawOverlay(); done(); return; }
   const step = now => {
     if (!S.traces) return;
     S.traces.prog = Math.min(1, (now - t0) / 2200);
     drawOverlay();
-    if (S.traces.prog < 1) animId = requestAnimationFrame(step);
-    else {
-      const avg = gk => (list.filter(x => x.g === gk).reduce((a, x) => a + x.strokes, 0) / 8).toFixed(1);
-      toast(`This group: scratch ${avg("s")}, bogey ${avg("b")} on a par ${h.par}`);
-    }
+    if (S.traces.prog < 1) animId = requestAnimationFrame(step); else done();
   };
   animId = requestAnimationFrame(step);
 }
 
-// ─── Grand opening ────────────────────────────────────────────────────────
-function openCourse() {
-  if (S.holes.length < 9) return;
-  if (S.simDirty) runSims();
-  const r = rateCourse();
-  const stars = Math.max(0.5, Math.round(r.score / 10) / 2);
-  const starStr = "★".repeat(Math.floor(stars)) + (stars % 1 ? "½" : "") + "☆".repeat(5 - Math.ceil(stars));
-  const names = { par: "Par & length", play: "Playability", strat: "Strategy", variety: "Variety", route: "Routing & safety", env: "Environment" };
-  const best = load("dogleg-best") || {};
-  const prev = best[S.seed];
-  if (!prev || r.score > prev) { best[S.seed] = Math.round(r.score); store("dogleg-best", best); }
+// ─── Comparison chart (Course Rating × Slope) ─────────────────────────────
+function compareChart(r) {
+  const pts = REAL.map(c => ({ x: c.cr, y: c.sl, c }));
+  const me = { x: r.cr, y: r.slope };
+  const best = r.matches[0].c;
+  const xs = pts.map(p => p.x).concat(me.x), ys = pts.map(p => p.y).concat(me.y);
+  const x0 = Math.floor(Math.min(...xs) - 1), x1 = Math.ceil(Math.max(...xs) + 1);
+  const y0 = Math.floor((Math.min(...ys) - 5) / 10) * 10, y1 = Math.ceil((Math.max(...ys) + 5) / 10) * 10;
+  const Wd = 560, Ht = 300, L = 44, R = 16, T = 14, B = 38;
+  const sx = v => L + (v - x0) / (x1 - x0) * (Wd - L - R), sy = v => T + (1 - (v - y0) / (y1 - y0)) * (Ht - T - B);
+  let g = "";
+  const xStep = (x1 - x0) > 8 ? 2 : 1;
+  for (let v = Math.ceil(x0); v <= x1; v += xStep) g += `<line x1="${sx(v)}" x2="${sx(v)}" y1="${T}" y2="${Ht - B}" stroke="#E3E8E1"/><text x="${sx(v)}" y="${Ht - B + 16}" text-anchor="middle" fill="#56665B" font-size="11">${v}</text>`;
+  for (let v = y0; v <= y1; v += 10) g += `<line x1="${L}" x2="${Wd - R}" y1="${sy(v)}" y2="${sy(v)}" stroke="#E3E8E1"/><text x="${L - 8}" y="${sy(v) + 4}" text-anchor="end" fill="#56665B" font-size="11">${v}</text>`;
+  g += `<line x1="${L}" x2="${Wd - R}" y1="${Ht - B}" y2="${Ht - B}" stroke="#56665B"/>`;
+  if (113 >= y0 && 113 <= y1) g += `<line x1="${L}" x2="${Wd - R}" y1="${sy(113)}" y2="${sy(113)}" stroke="#A9B5A6" stroke-dasharray="4 4"/><text x="${Wd - R - 2}" y="${sy(113) - 5}" text-anchor="end" fill="#56665B" font-size="10">Slope 113 = average difficulty</text>`;
+  g += `<text x="${(L + Wd - R) / 2}" y="${Ht - 4}" text-anchor="middle" fill="#15251B" font-size="12" font-weight="600">Course Rating (expected scratch score)</text>`;
+  g += `<text transform="translate(12 ${(T + Ht - B) / 2}) rotate(-90)" text-anchor="middle" fill="#15251B" font-size="12" font-weight="600">Slope</text>`;
+  pts.forEach((p, i) => {
+    const isBest = p.c === best;
+    g += `<circle data-i="${i}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="${isBest ? 7 : 5.5}" fill="${p.c.generic ? "#FFFFFF" : "#8FA394"}" stroke="${isBest ? "#0F4D2C" : "#56665B"}" stroke-width="${isBest ? 2.5 : 1.2}"/>`;
+    g += `<circle data-i="${i}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="12" fill="transparent" class="hit"/>`;
+  });
+  const bx = sx(best.cr), by = sy(best.sl);
+  g += `<text x="${bx + 10}" y="${by - 8}" fill="#15251B" font-size="11" font-weight="600">${esc(best.n)}</text>`;
+  g += `<circle cx="${sx(me.x)}" cy="${sy(me.y)}" r="8.5" fill="#F2C230" stroke="#FFFFFF" stroke-width="2"/><circle cx="${sx(me.x)}" cy="${sy(me.y)}" r="8.5" fill="none" stroke="#15251B" stroke-width="1"/>`;
+  const lx = sx(me.x) > Wd - 120 ? sx(me.x) - 12 : sx(me.x) + 12;
+  g += `<text x="${lx}" y="${sy(me.y) + 4}" text-anchor="${sx(me.x) > Wd - 120 ? "end" : "start"}" fill="#15251B" font-size="12" font-weight="700">Your course</text>`;
+  return `<div class="chartwrap" id="cmpChart"><svg viewBox="0 0 ${Wd} ${Ht}" role="img" aria-label="Course Rating versus Slope for your course and ${REAL.length} real courses">${g}</svg><div class="tip" hidden></div></div>`;
+}
+function wireChart() {
+  const wrap = document.getElementById("cmpChart"); if (!wrap) return;
+  const tip = wrap.querySelector(".tip");
+  wrap.querySelectorAll(".hit").forEach(c => {
+    const show = () => {
+      const r = REAL[+c.dataset.i], box = wrap.getBoundingClientRect(), cb = c.getBoundingClientRect();
+      tip.innerHTML = `<b>${esc(r.n)}</b> · ${esc(r.loc)}<br>Par ${r.par} · ${r.yds.toLocaleString()} yds · ${r.cr.toFixed(1)} / ${r.sl}`;
+      tip.style.left = (cb.left + cb.width / 2 - box.left) + "px"; tip.style.top = (cb.top - box.top) + "px"; tip.hidden = false;
+    };
+    c.addEventListener("pointerenter", show); c.addEventListener("click", show);
+    c.addEventListener("pointerleave", () => tip.hidden = true);
+  });
+}
 
+// ─── Grand opening ────────────────────────────────────────────────────────
+let lastResult = null;
+function openCourse() {
+  if (S.holes.length < HOLES) return;
+  if (!simsReady()) runSims();
+  const r = rateCourse();
+  lastResult = r;
+  const names = { par: "Par & length", play: "Playability", strat: "Strategy", variety: "Variety", route: "Routing & safety", env: "Environment" };
+  const top = r.matches[0], nxt = r.matches.slice(1, 4);
+  const harder = REAL.filter(c => !c.generic && c.sl < r.slope).length, nReal = REAL.filter(c => !c.generic).length;
+  const sig = S.holes[r.sig], sigF = r.prof.perHole[r.sig];
   const q = [];
   const ds = r.cr - r.parTot, db = r.br - r.parTot;
-  q.push(ds < -1 ? ["Club champion", "Shot 3 under without trying. Where's the challenge?"] :
-         ds > 3 ? ["Club champion", "I love a test, but this is a grind."] :
+  q.push(ds < -2 ? ["Club champion", "Shot five under without trying. Where's the challenge?"] :
+         ds > 5 ? ["Club champion", "I love a test, but this is a grind from start to finish."] :
          r.comp.strat > 65 ? ["Club champion", "Every tee shot asks a question. That's real architecture."] :
                              ["Club champion", "Fair enough, but I never had to think."]);
-  q.push(db > 16 ? ["Weekend hacker", "Lost six balls. Taking up pickleball."] :
-         db < 6 ? ["Weekend hacker", "Easiest nine I've ever played, and I loved every minute."] :
-                  ["Weekend hacker", "Tough in spots, but I could always find a way round."]);
-  if (r.comp.env < 60) q.push(["Local conservation group", "Acres of old woods gone for fairways. We're writing a letter."]);
+  q.push(db > 32 ? ["Weekend golfer", "Lost a sleeve of balls by the turn. Taking up pickleball."] :
+         db < 12 ? ["Weekend golfer", "Easiest 18 I've ever played, and I loved every minute."] :
+                   ["Weekend golfer", "Tough in spots, but I could always find a way round."]);
+  if (r.comp.env < 60) q.push(["Local conservation group", "Acres of old woods gone for fairways. We're writing to the council."]);
   else if (r.comp.env > 85) q.push(["Local conservation group", "The course works with the land. The woods and wetland are intact."]);
-  if (r.walk / 8 > 110) q.push(["Walking member", "Great holes, but I needed a cart just to get between them."]);
+  if (r.walk / 16 > 110) q.push(["Walking member", "Great holes, but I needed a cart just to get between them."]);
+  const defName = load("dogleg-name") || "";
 
   document.getElementById("resultsBody").innerHTML = `
-    <h2>Grand opening</h2>
-    <p class="dim">Par ${r.parTot} · ${Math.round(r.yards).toLocaleString()} yds · built for ${fmt$(r.cost.total)}${r.over > 0 ? ` <span class="pos">(over budget)</span>` : ""}</p>
-    <div class="big"><b>${Math.round(r.score)}</b><span class="stars">${starStr}</span>${prev ? `<span class="dim">previous best ${prev}</span>` : ""}</div>
-    <div class="kv" style="max-width:360px">
-      <span>Course Rating (scratch)</span><span>${r.cr.toFixed(1)}</span>
-      <span>Bogey Rating</span><span>${r.br.toFixed(1)}</span>
-      <span>Slope</span><span>${r.slope}</span>
-      <span>Walk between holes</span><span>${Math.round(r.walk).toLocaleString()} yds</span>
+    <div class="eyebrow">Grand opening · Par ${r.parTot} (${r.out}–${r.inn}) · ${Math.round(r.yards).toLocaleString()} yds · built for ${fmt$(r.cost.total)}${r.over > 0 ? " · over budget" : ""}</div>
+    <div class="gradeRow">
+      <div class="grade">${r.grade}</div>
+      <div>
+        <div class="score">${Math.round(r.score)} / 100</div>
+        <div class="kv" style="min-width:230px;margin-top:4px">
+          <span>Course Rating</span><span>${r.cr.toFixed(1)}</span>
+          <span>Bogey Rating</span><span>${r.br.toFixed(1)}</span>
+          <span>Slope</span><span>${r.slope}</span>
+        </div>
+      </div>
     </div>
-    <div class="comp">${Object.keys(names).map(k => `<span>${names[k]}</span><div class="bar"><i style="width:${Math.round(r.comp[k])}%"></i></div><b>${Math.round(r.comp[k])}</b>`).join("")}</div>
+    <div class="cols">
+      <div>
+        <h3>Scorecard of the design</h3>
+        <div class="comp">${Object.keys(names).map(k => `<span>${names[k]}</span><div class="bar"><i style="width:${Math.round(r.comp[k])}%"></i></div><b>${Math.round(r.comp[k])}</b>`).join("")}</div>
+        <p class="dim" style="font-size:12px;margin-top:10px">Signature hole: <b style="color:var(--ink)">No. ${r.sig + 1}</b>, a ${Math.round(sig.len)}-yd par ${sig.par}${sigF.water ? " with water in play" : sigF.bunk > 12 ? " guarded by sand" : ""}.</p>
+      </div>
+      <div>
+        <h3>Plays most like</h3>
+        <div class="match"><b class="pct">${top.match}%</b><div><div class="nm">${esc(top.c.n)}</div><div class="dim">${esc(top.c.loc)} · Par ${top.c.par} · ${top.c.yds.toLocaleString()} yds · ${top.c.cr.toFixed(1)} / ${top.c.sl}</div></div></div>
+        <div class="kv" style="margin-top:6px">${nxt.map(m => `<span>${esc(m.c.n)}</span><span>${m.match}%</span>`).join("")}</div>
+        <p class="dim" style="font-size:12px;margin-top:10px">Your slope of ${r.slope} is steeper than ${harder} of the ${nReal} famous courses here. Your course has ${r.prof.waterHoles} hole${r.prof.waterHoles === 1 ? "" : "s"} with water in play, ${Math.round(r.prof.trees * 100)}% tree-lined corridors and ${Math.round(r.prof.elevRange)} ft of elevation change.</p>
+      </div>
+    </div>
+    <h3>Where it sits among real courses</h3>
+    ${compareChart(r)}
+    <p class="dim" style="font-size:12px">Grey dots are famous courses from their back tees; white dots are typical US benchmarks. Tap a dot for details. Real-course figures are approximate and scorecards change. Augusta National isn't officially rated, so its dot uses a widely quoted estimate.</p>
+    <h3>What people are saying</h3>
     ${q.map(([who, txt]) => `<div class="quote">“${txt}” <b>— ${who}</b></div>`).join("")}
-    ${r.tips.length ? `<h3 style="font:600 15px var(--display);margin:14px 0 4px">Architect's notes</h3><ul class="notes">${r.tips.slice(0, 7).map(t => `<li>${t}</li>`).join("")}</ul>` : ""}
-    <p class="dim" style="font-size:11px">Slope uses the USGA formula: 5.381 × (bogey − scratch rating), doubled for nine holes. 113 is average; 155 is the maximum.</p>
-    <div class="btns"><button class="btn primary" id="bKeep">Keep designing</button><button class="btn" id="bNext">New land</button></div>`;
+    ${r.tips.length ? `<h3>Architect's notes</h3><ul class="notes">${r.tips.slice(0, 8).map(t => `<li>${t}</li>`).join("")}</ul>` : ""}
+    <p class="dim" style="font-size:12px">Course Rating is the expected score of a scratch golfer; Bogey Rating is the same for a bogey golfer. Slope uses the USGA formula 5.381 × (Bogey Rating − Course Rating), where 113 is average and 155 is the maximum.</p>
+    <form class="saverow" id="saveForm">
+      <label for="courseName" class="dim">Course name</label>
+      <input id="courseName" maxlength="40" placeholder="e.g. Heron Creek National" value="${esc(defName)}">
+      <button class="btn primary" type="submit">Save to My courses</button>
+      <button class="btn" type="button" id="bKeep">Keep designing</button>
+    </form>`;
   document.getElementById("results").hidden = false;
+  wireChart();
   document.getElementById("bKeep").onclick = () => document.getElementById("results").hidden = true;
-  document.getElementById("bNext").onclick = () => { document.getElementById("results").hidden = true; newLand(); };
+  document.getElementById("saveForm").onsubmit = e => { e.preventDefault(); saveCourse(document.getElementById("courseName").value.trim()); };
 }
 
 // ─── Save / load ──────────────────────────────────────────────────────────
-function save() {
-  store("dogleg-design", { seed: S.seed, holes: S.holes.map(h => ({ pts: h.pts })), built: rle(S.built) });
-}
 function rle(a) { const out = []; let v = a[0], n = 0; for (let i = 0; i < a.length; i++) { if (a[i] === v) n++; else { out.push(v, n); v = a[i]; n = 1; } } out.push(v, n); return out; }
 function unrle(r, a) { let o = 0; for (let i = 0; i < r.length; i += 2) { a.fill(r[i], o, o + r[i + 1]); o += r[i + 1]; } }
+function snapshot() { return { seed: S.seed, holes: S.holes.map(h => ({ pts: h.pts, cells: h.cells })), built: rle(S.built) }; }
+function restore(d) {
+  generate(d.seed);
+  try { unrle(d.built, S.built); S.holes = d.holes.map(h => ({ pts: h.pts, cells: h.cells || [] })); }
+  catch (e) { S.built.fill(0); S.holes = []; }
+  S.allDirty = true;
+}
+function save() { store("dogleg18-design", snapshot()); }
 
+function saveCourse(name) {
+  const r = lastResult; if (!r) return;
+  name = name || `Course ${(load("dogleg18-courses") || []).length + 1}`;
+  store("dogleg-name", name);
+  const list = load("dogleg18-courses") || [];
+  list.unshift({ id: Date.now(), name, date: new Date().toISOString().slice(0, 10), score: Math.round(r.score), grade: r.grade, par: r.parTot, yards: Math.round(r.yards),
+    cr: +r.cr.toFixed(1), slope: r.slope, like: r.matches[0].c.n, likePct: r.matches[0].match, design: snapshot() });
+  if (!store("dogleg18-courses", list.slice(0, 30))) { toast("Couldn't save. Your browser is blocking storage for this page."); return; }
+  toast(`Saved “${name}” to My courses`);
+  document.getElementById("results").hidden = true;
+}
+function showMine() {
+  const list = load("dogleg18-courses") || [];
+  const rows = list.map((c, i) => `<tr><td class="g">${esc(c.grade)}</td><td><b>${esc(c.name)}</b><br><span class="dim">${esc(c.date)} · plays like ${esc(c.like)} (${c.likePct}%)</span></td><td class="num">${c.par}</td><td class="num">${c.yards.toLocaleString()}</td><td class="num">${c.cr} / ${c.slope}</td><td><div class="btns" style="margin:0"><button class="btn" data-load="${i}">Open</button><button class="btn danger" data-del="${i}">Delete</button></div></td></tr>`).join("");
+  document.getElementById("mineBody").innerHTML = `
+    <div class="eyebrow">Your portfolio</div><h2>My courses</h2>
+    ${list.length ? `<div class="cardwrap"><table class="list"><thead><tr><th>Grade</th><th>Course</th><th>Par</th><th>Yards</th><th>Rating / Slope</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
+      : `<p class="dim">No courses saved yet. Route all 18 holes, open the course, then save it from the grand opening screen.</p>`}
+    <p class="dim" style="font-size:12px">Courses are saved in this browser only.</p>
+    <div class="btns"><button class="btn primary" id="mineClose">Close</button></div>`;
+  const m = document.getElementById("mine"); m.hidden = false;
+  document.getElementById("mineClose").onclick = () => m.hidden = true;
+  m.querySelectorAll("[data-load]").forEach(b => b.onclick = () => {
+    const c = list[+b.dataset.load];
+    const go = () => { restore(c.design); store("dogleg-name", c.name); m.hidden = true; afterLoad(); toast(`Opened “${c.name}”`); };
+    if (S.holes.length) ask("Open this course?", `Your current design will be replaced by “${c.name}”. It's autosaved only until you open another course.`, "Open course", go); else go();
+  });
+  m.querySelectorAll("[data-del]").forEach(b => b.onclick = () => {
+    const c = list[+b.dataset.del];
+    ask("Delete this course?", `“${c.name}” will be removed from My courses. This can't be undone.`, "Delete", () => {
+      list.splice(+b.dataset.del, 1); store("dogleg18-courses", list); showMine();
+    });
+  });
+}
+function afterLoad() {
+  S.sel = -1; S.traces = null;
+  drawTerrain(); setTool("route"); changed(false); updateCard();
+}
 function newLand() {
   generate(Math.floor(Math.random() * 1e6) + 2);
-  drawTerrain(); changed(false); updateCard();
-  setTool("route");
+  store("dogleg-name", "");
+  afterLoad();
 }
 
 // ─── Wire up ──────────────────────────────────────────────────────────────
@@ -1328,12 +1574,17 @@ document.getElementById("bDelHole").onclick = () => {
   pushUndo();
   unpaintHole(S.holes[S.sel]);
   S.holes.splice(S.sel, 1);
-  S.sel = -1;
+  S.sel = -1; S.allDirty = true;
   changed(true);
 };
 document.getElementById("bPlay").onclick = playtest;
 document.getElementById("bOpen").onclick = openCourse;
-document.getElementById("bLand").onclick = () => { if (!S.holes.length || confirm("Start over on a new piece of land?")) newLand(); };
+document.getElementById("bMine").onclick = showMine;
+document.getElementById("bLand").onclick = () => {
+  if (!S.holes.length) { newLand(); return; }
+  ask("Start on new land?", "Your current design will be cleared. Save it from the grand opening screen first if you want to keep it.", "Start over", newLand);
+};
+document.getElementById("askNo").onclick = () => document.getElementById("ask").hidden = true;
 document.getElementById("bHelp").onclick = () => document.getElementById("help").hidden = false;
 document.getElementById("bHelpClose").onclick = () => { document.getElementById("help").hidden = true; store("dogleg-seen", 1); };
 document.querySelectorAll(".modal").forEach(m => m.addEventListener("click", e => { if (e.target === m) m.hidden = true; }));
@@ -1342,26 +1593,20 @@ window.addEventListener("keydown", e => {
   if (e.target.tagName === "INPUT") return;
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") { e.preventDefault(); doUndo(); return; }
   if (e.key === "Escape") { S.draft = null; S.traces = null; document.querySelectorAll(".modal").forEach(m => m.hidden = true); drawOverlay(); document.getElementById("hint").innerHTML = hintBase(); return; }
+  if ([...document.querySelectorAll(".modal")].some(m => !m.hidden)) return;
   if (e.key === "Enter" && S.draft && S.draft.length >= 2) { finishRoute(); return; }
   if (e.key === "Backspace" && S.draft) { e.preventDefault(); S.draft.pop(); if (!S.draft.length) S.draft = null; drawOverlay(); return; }
   if ((e.key === "Delete" || e.key === "Backspace") && S.sel >= 0) { document.getElementById("bDelHole").click(); return; }
   if (e.key === "[" || e.key === "]") { S.brush = clamp(S.brush + (e.key === "]" ? 1 : -1), 1, 5); document.getElementById("brush").value = S.brush; document.getElementById("brushV").textContent = S.brush; drawOverlay(); return; }
-  if (e.key.toLowerCase() === "p") { playtest(); return; }
+  if (e.key.toLowerCase() === "p" && !e.ctrlKey && !e.metaKey) { playtest(); return; }
   const t = TOOLS.find(x => x.key.toLowerCase() === e.key.toLowerCase());
   if (t && !e.ctrlKey && !e.metaKey) setTool(t.id);
 });
 window.addEventListener("resize", fitMap);
 
-// boot
 (function boot() {
-  const saved = load("dogleg-design");
-  generate(saved && saved.seed ? saved.seed : 1);
-  if (saved && saved.built && saved.holes) {
-    try {
-      unrle(saved.built, S.built);
-      S.holes = saved.holes.map(h => ({ pts: h.pts, cells: [] }));
-    } catch (e) { S.built.fill(0); S.holes = []; }
-  }
+  const saved = load("dogleg18-design");
+  if (saved && saved.seed) restore(saved); else generate(1);
   fitMap();
   drawTerrain();
   setTool("route");
