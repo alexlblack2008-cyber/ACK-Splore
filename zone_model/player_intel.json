@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-09-25T21:24:12.095692+00:00",
-  "signal_count": 1239,
+  "updated_at": "2026-09-26T04:34:53.257412+00:00",
+  "signal_count": 1243,
   "signals": [
+    {
+      "player": "Andrew Vaughn",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Brewers Designate Lyon Richardson For Assignment The Brewers announced that right-hander Bryse Wilson has been reinstate",
+      "excerpt": "Brewers Designate Lyon Richardson For Assignment The Brewers announced that right-hander Bryse Wilson has been reinstated from the 15-day injured list. Fellow righty Lyon Richardson has been designated for assignment as the corresponding move. On the position player side, Andrew Vaughn has been plac",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/09/brewers-designate-lyon-richardson-for-assignment.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-09-26T04:34:32.709092+00:00"
+    },
+    {
+      "player": "Tony Pollard",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Titans RB Tony Pollard has no injury designation, but RB Tyjae Spears is questionable Titans running back Tony Pollard (",
+      "excerpt": "Titans RB Tony Pollard has no injury designation, but RB Tyjae Spears is questionable Titans running back Tony Pollard (ankle) had a second consecutive limited practice Friday after missing Wednesday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/titans-rb-tony-pollard-has-no-injury-designation-but-rb-tyjae-spears-is-questionable",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-26T04:34:31.198720+00:00"
+    },
+    {
+      "player": "Saquon Barkley",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "activation",
+      "headline": "Saquon Barkley back to full participation, Hollywood Brown doesn't practice Eagles running back Saquon Barkley said that",
+      "excerpt": "Saquon Barkley back to full participation, Hollywood Brown doesn't practice Eagles running back Saquon Barkley said that he expects to be good to go for Monday night's game against the Bears and Friday's injury report shows that he's on track to play.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/saquon-barkley-back-to-full-participation-hollywood-brown-doesnt-practice",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-09-26T04:34:31.198493+00:00"
+    },
+    {
+      "player": "Saquon Barkley",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "After Week 2 stinger, Saquon Barkley vows to be \"fearless\" Barkley missed much of Sunday's game after injury.",
+      "excerpt": "After Week 2 stinger, Saquon Barkley vows to be \"fearless\" Barkley missed much of Sunday's game after injury.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/after-week-2-stinger-saquon-barkley-vow-to-be-fearless",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-26T04:34:31.198059+00:00"
+    },
     {
       "player": "Klay Thompson",
       "team": "Unknown",
@@ -16278,7 +16330,7 @@
     "Dansby Swanson|activation": "2026-09-19T20:25:10.797038+00:00",
     "Chris Olave|activation": "2026-09-20T15:52:14.189091+00:00",
     "Colts|suspension": "2026-09-20T15:52:14.189091+00:00",
-    "Saquon Barkley|injury": "2026-09-20T20:38:20.808172+00:00",
+    "Saquon Barkley|injury": "2026-09-26T04:34:53.257265+00:00",
     "Kyle Tucker|injury": "2026-09-20T20:38:20.808172+00:00",
     "Dallas Goedert|injury": "2026-09-23T04:22:11.007697+00:00",
     "Browns|weather": "2026-09-20T23:07:19.088374+00:00",
@@ -16300,7 +16352,9 @@
     "Keon Coleman|injury": "2026-09-25T21:24:12.095455+00:00",
     "Aaron Jones|injury": "2026-09-24T04:18:56.344776+00:00",
     "Gunnar Henderson|injury": "2026-09-24T04:18:56.344776+00:00",
-    "Tony Pollard|injury": "2026-09-25T04:30:28.933888+00:00",
-    "Aaron Jones|positive": "2026-09-25T21:24:12.095455+00:00"
+    "Tony Pollard|injury": "2026-09-26T04:34:53.257265+00:00",
+    "Aaron Jones|positive": "2026-09-25T21:24:12.095455+00:00",
+    "Saquon Barkley|activation": "2026-09-26T04:34:53.257265+00:00",
+    "Andrew Vaughn|injury": "2026-09-26T04:34:53.257265+00:00"
   }
 }
