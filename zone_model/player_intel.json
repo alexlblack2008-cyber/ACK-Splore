@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-09-26T04:34:53.257412+00:00",
-  "signal_count": 1243,
+  "updated_at": "2026-09-26T11:11:09.660504+00:00",
+  "signal_count": 1244,
   "signals": [
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Commanders announce Marcus Mariota will be a team captain for the rest of the season Mariota will start in place of the ",
+      "excerpt": "Commanders announce Marcus Mariota will be a team captain for the rest of the season Mariota will start in place of the injured Jayden Daniels on Sunday against the Seahawks.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/commanders-announce-marcus-mariota-will-be-a-team-captain-for-the-rest-of-the-season",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-26T11:10:46.111338+00:00"
+    },
     {
       "player": "Andrew Vaughn",
       "team": "Unknown",
@@ -16334,7 +16347,7 @@
     "Kyle Tucker|injury": "2026-09-20T20:38:20.808172+00:00",
     "Dallas Goedert|injury": "2026-09-23T04:22:11.007697+00:00",
     "Browns|weather": "2026-09-20T23:07:19.088374+00:00",
-    "Jayden Daniels|injury": "2026-09-25T11:36:31.837953+00:00",
+    "Jayden Daniels|injury": "2026-09-26T11:11:09.660392+00:00",
     "David Njoku|injury": "2026-09-20T23:07:19.088374+00:00",
     "Steelers|suspension": "2026-09-23T04:22:11.007697+00:00",
     "Drake London|injury": "2026-09-25T16:59:24.328725+00:00",
