@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-09-30T09:32:51.570907+00:00",
-  "signal_count": 1430,
+  "updated_at": "2026-09-30T17:54:00.645819+00:00",
+  "signal_count": 1432,
   "signals": [
+    {
+      "player": "Austin Riley",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Cam Schlittler, Austin Riley open MLB playoffs in style; Pete Prisco&#039;s NFL Power Rankings are out Plus our first 20",
+      "excerpt": "Cam Schlittler, Austin Riley open MLB playoffs in style; Pete Prisco&#039;s NFL Power Rankings are out Plus our first 2027 WNBA mock draft after a historic night in the postseason",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/cam-schlittler-austin-riley-open-mlb-playoffs-in-style-pete-priscos-nfl-power-rankings-are-out/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-09-30T17:53:44.077346+00:00"
+    },
+    {
+      "player": "Diontae Johnson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Case Keenum was ready to quit playing football until Ben Johnson called Case Keenum spent the entire 2024 season on the ",
+      "excerpt": "Case Keenum was ready to quit playing football until Ben Johnson called Case Keenum spent the entire 2024 season on the Texans' injured reserve list with a foot injury, and when his contract expired at the end of that year, he figured his football career had come to an end.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/case-keenum-was-ready-to-quit-playing-football-until-ben-johnson-called",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-09-30T17:53:38.431026+00:00"
+    },
     {
       "player": "LeBron James",
       "team": "Unknown",
@@ -18743,7 +18769,7 @@
     "Ladd McConkey|injury": "2026-09-28T13:32:31.985359+00:00",
     "Trevor Lawrence|injury": "2026-09-28T04:55:27.765730+00:00",
     "Hunter Brown|usage_up": "2026-09-21T12:33:28.096747+00:00",
-    "Diontae Johnson|injury": "2026-09-29T12:34:39.480234+00:00",
+    "Diontae Johnson|injury": "2026-09-30T17:54:00.645683+00:00",
     "Najee Harris|injury": "2026-09-17T04:31:12.678553+00:00",
     "Blake Snell|injury": "2026-09-17T04:31:12.678553+00:00",
     "CJ Stroud|injury": "2026-09-17T21:12:18.489195+00:00",
@@ -18800,6 +18826,7 @@
     "Jake Ferguson|injury": "2026-09-29T05:20:46.959817+00:00",
     "Chris Sale|usage_up": "2026-09-30T09:32:51.570683+00:00",
     "Rays|suspension": "2026-09-30T00:17:03.772714+00:00",
-    "Astros|pitcher_scratch": "2026-09-30T09:32:51.570683+00:00"
+    "Astros|pitcher_scratch": "2026-09-30T09:32:51.570683+00:00",
+    "Austin Riley|injury": "2026-09-30T17:54:00.645683+00:00"
   }
 }
