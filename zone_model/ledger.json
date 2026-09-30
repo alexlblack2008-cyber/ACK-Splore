@@ -1844,5 +1844,23 @@
     "actual_runs": null,
     "pnl": null,
     "settled_at": null
+  },
+  {
+    "bet_date": "2026-09-30",
+    "game_pk": 849848,
+    "home_team": "New York Yankees",
+    "away_team": "Boston Red Sox",
+    "umpire": "Scott Barry",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.34,
+    "edge_runs": 0.84,
+    "confidence": 0.444,
+    "kelly_fraction": 0.0286,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
