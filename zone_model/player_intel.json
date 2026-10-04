@@ -1,7 +1,33 @@
 {
-  "updated_at": "2026-10-03T23:42:23.237888+00:00",
-  "signal_count": 1562,
+  "updated_at": "2026-10-04T05:26:00.951583+00:00",
+  "signal_count": 1564,
   "signals": [
+    {
+      "player": "Kyle Tucker",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "What struggles? Teo, Tucker continue resurgence, come out swinging in NLDS Game 1 ",
+      "excerpt": "What struggles? Teo, Tucker continue resurgence, come out swinging in NLDS Game 1 ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/teoscar-hernandez-homers-in-nlds-game-1-vs-braves",
+      "confidence": 0.8,
+      "prop_impact": "under",
+      "detected_at": "2026-10-04T05:25:40.204130+00:00"
+    },
+    {
+      "player": "Jackson Chourio",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "At just 22, Chourio takes place as Brewers' postseason HR leader ",
+      "excerpt": "At just 22, Chourio takes place as Brewers' postseason HR leader ",
+      "source": "MLB.com",
+      "url": "https://www.mlb.com/news/jackson-chourio-sets-brewers-postseason-home-run-record",
+      "confidence": 0.8,
+      "prop_impact": "over",
+      "detected_at": "2026-10-04T05:25:40.204069+00:00"
+    },
     {
       "player": "Austin Riley",
       "team": "Unknown",
@@ -20478,7 +20504,7 @@
     "Chris Olave|activation": "2026-09-20T15:52:14.189091+00:00",
     "Colts|suspension": "2026-09-20T15:52:14.189091+00:00",
     "Saquon Barkley|injury": "2026-09-27T04:53:38.620469+00:00",
-    "Kyle Tucker|injury": "2026-09-20T20:38:20.808172+00:00",
+    "Kyle Tucker|injury": "2026-10-04T05:26:00.951446+00:00",
     "Dallas Goedert|injury": "2026-09-23T04:22:11.007697+00:00",
     "Browns|weather": "2026-09-20T23:07:19.088374+00:00",
     "Jayden Daniels|injury": "2026-10-03T20:54:41.739617+00:00",
@@ -20526,6 +20552,7 @@
     "Freddie Freeman|usage_up": "2026-10-03T04:53:43.643330+00:00",
     "Ketel Marte|injury": "2026-10-03T11:27:43.512337+00:00",
     "Jordan Walker|usage_up": "2026-10-03T20:54:41.739617+00:00",
-    "Diontae Johnson|usage_up": "2026-10-03T20:54:41.739617+00:00"
+    "Diontae Johnson|usage_up": "2026-10-03T20:54:41.739617+00:00",
+    "Jackson Chourio|usage_up": "2026-10-04T05:26:00.951446+00:00"
   }
 }
