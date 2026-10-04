@@ -1984,10 +1984,10 @@
     "confidence": 0.434,
     "kelly_fraction": 0.0805,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 1,
+    "pnl": -100.0,
+    "settled_at": "2026-10-04T19:59:49.192720"
   },
   {
     "bet_date": "2026-10-03",
@@ -2002,9 +2002,9 @@
     "confidence": 0.417,
     "kelly_fraction": 0.0264,
     "stake": 100.0,
-    "outcome": "pending",
-    "actual_runs": null,
-    "pnl": null,
-    "settled_at": null
+    "outcome": "lost",
+    "actual_runs": 8,
+    "pnl": -100.0,
+    "settled_at": "2026-10-04T19:59:49.192681"
   }
 ]
