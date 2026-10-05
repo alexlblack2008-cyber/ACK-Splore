@@ -2006,5 +2006,23 @@
     "actual_runs": 8,
     "pnl": -100.0,
     "settled_at": "2026-10-04T19:59:49.192681"
+  },
+  {
+    "bet_date": "2026-10-05",
+    "game_pk": 849839,
+    "home_team": "Tampa Bay Rays",
+    "away_team": "New York Yankees",
+    "umpire": "Jeremie Rehak",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 9.43,
+    "edge_runs": 0.93,
+    "confidence": 0.617,
+    "kelly_fraction": 0.0162,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
