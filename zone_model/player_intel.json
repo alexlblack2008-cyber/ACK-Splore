@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-10-08T10:18:54.120146+00:00",
-  "signal_count": 1757,
+  "updated_at": "2026-10-08T18:44:19.029471+00:00",
+  "signal_count": 1762,
   "signals": [
+    {
+      "player": "Jordan Walker",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "2026 Fantasy Football RB Rankings - Week 5 Start, Sit Running Backs The running back position is always plagued by injur",
+      "excerpt": "2026 Fantasy Football RB Rankings - Week 5 Start, Sit Running Backs The running back position is always plagued by injuries, and byes take Kenneth Walker III and Chuba Hubbard out of [&#8230;]",
+      "source": "RotoBaller MLB",
+      "url": "https://www.rotoballer.com/2026-fantasy-football-rb-rankings-week-5-start-sit-running-backs/1961183",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-08T18:44:01.179786+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "When Is Jayden Daniels Coming Back - Week 5 Fantasy Football Injury Return Update (2026) Welcome back to the Jayden Dani",
+      "excerpt": "When Is Jayden Daniels Coming Back - Week 5 Fantasy Football Injury Return Update (2026) Welcome back to the Jayden Daniels injury update trilogy, and this week we will be reading the \"Return of Daniels\" [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/when-is-jayden-daniels-coming-back-week-5-fantasy-football-injury-return-update-2026/1959544",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-08T18:44:00.178026+00:00"
+    },
+    {
+      "player": "Padres",
+      "team": "Padres",
+      "sport": "mlb",
+      "signal_type": "pitcher_scratch",
+      "headline": "The Opener: Mitchell&#8217;s Catch, Volpe&#8217;s Non-Homer, Pages The White Sox weren&#8217;t able to clinch a playoff ",
+      "excerpt": "The Opener: Mitchell&#8217;s Catch, Volpe&#8217;s Non-Homer, Pages The White Sox weren&#8217;t able to clinch a playoff series at home for the first time since 1906. They&#8217;ll get another chance today. The Guardians will send ace Parker Messick to the mound for Game 4. Chicago is expected to cou",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/10/the-opener-mitchells-catch-volpes-non-homer-pages.html",
+      "confidence": 0.82,
+      "prop_impact": "over",
+      "detected_at": "2026-10-08T18:43:57.623057+00:00"
+    },
+    {
+      "player": "Chris Sale",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Tyler Mahle Interested In Return To Braves Pending free agent Tyler Mahle put together a strong two-month stretch with t",
+      "excerpt": "Tyler Mahle Interested In Return To Braves Pending free agent Tyler Mahle put together a strong two-month stretch with the Braves to close the regular season. He was even better in the playoffs, covering critical innings for a pitching staff lacking viable starters outside of Chris Sale. After Atlan",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/10/tyler-mahle-interested-in-return-to-braves.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-10-08T18:43:57.622947+00:00"
+    },
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "activation",
+      "headline": "David Blough: Jayden Daniels is full go, looking forward to having him back Sunday Commanders quarterback Jayden Daniels",
+      "excerpt": "David Blough: Jayden Daniels is full go, looking forward to having him back Sunday Commanders quarterback Jayden Daniels is good to go for Sunday's game against the Giants.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/david-blough-jayden-daniels-is-full-go-looking-forward-to-having-him-back-sunday",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-10-08T18:43:56.199986+00:00"
+    },
     {
       "player": "Stephen Curry",
       "team": "Unknown",
@@ -22866,7 +22931,7 @@
     "Dolphins|suspension": "2026-08-28T15:12:52.988716+00:00",
     "Chargers|qb_scratch": "2026-08-30T20:52:42.322209+00:00",
     "Steelers|qb_scratch": "2026-08-28T15:12:52.988716+00:00",
-    "Chris Sale|injury": "2026-10-08T00:53:29.469855+00:00",
+    "Chris Sale|injury": "2026-10-08T18:44:19.029278+00:00",
     "Vikings|qb_scratch": "2026-09-02T20:53:50.092952+00:00",
     "Nick Boutte|injury": "2026-09-03T20:52:08.398218+00:00",
     "Max Fried|injury": "2026-08-30T04:57:19.770209+00:00",
@@ -23072,6 +23137,8 @@
     "Dak Prescott|injury": "2026-10-07T10:05:13.615714+00:00",
     "Rhamondre Stevenson|injury": "2026-10-07T18:46:01.427603+00:00",
     "Marvin Harrison Jr|injury": "2026-10-07T18:46:01.427603+00:00",
-    "Jayden Daniels|positive": "2026-10-08T10:18:54.119884+00:00"
+    "Jayden Daniels|positive": "2026-10-08T10:18:54.119884+00:00",
+    "Jayden Daniels|activation": "2026-10-08T18:44:19.029278+00:00",
+    "Padres|pitcher_scratch": "2026-10-08T18:44:19.029278+00:00"
   }
 }
