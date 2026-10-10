@@ -2204,5 +2204,23 @@
     "actual_runs": null,
     "pnl": null,
     "settled_at": null
+  },
+  {
+    "bet_date": "2026-10-10",
+    "game_pk": 849831,
+    "home_team": "Cleveland Guardians",
+    "away_team": "Chicago White Sox",
+    "umpire": "Vic Carapazza",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 10.38,
+    "edge_runs": 1.88,
+    "confidence": 0.674,
+    "kelly_fraction": 0.0339,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
