@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-10-10T17:13:55.135738+00:00",
-  "signal_count": 1866,
+  "updated_at": "2026-10-10T21:27:38.711736+00:00",
+  "signal_count": 1871,
   "signals": [
+    {
+      "player": "Jayden Daniels",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Buccaneers rookie Jalon Daniels orchestrates wild upset of Cowboys in second career start The undrafted Kansas product i",
+      "excerpt": "Buccaneers rookie Jalon Daniels orchestrates wild upset of Cowboys in second career start The undrafted Kansas product is making history in place of the injured Baker Mayfield",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/who-is-jalon-daniels-buccaneers-rookie-quarterback/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-10T21:27:21.222592+00:00"
+    },
+    {
+      "player": "Justin Jefferson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Vikings reportedly elevate Odell Beckham Jr. with Justin Jefferson, Jordan Addison questionable The veteran receiver cou",
+      "excerpt": "Vikings reportedly elevate Odell Beckham Jr. with Justin Jefferson, Jordan Addison questionable The veteran receiver could make his Minnesota debut only days after signing with the team&#039;s practice squad",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/vikings-elevate-odell-beckham-jr-saints-wr-injury/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-10T21:27:21.220531+00:00"
+    },
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Fantasy Football Landmines to Avoid for Week 5 - Jalen Hurts, Mike Evans, Tyler Warren, more Week 5 is here, and what an",
+      "excerpt": "Fantasy Football Landmines to Avoid for Week 5 - Jalen Hurts, Mike Evans, Tyler Warren, more Week 5 is here, and what an upset! The Tampa Bay Buccaneers got their first win of the season, with [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/fantasy-football-landmines-to-avoid-for-week-5-2026/1961824",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-10T21:27:20.110081+00:00"
+    },
+    {
+      "player": "Nick Westbrook-Ikhine",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Colts put Arden Key on IR, elevate Nick Westbrook-Ikhine Word this week was that Colts defensive end Arden Key will miss",
+      "excerpt": "Colts put Arden Key on IR, elevate Nick Westbrook-Ikhine Word this week was that Colts defensive end Arden Key will miss multiple weeks with a hamstring injury and the team confirmed it on Saturday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/colts-put-arden-key-on-ir-elevate-nick-westbrook-ikhine",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-10T21:27:15.046658+00:00"
+    },
+    {
+      "player": "Diontae Johnson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Cardinals place RG Isaiah Adams on IR Cardinals left tackle Paris Johnson is out for the season with a torn left biceps.",
+      "excerpt": "Cardinals place RG Isaiah Adams on IR Cardinals left tackle Paris Johnson is out for the season with a torn left biceps.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/cardinals-place-rg-isaiah-adams-on-ir",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-10T21:27:15.046177+00:00"
+    },
     {
       "player": "Stephen Curry",
       "team": "Unknown",
@@ -24411,7 +24476,7 @@
     "Ladd McConkey|injury": "2026-10-04T23:54:44.346231+00:00",
     "Trevor Lawrence|injury": "2026-09-28T04:55:27.765730+00:00",
     "Hunter Brown|usage_up": "2026-09-21T12:33:28.096747+00:00",
-    "Diontae Johnson|injury": "2026-10-08T00:53:29.469855+00:00",
+    "Diontae Johnson|injury": "2026-10-10T21:27:38.711591+00:00",
     "Najee Harris|injury": "2026-10-07T18:46:01.427603+00:00",
     "Blake Snell|injury": "2026-09-17T04:31:12.678553+00:00",
     "CJ Stroud|injury": "2026-09-17T21:12:18.489195+00:00",
@@ -24433,7 +24498,7 @@
     "Kyle Tucker|injury": "2026-10-04T05:26:00.951446+00:00",
     "Dallas Goedert|injury": "2026-09-23T04:22:11.007697+00:00",
     "Browns|weather": "2026-09-20T23:07:19.088374+00:00",
-    "Jayden Daniels|injury": "2026-10-09T18:15:01.300018+00:00",
+    "Jayden Daniels|injury": "2026-10-10T21:27:38.711591+00:00",
     "David Njoku|injury": "2026-09-20T23:07:19.088374+00:00",
     "Steelers|suspension": "2026-09-23T04:22:11.007697+00:00",
     "Drake London|injury": "2026-10-05T21:56:17.436006+00:00",
@@ -24459,7 +24524,7 @@
     "Cowboys|suspension": "2026-09-26T20:55:48.096032+00:00",
     "Pirates|pitcher_scratch": "2026-09-27T04:53:38.620469+00:00",
     "De'Von Achane|injury": "2026-09-29T05:20:46.959817+00:00",
-    "Justin Jefferson|injury": "2026-10-10T00:39:58.368314+00:00",
+    "Justin Jefferson|injury": "2026-10-10T21:27:38.711591+00:00",
     "Garrett Wilson|injury": "2026-10-03T23:42:23.237734+00:00",
     "Russell Wilson|injury": "2026-10-03T23:42:23.237734+00:00",
     "Jahmyr Gibbs|injury": "2026-10-04T23:54:44.346231+00:00",
@@ -24501,6 +24566,7 @@
     "Caleb Williams|activation": "2026-10-10T00:39:58.368314+00:00",
     "Kyren Williams|activation": "2026-10-10T00:39:58.368314+00:00",
     "Corey Seager|injury": "2026-10-10T00:39:58.368314+00:00",
-    "Orioles|pitcher_scratch": "2026-10-10T09:39:42.064432+00:00"
+    "Orioles|pitcher_scratch": "2026-10-10T09:39:42.064432+00:00",
+    "Nick Westbrook-Ikhine|injury": "2026-10-10T21:27:38.711591+00:00"
   }
 }
