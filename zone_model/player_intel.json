@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-10-14T04:29:14.580758+00:00",
-  "signal_count": 2033,
+  "updated_at": "2026-10-14T11:35:36.523532+00:00",
+  "signal_count": 2034,
   "signals": [
+    {
+      "player": "Tyreek Hill",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Drew Rosenhaus still claims a Tyreek Hill deal \"could happen at any time\" Rosenhaus comments on Hill's prospects, withou",
+      "excerpt": "Drew Rosenhaus still claims a Tyreek Hill deal \"could happen at any time\" Rosenhaus comments on Hill's prospects, without addressing the potential impact of the pending NFL investigation.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/drew-rosenhaus-still-claims-a-tyreek-hill-deal-could-happen-at-any-time",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-14T11:35:11.819768+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -26642,7 +26655,7 @@
     "Astros|pitcher_scratch": "2026-09-30T09:32:51.570683+00:00",
     "Austin Riley|injury": "2026-10-04T23:54:44.346231+00:00",
     "Xavier Legette|injury": "2026-10-03T20:54:41.739617+00:00",
-    "Tyreek Hill|injury": "2026-10-07T00:32:18.405123+00:00",
+    "Tyreek Hill|injury": "2026-10-14T11:35:36.523416+00:00",
     "Rashid Shaheed|positive": "2026-10-01T05:23:13.982931+00:00",
     "Bryce Harper|injury": "2026-10-05T14:16:26.107397+00:00",
     "Jake Ferguson|late_scratch": "2026-10-02T22:03:13.346326+00:00",
