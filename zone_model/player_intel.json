@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-10-17T20:24:54.398241+00:00",
-  "signal_count": 2172,
+  "updated_at": "2026-10-17T22:59:00.635231+00:00",
+  "signal_count": 2178,
   "signals": [
+    {
+      "player": "Bo Nix",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "What&#039;s wrong with Bo Nix and Sam Darnold, and can either one of them figure it out? Nix managed just 107 passing ya",
+      "excerpt": "What&#039;s wrong with Bo Nix and Sam Darnold, and can either one of them figure it out? Nix managed just 107 passing yards, and Darnold threw two interceptions",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/whats-wrong-with-bo-nix-sam-darnold-broncos-seahawks/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:43.835981+00:00"
+    },
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "What&#039;s wrong with Bo Nix and Sam Darnold, and can either one of them figure it out? Nix managed just 107 passing ya",
+      "excerpt": "What&#039;s wrong with Bo Nix and Sam Darnold, and can either one of them figure it out? Nix managed just 107 passing yards, and Darnold threw two interceptions",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/whats-wrong-with-bo-nix-sam-darnold-broncos-seahawks/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:43.835972+00:00"
+    },
+    {
+      "player": "Sam Darnold",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_down",
+      "headline": "Mike Macdonald shuts down potential Seahawks quarterback change, sticking with Sam Darnold Darnold has thrown an NFL-hig",
+      "excerpt": "Mike Macdonald shuts down potential Seahawks quarterback change, sticking with Sam Darnold Darnold has thrown an NFL-high seven interceptions, but Macdonald stands behind his starter",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/seahawks-starting-qb-sam-darnold-mike-macdonald-2026/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:43.835848+00:00"
+    },
+    {
+      "player": "DK Metcalf",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Steelers say DK Metcalf will play, Pat Freiermuth is questionable with calf injury Steelers wide receiver DK Metcalf is ",
+      "excerpt": "Steelers say DK Metcalf will play, Pat Freiermuth is questionable with calf injury Steelers wide receiver DK Metcalf is no longer on the injury report for Sunday's game against the Buccaneers, but tight end Pat Freiermuth now is.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/steelers-say-dk-metcalf-will-play-pat-freiermuth-is-questionable-with-calf-injury",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:38.488672+00:00"
+    },
+    {
+      "player": "Jets",
+      "team": "Jets",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "Minkah Fitzpatrick, five others fined for player safety fouls in Week 6 The NFL confirmed that Jets safety Minkah Fitzpa",
+      "excerpt": "Minkah Fitzpatrick, five others fined for player safety fouls in Week 6 The NFL confirmed that Jets safety Minkah Fitzpatrick was fined for his hit on a defenseless KC Concepcion in the Jets' Week 5 win over the Browns and they announced five other players were fined for the player safety fouls that",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/minkah-fitzpatrick-five-others-fined-for-player-safety-fouls-in-week-6",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:38.487788+00:00"
+    },
+    {
+      "player": "Lamar Jackson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Bradley Chubb fined for taunting Alaric Jackson before Jackson punched him Bills linebacker Bradley Chubb did not retali",
+      "excerpt": "Bradley Chubb fined for taunting Alaric Jackson before Jackson punched him Bills linebacker Bradley Chubb did not retaliate physically after Rams left tackle Alaric Jackson punched him in the aftermath of Buffalo's Week 5 win in Los Angeles, but he did get disciplined by the league for his part in t",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bradley-chubb-fined-for-taunting-alaric-jackson-before-jackson-punched-him",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-17T22:58:38.487524+00:00"
+    },
     {
       "player": "Justin Herbert",
       "team": "Unknown",
@@ -28354,7 +28432,7 @@
     "Patriots|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
     "George Kittle|injury": "2026-09-30T22:06:47.673275+00:00",
     "Malik Nabers|positive": "2026-09-09T23:07:44.525528+00:00",
-    "Sam Darnold|injury": "2026-10-16T20:50:19.452882+00:00",
+    "Sam Darnold|injury": "2026-10-17T22:59:00.635065+00:00",
     "Drake Maye|injury": "2026-10-12T21:10:14.938513+00:00",
     "Bryce Young|injury": "2026-10-10T17:13:55.135534+00:00",
     "Tua Tagovailoa|injury": "2026-10-12T10:33:25.121545+00:00",
@@ -28375,7 +28453,7 @@
     "Framber Valdez|injury": "2026-09-12T20:25:56.135224+00:00",
     "Amon-Ra St. Brown|positive": "2026-09-13T20:36:49.327345+00:00",
     "Sam LaPorta|positive": "2026-10-08T00:53:29.469855+00:00",
-    "Bo Nix|injury": "2026-10-16T20:50:19.452882+00:00",
+    "Bo Nix|injury": "2026-10-17T22:59:00.635065+00:00",
     "Alvin Kamara|activation": "2026-09-13T16:01:21.740923+00:00",
     "Lourdes Gurriel Jr|injury": "2026-09-19T04:12:21.979887+00:00",
     "Zay Flowers|injury": "2026-10-15T21:11:41.037663+00:00",
@@ -28501,6 +28579,7 @@
     "Brewers|weather": "2026-10-15T16:44:53.860670+00:00",
     "Jalen Hurts|late_scratch": "2026-10-15T21:11:41.037663+00:00",
     "Dodgers|weather": "2026-10-16T16:27:08.758469+00:00",
-    "DK Metcalf|injury": "2026-10-16T20:50:19.452882+00:00"
+    "DK Metcalf|injury": "2026-10-17T22:59:00.635065+00:00",
+    "Jets|suspension": "2026-10-17T22:59:00.635065+00:00"
   }
 }
