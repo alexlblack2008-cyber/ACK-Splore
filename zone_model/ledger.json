@@ -2294,5 +2294,23 @@
     "actual_runs": 8,
     "pnl": -100.0,
     "settled_at": "2026-10-15T20:13:38.090890"
+  },
+  {
+    "bet_date": "2026-10-18",
+    "game_pk": 849817,
+    "home_team": "Cleveland Guardians",
+    "away_team": "Tampa Bay Rays",
+    "umpire": "Jordan Baker",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 10.23,
+    "edge_runs": 1.73,
+    "confidence": 0.331,
+    "kelly_fraction": 0.0252,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
