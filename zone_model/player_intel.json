@@ -1,7 +1,98 @@
 {
-  "updated_at": "2026-10-19T04:13:59.494682+00:00",
-  "signal_count": 2217,
+  "updated_at": "2026-10-19T12:47:34.395942+00:00",
+  "signal_count": 2224,
   "signals": [
+    {
+      "player": "Derrick Henry",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A",
+      "excerpt": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A.J. Brown Week 6 of the 2026 NFL season had a little bit of everything, including a nail-biter in London and near-comeback [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/biggest-busts-fantasy-football-week-6-disappointments-2026/1969582",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:14.632597+00:00"
+    },
+    {
+      "player": "Bijan Robinson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A",
+      "excerpt": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A.J. Brown Week 6 of the 2026 NFL season had a little bit of everything, including a nail-biter in London and near-comeback [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/biggest-busts-fantasy-football-week-6-disappointments-2026/1969582",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:14.632541+00:00"
+    },
+    {
+      "player": "Bo Nix",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A",
+      "excerpt": "Biggest Fantasy Football Busts of the Week - Fantasy Outlooks for Bijan Robinson, Bo Nix, Derrick Henry, Cam Skattebo, A.J. Brown Week 6 of the 2026 NFL season had a little bit of everything, including a nail-biter in London and near-comeback [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/biggest-busts-fantasy-football-week-6-disappointments-2026/1969582",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:14.632509+00:00"
+    },
+    {
+      "player": "Kyren Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals d",
+      "excerpt": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals dropped the Rams to 2-4 and continued a start that has many people scratching their heads given how high the hopes were for the team heading into the season.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kyren-williams-offensive-inconsistency-probably-because-im-not-out-there",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:09.831317+00:00"
+    },
+    {
+      "player": "Caleb Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals d",
+      "excerpt": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals dropped the Rams to 2-4 and continued a start that has many people scratching their heads given how high the hopes were for the team heading into the season.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kyren-williams-offensive-inconsistency-probably-because-im-not-out-there",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:09.831307+00:00"
+    },
+    {
+      "player": "Javonte Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals d",
+      "excerpt": "Kyren Williams: Offensive inconsistency \"probably because I'm not out there\" Sunday's 18-16 home loss to the Cardinals dropped the Rams to 2-4 and continued a start that has many people scratching their heads given how high the hopes were for the team heading into the season.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/kyren-williams-offensive-inconsistency-probably-because-im-not-out-there",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-19T12:47:09.831293+00:00"
+    },
+    {
+      "player": "Drake London",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "usage_up",
+      "headline": "Liam Coen on Brian Thomas not playing in second half: Guys have to make plays Travis Hunter had his most productive offe",
+      "excerpt": "Liam Coen on Brian Thomas not playing in second half: Guys have to make plays Travis Hunter had his most productive offensive day of the season in London on Sunday and his expanded role at wide receiver came at the expense of Brian Thomas.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/liam-coen-on-brian-thomas-not-playing-in-second-half-guys-have-to-make-plays",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-10-19T12:47:09.830923+00:00"
+    },
     {
       "player": "Victor Wembanyama",
       "team": "Unknown",
@@ -28968,9 +29059,9 @@
     "William Contreras|activation": "2026-09-13T20:36:49.327345+00:00",
     "Kyler Murray|injury": "2026-09-28T04:55:27.765730+00:00",
     "Logan Webb|usage_up": "2026-09-15T04:29:41.689539+00:00",
-    "Kyren Williams|injury": "2026-10-18T10:47:06.506070+00:00",
-    "Caleb Williams|injury": "2026-10-18T10:47:06.506070+00:00",
-    "Javonte Williams|injury": "2026-10-18T10:47:06.506070+00:00",
+    "Kyren Williams|injury": "2026-10-19T12:47:34.395781+00:00",
+    "Caleb Williams|injury": "2026-10-19T12:47:34.395781+00:00",
+    "Javonte Williams|injury": "2026-10-19T12:47:34.395781+00:00",
     "Ladd McConkey|injury": "2026-10-18T22:56:49.639982+00:00",
     "Trevor Lawrence|injury": "2026-09-28T04:55:27.765730+00:00",
     "Hunter Brown|usage_up": "2026-09-21T12:33:28.096747+00:00",
@@ -29091,6 +29182,7 @@
     "Brewers|pitcher_scratch": "2026-10-19T04:13:59.494453+00:00",
     "Chiefs|suspension": "2026-10-18T22:56:49.639982+00:00",
     "Saints|qb_scratch": "2026-10-18T22:56:49.639982+00:00",
-    "A.J. Brown|positive": "2026-10-19T04:13:59.494453+00:00"
+    "A.J. Brown|positive": "2026-10-19T04:13:59.494453+00:00",
+    "Drake London|usage_up": "2026-10-19T12:47:34.395781+00:00"
   }
 }
