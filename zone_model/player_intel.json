@@ -1,7 +1,85 @@
 {
-  "updated_at": "2026-10-20T23:44:17.127524+00:00",
-  "signal_count": 2304,
+  "updated_at": "2026-10-21T04:16:51.769437+00:00",
+  "signal_count": 2310,
   "signals": [
+    {
+      "player": "Victor Wembanyama",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "positive",
+      "headline": "Grading every NBA rookie extension: Evaluating new contracts for Victor Wembanyama, Keyonte George, more First-round pic",
+      "excerpt": "Grading every NBA rookie extension: Evaluating new contracts for Victor Wembanyama, Keyonte George, more First-round picks from the 2023 Draft were eligible to sign rookie extensions until Oct. 19, so we&#039;re grading all seven",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/grading-nba-rookie-extensions-wembanyama-george-thompson-podziemski-wallace-miller/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-10-21T04:16:35.601467+00:00"
+    },
+    {
+      "player": "Paul George",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "positive",
+      "headline": "Grading every NBA rookie extension: Evaluating new contracts for Victor Wembanyama, Keyonte George, more First-round pic",
+      "excerpt": "Grading every NBA rookie extension: Evaluating new contracts for Victor Wembanyama, Keyonte George, more First-round picks from the 2023 Draft were eligible to sign rookie extensions until Oct. 19, so we&#039;re grading all seven",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/grading-nba-rookie-extensions-wembanyama-george-thompson-podziemski-wallace-miller/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-10-21T04:16:35.601436+00:00"
+    },
+    {
+      "player": "Freddy Peralta",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_down",
+      "headline": "Guardians vs. Rays ALCS Game 6 picks: Back at Trop, Tampa Bay can head to World Series behind Freddy Peralta The Rays ai",
+      "excerpt": "Guardians vs. Rays ALCS Game 6 picks: Back at Trop, Tampa Bay can head to World Series behind Freddy Peralta The Rays aim to punch their ticket to the World Series in Game 6 of the ALCS back home vs. the Guardians",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/betting/news/guardians-vs-rays-alcs-game-6-picks-back-at-trop-tampa-bay-can-head-to-world-series-behind-freddy-peralta/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-21T04:16:35.199298+00:00"
+    },
+    {
+      "player": "Davante Adams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "From bad to worse for Rams: Davante Adams to miss 6-10 weeks with ruptured hamstring Adams wasn&#039;t the only bad news",
+      "excerpt": "From bad to worse for Rams: Davante Adams to miss 6-10 weeks with ruptured hamstring Adams wasn&#039;t the only bad news L.A. got on Monday: Blake Grupe tore his ACL, Poona Ford ruptured his triceps, and Kobie Turner is projected to miss four to six weeks",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/rams-davante-adams-to-miss-6-10-weeks-ruptured-hamstring/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-21T04:16:34.783374+00:00"
+    },
+    {
+      "player": "Davante Adams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Rams put Davante Adams, Poona Ford on IR Wide receiver Davante Adams is expected to miss the next 6-10 weeks after ruptu",
+      "excerpt": "Rams put Davante Adams, Poona Ford on IR Wide receiver Davante Adams is expected to miss the next 6-10 weeks after rupturing his hamstring in last Sunday's loss to the Cardinals and the Rams moved him off of the active roster on Tuesday.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/rams-put-davante-adams-poona-ford-on-ir",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-21T04:16:29.430326+00:00"
+    },
+    {
+      "player": "Jake Ferguson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Report: Rams TE Terrance Ferguson not ready to come off IR The Rams placed tight end Terrance Ferguson on injured reserv",
+      "excerpt": "Report: Rams TE Terrance Ferguson not ready to come off IR The Rams placed tight end Terrance Ferguson on injured reserve with an ankle injury on Oct. 2.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/report-rams-te-terrance-ferguson-not-ready-to-come-off-ir",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-21T04:16:29.429595+00:00"
+    },
     {
       "player": "Kevin Durant",
       "team": "Unknown",
@@ -30117,7 +30195,7 @@
     "Luis Castillo|injury": "2026-09-30T22:06:47.673275+00:00",
     "Chiefs|qb_scratch": "2026-09-18T20:44:59.569566+00:00",
     "Spencer Steer|injury": "2026-09-24T04:18:56.344776+00:00",
-    "Paul George|positive": "2026-10-20T00:11:58.749728+00:00",
+    "Paul George|positive": "2026-10-21T04:16:51.769221+00:00",
     "Dansby Swanson|injury": "2026-09-18T23:09:32.737271+00:00",
     "Logan Webb|injury": "2026-09-19T04:12:21.979887+00:00",
     "Dansby Swanson|activation": "2026-09-19T20:25:10.797038+00:00",
@@ -30131,7 +30209,7 @@
     "David Njoku|injury": "2026-09-20T23:07:19.088374+00:00",
     "Steelers|suspension": "2026-09-23T04:22:11.007697+00:00",
     "Drake London|injury": "2026-10-20T19:06:36.273356+00:00",
-    "Davante Adams|injury": "2026-10-20T00:11:58.749728+00:00",
+    "Davante Adams|injury": "2026-10-21T04:16:51.769221+00:00",
     "Dylan Cease|injury": "2026-09-24T04:18:56.344776+00:00",
     "Giants|pitcher_scratch": "2026-09-22T11:21:22.688609+00:00",
     "Kawhi Leonard|positive": "2026-10-06T05:55:47.272963+00:00",
@@ -30159,7 +30237,7 @@
     "Jahmyr Gibbs|injury": "2026-10-04T23:54:44.346231+00:00",
     "Max Fried|usage_up": "2026-09-30T09:32:51.570683+00:00",
     "Gerrit Cole|usage_up": "2026-09-30T09:32:51.570683+00:00",
-    "Jake Ferguson|injury": "2026-09-29T05:20:46.959817+00:00",
+    "Jake Ferguson|injury": "2026-10-21T04:16:51.769221+00:00",
     "Chris Sale|usage_up": "2026-10-11T12:32:02.333564+00:00",
     "Rays|suspension": "2026-09-30T00:17:03.772714+00:00",
     "Astros|pitcher_scratch": "2026-09-30T09:32:51.570683+00:00",
@@ -30225,6 +30303,6 @@
     "A.J. Brown|positive": "2026-10-19T04:13:59.494453+00:00",
     "Drake London|usage_up": "2026-10-19T12:47:34.395781+00:00",
     "Giants|qb_scratch": "2026-10-19T20:30:18.163068+00:00",
-    "Victor Wembanyama|positive": "2026-10-20T00:11:58.749728+00:00"
+    "Victor Wembanyama|positive": "2026-10-21T04:16:51.769221+00:00"
   }
 }
