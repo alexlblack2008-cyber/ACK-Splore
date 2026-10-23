@@ -2564,5 +2564,23 @@
     "actual_runs": null,
     "pnl": null,
     "settled_at": null
+  },
+  {
+    "bet_date": "2026-10-23",
+    "game_pk": 849805,
+    "home_team": "Milwaukee Brewers",
+    "away_team": "Tampa Bay Rays",
+    "umpire": "Gabe Morales",
+    "recommendation": "OVER",
+    "market_total": 8.5,
+    "fair_total": 10.88,
+    "edge_runs": 2.38,
+    "confidence": 0.447,
+    "kelly_fraction": 0.0281,
+    "stake": 100.0,
+    "outcome": "pending",
+    "actual_runs": null,
+    "pnl": null,
+    "settled_at": null
   }
 ]
