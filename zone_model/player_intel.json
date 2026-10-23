@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-10-23T16:51:42.899825+00:00",
-  "signal_count": 2405,
+  "updated_at": "2026-10-23T21:16:30.631364+00:00",
+  "signal_count": 2410,
   "signals": [
+    {
+      "player": "Aaron Rodgers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "drama",
+      "headline": "Aaron Rodgers sounds annoyed with Steelers&#039; travel plans for Paris: Why the QB is unhappy The Steelers quarterback ",
+      "excerpt": "Aaron Rodgers sounds annoyed with Steelers&#039; travel plans for Paris: Why the QB is unhappy The Steelers quarterback is set to become the first QB in NFL history to play international games in three straight seasons in three different countries",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/aaron-rodgers-steelers-travel-plans-nfl-paris-game-saints/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T21:16:13.626024+00:00"
+    },
+    {
+      "player": "Cole Kmet",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Bears fear season-ending injury for Cole Kmet after veteran tight end is carted off field Chicago&#039;s longest-tenured",
+      "excerpt": "Bears fear season-ending injury for Cole Kmet after veteran tight end is carted off field Chicago&#039;s longest-tenured player suffered a likely season-ending knee injury against New England",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/bears-cole-kmet-season-ending-knee-injury/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T21:16:13.625901+00:00"
+    },
+    {
+      "player": "Giants",
+      "team": "Giants",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Giants RB Cam Skattebo says he &#039;got taught a lesson&#039; after surprise benching After being effectively benched a",
+      "excerpt": "Giants RB Cam Skattebo says he &#039;got taught a lesson&#039; after surprise benching After being effectively benched and watching New York release Najee Harris days later, Skattebo acknowledged his situation",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/cam-skattebo-giants-benching-najee-harris-release/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T21:16:13.625572+00:00"
+    },
+    {
+      "player": "Chiefs",
+      "team": "Chiefs",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "Zach Charbonnet will not play for Seahawks on Sunday Kenneth Walker will be back on the field in Seattle on Sunday for t",
+      "excerpt": "Zach Charbonnet will not play for Seahawks on Sunday Kenneth Walker will be back on the field in Seattle on Sunday for the first time since leaving the Seahawks for the Chiefs as a free agent, but Zach Charbonnet won't be joining his former teammate as an active participant.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/zach-charbonnet-will-not-play-for-seahawks-on-sunday",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T21:16:08.287191+00:00"
+    },
+    {
+      "player": "David Montgomery",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "late_scratch",
+      "headline": "RB David Montgomery, DB Jalen Pitre among Texans out for Sunday The Texans will be short-handed on Sunday, without four ",
+      "excerpt": "RB David Montgomery, DB Jalen Pitre among Texans out for Sunday The Texans will be short-handed on Sunday, without four key players.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/rb-david-montgomery-db-jalen-pitre-among-texans-out-for-sunday",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T21:16:08.287023+00:00"
+    },
     {
       "player": "Jaylen Brown",
       "team": "Unknown",
@@ -31428,7 +31493,7 @@
     "Justin Herbert|injury": "2026-10-17T20:24:54.397974+00:00",
     "Stephen Curry|injury": "2026-10-04T23:54:44.346231+00:00",
     "Luis Castillo|injury": "2026-09-30T22:06:47.673275+00:00",
-    "Chiefs|qb_scratch": "2026-09-18T20:44:59.569566+00:00",
+    "Chiefs|qb_scratch": "2026-10-23T21:16:30.631159+00:00",
     "Spencer Steer|injury": "2026-09-24T04:18:56.344776+00:00",
     "Paul George|positive": "2026-10-22T04:16:37.449215+00:00",
     "Dansby Swanson|injury": "2026-09-18T23:09:32.737271+00:00",
@@ -31537,13 +31602,14 @@
     "Saints|qb_scratch": "2026-10-18T22:56:49.639982+00:00",
     "A.J. Brown|positive": "2026-10-19T04:13:59.494453+00:00",
     "Drake London|usage_up": "2026-10-19T12:47:34.395781+00:00",
-    "Giants|qb_scratch": "2026-10-21T21:30:01.590926+00:00",
+    "Giants|qb_scratch": "2026-10-23T21:16:30.631159+00:00",
     "Victor Wembanyama|positive": "2026-10-22T04:16:37.449215+00:00",
     "Jayson Tatum|injury": "2026-10-23T16:51:42.899538+00:00",
     "LaMelo Ball|injury": "2026-10-22T21:24:38.395393+00:00",
     "Giannis Antetokounmpo|injury": "2026-10-22T21:24:38.395393+00:00",
     "Anthony Edwards|injury": "2026-10-22T04:16:37.449215+00:00",
     "Travis Kelce|injury": "2026-10-22T21:24:38.395393+00:00",
-    "Cole Kmet|injury": "2026-10-23T11:23:06.645794+00:00"
+    "Cole Kmet|injury": "2026-10-23T21:16:30.631159+00:00",
+    "David Montgomery|late_scratch": "2026-10-23T21:16:30.631159+00:00"
   }
 }
