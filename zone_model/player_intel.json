@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-10-23T04:20:38.322219+00:00",
-  "signal_count": 2387,
+  "updated_at": "2026-10-23T11:23:06.646014+00:00",
+  "signal_count": 2392,
   "signals": [
+    {
+      "player": "Kyren Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to de",
+      "excerpt": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to describe what Cole is to me, to this team, to this organization.\"",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ben-johnson-cole-kmets-knee-injury-doesnt-look-good",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T11:22:43.037551+00:00"
+    },
+    {
+      "player": "Caleb Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to de",
+      "excerpt": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to describe what Cole is to me, to this team, to this organization.\"",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ben-johnson-cole-kmets-knee-injury-doesnt-look-good",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T11:22:43.037536+00:00"
+    },
+    {
+      "player": "Cole Kmet",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to de",
+      "excerpt": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to describe what Cole is to me, to this team, to this organization.\"",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ben-johnson-cole-kmets-knee-injury-doesnt-look-good",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T11:22:43.037504+00:00"
+    },
+    {
+      "player": "Javonte Williams",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to de",
+      "excerpt": "Ben Johnson: Cole Kmet's knee injury doesn't look good Caleb Williams said after the game, \"I don't have the words to describe what Cole is to me, to this team, to this organization.\"",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ben-johnson-cole-kmets-knee-injury-doesnt-look-good",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-23T11:22:43.037484+00:00"
+    },
+    {
+      "player": "Aaron Rodgers",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "positive",
+      "headline": "NFL tells teams that uncalled hip-drop tackle on Aaron Rodgers was clear example of penalty In Week 4, Browns defensive ",
+      "excerpt": "NFL tells teams that uncalled hip-drop tackle on Aaron Rodgers was clear example of penalty In Week 4, Browns defensive lineman Adin Huntington committed a textbook example of a hip-drop tackle on Steelers quarterback Aaron Rodgers.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/nfl-tells-teams-that-uncalled-hip-drop-tackle-on-aaron-rodgers-was-clear-example-of-penalty",
+      "confidence": 0.78,
+      "prop_impact": "over",
+      "detected_at": "2026-10-23T11:22:43.037304+00:00"
+    },
     {
       "player": "LeBron James",
       "team": "Unknown",
@@ -31178,9 +31243,9 @@
     "William Contreras|activation": "2026-09-13T20:36:49.327345+00:00",
     "Kyler Murray|injury": "2026-09-28T04:55:27.765730+00:00",
     "Logan Webb|usage_up": "2026-09-15T04:29:41.689539+00:00",
-    "Kyren Williams|injury": "2026-10-21T17:00:18.688650+00:00",
-    "Caleb Williams|injury": "2026-10-21T17:00:18.688650+00:00",
-    "Javonte Williams|injury": "2026-10-21T17:00:18.688650+00:00",
+    "Kyren Williams|injury": "2026-10-23T11:23:06.645794+00:00",
+    "Caleb Williams|injury": "2026-10-23T11:23:06.645794+00:00",
+    "Javonte Williams|injury": "2026-10-23T11:23:06.645794+00:00",
     "Ladd McConkey|injury": "2026-10-18T22:56:49.639982+00:00",
     "Trevor Lawrence|injury": "2026-09-28T04:55:27.765730+00:00",
     "Hunter Brown|usage_up": "2026-09-21T12:33:28.096747+00:00",
@@ -31292,7 +31357,7 @@
     "Saquon Barkley|late_scratch": "2026-10-15T04:11:58.133489+00:00",
     "DeVonta Smith|late_scratch": "2026-10-15T04:11:58.133489+00:00",
     "Tua Tagovailoa|positive": "2026-10-15T16:44:53.860670+00:00",
-    "Aaron Rodgers|positive": "2026-10-15T16:44:53.860670+00:00",
+    "Aaron Rodgers|positive": "2026-10-23T11:23:06.645794+00:00",
     "Brewers|weather": "2026-10-15T16:44:53.860670+00:00",
     "Jalen Hurts|late_scratch": "2026-10-15T21:11:41.037663+00:00",
     "Dodgers|weather": "2026-10-16T16:27:08.758469+00:00",
@@ -31309,6 +31374,7 @@
     "LaMelo Ball|injury": "2026-10-22T21:24:38.395393+00:00",
     "Giannis Antetokounmpo|injury": "2026-10-22T21:24:38.395393+00:00",
     "Anthony Edwards|injury": "2026-10-22T04:16:37.449215+00:00",
-    "Travis Kelce|injury": "2026-10-22T21:24:38.395393+00:00"
+    "Travis Kelce|injury": "2026-10-22T21:24:38.395393+00:00",
+    "Cole Kmet|injury": "2026-10-23T11:23:06.645794+00:00"
   }
 }
