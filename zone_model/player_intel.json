@@ -1,7 +1,46 @@
 {
-  "updated_at": "2026-10-25T20:40:47.881289+00:00",
-  "signal_count": 2505,
+  "updated_at": "2026-10-25T23:07:44.077596+00:00",
+  "signal_count": 2508,
   "signals": [
+    {
+      "player": "Paolo Banchero",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "injury",
+      "headline": "Paolo Banchero is hurt again, and this Magic experiment might be cursed Banchero is reportedly out 4-to-6 weeks with a h",
+      "excerpt": "Paolo Banchero is hurt again, and this Magic experiment might be cursed Banchero is reportedly out 4-to-6 weeks with a high ankle sprain",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/paolo-banchero-hurt-again-magic-experiment-might-be-cursed/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-25T23:07:27.553303+00:00"
+    },
+    {
+      "player": "Pablo Lopez",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "Pablo Lopez On Track In Tommy John Recovery Twins right-hander Pablo Lopez is working his way back from a February elbow",
+      "excerpt": "Pablo Lopez On Track In Tommy John Recovery Twins right-hander Pablo Lopez is working his way back from a February elbow procedure. He returned to playing catch in August and is targeting a return in Spring Training. His current outlook would make starting the year on the Opening Day roster a possib",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/10/pablo-lopez-on-track-in-tommy-john-recovery.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-10-25T23:07:22.261638+00:00"
+    },
+    {
+      "player": "Aaron Jones",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Aaron Jones aggravated his knee injury in Sunday's win Vikings running back Aaron Jones was called questionable to retur",
+      "excerpt": "Aaron Jones aggravated his knee injury in Sunday's win Vikings running back Aaron Jones was called questionable to return after going to get his knee checked out on Sunday and he did not return for the final minutes of Minnesota's 16-10 win over the Colts.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/aaron-jones-aggravated-his-knee-injury-in-sundays-win",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-10-25T23:07:20.764774+00:00"
+    },
     {
       "player": "Paul George",
       "team": "Unknown",
@@ -32756,7 +32795,7 @@
     "Scottie Barnes|injury": "2026-10-07T10:05:13.615714+00:00",
     "Stephen Curry|positive": "2026-10-12T21:10:14.938513+00:00",
     "Keon Coleman|injury": "2026-10-01T05:23:13.982931+00:00",
-    "Aaron Jones|injury": "2026-10-11T19:26:45.440778+00:00",
+    "Aaron Jones|injury": "2026-10-25T23:07:44.077349+00:00",
     "Gunnar Henderson|injury": "2026-09-24T04:18:56.344776+00:00",
     "Tony Pollard|injury": "2026-10-03T04:53:43.643330+00:00",
     "Aaron Jones|positive": "2026-09-25T21:24:12.095455+00:00",
@@ -32849,7 +32888,7 @@
     "Cody Bellinger|injury": "2026-10-25T04:14:05.272464+00:00",
     "Gerrit Cole|injury": "2026-10-25T04:14:05.272464+00:00",
     "Mookie Betts|injury": "2026-10-25T20:40:47.881011+00:00",
-    "Pablo Lopez|injury": "2026-10-24T23:02:41.206493+00:00",
-    "Paolo Banchero|injury": "2026-10-24T23:02:41.206493+00:00"
+    "Pablo Lopez|injury": "2026-10-25T23:07:44.077349+00:00",
+    "Paolo Banchero|injury": "2026-10-25T23:07:44.077349+00:00"
   }
 }
