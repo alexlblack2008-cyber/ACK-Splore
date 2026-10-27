@@ -1,7 +1,72 @@
 {
-  "updated_at": "2026-10-27T08:50:18.901576+00:00",
-  "signal_count": 2556,
+  "updated_at": "2026-10-27T15:15:50.952264+00:00",
+  "signal_count": 2561,
   "signals": [
+    {
+      "player": "Unknown",
+      "team": "Unknown",
+      "sport": "nba",
+      "signal_type": "suspension",
+      "headline": "Clippers coach Ty Lue dedicates opening night win to suspended Steve Ballmer: &#039;We&#039;re still fighting for him&#0",
+      "excerpt": "Clippers coach Ty Lue dedicates opening night win to suspended Steve Ballmer: &#039;We&#039;re still fighting for him&#039; Lue made sure to shoutout the Clippers&#039; suspended owner after beating the Kings",
+      "source": "CBS NBA",
+      "url": "https://www.cbssports.com/nba/news/clippers-ty-lue-dedicates-win-steve-ballmer/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-27T15:15:33.589807+00:00"
+    },
+    {
+      "player": "Jackson Chourio",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_up",
+      "headline": "Jackson Chourio just showing off now as the face of the Brewers as Crew creeps closer to World Series title In Game 3 on",
+      "excerpt": "Jackson Chourio just showing off now as the face of the Brewers as Crew creeps closer to World Series title In Game 3 on Monday, Chourio became the youngest player with a four-hit World Series game since Joe Garagiola in 1946",
+      "source": "CBS MLB",
+      "url": "https://www.cbssports.com/mlb/news/jackson-chourio-brewers-world-series-face-of-the-franchise/",
+      "confidence": 0.75,
+      "prop_impact": "over",
+      "detected_at": "2026-10-27T15:15:33.204527+00:00"
+    },
+    {
+      "player": "Jalen Hurts",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Eagles vs. Cowboys prediction: Dallas visits injury-ravaged Philadelphia on &#039;Monday Night Football&#039; Dallas has",
+      "excerpt": "Eagles vs. Cowboys prediction: Dallas visits injury-ravaged Philadelphia on &#039;Monday Night Football&#039; Dallas has dropped two straight games, but Philadelphia enters the NFC East matchup without Jalen Hurts",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/eagles-vs-cowboys-prediction-odds-monday-night-football-2026/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-10-27T15:15:32.817272+00:00"
+    },
+    {
+      "player": "Francisco Lindor",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "usage_down",
+      "headline": "The Opener: Brewers Dominate, Rays On Brink, Lindor Wins Clemente Award The Brewers haven&#8217;t lost in three weeks. T",
+      "excerpt": "The Opener: Brewers Dominate, Rays On Brink, Lindor Wins Clemente Award The Brewers haven&#8217;t lost in three weeks. They can set the record for the longest postseason winning streak with a victory tonight. 1. Brewers crush Rays in Game 3 Tampa Bay was so close to being out of that fifth inning. C",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/10/the-opener-brewers-dominate-rays-on-brink-lindor-wins-clemente-award.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-10-27T15:15:27.898831+00:00"
+    },
+    {
+      "player": "Christian Yelich",
+      "team": "Unknown",
+      "sport": "mlb",
+      "signal_type": "injury",
+      "headline": "The Opener: Brewers Dominate, Rays On Brink, Lindor Wins Clemente Award The Brewers haven&#8217;t lost in three weeks. T",
+      "excerpt": "The Opener: Brewers Dominate, Rays On Brink, Lindor Wins Clemente Award The Brewers haven&#8217;t lost in three weeks. They can set the record for the longest postseason winning streak with a victory tonight. 1. Brewers crush Rays in Game 3 Tampa Bay was so close to being out of that fifth inning. C",
+      "source": "MLBTR",
+      "url": "https://www.mlbtraderumors.com/2026/10/the-opener-brewers-dominate-rays-on-brink-lindor-wins-clemente-award.html",
+      "confidence": 0.82,
+      "prop_impact": "under",
+      "detected_at": "2026-10-27T15:15:27.898782+00:00"
+    },
     {
       "player": "Kyren Williams",
       "team": "Unknown",
@@ -33240,7 +33305,7 @@
     "Luis Robert|injury": "2026-09-27T04:53:38.620469+00:00",
     "Packers|suspension": "2026-09-10T20:43:27.285732+00:00",
     "Joe Burrow|usage_up": "2026-08-29T01:39:25.740034+00:00",
-    "Unknown|suspension": "2026-10-26T12:40:45.915286+00:00",
+    "Unknown|suspension": "2026-10-27T15:15:50.952114+00:00",
     "Shohei Ohtani|injury": "2026-10-25T20:40:47.881011+00:00",
     "Shane Bieber|injury": "2026-08-31T05:02:16.921009+00:00",
     "Cal Raleigh|injury": "2026-09-09T23:07:44.525528+00:00",
@@ -33280,7 +33345,7 @@
     "Xavier Worthy|injury": "2026-08-30T23:20:33.884173+00:00",
     "Pete Alonso|injury": "2026-08-31T05:02:16.921009+00:00",
     "Lamar Jackson|positive": "2026-10-26T04:18:02.847837+00:00",
-    "Jalen Hurts|injury": "2026-10-26T20:23:22.352149+00:00",
+    "Jalen Hurts|injury": "2026-10-27T15:15:50.952114+00:00",
     "Eagles|qb_scratch": "2026-10-19T20:30:18.163068+00:00",
     "Jets|qb_scratch": "2026-10-09T18:15:01.300018+00:00",
     "William Contreras|injury": "2026-10-27T00:19:29.837962+00:00",
@@ -33449,7 +33514,7 @@
     "Ketel Marte|injury": "2026-10-03T11:27:43.512337+00:00",
     "Jordan Walker|usage_up": "2026-10-03T20:54:41.739617+00:00",
     "Diontae Johnson|usage_up": "2026-10-03T20:54:41.739617+00:00",
-    "Jackson Chourio|usage_up": "2026-10-26T12:40:45.915286+00:00",
+    "Jackson Chourio|usage_up": "2026-10-27T15:15:50.952114+00:00",
     "Rashee Rice|injury": "2026-10-24T10:42:22.021269+00:00",
     "CeeDee Lamb|injury": "2026-10-09T10:19:48.616894+00:00",
     "Lions|qb_scratch": "2026-10-05T21:56:17.436006+00:00",
@@ -33516,6 +33581,7 @@
     "Paolo Banchero|injury": "2026-10-27T00:19:29.837962+00:00",
     "Rashid Shaheed|injury": "2026-10-26T04:18:02.847837+00:00",
     "Jaylen Waddle|injury": "2026-10-26T04:18:02.847837+00:00",
-    "Amon-Ra St. Brown|injury": "2026-10-26T20:23:22.352149+00:00"
+    "Amon-Ra St. Brown|injury": "2026-10-26T20:23:22.352149+00:00",
+    "Christian Yelich|injury": "2026-10-27T15:15:50.952114+00:00"
   }
 }
