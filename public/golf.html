@@ -64,6 +64,9 @@ aside h2:first-child{margin-top:0}
 .row{display:flex;align-items:center;gap:8px;margin-top:10px}
 .row label{font-size:13px;color:var(--ink-2)}
 .row input[type=range]{flex:1;accent-color:var(--club)}
+.toggles{gap:16px}
+.toggles label{display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
+.toggles input{accent-color:var(--club);width:16px;height:16px}
 .btn{background:var(--panel-2);border:1.5px solid var(--rule);border-radius:4px;padding:6px 11px;font-weight:600;font-size:13px}
 .btn:hover{border-color:var(--ink-2)}
 .btn:disabled{opacity:.45;cursor:default}
@@ -93,6 +96,7 @@ table.card tr.tot td{font-weight:700;border-bottom:0}
 .kv span:nth-child(even){font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
 .notes{margin:8px 0 0;padding-left:18px;font-size:13px}
 .notes li{margin:3px 0}
+.archnote{margin:10px 0 0;font-size:13px;line-height:1.5;border-left:3px solid var(--flag);padding-left:10px}
 .notes li.bad{color:var(--bad)} .notes li.warn{color:var(--warn)} .notes li.good{color:var(--good)}
 
 .modal{position:fixed;inset:0;background:rgba(10,24,15,.6);display:flex;align-items:flex-start;justify-content:center;padding:16px;z-index:10;overflow-y:auto}
@@ -120,6 +124,8 @@ table.card tr.tot td{font-weight:700;border-bottom:0}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:6px 8px;border-radius:4px;white-space:nowrap;transform:translate(-50%,-110%)}
 .quote{border-left:3px solid var(--flag);padding:3px 10px;margin:8px 0;font-style:italic;color:var(--ink-2)}
 .quote b{font-style:normal;color:var(--ink);font-weight:600}
+.starter{background:var(--panel-2);border-radius:4px;padding:10px 12px;margin-top:14px}
+.starter b{display:block;font:700 20px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:2px 0}
 .saverow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--rule)}
 .saverow input{flex:1;min-width:180px;border:1.5px solid var(--rule);border-radius:4px;padding:6px 10px;background:var(--panel)}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px)}
@@ -168,21 +174,23 @@ table.list td.g{font:800 22px var(--display);color:var(--club)}
     </div>
     <div class="hint" id="hint"></div>
     <div class="legend">
-      <span><i style="background:#98A86C"></i>Native rough</span>
-      <span><i style="background:#355E3C"></i>Forest</span>
-      <span><i style="background:#4683AE"></i>Creek &amp; lake</span>
-      <span><i style="background:#6E9C86"></i>Protected wetland</span>
-      <span><i style="background:#62AE52"></i>Fairway</span>
-      <span><i style="background:#7ACB69"></i>Green</span>
-      <span><i style="background:#EBDDB2"></i>Bunker</span>
-      <span><i style="background:#C9BFA8"></i>Clubhouse (OB)</span>
-      <span>1 square = 5 yds · contours every 5 ft</span>
+      <span><i style="background:#B7AA70"></i>Native fescue</span>
+      <span><i style="background:#2F5233"></i>Forest</span>
+      <span><i style="background:#3B6F93"></i>Creek &amp; lake</span>
+      <span><i style="background:#6C8452"></i>Protected wetland</span>
+      <span><i style="background:#56843A"></i>Rough</span>
+      <span><i style="background:#74AA46"></i>Fairway</span>
+      <span><i style="background:#6CB250"></i>Green</span>
+      <span><i style="background:#E9DCB7"></i>Bunker</span>
+      <span><i style="background:#96968F"></i>Clubhouse (OB)</span>
+      <span>1 tile = 5 yds · contours every 5 ft</span>
     </div>
   </section>
 
   <aside>
     <h2>Tools</h2>
     <div class="tools" id="tools"></div>
+    <div class="row toggles"><label><input type="checkbox" id="vLines" checked> Routing lines</label><label><input type="checkbox" id="vContours"> Contours</label></div>
     <div class="row"><label for="brush">Brush size</label><input type="range" id="brush" min="1" max="5" value="2"><span id="brushV" class="num">2</span></div>
     <div class="btns">
       <button class="btn" id="bUndo">Undo</button>
@@ -219,7 +227,8 @@ table.list td.g{font:800 22px var(--display);color:var(--club)}
       <li><b>Open the course</b> to get a grade, an official-style Course Rating and Slope, and the real courses yours plays most like.</li>
     </ol>
     <p class="dim">You can't build in the creek, lake or wetland, but golfers can hit over them. Anything off the property or into the clubhouse is out of bounds.</p>
-    <div class="btns"><button class="btn primary" id="bHelpClose">Start designing</button></div>
+    <div class="starter"><div><div class="eyebrow">Starter course · designed with Claude</div><b>Heron Creek</b><span class="dim">Par 72 (36–36) · 6,644 yds · Rating 72.4 / Slope 137 · Grade A</span></div></div>
+    <div class="btns"><button class="btn primary" id="bHelpClose">Start designing</button><button class="btn" id="bHelpStarter">Study the starter course</button></div>
   </div>
 </div>
 
@@ -287,6 +296,9 @@ const REAL = [
   { n: "Typical resort course", loc: "US benchmark", par: 72, yds: 6700, cr: 72.4, sl: 129, water: .5, trees: .4, bunk: .5, elev: .2, generic: true },
   { n: "Typical municipal course", loc: "US benchmark", par: 72, yds: 6400, cr: 70.8, sl: 122, water: .2, trees: .5, bunk: .3, elev: .3, generic: true },
 ];
+
+// A complete 18-hole course designed with Claude on the starting land (seed 1), to study before building your own.
+const STARTER = {"name":"Heron Creek","seed":1,"holes":[[[700,729],[961,484]],[[921,469],[552,586]],[[562,522],[610,381]],[[547,369],[353,529],[96,592]],[[96,534],[318,445],[435,354]],[[444,305],[302,233]],[[362,199],[605,240],[803,191]],[[850,171],[1007,446],[1058,704]],[[1010,722],[671,753]],[[712,799],[288,706]],[[228,734],[39,709]],[[34,646],[42,94]],[[50,58],[398,148]],[[426,108],[775,124]],[[770,61],[964,156],[1051,283]],[[1090,266],[1222,176]],[[1227,202],[1253,474],[1130,710]],[[1144,757],[861,816],[788,808]]],"notes":["A gentle handshake: wide, slightly downhill and no water. Opening holes should get golfers moving, not cost them balls. The fairway bunker sits where a good drive lands, so better players still have to pick a line.","The creek runs down the right side. Bail left to stay dry and you bring the fairway bunker into play. That's a classic risk-and-reward tee shot.","Only 149 yds, but the shot carries the creek and a pond waits short-right of the green. A short par 3 earns its place with trouble around the green, not length.","Climbs 23 ft and doglegs right across the creek. Long hitters can cut the corner over the water; everyone else lays up and plays it as a three-shotter.","Dogleg left, falling 33 ft. The drive has to carry the creek, and wetland guards the approach. It's the toughest par 4 on the front for bogey golfers, placed after the easier opening holes.","Tree-lined, with a pond short of the green. A mid-iron to a small target rewards accuracy over power.","The longest par 4 on the course, and 30 ft uphill, so it plays close to 460. No water, just length and well-placed sand. Every course needs one honest brute.","The signature tee shot: about 85 yds over the lake, then 56 ft downhill to the green. The drop makes it play shorter than the card says.","Short and uphill back to the clubhouse. A drive and a wedge, with bunkers instead of length as the defence. Finishing the nine at the clubhouse lets golfers stop for food, or stop after nine.","The back nine leaves the clubhouse through the woods: three-quarters of it is tree-lined, so a straight drive matters more than a long one.","A long par 3 that plays 15 ft uphill into a wooded corner. Take one more club than the yardage.","Runs straight down the west boundary, and the creek crosses about 245 yds out. Carry it or lay up short: that one decision is the whole hole.","A breather after the 12th: downhill and open, with greenside bunkers doing the work. Good courses vary the pressure.","Short but tight, with woods on both sides and 18 ft of climb. The smart play is a fairway wood off the tee, not driver.","Dogleg right through open ground. The fairway bunker sits on the inside corner: cutting it leaves a shorter approach but brings the sand into play.","Almost completely enclosed by trees. A quiet, pretty par 3 before the finish.","Falls 30 ft, and the creek crosses about 240 yds out, right where long drives land. It's the most heavily bunkered hole on the course. Big hitters must lay back or take on the water.","Bends right along the southern woods to a green beside the clubhouse. The 9th and 18th greens finish side by side, as they do at most clubs."],"strokes":[[5,964,502,1.6],[5,943.3,480,1.6],[5,879.1,535,1.8],[5,857.2,609.1,1.6],[5,566,597.1,1.6],[5,658.9,531.8,1.8],[5,741.1,546.7,1.6],[5,621.4,395.1,1.6],[5,592.7,385.3,1.6],[5,109.3,604.6,1.6],[5,335.3,513.7,1.8],[5,402.4,514.1,1.6],[5,198.3,588.7,1.6],[5,436.6,371.9,1.6],[5,418,348,1.6],[5,327,413.9,1.8],[5,283.5,480.4,1.6],[5,317.4,224.3,1.6],[5,303.7,251.3,1.6],[5,797.2,208,1.6],[5,789.9,178.6,1.6],[5,608.9,219.5,1.8],[5,548,250.7,1.6],[5,1070.7,692,1.6],[5,958.3,399.3,1.8],[5,966.4,334.5,1.6],[5,1059,602.3,1.6],[5,678.9,736.7,1.6],[5,681.6,766.8,1.6],[5,759,763.7,1.8],[5,818.1,719.2,1.6],[5,294.2,722.5,1.6],[5,458.8,723.9,1.8],[5,528.2,779.1,1.6],[5,50.6,694.8,1.6],[5,46.6,724.8,1.6],[5,26.8,103.3,1.6],[5,56.1,423.7,1.8],[5,16.9,438.4,1.6],[5,19.6,193.4,1.6],[5,384.9,160.3,1.6],[5,392.5,130.9,1.6],[5,308.2,105.2,1.8],[5,238.2,127.4,1.6],[5,765.9,108.3,1.6],[5,689.1,139.1,1.8],[5,624.1,97.2,1.6],[5,1033.3,283.8,1.6],[5,1058.3,266.7,1.6],[5,973.9,203.7,1.8],[5,945.2,124.6,1.6],[5,1222.2,193.7,1.6],[5,1205,168.7,1.6],[5,1121.4,694.7,1.6],[5,1148.3,708.7,1.6],[5,1230.2,432.9,1.8],[5,1265.7,394,1.6],[5,1195.1,631.3,1.6],[5,796,824.1,1.6],[5,892.7,790.2,1.8],[5,949.4,818.2,1.6],[6,589.7,409.9,2.6],[6,336.8,239.8,2.6]],"summary":"Par 72 (36–36) · 6,644 yds · Rating 72.4 / Slope 137 · Grade A"};
 
 // ─── State ────────────────────────────────────────────────────────────────
 const S = {
@@ -455,6 +467,8 @@ function generate(seed) {
   S.forestTotal = 0;
   for (let k = 0; k < W * H; k++) if (nat[k] === N_FOREST) S.forestTotal++;
   S.holes = []; S.sel = -1; S.draft = null; S.traces = null; S.undo = []; S.sims = []; S.allDirty = true;
+  S.rbox = null; S.renderAll = true;
+  prepRender();
 }
 
 // ─── Lies ─────────────────────────────────────────────────────────────────
@@ -536,7 +550,13 @@ function markDirty(k) {
   if (!b) S.dirtyBox = [x, y, x + CELL, y + CELL];
   else { b[0] = Math.min(b[0], x); b[1] = Math.min(b[1], y); b[2] = Math.max(b[2], x + CELL); b[3] = Math.max(b[3], y + CELL); }
 }
-function setBuilt(k, b) { if (S.built[k] !== b) { S.built[k] = b; markDirty(k); return true; } return false; }
+function setBuilt(k, b) {
+  if (S.built[k] === b) return false;
+  S.built[k] = b; markDirty(k);
+  const i = k % W, j = Math.floor(k / W), r = S.rbox;
+  if (!r) S.rbox = [i, j, i, j]; else { r[0] = Math.min(r[0], i); r[1] = Math.min(r[1], j); r[2] = Math.max(r[2], i); r[3] = Math.max(r[3], j); }
+  return true;
+}
 
 function paintHole(h) {
   h.cells = [];
@@ -570,6 +590,7 @@ function paintHole(h) {
   disk(pin, 6, B_ROUGH, [B_NONE]);
   disk(tee, 3, B_ROUGH, [B_NONE]);
   for (let s = 0; s < Math.min(70, s0); s += 3) disk(pointAt(h.pts, s), 2, B_ROUGH, [B_NONE]);
+  assignStripes(h);
 }
 function unpaintHole(h) {
   for (let n = h.cells.length - 1; n >= 0; n--) {
@@ -934,7 +955,11 @@ function rateCourse() {
     for (let a = 1; a < A.length && !x; a++) for (let b = 1; b < B.length && !x; b++) if (segIntersect(A[a - 1], A[a], B[b - 1], B[b])) x = true;
     if (x) { crossings++; continue; }
     let md = Infinity;
-    for (let s = 60; s < hs[i].len - 40; s += 10) md = Math.min(md, project(B, pointAt(A, s)).d);
+    for (let s = 60; s < hs[i].len - 40; s += 10) {
+      const p = pointAt(A, s);
+      if (dist(p, S.club) < 100) continue;          // every course bunches up around the clubhouse
+      md = Math.min(md, project(B, p).d);
+    }
     if (md < 35) close++;
   }
   rt -= crossings * 15 + close * 5;
@@ -972,45 +997,202 @@ const xT = cT.getContext("2d"), xO = cO.getContext("2d");
 cT.width = cO.width = W * CPX; cT.height = cO.height = H * CPX;
 const img = xT.createImageData(W * CPX, H * CPX);
 
-function colorFor(k, i, j) {
-  const b = S.built[k], n = S.nat[k], nz = S.noise[k];
-  if (b === B_FAIRWAY) return ((Math.floor((i + j) / 3)) & 1) ? [98, 174, 82] : [106, 184, 88];
-  if (b === B_GREEN) return [122, 203, 105];
-  if (b === B_TEE) return [110, 189, 94];
-  if (b === B_BUNKER) return [235, 221, 178];
-  if (b === B_POND) return [62, 127, 175];
-  if (b === B_ROUGH) return [134, 167, 99];
-  if (n === N_FOREST) return [48 + nz * 16, 88 + nz * 20, 56 + nz * 10];
-  if (n === N_CREEK || n === N_LAKE) return [70, 131, 174];
-  if (n === N_WET) return (((i + j) & 3) === 0) ? [88, 128, 110] : [110, 156, 134];
-  if (n === N_CLUB) return [201, 191, 168];
-  return [146 + nz * 14, 162 + nz * 12, 104 + nz * 8];
+// surfaces as drawn (blended at sub-cell resolution so edges curve like real turf)
+const SF_NATIVE = 0, SF_FOREST = 1, SF_WATER = 2, SF_WET = 3, SF_CLUB = 4, SF_ROUGH = 5, SF_FAIR = 6, SF_GREEN = 7, SF_TEE = 8, SF_BUNKER = 9;
+const PRIO = new Float32Array([1, 1.15, 1.5, 1.2, 1.4, 0.95, 1.0, 1.8, 1.8, 2.4]);
+const surf = new Uint8Array(W * H);
+const depth = new Float32Array(W * H);
+const stripeAng = new Float32Array(W * H).fill(NaN);
+const gX = new Float32Array(W * H), gY = new Float32Array(W * H);
+const VIEW = { contours: false, lines: true };
+let warp = null;
+
+function surfOf(k) {
+  const b = S.built[k];
+  if (b === B_FAIRWAY) return SF_FAIR;
+  if (b === B_GREEN) return SF_GREEN;
+  if (b === B_TEE) return SF_TEE;
+  if (b === B_BUNKER) return SF_BUNKER;
+  if (b === B_POND) return SF_WATER;
+  if (b === B_ROUGH) return SF_ROUGH;
+  const n = S.nat[k];
+  if (n === N_FOREST) return SF_FOREST;
+  if (n === N_CREEK || n === N_LAKE) return SF_WATER;
+  if (n === N_WET) return SF_WET;
+  if (n === N_CLUB) return SF_CLUB;
+  return SF_NATIVE;
 }
-function drawTerrain() {
-  const d = img.data, E = S.elev, rowPx = W * CPX;
+function prepRender() {
+  const E = S.elev;
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
-    const k = j * W + i, c = colorFor(k, i, j);
-    const ex = E[j * W + Math.min(W - 1, i + 1)] - E[j * W + Math.max(0, i - 1)];
-    const ey = E[Math.min(H - 1, j + 1) * W + i] - E[Math.max(0, j - 1) * W + i];
-    const water = S.built[k] === B_POND || S.nat[k] === N_CREEK || S.nat[k] === N_LAKE;
-    const sh = water ? 1 : clamp(1 - (ex + ey) * 0.035, 0.72, 1.2);
-    const band = Math.floor(E[k] / 5);
-    const contour = !water && ((i < W - 1 && Math.floor(E[k + 1] / 5) !== band) || (j < H - 1 && Math.floor(E[k + W] / 5) !== band));
-    const forest = S.nat[k] === N_FOREST && !S.built[k];
-    for (let py = 0; py < CPX; py++) for (let px = 0; px < CPX; px++) {
-      const o = ((j * CPX + py) * rowPx + i * CPX + px) * 4;
-      let f = sh;
-      if (contour && (px === CPX - 1 || py === CPX - 1)) f *= 0.84;
-      if (forest && ((px + py * 3 + i * 7 + j * 5) % 7 === 0)) f *= 0.75;
-      d[o] = clamp(c[0] * f, 0, 255); d[o + 1] = clamp(c[1] * f, 0, 255); d[o + 2] = clamp(c[2] * f, 0, 255); d[o + 3] = 255;
+    const k = j * W + i;
+    gX[k] = (E[j * W + Math.min(W - 1, i + 1)] - E[j * W + Math.max(0, i - 1)]) / 2;
+    gY[k] = (E[Math.min(H - 1, j + 1) * W + i] - E[Math.max(0, j - 1) * W + i]) / 2;
+  }
+  warp = valueNoise(S.seed + 404);
+  stripeAng.fill(NaN);
+  for (const h of S.holes) assignStripes(h);
+}
+// fairways are mown in bands that run along the hole
+function assignStripes(h) {
+  const L = holeLen(h.pts);
+  for (const [k, b] of h.cells) {
+    if (b !== B_FAIRWAY && b !== B_TEE) continue;
+    const c = [(k % W) * CELL + 2.5, Math.floor(k / W) * CELL + 2.5], s0 = project(h.pts, c).s;
+    const a = pointAt(h.pts, Math.min(L, s0 + 6)), z = pointAt(h.pts, Math.max(0, s0 - 6));
+    stripeAng[k] = Math.atan2(a[1] - z[1], a[0] - z[0]);
+  }
+}
+function stripeForBrush(k) {
+  let best = null, bd = 80;
+  const c = [(k % W) * CELL + 2.5, Math.floor(k / W) * CELL + 2.5];
+  for (const h of S.holes) { const pr = project(h.pts, c); if (pr.d < bd) { bd = pr.d; best = { h, s: pr.s }; } }
+  if (!best) { stripeAng[k] = NaN; return; }
+  const L = holeLen(best.h.pts), a = pointAt(best.h.pts, Math.min(L, best.s + 6)), z = pointAt(best.h.pts, Math.max(0, best.s - 6));
+  stripeAng[k] = Math.atan2(a[1] - z[1], a[0] - z[0]);
+}
+function computeDepth() {
+  const INF = 1e9;
+  for (let k = 0; k < W * H; k++) depth[k] = surf[k] === SF_WATER ? INF : 0;
+  for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) { const k = j * W + i; if (!depth[k]) continue; let v = depth[k]; if (i > 0) v = Math.min(v, depth[k - 1] + 1); if (j > 0) v = Math.min(v, depth[k - W] + 1); depth[k] = v; }
+  for (let j = H - 1; j >= 0; j--) for (let i = W - 1; i >= 0; i--) { const k = j * W + i; if (!depth[k]) continue; let v = depth[k]; if (i < W - 1) v = Math.min(v, depth[k + 1] + 1); if (j < H - 1) v = Math.min(v, depth[k + W] + 1); depth[k] = v; }
+}
+const hash2 = (x, y) => { let h = Math.imul(x, 374761393) + Math.imul(y, 668265263) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+function bil(arr, x, y) {
+  const i = clamp(Math.floor(x), 0, W - 2), j = clamp(Math.floor(y), 0, H - 2), tx = clamp(x - i, 0, 1), ty = clamp(y - j, 0, 1), k = j * W + i;
+  return (arr[k] * (1 - tx) + arr[k + 1] * tx) * (1 - ty) + (arr[k + W] * (1 - tx) + arr[k + W + 1] * tx) * ty;
+}
+const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+const C = {
+  fescue: [182, 170, 112], native: [124, 146, 80], forestFloor: [38, 62, 38], rough: [86, 132, 58],
+  fair: [116, 170, 70], green: [108, 178, 80], collar: [98, 160, 68], tee: [112, 172, 74],
+  sand: [233, 220, 183], lip: [196, 178, 132], shallow: [82, 138, 146], deep: [30, 74, 112], shore: [112, 128, 98],
+  reed: [104, 126, 78], glint: [92, 132, 140], lot: [150, 150, 146],
+};
+
+function drawTerrain(full) {
+  for (let k = 0; k < W * H; k++) surf[k] = surfOf(k);
+  computeDepth();
+  let i0 = 0, j0 = 0, i1 = W - 1, j1 = H - 1;
+  if (!full && !S.renderAll && !S.rbox) return;      // nothing changed since the last draw
+  if (!full && S.rbox && !S.renderAll) {
+    i0 = Math.max(0, S.rbox[0] - 3); j0 = Math.max(0, S.rbox[1] - 3); i1 = Math.min(W - 1, S.rbox[2] + 3); j1 = Math.min(H - 1, S.rbox[3] + 3);
+  }
+  S.rbox = null; S.renderAll = false;
+  const d = img.data, rowPx = W * CPX, acc = new Float32Array(10);
+  const px0 = i0 * CPX, py0 = j0 * CPX, px1 = (i1 + 1) * CPX, py1 = (j1 + 1) * CPX;
+  for (let py = py0; py < py1; py++) for (let px = px0; px < px1; px++) {
+    const cx = (px + 0.5) / CPX - 0.5, cy = (py + 0.5) / CPX - 0.5;
+    const fx = cx + (warp(px * 0.05, py * 0.05) - 0.5) * 0.9, fy = cy + (warp(px * 0.05 + 31.7, py * 0.05 + 11.3) - 0.5) * 0.9;
+    const ci = Math.floor(fx), cj = Math.floor(fy);
+    acc.fill(0); let tot = 0;
+    for (let dj = -1; dj <= 2; dj++) {
+      const j = cj + dj; if (j < 0 || j >= H) continue;
+      const wy = 1.5 - Math.abs(fy - j); if (wy <= 0) continue;
+      for (let di = -1; di <= 2; di++) {
+        const i = ci + di; if (i < 0 || i >= W) continue;
+        const wx = 1.5 - Math.abs(fx - i); if (wx <= 0) continue;
+        const sf = surf[j * W + i], w = wx * wy * PRIO[sf];
+        acc[sf] += w; tot += w;
+      }
+    }
+    let sf = 0, best = -1;
+    for (let q = 0; q < 10; q++) if (acc[q] > best) { best = acc[q]; sf = q; }
+    const grain = hash2(px, py), kN = clamp(Math.round(cy), 0, H - 1) * W + clamp(Math.round(cx), 0, W - 1);
+    let c, shadeK = 1;
+    switch (sf) {
+      case SF_FAIR: case SF_TEE: {
+        const ang = isNaN(stripeAng[kN]) ? 0.785 : stripeAng[kN];
+        const band = Math.floor((-px * Math.sin(ang) + py * Math.cos(ang)) / 8) & 1;
+        c = sf === SF_TEE ? C.tee : C.fair;
+        const f = (band ? 1.06 : 0.95) * (0.97 + grain * 0.05);
+        c = [c[0] * f, c[1] * f, c[2] * f];
+        break;
+      }
+      case SF_GREEN: {
+        const u = Math.floor((px + py) / 5), v = Math.floor((px - py + 4000) / 5);
+        const f = ((u + v) & 1 ? 1.035 : 0.97) * (0.985 + grain * 0.03);
+        c = [C.green[0] * f, C.green[1] * f, C.green[2] * f];
+        break;
+      }
+      case SF_BUNKER: {
+        const fr = acc[SF_BUNKER] / tot;
+        c = mix(C.lip, C.sand, clamp((fr - 0.45) / 0.4, 0, 1));
+        const f = 0.96 + grain * 0.08; c = [c[0] * f, c[1] * f, c[2] * f];
+        shadeK = 0.4;
+        break;
+      }
+      case SF_WATER: {
+        const dp = bil(depth, cx, cy), fr = acc[SF_WATER] / tot;
+        c = mix(C.shallow, C.deep, clamp((dp - 0.5) / 4, 0, 1));
+        const sheen = warp(px * 0.02 + py * 0.11, py * 0.02) ; if (sheen > 0.72) c = mix(c, [190, 215, 225], (sheen - 0.72) * 0.9);
+        if (fr < 0.72) c = mix(C.shore, c, clamp((fr - 0.4) / 0.32, 0, 1));
+        shadeK = 0;
+        break;
+      }
+      case SF_WET: {
+        const n = warp(px * 0.35, py * 0.35);
+        c = n > 0.66 ? C.glint : mix(C.reed, C.native, grain * 0.5);
+        const f = 0.9 + grain * 0.15; c = [c[0] * f, c[1] * f, c[2] * f];
+        break;
+      }
+      case SF_ROUGH: { const f = 0.94 + grain * 0.1; c = [C.rough[0] * f, C.rough[1] * f, C.rough[2] * f]; break; }
+      case SF_FOREST: c = C.forestFloor; break;
+      case SF_CLUB: c = C.lot; shadeK = 0; break;
+      default: {
+        // meadow grasses with drifts of tan fescue
+        const n = 0.65 * warp(px * 0.022 + 50, py * 0.022) + 0.35 * warp(px * 0.07 + 9, py * 0.07 + 3);
+        c = mix(C.native, C.fescue, clamp((n - 0.42) * 2.2, 0, 0.8));
+        const f = 0.94 + grain * 0.09; c = [c[0] * f, c[1] * f, c[2] * f];
+      }
+    }
+    // collar around greens, and the grass lip that shades into bunkers
+    if (sf !== SF_GREEN && sf !== SF_BUNKER && sf !== SF_WATER && acc[SF_GREEN] / tot > 0.1) c = mix(c, C.collar, 0.85);
+    if (sf !== SF_BUNKER && acc[SF_BUNKER] / tot > 0.06) c = [c[0] * 0.86, c[1] * 0.86, c[2] * 0.86];
+    // hillshade, lit from the north-west
+    const gx = bil(gX, cx, cy), gy = bil(gY, cx, cy);
+    let sh = 1 + clamp(-(gx + gy) * 0.06, -0.24, 0.2) * (shadeK || 0);
+    if (shadeK && VIEW.contours) {
+      const e = bil(S.elev, cx, cy), e2 = bil(S.elev, cx + 1 / CPX, cy + 1 / CPX);
+      if (Math.floor(e / 5) !== Math.floor(e2 / 5)) sh *= 0.8;
+    }
+    const o = (py * rowPx + px) * 4;
+    d[o] = clamp(c[0] * sh, 0, 255); d[o + 1] = clamp(c[1] * sh, 0, 255); d[o + 2] = clamp(c[2] * sh, 0, 255); d[o + 3] = 255;
+  }
+  xT.putImageData(img, 0, 0, px0, py0, px1 - px0, py1 - py0);
+  drawTrees(px0, py0, px1, py1, i0, j0, i1, j1);
+}
+
+// individual tree crowns with shadows cast to the south-east
+function drawTrees(px0, py0, px1, py1, i0, j0, i1, j1) {
+  const ctx = xT;
+  ctx.save();
+  ctx.beginPath(); ctx.rect(px0, py0, px1 - px0, py1 - py0); ctx.clip();
+  const trees = [];
+  for (let j = Math.max(0, j0 - 2); j <= Math.min(H - 1, j1 + 2); j++) for (let i = Math.max(0, i0 - 2); i <= Math.min(W - 1, i1 + 2); i++) {
+    if (!isTreeCell(j * W + i)) continue;
+    const n = 1 + (hash2(i, j) > 0.45 ? 1 : 0);
+    for (let t = 0; t < n; t++) {
+      const r1 = hash2(i * 3 + t, j * 7), r2 = hash2(i * 5, j * 3 + t), r3 = hash2(i + 91 * t, j + 17);
+      trees.push([(i + r1) * CPX, (j + r2) * CPX, CPX * (0.85 + r3 * 0.6), r3]);
     }
   }
-  xT.putImageData(img, 0, 0);
+  ctx.fillStyle = "rgba(10,25,12,.38)";
+  for (const [x, y, r] of trees) { ctx.beginPath(); ctx.ellipse(x + r * 0.55, y + r * 0.7, r, r * 0.85, 0, 0, 7); ctx.fill(); }
+  for (const [x, y, r, v] of trees) {
+    ctx.fillStyle = `rgb(${34 + v * 22 | 0},${64 + v * 26 | 0},${36 + v * 10 | 0})`;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+    ctx.fillStyle = `rgba(${110 + v * 40 | 0},${150 + v * 30 | 0},${80},.32)`;
+    ctx.beginPath(); ctx.arc(x - r * 0.3, y - r * 0.32, r * 0.55, 0, 7); ctx.fill();
+  }
+  ctx.restore();
 }
 
 function drawFlag(ctx, p, num, sel) {
   const x = p[0] * YPX, y = p[1] * YPX;
-  ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.arc(x, y, 2.5, 0, 7); ctx.fill();
+  ctx.strokeStyle = "rgba(0,0,0,.35)"; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 9, y + 9); ctx.stroke();
+  ctx.fillStyle = "rgba(0,0,0,.45)"; ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill();
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.6;
   ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y - 20); ctx.stroke();
   ctx.fillStyle = sel ? "#F2C230" : "#C8102E";
@@ -1021,8 +1203,8 @@ function drawTee(ctx, p, num, sel) {
   const x = p[0] * YPX, y = p[1] * YPX;
   ctx.fillStyle = sel ? "#F2C230" : "#15251B";
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = sel ? "#15251B" : "#fff"; ctx.font = "700 11px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.beginPath(); ctx.arc(x, y, 7.5, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = sel ? "#15251B" : "#fff"; ctx.font = "700 10px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
   ctx.fillText(num, x, y + 0.5); ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
 }
 function drawLine(ctx, pts, color, w, dash) {
@@ -1038,20 +1220,49 @@ function label(ctx, text, x, y) {
   ctx.fillStyle = "#fff"; ctx.fillText(text, x + 5, y + 1);
 }
 
+function drawClubhouse(ctx) {
+  // the clubhouse sits on the parking-lot cells; stalls below, building above
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (let k = 0; k < W * H; k++) if (S.nat[k] === N_CLUB) { const i = k % W, j = Math.floor(k / W); x0 = Math.min(x0, i); y0 = Math.min(y0, j); x1 = Math.max(x1, i); y1 = Math.max(y1, j); }
+  if (x0 === Infinity) return;
+  const X0 = x0 * CPX, Y0 = y0 * CPX, X1 = (x1 + 1) * CPX, Y1 = (y1 + 1) * CPX, mx = (X0 + X1) / 2;
+  ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 1;
+  for (let x = X0 + 4; x < X1 - 2; x += 5) { ctx.beginPath(); ctx.moveTo(x, Y0 + 20); ctx.lineTo(x, Y0 + 26); ctx.moveTo(x, Y1 - 8); ctx.lineTo(x, Y1 - 2); ctx.stroke(); }
+  const bw = 40, bh = 14, bx = mx - bw / 2, by = Y0 + 2;
+  ctx.fillStyle = "rgba(0,0,0,.3)"; ctx.fillRect(bx + 3, by + 4, bw, bh);
+  ctx.fillStyle = "#5E5650"; ctx.fillRect(bx, by, bw, bh);
+  ctx.fillStyle = "#7A716A"; ctx.fillRect(bx, by, bw, bh / 2);
+  ctx.strokeStyle = "#3F3934"; ctx.beginPath(); ctx.moveTo(bx, by + bh / 2); ctx.lineTo(bx + bw, by + bh / 2); ctx.stroke();
+  ctx.fillStyle = "#15251B"; ctx.font = "700 10px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center";
+  ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.fillText("CLUBHOUSE", mx, Y1 + 11); ctx.textAlign = "start";
+}
+function pathStroke(ctx, pts) {
+  if (pts.length < 2) return;
+  const tr = () => { ctx.beginPath(); ctx.moveTo(pts[0][0] * YPX, pts[0][1] * YPX);
+    for (let i = 1; i < pts.length - 1; i++) { const a = pts[i], b = pts[i + 1]; ctx.quadraticCurveTo(a[0] * YPX, a[1] * YPX, (a[0] + b[0]) / 2 * YPX, (a[1] + b[1]) / 2 * YPX); }
+    const z = pts[pts.length - 1]; ctx.lineTo(z[0] * YPX, z[1] * YPX); };
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  tr(); ctx.strokeStyle = "rgba(90,84,70,.55)"; ctx.lineWidth = 3.6; ctx.stroke();
+  tr(); ctx.strokeStyle = "#DCD6C6"; ctx.lineWidth = 2.2; ctx.stroke();
+  ctx.lineCap = "butt";
+}
+// cart paths: from the clubhouse or last green to each tee, then down the right side of the hole to the green
+function drawCartPaths(ctx) {
+  S.holes.forEach((h, i) => {
+    const from = (i === 0 || i === 9) ? S.club : lastPt(S.holes[i - 1]);
+    const L = holeLen(h.pts), side = [];
+    for (let s = 25; s < L - 25; s += 20) { const p = pointAt(h.pts, s), [nx, ny] = normalAt(h.pts, s, L); side.push([p[0] + nx * 34, p[1] + ny * 34]); }
+    const g = lastPt(h), t = h.pts[0];
+    pathStroke(ctx, [from, t, ...side, g].map(p => [clamp(p[0], 3, MAPW - 3), clamp(p[1], 3, MAPH - 3)]));
+  });
+  for (const k of [8, 17]) if (S.holes[k]) pathStroke(ctx, [lastPt(S.holes[k]), S.club]);
+}
+
 function drawOverlay() {
   const ctx = xO;
   ctx.clearRect(0, 0, cO.width, cO.height);
-  const cx = S.club[0] * YPX, cy = S.club[1] * YPX;
-  ctx.fillStyle = "#6B4E3A"; ctx.fillRect(cx - 26, cy + 18, 52, 22);
-  ctx.fillStyle = "#8C3B2E"; ctx.beginPath(); ctx.moveTo(cx - 30, cy + 19); ctx.lineTo(cx, cy + 6); ctx.lineTo(cx + 30, cy + 19); ctx.fill();
-  ctx.fillStyle = "#15251B"; ctx.font = "700 10px 'Barlow Condensed', sans-serif"; ctx.textAlign = "center"; ctx.fillText("CLUBHOUSE", cx, cy + 33); ctx.textAlign = "start";
-
-  // walking routes
-  for (let i = 0; i < S.holes.length; i++) {
-    const from = (i === 0 || i === 9) ? S.club : lastPt(S.holes[i - 1]);
-    drawLine(ctx, [from, S.holes[i].pts[0]], "rgba(255,255,255,.5)", 1, [2, 4]);
-  }
-  for (const k of [8, 17]) if (S.holes[k]) drawLine(ctx, [lastPt(S.holes[k]), S.club], "rgba(255,255,255,.5)", 1, [2, 4]);
+  drawClubhouse(ctx);
+  drawCartPaths(ctx);
 
   if (S.sel >= 0 && S.sims[S.sel] && !S.traces) {
     for (const gk of ["b", "s"]) {
@@ -1062,8 +1273,8 @@ function drawOverlay() {
 
   S.holes.forEach((h, i) => {
     const sel = i === S.sel;
-    drawLine(ctx, h.pts, sel ? "#F2C230" : "rgba(255,255,255,.9)", sel ? 2.2 : 1.4, [6, 4]);
-    for (let k = 1; k < h.pts.length - 1; k++) {
+    if (sel || VIEW.lines) drawLine(ctx, h.pts, sel ? "#F2C230" : "rgba(255,255,255,.55)", sel ? 2.2 : 1, sel ? [6, 4] : [3, 5]);
+    if (sel || VIEW.lines) for (let k = 1; k < h.pts.length - 1; k++) {
       const p = h.pts[k]; ctx.fillStyle = sel ? "#F2C230" : "#fff";
       ctx.beginPath(); ctx.arc(p[0] * YPX, p[1] * YPX, sel ? 4 : 2.5, 0, 7); ctx.fill();
     }
@@ -1153,7 +1364,7 @@ function fitMap() {
 }
 
 function pushUndo() {
-  S.undo.push({ built: S.built.slice(), holes: JSON.stringify(S.holes.map(h => ({ pts: h.pts, cells: h.cells }))) });
+  S.undo.push({ built: S.built.slice(), holes: JSON.stringify(S.holes.map(h => ({ pts: h.pts, cells: h.cells, note: h.note }))) });
   if (S.undo.length > 40) S.undo.shift();
 }
 function doUndo() {
@@ -1161,7 +1372,7 @@ function doUndo() {
   if (!u) { toast("Nothing to undo"); return; }
   S.built.set(u.built); S.holes = JSON.parse(u.holes);
   if (S.sel >= S.holes.length) S.sel = S.holes.length - 1;
-  S.allDirty = true;
+  S.allDirty = true; S.renderAll = true;
   changed(true);
 }
 
@@ -1194,7 +1405,7 @@ function updateCard() {
   const body = document.getElementById("cardBody");
   body.innerHTML = "";
   const n = S.holes.length;
-  if (!n) { body.innerHTML = `<tr><td colspan="6" class="dim" style="text-align:left;padding:10px 4px">No holes yet. Pick Route and click near the clubhouse.</td></tr>`; updateDetail(); return; }
+  if (!n) { body.innerHTML = `<tr><td colspan="6" class="dim" style="text-align:left;padding:10px 4px">No holes yet. Pick Route and click near the clubhouse, or <button class="btn" id="bStarterCard" style="margin-top:6px">open the starter course</button> to study a finished design first.</td></tr>`; document.getElementById("bStarterCard").onclick = openStarter; updateDetail(); return; }
   const fmtAvg = (v, par) => `<span class="${v - par < -0.05 ? "under" : ""}">${v.toFixed(2)}</span>`;
   const sub = (label, a, b) => {
     const hs = S.holes.slice(a, b); if (!hs.length) return;
@@ -1239,6 +1450,7 @@ function updateDetail() {
       <span>In a bunker (scr / bog)</span><span>${pct(sim.s.bunker)} / ${pct(sim.b.bunker)}</span>
       <span>Hit trees (scr / bog)</span><span>${pct(sim.s.trees)} / ${pct(sim.b.trees)}</span>
     </div>
+    ${h.note ? `<p class="archnote"><b>Architect's note.</b> ${esc(h.note)}</p>` : ""}
     <ul class="notes">${holeNotes(h, i).map(([c, t]) => `<li class="${c}">${t}</li>`).join("")}</ul>
     <p class="dim" style="font-size:12px;margin:6px 0 0">Dots on the map show where tee shots land: white for scratch, orange for bogey.</p>
   </div>`;
@@ -1267,7 +1479,7 @@ function paintAt(p) {
     if (Math.hypot(i + 0.5 - ci, j + 0.5 - cj) > r) continue;
     const k = j * W + i;
     if (t.b !== B_NONE && !canBuild(k)) { blocked = true; continue; }
-    if (setBuilt(k, t.b)) any = true;
+    if (setBuilt(k, t.b)) { any = true; if (t.b === B_FAIRWAY || t.b === B_TEE) stripeForBrush(k); }
   }
   if (blocked && !S._warned) { toast("The creek, lake, wetland and clubhouse are off-limits."); S._warned = true; }
   return any;
@@ -1338,7 +1550,7 @@ function endPointer() {
     const bad = end >= 0 ? validSpot(h.pts[end], end ? "green" : "tee") : null;
     S.drag = null;
     if (bad) { toast(bad); doUndo(); return; }
-    paintHole(h); h.dirty = true;
+    paintHole(h); h.dirty = true; h.note = null;
     changed(true);
   } else if (S.painting) {
     S.painting = false;
@@ -1513,12 +1725,13 @@ function openCourse() {
 // ─── Save / load ──────────────────────────────────────────────────────────
 function rle(a) { const out = []; let v = a[0], n = 0; for (let i = 0; i < a.length; i++) { if (a[i] === v) n++; else { out.push(v, n); v = a[i]; n = 1; } } out.push(v, n); return out; }
 function unrle(r, a) { let o = 0; for (let i = 0; i < r.length; i += 2) { a.fill(r[i], o, o + r[i + 1]); o += r[i + 1]; } }
-function snapshot() { return { seed: S.seed, holes: S.holes.map(h => ({ pts: h.pts, cells: h.cells })), built: rle(S.built) }; }
+function snapshot() { return { seed: S.seed, holes: S.holes.map(h => ({ pts: h.pts, cells: h.cells, note: h.note })), built: rle(S.built) }; }
 function restore(d) {
   generate(d.seed);
-  try { unrle(d.built, S.built); S.holes = d.holes.map(h => ({ pts: h.pts, cells: h.cells || [] })); }
+  try { unrle(d.built, S.built); S.holes = d.holes.map(h => ({ pts: h.pts, cells: h.cells || [], note: h.note })); }
   catch (e) { S.built.fill(0); S.holes = []; }
-  S.allDirty = true;
+  prepRender();
+  S.allDirty = true; S.renderAll = true;
 }
 function save() { store("dogleg18-design", snapshot()); }
 
@@ -1538,12 +1751,14 @@ function showMine() {
   const rows = list.map((c, i) => `<tr><td class="g">${esc(c.grade)}</td><td><b>${esc(c.name)}</b><br><span class="dim">${esc(c.date)} · plays like ${esc(c.like)} (${c.likePct}%)</span></td><td class="num">${c.par}</td><td class="num">${c.yards.toLocaleString()}</td><td class="num">${c.cr} / ${c.slope}</td><td><div class="btns" style="margin:0"><button class="btn" data-load="${i}">Open</button><button class="btn danger" data-del="${i}">Delete</button></div></td></tr>`).join("");
   document.getElementById("mineBody").innerHTML = `
     <div class="eyebrow">Your portfolio</div><h2>My courses</h2>
+    <div class="starter" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px"><div><div class="eyebrow">Starter course · designed with Claude</div><b>${esc(STARTER.name)}</b><span class="dim">${esc(STARTER.summary)}</span></div><button class="btn" id="mineStarter">Open</button></div>
     ${list.length ? `<div class="cardwrap"><table class="list"><thead><tr><th>Grade</th><th>Course</th><th>Par</th><th>Yards</th><th>Rating / Slope</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
       : `<p class="dim">No courses saved yet. Route all 18 holes, open the course, then save it from the grand opening screen.</p>`}
     <p class="dim" style="font-size:12px">Courses are saved in this browser only.</p>
     <div class="btns"><button class="btn primary" id="mineClose">Close</button></div>`;
   const m = document.getElementById("mine"); m.hidden = false;
   document.getElementById("mineClose").onclick = () => m.hidden = true;
+  document.getElementById("mineStarter").onclick = openStarter;
   m.querySelectorAll("[data-load]").forEach(b => b.onclick = () => {
     const c = list[+b.dataset.load];
     const go = () => { restore(c.design); store("dogleg-name", c.name); m.hidden = true; afterLoad(); toast(`Opened “${c.name}”`); };
@@ -1556,9 +1771,28 @@ function showMine() {
     });
   });
 }
+function loadStarter() {
+  generate(STARTER.seed);
+  STARTER.holes.forEach((pts, i) => { const h = { pts: pts.map(p => p.slice()), cells: [], note: STARTER.notes[i] }; paintHole(h); S.holes.push(h); });
+  const prevTool = S.tool, prevBrush = S.brush;
+  S._warned = true;
+  for (const [b, x, y, r] of STARTER.strokes) { S.tool = TOOLS.find(t => t.b === b).id; S.brush = r; paintAt([x, y]); }
+  S.tool = prevTool; S.brush = prevBrush;
+  prepRender();
+  S.allDirty = true; S.renderAll = true;
+  store("dogleg-name", STARTER.name);
+  afterLoad();
+  S.sel = 0; updateCard(); updateStats(); drawOverlay();
+  toast(`Opened ${STARTER.name}. Click any hole on the scorecard to read its design notes.`);
+}
+function openStarter() {
+  document.querySelectorAll(".modal").forEach(m => m.hidden = true);
+  if (S.holes.length) ask(`Open ${STARTER.name}?`, "Your current design will be replaced by the starter course. Save it from the grand opening screen first if you want to keep it.", "Open starter course", loadStarter);
+  else loadStarter();
+}
 function afterLoad() {
   S.sel = -1; S.traces = null;
-  drawTerrain(); setTool("route"); changed(false); updateCard();
+  drawTerrain(true); setTool("route"); changed(false); updateCard();
 }
 function newLand() {
   generate(Math.floor(Math.random() * 1e6) + 2);
@@ -1569,6 +1803,8 @@ function newLand() {
 // ─── Wire up ──────────────────────────────────────────────────────────────
 document.getElementById("brush").oninput = e => { S.brush = +e.target.value; document.getElementById("brushV").textContent = S.brush; drawOverlay(); };
 document.getElementById("bUndo").onclick = doUndo;
+document.getElementById("vLines").onchange = e => { VIEW.lines = e.target.checked; store("dogleg-view", VIEW); drawOverlay(); };
+document.getElementById("vContours").onchange = e => { VIEW.contours = e.target.checked; store("dogleg-view", VIEW); drawTerrain(true); };
 document.getElementById("bDelHole").onclick = () => {
   if (S.sel < 0) return;
   pushUndo();
@@ -1586,6 +1822,7 @@ document.getElementById("bLand").onclick = () => {
 };
 document.getElementById("askNo").onclick = () => document.getElementById("ask").hidden = true;
 document.getElementById("bHelp").onclick = () => document.getElementById("help").hidden = false;
+document.getElementById("bHelpStarter").onclick = () => { store("dogleg-seen", 1); openStarter(); };
 document.getElementById("bHelpClose").onclick = () => { document.getElementById("help").hidden = true; store("dogleg-seen", 1); };
 document.querySelectorAll(".modal").forEach(m => m.addEventListener("click", e => { if (e.target === m) m.hidden = true; }));
 
@@ -1605,10 +1842,12 @@ window.addEventListener("keydown", e => {
 window.addEventListener("resize", fitMap);
 
 (function boot() {
+  const v = load("dogleg-view");
+  if (v) { VIEW.lines = v.lines !== false; VIEW.contours = !!v.contours; document.getElementById("vLines").checked = VIEW.lines; document.getElementById("vContours").checked = VIEW.contours; }
   const saved = load("dogleg18-design");
   if (saved && saved.seed) restore(saved); else generate(1);
   fitMap();
-  drawTerrain();
+  drawTerrain(true);
   setTool("route");
   changed(false);
   updateCard();
