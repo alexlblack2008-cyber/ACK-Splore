@@ -55,7 +55,7 @@ main{flex:1;display:flex;min-height:0}
 aside{width:360px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--rule);overflow-y:auto;padding-block:14px 24px;padding-inline:16px}
 aside h2{font:700 18px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:20px 0 8px}
 aside h2:first-child{margin-top:0}
-.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tools{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
 .tool{background:var(--panel-2);border:1.5px solid transparent;border-radius:4px;padding:7px 2px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:600}
 .tool:hover{border-color:var(--rule)}
 .tool[aria-pressed="true"]{border-color:var(--club);background:#E2EDE4}
@@ -182,6 +182,8 @@ table.list td.g{font:800 22px var(--display);color:var(--club)}
       <span><i style="background:#74AA46"></i>Fairway</span>
       <span><i style="background:#6CB250"></i>Green</span>
       <span><i style="background:#E9DCB7"></i>Bunker</span>
+      <span><i style="background:#D9CBA0"></i>Waste area</span>
+      <span><i style="background:#E46A8C"></i>Flower bed</span>
       <span><i style="background:#96968F"></i>Clubhouse (OB)</span>
       <span>1 tile = 5 yds · contours every 5 ft</span>
     </div>
@@ -223,6 +225,7 @@ table.list td.g{font:800 22px var(--display);color:var(--club)}
       <li><b>Par follows the USGA's 2019 guidelines</b>: up to 260 yds is a par 3, up to 490 is a par 4, up to 710 is a par 5. Most championship courses are par 70–72, with four par 3s and four par 5s.</li>
       <li><b>Two returning nines.</b> Holes 1 and 10 tee off at the clubhouse, and holes 9 and 18 finish there.</li>
       <li><b>Shape it</b> with brushes. Put bunkers and ponds where the landing zones are, widen fairways, clear trees, or erase to return ground to nature.</li>
+      <li><b>Landscape it.</b> Plant trees to frame holes, separate fairways or block a corner, since planted trees catch shots just like the woods. Add waste areas, a softer hazard than sand, and flower beds around tees and the clubhouse.</li>
       <li><b>Playtest</b> (P) to watch a group play the hole. Dots show where tee shots land.</li>
       <li><b>Open the course</b> to get a grade, an official-style Course Rating and Slope, and the real courses yours plays most like.</li>
     </ol>
@@ -259,8 +262,8 @@ const D2R = Math.PI / 180;
 // natural terrain
 const N_NATIVE = 0, N_FOREST = 1, N_CREEK = 2, N_WET = 3, N_CLUB = 4, N_LAKE = 5;
 // built surfaces
-const B_NONE = 0, B_ROUGH = 1, B_FAIRWAY = 2, B_GREEN = 3, B_TEE = 4, B_BUNKER = 5, B_POND = 6;
-const COST = { [B_ROUGH]: 60, [B_FAIRWAY]: 380, [B_GREEN]: 2600, [B_TEE]: 1100, [B_BUNKER]: 1400, [B_POND]: 2200 };
+const B_NONE = 0, B_ROUGH = 1, B_FAIRWAY = 2, B_GREEN = 3, B_TEE = 4, B_BUNKER = 5, B_POND = 6, B_TREES = 7, B_WASTE = 8, B_FLOWERS = 9;
+const COST = { [B_ROUGH]: 60, [B_FAIRWAY]: 380, [B_GREEN]: 2600, [B_TEE]: 1100, [B_BUNKER]: 1400, [B_POND]: 2200, [B_TREES]: 450, [B_WASTE]: 300, [B_FLOWERS]: 600 };
 const CLEAR_COST = 700;       // per forest cell removed
 const EARTH_COST = 90;        // per cell per foot of slope, for shaped surfaces
 const HOLE_FIXED = 45_000;    // irrigation mainline, cart path, signage per hole
@@ -272,7 +275,10 @@ const TOOLS = [
   { id: "green",   name: "Green",   key: "G", sw: "#7ACB69", b: B_GREEN },
   { id: "tee",     name: "Tee",     key: "T", sw: "#6EBD5E", b: B_TEE },
   { id: "bunker",  name: "Bunker",  key: "B", sw: "#EBDDB2", b: B_BUNKER },
+  { id: "waste",   name: "Waste",   key: "X", sw: "radial-gradient(circle at 30% 40%,#7C8A4E 0 2px,transparent 3px),radial-gradient(circle at 70% 65%,#7C8A4E 0 2px,transparent 3px),#D9CBA0", b: B_WASTE },
   { id: "pond",    name: "Pond",    key: "W", sw: "#3E7FAF", b: B_POND },
+  { id: "trees",   name: "Trees",   key: "K", sw: "radial-gradient(circle at 35% 35%,#5F8F4A 0 4px,#2F5A33 5px 7px,transparent 8px),#7FA05A", b: B_TREES },
+  { id: "flowers", name: "Flowers", key: "L", sw: "radial-gradient(circle at 30% 30%,#E46A8C 0 2px,transparent 3px),radial-gradient(circle at 70% 40%,#F2C230 0 2px,transparent 3px),radial-gradient(circle at 45% 72%,#9A6BD0 0 2px,transparent 3px),#6E9B4E", b: B_FLOWERS },
   { id: "clear",   name: "Clear",   key: "C", sw: "#86A763", b: B_ROUGH },
   { id: "erase",   name: "Erase",   key: "E", sw: "repeating-linear-gradient(45deg,#98A86C 0 3px,#355E3C 3px 6px)", b: B_NONE },
 ];
@@ -481,6 +487,9 @@ function lieIdx(k) {
   if (b === B_BUNKER) return "bunker";
   if (b === B_POND) return "water";
   if (b === B_ROUGH) return "rough";
+  if (b === B_TREES) return "trees";
+  if (b === B_WASTE) return "waste";
+  if (b === B_FLOWERS) return "native";
   const n = S.nat[k];
   if (n === N_FOREST) return "trees";
   if (n === N_CREEK || n === N_WET || n === N_LAKE) return "water";
@@ -488,12 +497,12 @@ function lieIdx(k) {
   return "native";
 }
 const lieAt = p => lieIdx(idxOf(p[0], p[1]));
-const isTreeCell = k => k >= 0 && S.built[k] === B_NONE && S.nat[k] === N_FOREST;
+const isTreeCell = k => k >= 0 && (S.built[k] === B_TREES || (S.built[k] === B_NONE && S.nat[k] === N_FOREST));
 const elevAt = p => { const k = idxOf(p[0], p[1]); return k < 0 ? 0 : S.elev[k]; };
 
 function computeHazardDist() {
   const d = S.hazDist, INF = 1e9;
-  for (let k = 0; k < W * H; k++) { const l = lieIdx(k); d[k] = (l === "bunker" || l === "water") ? 0 : INF; }
+  for (let k = 0; k < W * H; k++) { const l = lieIdx(k); d[k] = (l === "bunker" || l === "water" || l === "waste") ? 0 : INF; }
   const A = 1, B = Math.SQRT2;
   for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
     const k = j * W + i; let v = d[k];
@@ -602,16 +611,17 @@ function unpaintHole(h) {
 
 // ─── Cost ─────────────────────────────────────────────────────────────────
 function costs() {
-  let build = 0, clear = 0, earth = 0, cleared = 0;
+  let build = 0, clear = 0, earth = 0, cleared = 0, planted = 0;
   for (let k = 0; k < W * H; k++) {
     const b = S.built[k];
     if (!b) continue;
     build += COST[b];
+    if (b === B_TREES) { if (S.nat[k] !== N_FOREST) planted++; continue; }
     if (S.nat[k] === N_FOREST) { clear += CLEAR_COST; cleared++; }
-    if (b >= B_FAIRWAY) earth += EARTH_COST * S.grad[k] * (b === B_FAIRWAY ? 1 : 2.5);
+    if (b >= B_FAIRWAY && b <= B_POND) earth += EARTH_COST * S.grad[k] * (b === B_FAIRWAY ? 1 : 2.5);
   }
   const fixed = S.holes.length * HOLE_FIXED;
-  return { total: build + clear + earth + fixed, build, clear, earth, fixed, cleared, clearedPct: S.forestTotal ? cleared / S.forestTotal : 0 };
+  return { total: build + clear + earth + fixed, build, clear, earth, fixed, cleared, planted, clearedPct: S.forestTotal ? Math.max(0, cleared - planted * 0.6) / S.forestTotal : 0 };   // new planting earns back part of what was cut
 }
 
 // ─── Golfer simulation ────────────────────────────────────────────────────
@@ -621,9 +631,9 @@ const GOLFERS = {
 };
 const LIE_MOD = {
   tee: { d: 1, a: 1 }, fairway: { d: 1, a: 1 }, green: { d: 1, a: 1 },
-  rough: { d: 0.9, a: 1.25 }, native: { d: 0.75, a: 1.5 }, bunker: { d: 0.62, a: 1.6 }, trees: { d: 0.3, a: 2.0 },
+  rough: { d: 0.9, a: 1.25 }, native: { d: 0.75, a: 1.5 }, bunker: { d: 0.62, a: 1.6 }, waste: { d: 0.82, a: 1.3 }, trees: { d: 0.3, a: 2.0 },
 };
-const LIE_PEN = { fairway: 0, tee: 0, green: -0.1, rough: 0.12, native: 0.32, bunker: 0.38, trees: 0.8, water: 1.15, ob: 2.0 };
+const LIE_PEN = { fairway: 0, tee: 0, green: -0.1, rough: 0.12, native: 0.32, bunker: 0.38, waste: 0.2, trees: 0.8, water: 1.15, ob: 2.0 };
 
 function maxDist(g, lie, first) {
   if (lie === "trees") return 75;
@@ -703,7 +713,7 @@ function playHole(g, h, rng, gauss, trace) {
     if (dp <= 40 && lie !== "trees" && lie !== "water") {
       strokes++;
       if (lie === "bunker" && rng() < g.bunkerFail) continue;
-      const mult = lie === "bunker" ? 1.7 : lie === "native" ? 1.35 : lie === "rough" ? 1.15 : 1;
+      const mult = lie === "bunker" ? 1.7 : lie === "waste" ? 1.3 : lie === "native" ? 1.35 : lie === "rough" ? 1.15 : 1;
       const r = Math.abs(gauss()) * (g.chipK * dp + g.chipC) * mult;
       const a = rng() * Math.PI * 2;
       p = [pin[0] + Math.cos(a) * r, pin[1] + Math.sin(a) * r];
@@ -748,7 +758,7 @@ function playHole(g, h, rng, gauss, trace) {
     }
     if (ll === "bunker") ev.bunker++;
     ev.full++;
-    if (ll !== "bunker" && ll !== "trees" && S.hazDist[idxOf(land[0], land[1])] <= 2.2) ev.near++;
+    if (ll !== "bunker" && ll !== "trees" && ll !== "waste" && S.hazDist[idxOf(land[0], land[1])] <= 2.2) ev.near++;
     if (first) ev.tee = land.slice();
     p = land; lie = ll; first = false;
     if (lie === "green" && strokes <= par - 2) ev.gir = true;
@@ -970,6 +980,7 @@ function rateCourse() {
   // Environment
   const c = costs();
   comp.env = clamp(100 - c.clearedPct * 200, 0, 100);
+  if (c.planted > 150) tips.push(`You planted ${Math.round(c.planted * 25 / 4840 * 10) / 10} acres of new trees, which offsets some of the clearing.`);
   if (c.clearedPct > 0.25) tips.push(`You cleared ${Math.round(c.clearedPct * 100)}% of the forest. Route more holes through open ground.`);
 
   const W8 = { par: 0.15, play: 0.25, strat: 0.2, variety: 0.1, route: 0.15, env: 0.15 };
@@ -998,8 +1009,9 @@ cT.width = cO.width = W * CPX; cT.height = cO.height = H * CPX;
 const img = xT.createImageData(W * CPX, H * CPX);
 
 // surfaces as drawn (blended at sub-cell resolution so edges curve like real turf)
-const SF_NATIVE = 0, SF_FOREST = 1, SF_WATER = 2, SF_WET = 3, SF_CLUB = 4, SF_ROUGH = 5, SF_FAIR = 6, SF_GREEN = 7, SF_TEE = 8, SF_BUNKER = 9;
-const PRIO = new Float32Array([1, 1.15, 1.5, 1.2, 1.4, 0.95, 1.0, 1.8, 1.8, 2.4]);
+const SF_NATIVE = 0, SF_FOREST = 1, SF_WATER = 2, SF_WET = 3, SF_CLUB = 4, SF_ROUGH = 5, SF_FAIR = 6, SF_GREEN = 7, SF_TEE = 8, SF_BUNKER = 9, SF_WASTE = 10, SF_FLOWER = 11;
+const NSF = 12;
+const PRIO = new Float32Array([1, 1.15, 1.5, 1.2, 1.4, 0.95, 1.0, 1.8, 1.8, 2.4, 1.6, 1.9]);
 const surf = new Uint8Array(W * H);
 const depth = new Float32Array(W * H);
 const stripeAng = new Float32Array(W * H).fill(NaN);
@@ -1014,7 +1026,9 @@ function surfOf(k) {
   if (b === B_TEE) return SF_TEE;
   if (b === B_BUNKER) return SF_BUNKER;
   if (b === B_POND) return SF_WATER;
-  if (b === B_ROUGH) return SF_ROUGH;
+  if (b === B_ROUGH || b === B_TREES) return SF_ROUGH;      // planted trees stand on mown grass
+  if (b === B_WASTE) return SF_WASTE;
+  if (b === B_FLOWERS) return SF_FLOWER;
   const n = S.nat[k];
   if (n === N_FOREST) return SF_FOREST;
   if (n === N_CREEK || n === N_LAKE) return SF_WATER;
@@ -1067,7 +1081,7 @@ const C = {
   fescue: [182, 170, 112], native: [124, 146, 80], forestFloor: [38, 62, 38], rough: [86, 132, 58],
   fair: [116, 170, 70], green: [108, 178, 80], collar: [98, 160, 68], tee: [112, 172, 74],
   sand: [233, 220, 183], lip: [196, 178, 132], shallow: [82, 138, 146], deep: [30, 74, 112], shore: [112, 128, 98],
-  reed: [104, 126, 78], glint: [92, 132, 140], lot: [150, 150, 146],
+  reed: [104, 126, 78], waste: [217, 203, 160], glint: [92, 132, 140], lot: [150, 150, 146],
 };
 
 function drawTerrain(full) {
@@ -1079,7 +1093,7 @@ function drawTerrain(full) {
     i0 = Math.max(0, S.rbox[0] - 3); j0 = Math.max(0, S.rbox[1] - 3); i1 = Math.min(W - 1, S.rbox[2] + 3); j1 = Math.min(H - 1, S.rbox[3] + 3);
   }
   S.rbox = null; S.renderAll = false;
-  const d = img.data, rowPx = W * CPX, acc = new Float32Array(10);
+  const d = img.data, rowPx = W * CPX, acc = new Float32Array(NSF);
   const px0 = i0 * CPX, py0 = j0 * CPX, px1 = (i1 + 1) * CPX, py1 = (j1 + 1) * CPX;
   for (let py = py0; py < py1; py++) for (let px = px0; px < px1; px++) {
     const cx = (px + 0.5) / CPX - 0.5, cy = (py + 0.5) / CPX - 0.5;
@@ -1097,7 +1111,7 @@ function drawTerrain(full) {
       }
     }
     let sf = 0, best = -1;
-    for (let q = 0; q < 10; q++) if (acc[q] > best) { best = acc[q]; sf = q; }
+    for (let q = 0; q < NSF; q++) if (acc[q] > best) { best = acc[q]; sf = q; }
     const grain = hash2(px, py), kN = clamp(Math.round(cy), 0, H - 1) * W + clamp(Math.round(cx), 0, W - 1);
     let c, shadeK = 1;
     switch (sf) {
@@ -1139,6 +1153,19 @@ function drawTerrain(full) {
       case SF_ROUGH: { const f = 0.94 + grain * 0.1; c = [C.rough[0] * f, C.rough[1] * f, C.rough[2] * f]; break; }
       case SF_FOREST: c = C.forestFloor; break;
       case SF_CLUB: c = C.lot; shadeK = 0; break;
+      case SF_WASTE: {
+        // hardpan sand dotted with clumps of wiregrass
+        const tuft = warp(px * 0.55 + 7, py * 0.55 + 3);
+        c = tuft > 0.7 ? [112, 128, 72] : tuft > 0.64 ? [150, 150, 98] : C.waste;
+        const f = 0.94 + grain * 0.1; c = [c[0] * f, c[1] * f, c[2] * f];
+        shadeK = 0.6;
+        break;
+      }
+      case SF_FLOWER: {
+        const h = hash2(px >> 1, py >> 1);
+        c = h > 0.86 ? [228, 106, 140] : h > 0.74 ? [242, 194, 48] : h > 0.64 ? [154, 107, 208] : h > 0.58 ? [245, 240, 232] : [92, 128, 66];
+        break;
+      }
       default: {
         // meadow grasses with drifts of tan fescue
         const n = 0.65 * warp(px * 0.022 + 50, py * 0.022) + 0.35 * warp(px * 0.07 + 9, py * 0.07 + 3);
@@ -1170,17 +1197,25 @@ function drawTrees(px0, py0, px1, py1, i0, j0, i1, j1) {
   ctx.beginPath(); ctx.rect(px0, py0, px1 - px0, py1 - py0); ctx.clip();
   const trees = [];
   for (let j = Math.max(0, j0 - 2); j <= Math.min(H - 1, j1 + 2); j++) for (let i = Math.max(0, i0 - 2); i <= Math.min(W - 1, i1 + 2); i++) {
-    if (!isTreeCell(j * W + i)) continue;
+    const k = j * W + i;
+    if (!isTreeCell(k)) continue;
+    if (S.built[k] === B_TREES) {
+      const r3 = hash2(i + 5, j + 41);
+      trees.push([(i + 0.3 + hash2(i, j + 9) * 0.4) * CPX, (j + 0.3 + hash2(i + 9, j) * 0.4) * CPX, CPX * (0.95 + r3 * 0.55), r3, hash2(i * 7, j * 11)]);
+      continue;
+    }
     const n = 1 + (hash2(i, j) > 0.45 ? 1 : 0);
     for (let t = 0; t < n; t++) {
       const r1 = hash2(i * 3 + t, j * 7), r2 = hash2(i * 5, j * 3 + t), r3 = hash2(i + 91 * t, j + 17);
-      trees.push([(i + r1) * CPX, (j + r2) * CPX, CPX * (0.85 + r3 * 0.6), r3]);
+      trees.push([(i + r1) * CPX, (j + r2) * CPX, CPX * (0.85 + r3 * 0.6), r3, -1]);
     }
   }
   ctx.fillStyle = "rgba(10,25,12,.38)";
   for (const [x, y, r] of trees) { ctx.beginPath(); ctx.ellipse(x + r * 0.55, y + r * 0.7, r, r * 0.85, 0, 0, 7); ctx.fill(); }
-  for (const [x, y, r, v] of trees) {
-    ctx.fillStyle = `rgb(${34 + v * 22 | 0},${64 + v * 26 | 0},${36 + v * 10 | 0})`;
+  const SPECIES = [[52, 92, 46], [70, 104, 50], [44, 78, 52], [92, 112, 52], [58, 98, 66]];   // oak, maple, pine, birch, spruce
+  for (const [x, y, r, v, sp] of trees) {
+    const base = sp >= 0 ? SPECIES[Math.floor(sp * SPECIES.length)] : [34 + v * 22, 64 + v * 26, 36 + v * 10];
+    ctx.fillStyle = `rgb(${base[0] | 0},${base[1] | 0},${base[2] | 0})`;
     ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
     ctx.fillStyle = `rgba(${110 + v * 40 | 0},${150 + v * 30 | 0},${80},.32)`;
     ctx.beginPath(); ctx.arc(x - r * 0.3, y - r * 0.32, r * 0.55, 0, 7); ctx.fill();
@@ -1324,7 +1359,7 @@ function drawOverlay() {
     const k = idxOf(S.mouse[0], S.mouse[1]);
     if (k >= 0) {
       const n = S.nat[k];
-      const names = { fairway: "Fairway", tee: "Tee", green: "Green", rough: "Cleared rough", native: "Native rough", trees: "Forest", bunker: "Bunker",
+      const names = { fairway: "Fairway", tee: "Tee", green: "Green", rough: "Cleared rough", native: S.built[k] === B_FLOWERS ? "Flower bed" : "Native rough", trees: S.built[k] === B_TREES ? "Planted trees" : "Forest", bunker: "Bunker", waste: "Waste area",
         water: S.built[k] === B_POND ? "Pond" : n === N_WET ? "Protected wetland" : n === N_LAKE ? "Lake" : "Creek", ob: "Clubhouse (OB)" };
       document.getElementById("hint").innerHTML = hintBase() + ` <span class="dim">· ${names[lieIdx(k)]} · ${Math.round(S.elev[k])} ft</span>`;
     }
