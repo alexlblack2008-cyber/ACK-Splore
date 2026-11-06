@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-11-05T23:30:12.031874+00:00",
-  "signal_count": 2908,
+  "updated_at": "2026-11-06T06:04:19.086559+00:00",
+  "signal_count": 2909,
   "signals": [
+    {
+      "player": "Dak Prescott",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Cowboys stars reject George Pickens trade talk ahead of NFL deadline As speculation builds about Pickens&#039; future in",
+      "excerpt": "Cowboys stars reject George Pickens trade talk ahead of NFL deadline As speculation builds about Pickens&#039; future in Dallas, Prescott praised him as a teammate and Lamb explained how the receiver changes opposing defenses",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/news/george-pickens-trade-rumors-cowboys-nfl-deadline/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-11-06T06:04:01.428249+00:00"
+    },
     {
       "player": "Russell Wilson",
       "team": "Unknown",
@@ -38032,7 +38045,7 @@
     "Jordan Walker|activation": "2026-10-07T10:05:13.615714+00:00",
     "Freddy Peralta|injury": "2026-11-01T19:27:56.492654+00:00",
     "Joel Embiid|injury": "2026-10-30T00:43:56.028586+00:00",
-    "Dak Prescott|injury": "2026-10-17T10:27:57.246202+00:00",
+    "Dak Prescott|injury": "2026-11-06T06:04:19.086367+00:00",
     "Rhamondre Stevenson|injury": "2026-10-07T18:46:01.427603+00:00",
     "Marvin Harrison Jr|injury": "2026-10-18T20:25:38.877677+00:00",
     "Jayden Daniels|positive": "2026-10-09T10:19:48.616894+00:00",
