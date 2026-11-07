@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-11-07T05:35:58.383020+00:00",
-  "signal_count": 2936,
+  "updated_at": "2026-11-07T12:47:26.260857+00:00",
+  "signal_count": 2937,
   "signals": [
+    {
+      "player": "Bijan Robinson",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Weekend Waiver Wire Rankings for Week 9: Fantasy Football Pickups for Devin Singletary, Corey Kiner, Kimani Vidal, Demar",
+      "excerpt": "Weekend Waiver Wire Rankings for Week 9: Fantasy Football Pickups for Devin Singletary, Corey Kiner, Kimani Vidal, Demarcus Robinson, Darius Cooper, Chig Okonkwo, more Hey RotoBallers, the weekend is here, and it's time to scout the waiver wire for some potential pickups to help [&#8230;]",
+      "source": "RotoBaller NFL",
+      "url": "https://www.rotoballer.com/weekend-waiver-wire-rankings-fantasy-football-week-9-2026/1986348",
+      "confidence": 0.72,
+      "prop_impact": "under",
+      "detected_at": "2026-11-07T12:47:08.021750+00:00"
+    },
     {
       "player": "A.J. Brown",
       "team": "Unknown",
