@@ -1,7 +1,59 @@
 {
-  "updated_at": "2026-11-08T10:04:17.147535+00:00",
-  "signal_count": 2965,
+  "updated_at": "2026-11-08T17:50:42.216693+00:00",
+  "signal_count": 2969,
   "signals": [
+    {
+      "player": "Brock Purdy",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Have we been thinking about franchise QBs all wrong? CJ Carr, Darian Mensah and the Brock Purdy predicament Saturday&#03",
+      "excerpt": "Have we been thinking about franchise QBs all wrong? CJ Carr, Darian Mensah and the Brock Purdy predicament Saturday&#039;s Miami-Notre Dame showdown offered a reminder that playing quarterback is about more than looking the part.",
+      "source": "CBS NFL",
+      "url": "https://www.cbssports.com/nfl/draft/news/nfl-draft-franchise-qbs-cj-carr-darian-mensah-and-brock-purdy-predicament/",
+      "confidence": 0.75,
+      "prop_impact": "under",
+      "detected_at": "2026-11-08T17:50:24.070085+00:00"
+    },
+    {
+      "player": "Falcons",
+      "team": "Falcons",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "James Pearce Jr. is active for the Falcons The eight-game suspension of Falcons defensive end James Pearce Jr. has ended",
+      "excerpt": "James Pearce Jr. is active for the Falcons The eight-game suspension of Falcons defensive end James Pearce Jr. has ended.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/james-pearce-jr-is-active-for-the-falcons",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-11-08T17:50:18.777649+00:00"
+    },
+    {
+      "player": "Colts",
+      "team": "Colts",
+      "sport": "nfl",
+      "signal_type": "qb_scratch",
+      "headline": "George Pickens, Joey Porter Jr. will not play for the Cowboys LB DeMarvion Overshown is also inactive for Sunday's game ",
+      "excerpt": "George Pickens, Joey Porter Jr. will not play for the Cowboys LB DeMarvion Overshown is also inactive for Sunday's game against the Colts.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/george-pickens-joey-porter-jr-will-not-play-for-the-cowboys",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-11-08T17:50:18.776861+00:00"
+    },
+    {
+      "player": "Ja'Marr Chase",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "Ja'Marr Chase and the Bengals beat the Falcons 34-17 in Madrid Bengals wide receiver Ja'Marr Chase had an outstanding ga",
+      "excerpt": "Ja'Marr Chase and the Bengals beat the Falcons 34-17 in Madrid Bengals wide receiver Ja'Marr Chase had an outstanding game in a victory over the Falcons.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jamarr-chase-and-the-bengals-beat-the-falcons-34-17-in-madrid",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-11-08T17:50:18.776496+00:00"
+    },
     {
       "player": "DeVonta Smith",
       "team": "Unknown",
@@ -38608,7 +38660,7 @@
     "Yordan Alvarez|usage_up": "2026-09-12T10:29:45.434086+00:00",
     "Freddy Peralta|usage_up": "2026-10-30T00:43:56.028586+00:00",
     "Julio Rodriguez|injury": "2026-10-06T05:55:47.272963+00:00",
-    "Ja'Marr Chase|injury": "2026-10-13T22:31:22.085584+00:00",
+    "Ja'Marr Chase|injury": "2026-11-08T17:50:42.216439+00:00",
     "Tee Higgins|injury": "2026-10-09T18:15:01.300018+00:00",
     "CJ Stroud|positive": "2026-09-01T23:13:00.966858+00:00",
     "Adley Rutschman|injury": "2026-10-04T23:54:44.346231+00:00",
@@ -38621,7 +38673,7 @@
     "Garrett Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "Russell Wilson|positive": "2026-09-07T12:11:02.979425+00:00",
     "49ers|suspension": "2026-10-24T20:33:12.784556+00:00",
-    "Colts|qb_scratch": "2026-10-04T18:35:30.448656+00:00",
+    "Colts|qb_scratch": "2026-11-08T17:50:42.216439+00:00",
     "Patrick Mahomes|injury": "2026-10-28T20:10:44.730928+00:00",
     "Dylan Cease|usage_up": "2026-09-16T11:17:26.017798+00:00",
     "Adley Rutschman|usage_up": "2026-09-03T20:52:08.398218+00:00",
@@ -38670,7 +38722,7 @@
     "Breece Hall|positive": "2026-11-05T23:30:12.031704+00:00",
     "Spencer Strider|usage_up": "2026-09-10T20:43:27.285732+00:00",
     "Zay Flowers|positive": "2026-09-10T23:03:00.920821+00:00",
-    "Brock Purdy|injury": "2026-10-21T17:00:18.688650+00:00",
+    "Brock Purdy|injury": "2026-11-08T17:50:42.216439+00:00",
     "Matthew Stafford|injury": "2026-11-08T10:04:17.147392+00:00",
     "Kyler Murray|positive": "2026-09-11T04:11:02.585396+00:00",
     "Puka Nacua|injury": "2026-10-23T04:20:38.321943+00:00",
@@ -38852,7 +38904,7 @@
     "Lamar Jackson|activation": "2026-10-31T19:12:02.906873+00:00",
     "Breece Hall|activation": "2026-11-01T19:27:56.492654+00:00",
     "Jazz Chisholm|usage_up": "2026-11-07T19:19:17.139889+00:00",
-    "Falcons|suspension": "2026-11-04T14:12:02.131211+00:00",
+    "Falcons|suspension": "2026-11-08T17:50:42.216439+00:00",
     "Corbin Carroll|injury": "2026-11-08T00:20:03.130816+00:00"
   }
 }
