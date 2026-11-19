@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-11-18T20:18:35.577265+00:00",
-  "signal_count": 3340,
+  "updated_at": "2026-11-19T02:27:15.969862+00:00",
+  "signal_count": 3341,
   "signals": [
+    {
+      "player": "David Montgomery",
+      "team": "Unknown",
+      "sport": "nfl",
+      "signal_type": "injury",
+      "headline": "David Montgomery has no injury designation for Thursday; Woody Marks ruled out The Texans ruled one running back out for",
+      "excerpt": "David Montgomery has no injury designation for Thursday; Woody Marks ruled out The Texans ruled one running back out for Thursday night's game against the Colts, but they're set to get another one back in the lineup.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/david-montgomery-has-no-injury-designation-for-thursday-woody-marks-ruled-out",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-11-19T02:26:51.118963+00:00"
+    },
     {
       "player": "Unknown",
       "team": "Unknown",
@@ -43667,7 +43680,7 @@
     "Nick Westbrook-Ikhine|injury": "2026-10-10T21:27:38.711591+00:00",
     "T.J. Hockenson|injury": "2026-10-11T19:26:45.440778+00:00",
     "Jaguars|suspension": "2026-10-11T19:26:45.440778+00:00",
-    "David Montgomery|injury": "2026-11-17T07:32:14.940430+00:00",
+    "David Montgomery|injury": "2026-11-19T02:27:15.969696+00:00",
     "Bills|suspension": "2026-11-05T23:30:12.031704+00:00",
     "Ladd McConkey|late_scratch": "2026-10-13T16:51:06.295528+00:00",
     "William Contreras|usage_up": "2026-10-30T22:09:47.733955+00:00",
