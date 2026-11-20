@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-11-20T02:11:00.217973+00:00",
-  "signal_count": 3356,
+  "updated_at": "2026-11-20T11:13:30.139689+00:00",
+  "signal_count": 3357,
   "signals": [
+    {
+      "player": "Rams",
+      "team": "Rams",
+      "sport": "nfl",
+      "signal_type": "suspension",
+      "headline": "Puka Nacua's suspension arises from diversion program The NFL's statement announcing the three-game suspension for Rams ",
+      "excerpt": "Puka Nacua's suspension arises from diversion program The NFL's statement announcing the three-game suspension for Rams receiver Puka Nacua didn't specify the reason for it.",
+      "source": "PFT",
+      "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/puka-nacuas-suspension-arises-from-diversion-program",
+      "confidence": 0.78,
+      "prop_impact": "under",
+      "detected_at": "2026-11-20T11:13:07.417965+00:00"
+    },
     {
       "player": "Dejounte Murray",
       "team": "Unknown",
@@ -43708,7 +43721,7 @@
     "Patrick Mahomes|injury": "2026-11-16T21:52:40.513053+00:00",
     "Dylan Cease|usage_up": "2026-09-16T11:17:26.017798+00:00",
     "Adley Rutschman|usage_up": "2026-09-03T20:52:08.398218+00:00",
-    "Rams|suspension": "2026-11-20T02:11:00.217660+00:00",
+    "Rams|suspension": "2026-11-20T11:13:30.139464+00:00",
     "Rams|qb_scratch": "2026-09-09T23:07:44.525528+00:00",
     "Jonathan Taylor|injury": "2026-11-12T19:46:13.207520+00:00",
     "Rays|pitcher_scratch": "2026-10-12T00:23:28.369152+00:00",
